@@ -5,6 +5,11 @@
         "type": "command",
         "command": "node scripts/memory/state-preserve.js",
         "description": "Load preserved state, relevant instincts, and verify objective continuity"
+      },
+      {
+        "type": "command",
+        "command": "node scripts/memory/session-memory.js recent 3",
+        "description": "Load 3 most recent sessions for context continuity between chats"
       }
     ],
     "SessionEnd": [
@@ -12,6 +17,11 @@
         "type": "command",
         "command": "node scripts/state/state-store.js",
         "description": "Save state, update instincts, archive session"
+      },
+      {
+        "type": "command",
+        "command": "node scripts/memory/session-memory.js prune",
+        "description": "Prune sessions older than 90 days"
       }
     ],
     "PreToolUse": [
