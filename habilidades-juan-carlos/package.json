@@ -1,0 +1,19 @@
+{
+  "name": "habilidades-juan-carlos",
+  "version": "1.0.0",
+  "description": "Sistema agéntico autónomo basado en el patrón harness de Anthropic con corrección de todas las debilidades de ECC",
+  "main": "scripts/memory/state-preserve.js",
+  "scripts": {
+    "state:load": "node scripts/memory/state-preserve.js",
+    "state:save": "node scripts/state/state-store.js",
+    "instinct:list": "node scripts/instinct/engine.js list",
+    "instinct:decay": "node scripts/instinct/engine.js decay",
+    "instinct:conflicts": "node scripts/instinct/engine.js conflicts",
+    "instinct:evolve": "node scripts/instinct/engine.js evolve",
+    "contract:create": "node scripts/contract/verify.js create",
+    "contract:list": "node scripts/contract/verify.js list",
+    "setup": "mkdir -p memory/state memory/instincts memory/contracts memory/sessions"
+  },
+  "keywords": ["claude-code", "agents", "orchestrator", "harness", "autonomous"],
+  "license": "MIT"
+}
