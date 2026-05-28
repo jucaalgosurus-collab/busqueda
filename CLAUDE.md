@@ -77,7 +77,7 @@ Usuario → Orquestador → Plan (sub-tareas + contratos)
 
 ### Budget de Contexto
 - El orquestador estima tokens antes de delegar
-- Skills se cargan lazy (solo las relevantes)
+- Skills se cargan lazy (solo las relevantes via skill-index)
 - Reglas se cargan solo para el lenguaje activo
 - Instintos: máximo 8 relevantes por sesión, ordenados por confianza
 
@@ -88,6 +88,8 @@ Usuario → Orquestador → Plan (sub-tareas + contratos)
 - Nunca se compacta el objetivo principal
 
 ## Agentes Disponibles
+
+### Agentes HJC Core (9)
 
 | Agente | Modelo | Herramientas | Rol |
 |--------|--------|-------------|-----|
@@ -101,15 +103,76 @@ Usuario → Orquestador → Plan (sub-tareas + contratos)
 | build-fixer | sonnet | Read, Write, Edit, Bash | Corregir errores de build |
 | tdd-guide | sonnet | Read, Write, Edit, Bash | Desarrollo test-first |
 
+### Agentes ECC de Referencia (61)
+Disponibles en `agents/ecc-agents/`. Incluyen especialistas en:
+- Lenguajes: TypeScript, Python, Go, Rust, Kotlin, Java, C++, C#, F#, Swift, Dart
+- Dominios: Healthcare, Networking, Marketing, Homelab, OpenSource
+- Funciones: Chief of Staff, Performance Optimizer, Refactor Cleaner, Loop Operator
+
+## Skills Disponibles
+
+### Skills HJC Core (9)
+| Skill | Propósito |
+|-------|-----------|
+| always-execute | Norma SIEMPRE EJECUTAR |
+| memory-preserve | Preservar contexto entre sesiones y compactions |
+| sprint-contract | Definir "hecho" antes de construir |
+| strategic-compact | Compaction inteligente que preserva objetivo |
+| instinct-evolve | Auto-mejora con decay y resolución de conflictos |
+| orchestrator-route | Protocolo de enrutamiento de tareas |
+| semantic-index | Lazy loading de skills por relevancia |
+| evaluator-gate | Evaluación independiente con umbrales duros |
+| skill-index | Registro maestro de todas las skills disponibles |
+
+### Skills ECC Integradas (49)
+Disponibles en `skills/ecc-skills/`. Cubren:
+- **Lenguajes**: python-patterns, golang-patterns, rust-patterns, kotlin-patterns, django-patterns, fastapi-patterns, springboot-patterns, frontend-patterns
+- **Testing**: tdd-workflow, e2e-testing, ai-regression-testing, verification-loop, benchmark
+- **Arquitectura**: architecture-decision-records, hexagonal-architecture, backend-patterns, api-design, error-handling
+- **DevOps**: docker-patterns, deployment-patterns, database-migrations
+- **Dominios**: healthcare-phi-compliance, logistics-exception-management, production-scheduling, finance-billing-ops, energy-procurement, customs-trade-compliance
+- **Investigación**: deep-research, market-research, codebase-onboarding
+- **Agentic**: autonomous-loops, continuous-learning-v2, agent-harness-construction, context-budget
+- **Contenido**: marketing-campaign, content-engine, brand-voice, seo, video-editing
+
+### Cómo se Usan las Skills
+
+El orquestador consulta `skill-index` para encontrar la skill relevante, luego la carga via lazy loading. NO se cargan todas las skills — solo las que la tarea necesita, máximo 4 por sprint.
+
+Flujo:
+1. Usuario pide algo
+2. Orquestador consulta skill-index para matching
+3. Se cargan las skills relevantes (máximo 4)
+4. Se establece un sprint contract
+5. Se delega al agente con la skill como contexto
+6. Se evalúa con evaluator-gate
+7. Se preserva estado en memory/state/active-state.md
+
+## Reglas
+
+### Reglas HJC Core (3)
+- always-execute: Ejecutar sin dudar
+- never-lose-context: Preservar estado siempre
+- orchestrator-first: Rutar tareas no-triviales por el orquestador
+
+### Reglas ECC de Referencia (21)
+Disponibles en `rules/ecc-rules/`. Incluyen:
+- common/: coding-style, development-workflow, security, testing, git-workflow, patterns, performance, agents, code-review, hooks
+- typescript/: TypeScript-specific rules
+- python/: Python-specific rules
+
 ## Instalación
 
 ```bash
-# Copiar a tu proyecto
-cp -r habilidades-juan-carlos/.claude/ ~/.claude/
+# Clonar
+git clone https://github.com/jucaalgo/habilidadesclaude.git
+cd habilidadesclaude
 
-# O instalar como proyecto
-cd tu-proyecto
-ln -s /path/to/habilidades-juan-carlos/.claude .claude
+# Setup
+npm run setup
+
+# Usar en tu proyecto
+cp -r .claude/ ~/.claude/
 ```
 
 ## Principios Derivados del Análisis ECC
@@ -121,13 +184,17 @@ ln -s /path/to/habilidades-juan-carlos/.claude .claude
 - GAN harness (planner-generator-evaluator)
 - Instintos con confianza (mejorados con decay y resolución de conflictos)
 - Reglas con paths para activación selectiva
+- 49 skills ECC integradas con conocimiento especializado
+- 61 agentes ECC como referencia para delegación
+- 21 reglas ECC para estándares de código
 
 ### Lo que reescribimos completamente:
-- Memoria: de archivos planos → SQLite + índice semántico
-- Orquestación: de delegación implícita → orquestador formal con DAG
-- Evaluación: de auto-evaluación → evaluador independiente con umbrales duros
-- Compaction: de no-op → preservación estructurada de estado
-- Instintos: de manual → auto-evolución con decay
-- Skills: de carga total → lazy loading con índice compacto
-- Contratos: de inexistentes → obligatorios antes de cada sprint
-- Context: de sin presupuesto → budget estimado por sub-tarea
+- Memoria: de 3 sistemas desconectados → estado estructurado único con preservación pre-compaction
+- Orquestación: de delegación implícita → orquestador formal con DAG de dependencias
+- Evaluación: de auto-evaluación → evaluador independiente con umbrales duros PASS/FAIL
+- Compaction: de no-op (solo log) → preservación estructurada de estado antes de compaction
+- Instintos: de manual (/learn, /evolve) → auto-evolución con decay, conflictos, y poda
+- Skills: de carga total (246 en contexto) → lazy loading con índice compacto y máximo 4 por sprint
+- Contratos: de inexistentes → obligatorios antes de cada sprint con criterios medibles
+- Context: de sin presupuesto → budget estimado por sub-tarea con 40% reserva
+- Agents: de tool access inconsistente → principio de mínimo privilegio estricto
