@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "node scripts/memory/state-preserve.js",
+        "description": "Load preserved state, relevant instincts, and verify objective continuity"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "type": "command",
+        "command": "node scripts/state/state-store.js",
+        "description": "Save state, update instincts, archive session"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "node scripts/contract/verify.js pre-check",
+        "description": "Verify sprint contracts are defined before code changes",
+        "tools": ["Write", "Edit"]
+      }
+    ]
+  }
+}
