@@ -140,6 +140,18 @@ Invoke when working in a specific industry domain.
 
 ---
 
+## HERMES — Industrial Asset Intelligence
+
+Invoke when evaluating, auditing, valuing, or certifying industrial assets.
+
+| Skill | Trigger | Description |
+|-------|---------|-------------|
+| hermes-technical-audit | evaluacion tecnica, condicion A/B/C/D, red flags, nameplates, inspeccion industrial | Technical audit of industrial assets with condition scale, red flags, nameplates |
+| hermes-certifications | certificaciones, RETIE, NOM, ATEX, CE, INMETRO, COVENIN, OFAC, compliance regulatorio | Regulatory certifications by country for industrial assets |
+| hermes-asset-valuation | valoracion activos, economia circular, VRC, MOCR, subastas, mercado secundario | Asset valuation, circular economy, VRC, MOCR, secondary market |
+
+---
+
 ## SECURITY — Security & Compliance
 
 Invoke when security review, vulnerability assessment, or compliance is needed.
