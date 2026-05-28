@@ -4,5 +4,4 @@ node_modules/
 *.log
 __pycache__/
 .DS_Store
-ecc-analysis/
 habilidades-juan-carlos/
