@@ -1,0 +1,98 @@
+[
+  {
+    "slug": "boe-laboral",
+    "name": "BOE — Sección laboral / industria alimentaria",
+    "outlet": "BOE",
+    "url": "https://www.boe.es/buscar/boe.php?campo%5B%5D=ORI&dato%5B%5D=&operador%5B%5D=and&texto%5B%5D=ERE+industria+alimentaria&acession=",
+    "rss": "https://www.boe.es/rss/boe.php?seccion=5",
+    "kind": "bofficial"
+  },
+  {
+    "slug": "boe-eregulacion",
+    "name": "BOE — Regulación de empleo",
+    "outlet": "BOE",
+    "url": "https://www.boe.es/buscar/boe.php?campo%5B%5D=ORI&dato%5B%5D=&operador%5B%5D=and&texto%5B%5D=regulacion+empleo&acession=",
+    "rss": "https://www.boe.es/rss/boe.php?seccion=5",
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-madrid",
+    "name": "BOP Madrid — Sección laboral",
+    "outlet": "BOP Madrid",
+    "url": "https://www.bocm.es/buscar/boletin?texto=ERE+industria+alimentaria",
+    "rss": null,
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-barcelona",
+    "name": "BOP Barcelona — BOPB",
+    "outlet": "BOP Barcelona",
+    "url": "https://bop.diputacionbarcelona.es/cerca/cerca?text=ERE+industria+alimentaria",
+    "rss": null,
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-valencia",
+    "name": "BOP Valencia — DOGV",
+    "outlet": "DOGV",
+    "url": "https://dogv.gva.es/es/buscar?text=ERE+industria+alimentaria",
+    "rss": "https://dogv.gva.es/rss/dogv.xml",
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-sevilla",
+    "name": "BOP Sevilla",
+    "outlet": "BOP Sevilla",
+    "url": "https://bopsevilla.dipusevilla.es/buscar?texto=ERE+industria+alimentaria",
+    "rss": null,
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-murcia",
+    "name": "BORM — Boletín Oficial Región Murcia",
+    "outlet": "BORM",
+    "url": "https://www.borm.es/buscar?texto=ERE+industria+alimentaria",
+    "rss": "https://www.borm.es/rss/ultimos-borm.xml",
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-zaragoza",
+    "name": "BOA — Boletín Oficial Aragón",
+    "outlet": "BOA",
+    "url": "https://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VERLST&BASE=BOA&OPCSV=PIDF&DOCS=1-50&SEPARADOR=&@PUBL=A&@EBOA=A&SEPARADOR=&TITU=&NUME=&TEXT_C=ERE+industria+alimentaria",
+    "rss": "https://www.boa.aragon.es/rss",
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-valladolid",
+    "name": "BOCyL — Boletín Castilla y León",
+    "outlet": "BOCyL",
+    "url": "https://bocyl.jcyl.es/buscar?texto=ERE+industria+alimentaria",
+    "rss": "https://bocyl.jcyl.es/rss",
+    "kind": "bofficial"
+  },
+  {
+    "slug": "bop-coruna",
+    "name": "DOG — Diario Oficial Galicia",
+    "outlet": "DOG",
+    "url": "https://www.xunta.gal/diario-oficial-galicia/buscar?texto=ERE+industria+alimentaria",
+    "rss": "https://www.xunta.gal/diario-oficial-galicia/rss",
+    "kind": "bofficial"
+  },
+  {
+    "slug": "ugt-industria",
+    "name": "UGT — Industria y Construcción",
+    "outlet": "UGT Industria",
+    "url": "https://www.ugt.es/sector/industria-y-construccion",
+    "rss": "https://www.ugt.es/feed",
+    "kind": "syndicate"
+  },
+  {
+    "slug": "ccoo-industria",
+    "name": "CCOO Industria",
+    "outlet": "CCOO Industria",
+    "url": "https://industria.ccoo.es/",
+    "rss": "https://industria.ccoo.es/rss",
+    "kind": "syndicate"
+  }
+]

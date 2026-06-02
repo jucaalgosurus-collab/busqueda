@@ -1,0 +1,22 @@
+{
+  "queries": [
+    { "role": "Director de Planta", "subsector": "Lácteos", "company_hint": "Lactalis|Pascual|Kaiku" },
+    { "role": "Director de Planta", "subsector": "Cárnicas", "company_hint": "ElPozo|Campofrío|Juan Luna|Frimancha" },
+    { "role": "Director de Planta", "subsector": "Cerveza", "company_hint": "Mahou|Estrella Galicia|Damm|Ambar" },
+    { "role": "Director de Planta", "subsector": "Vinos", "company_hint": "Codorníu|Freixenet|García Carrión|Osborne" },
+    { "role": "Director de Planta", "subsector": "Pescado", "company_hint": "Pescanova|Jealsa|Frinsa|Congalsa" },
+    { "role": "Director de Planta", "subsector": "Aceite", "company_hint": "Deoleo| Borges|Aceites del Sur" },
+    { "role": "COO", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Mantenimiento", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Sostenibilidad", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Procurement / Compras", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "CFO", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Responsable ERE", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Director Industrial", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Director Fábrica", "subsector": "A&B", "company_hint": "todas top 60 A&B" }
+  ],
+  "google_templates": [
+    "site:linkedin.com/in \"{role}\" \"{company_hint}\" \"{subsector}\"",
+    "site:linkedin.com/in \"{role}\" \"{company_hint}\""
+  ]
+}

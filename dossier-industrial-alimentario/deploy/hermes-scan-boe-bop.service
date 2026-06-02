@@ -1,0 +1,20 @@
+[Unit]
+Description=HERMES Dossier — BOE/BOP/sindicatos agent
+After=network.target postgresql.service hermes-dossier.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+EnvironmentFile=/opt/hermes-dossier/.env
+Environment=NODE_ENV=production
+Environment=MAX_PER_SOURCE=15
+ExecStart=/usr/bin/node node_modules/tsx/dist/cli.mjs scripts/scan-boe-bop.ts
+StandardOutput=append:/opt/hermes-dossier/logs/agent-boe-bop.log
+StandardError=append:/opt/hermes-dossier/logs/agent-boe-bop.err
+TimeoutStartSec=1800s
+Nice=10
+
+[Install]
+WantedBy=multi-user.target
