@@ -1,0 +1,402 @@
+[
+  {
+    "slug": "elpais-mercados",
+    "name": "El País — Mercados / Empresas",
+    "outlet": "El País",
+    "url": "https://elpais.com/economia/",
+    "rss": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "nacional"
+  },
+  {
+    "slug": "expansion-empresas",
+    "name": "Expansión — Empresas",
+    "outlet": "Expansión",
+    "url": "https://www.expansion.com/empresas.html",
+    "rss": "https://www.expansion.com/rss/portada.xml",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "nacional"
+  },
+  {
+    "slug": "cincodias-mercados",
+    "name": "Cinco Días — Mercados",
+    "outlet": "Cinco Días",
+    "url": "https://cincodias.elpais.com/",
+    "rss": "https://cincodias.elpais.com/rss/cincodias/portada.xml",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "nacional"
+  },
+  {
+    "slug": "economista-empresas",
+    "name": "El Economista — Empresas",
+    "outlet": "El Economista",
+    "url": "https://www.eleconomista.es/empresas-finanzas/",
+    "rss": "https://www.eleconomista.es/rss/rss-empresas.php",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "nacional"
+  },
+  {
+    "slug": "elmundo-economia",
+    "name": "El Mundo — Economía",
+    "outlet": "El Mundo",
+    "url": "https://www.elmundo.es/economia.html",
+    "rss": "https://e00-elmundo.uecdn.es/rss/economia.xml",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "nacional"
+  },
+  {
+    "slug": "lavanguardia-economia",
+    "name": "La Vanguardia — Economía",
+    "outlet": "La Vanguardia",
+    "url": "https://www.lavanguardia.com/economia",
+    "rss": "https://www.lavanguardia.com/rss/economia.xml",
+    "region": "Cataluña",
+    "ccaa": "Cataluña",
+    "kind": "nacional"
+  },
+  {
+    "slug": "abc-economia",
+    "name": "ABC — Economía",
+    "outlet": "ABC",
+    "url": "https://www.abc.es/economia/",
+    "rss": "https://www.abc.es/rss/feeds/abcEconomia.xml",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "nacional"
+  },
+  {
+    "slug": "20minutos-empleo",
+    "name": "20 Minutos — Empresas / Economía",
+    "outlet": "20 Minutos",
+    "url": "https://www.20minutos.es/economia",
+    "rss": "https://www.20minutos.es/rss/economia/",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "nacional"
+  },
+  {
+    "slug": "voz-galicia-economia",
+    "name": "La Voz de Galicia — Economía",
+    "outlet": "La Voz de Galicia",
+    "url": "https://www.lavozdegalicia.es/economia",
+    "rss": "https://www.lavozdegalicia.es/rss/economia",
+    "region": "Galicia",
+    "ccaa": "Galicia",
+    "kind": "regional"
+  },
+  {
+    "slug": "faro-de-vigo-economia",
+    "name": "Faro de Vigo — Economía",
+    "outlet": "Faro de Vigo",
+    "url": "https://www.farodevigo.es/economia/",
+    "rss": "https://www.farodevigo.es/rss/economia.xml",
+    "region": "Galicia",
+    "ccaa": "Galicia",
+    "kind": "regional"
+  },
+  {
+    "slug": "elcorreogallego",
+    "name": "El Correo Gallego",
+    "outlet": "El Correo Gallego",
+    "url": "https://www.elcorreogallego.es/",
+    "rss": "https://www.elcorreogallego.es/rss/economia.xml",
+    "region": "Galicia",
+    "ccaa": "Galicia",
+    "kind": "regional"
+  },
+  {
+    "slug": "diariode-cadiz",
+    "name": "Diario de Cádiz — Economía",
+    "outlet": "Diario de Cádiz",
+    "url": "https://www.diariodecadiz.es/economia",
+    "rss": "https://www.diariodecadiz.es/rss/economia.xml",
+    "region": "Andalucía",
+    "ccaa": "Andalucía",
+    "kind": "regional"
+  },
+  {
+    "slug": "diario-sevilla",
+    "name": "Diario de Sevilla — Economía",
+    "outlet": "Diario de Sevilla",
+    "url": "https://www.diariodesevilla.es/economia/",
+    "rss": "https://www.diariodesevilla.es/rss/economia.xml",
+    "region": "Andalucía",
+    "ccaa": "Andalucía",
+    "kind": "regional"
+  },
+  {
+    "slug": "diario-sur",
+    "name": "Diario Sur — Economía",
+    "outlet": "Diario Sur",
+    "url": "https://www.diariosur.es/economia/",
+    "rss": "https://www.diariosur.es/rss/economia.xml",
+    "region": "Andalucía",
+    "ccaa": "Andalucía",
+    "kind": "regional"
+  },
+  {
+    "slug": "ideal-economia",
+    "name": "Ideal — Economía",
+    "outlet": "Ideal",
+    "url": "https://www.ideal.es/economia",
+    "rss": "https://www.ideal.es/rss/economia.xml",
+    "region": "Andalucía",
+    "ccaa": "Andalucía",
+    "kind": "regional"
+  },
+  {
+    "slug": "elperiodico-cat",
+    "name": "El Periódico — Economía",
+    "outlet": "El Periódico",
+    "url": "https://www.elperiodico.com/es/economia",
+    "rss": "https://www.elperiodico.com/es/rss/economia/rss.xml",
+    "region": "Cataluña",
+    "ccaa": "Cataluña",
+    "kind": "regional"
+  },
+  {
+    "slug": "ara-economia",
+    "name": "Ara — Economía",
+    "outlet": "Ara",
+    "url": "https://www.ara.cat/economia/",
+    "rss": "https://www.ara.cat/feeds/economia.xml",
+    "region": "Cataluña",
+    "ccaa": "Cataluña",
+    "kind": "regional"
+  },
+  {
+    "slug": "lavozdeasturias",
+    "name": "La Nueva España — Economía",
+    "outlet": "La Nueva España",
+    "url": "https://www.lne.es/economia/",
+    "rss": "https://www.lne.es/rss/economia.xml",
+    "region": "Asturias",
+    "ccaa": "Principado de Asturias",
+    "kind": "regional"
+  },
+  {
+    "slug": "elcomercio-economia",
+    "name": "El Comercio (Asturias) — Economía",
+    "outlet": "El Comercio",
+    "url": "https://www.elcomercio.es/economia/",
+    "rss": "https://www.elcomercio.es/rss/economia.xml",
+    "region": "Asturias",
+    "ccaa": "Principado de Asturias",
+    "kind": "regional"
+  },
+  {
+    "slug": "nortedecastilla",
+    "name": "El Norte de Castilla — Economía",
+    "outlet": "El Norte de Castilla",
+    "url": "https://www.elnortedecastilla.es/economia/",
+    "rss": "https://www.elnortedecastilla.es/rss/economia.xml",
+    "region": "Castilla y León",
+    "ccaa": "Castilla y León",
+    "kind": "regional"
+  },
+  {
+    "slug": "diario-de-burgos",
+    "name": "Diario de Burgos — Economía",
+    "outlet": "Diario de Burgos",
+    "url": "https://www.diariodeburgos.es/seccion/economia",
+    "rss": "https://www.diariodeburgos.es/rss/economia.xml",
+    "region": "Castilla y León",
+    "ccaa": "Castilla y León",
+    "kind": "regional"
+  },
+  {
+    "slug": "heraldo-aragon",
+    "name": "Heraldo de Aragón — Economía",
+    "outlet": "Heraldo de Aragón",
+    "url": "https://www.heraldo.es/economia/",
+    "rss": "https://www.heraldo.es/rss/economia.xml",
+    "region": "Aragón",
+    "ccaa": "Aragón",
+    "kind": "regional"
+  },
+  {
+    "slug": "elperiodicode-aragon",
+    "name": "El Periódico de Aragón — Economía",
+    "outlet": "El Periódico de Aragón",
+    "url": "https://www.elperiodicodearagon.com/economia/",
+    "rss": "https://www.elperiodicodearagon.com/rss/economia.xml",
+    "region": "Aragón",
+    "ccaa": "Aragón",
+    "kind": "regional"
+  },
+  {
+    "slug": "levante-emv",
+    "name": "Levante-EMV — Economía",
+    "outlet": "Levante-EMV",
+    "url": "https://www.levante-emv.com/economia/",
+    "rss": "https://www.levante-emv.com/rss/economia.xml",
+    "region": "C. Valenciana",
+    "ccaa": "Comunidad Valenciana",
+    "kind": "regional"
+  },
+  {
+    "slug": "las-provincias",
+    "name": "Las Provincias — Economía",
+    "outlet": "Las Provincias",
+    "url": "https://www.lasprovincias.es/economia/",
+    "rss": "https://www.lasprovincias.es/rss/economia.xml",
+    "region": "C. Valenciana",
+    "ccaa": "Comunidad Valenciana",
+    "kind": "regional"
+  },
+  {
+    "slug": "informacion-alicante",
+    "name": "Información Alicante — Economía",
+    "outlet": "Información",
+    "url": "https://www.informacion.es/economia/",
+    "rss": "https://www.informacion.es/rss/economia.xml",
+    "region": "C. Valenciana",
+    "ccaa": "Comunidad Valenciana",
+    "kind": "regional"
+  },
+  {
+    "slug": "la-verdad-murcia",
+    "name": "La Verdad Murcia — Economía",
+    "outlet": "La Verdad",
+    "url": "https://www.laverdad.es/economia/",
+    "rss": "https://www.laverdad.es/rss/economia.xml",
+    "region": "Murcia",
+    "ccaa": "Región de Murcia",
+    "kind": "regional"
+  },
+  {
+    "slug": "la-rioja",
+    "name": "Diario La Rioja — Economía",
+    "outlet": "Diario La Rioja",
+    "url": "https://www.larioja.com/economia/",
+    "rss": "https://www.larioja.com/rss/economia.xml",
+    "region": "La Rioja",
+    "ccaa": "La Rioja",
+    "kind": "regional"
+  },
+  {
+    "slug": "diario-navarra",
+    "name": "Diario de Navarra — Economía",
+    "outlet": "Diario de Navarra",
+    "url": "https://www.diariodenavarra.es/noticias/economia/",
+    "rss": "https://www.diariodenavarra.es/rss/economia.xml",
+    "region": "Navarra",
+    "ccaa": "Comunidad Foral de Navarra",
+    "kind": "regional"
+  },
+  {
+    "slug": "elcorreo-vizcaya",
+    "name": "El Correo — Economía",
+    "outlet": "El Correo",
+    "url": "https://www.elcorreo.com/economia/",
+    "rss": "https://www.elcorreo.com/rss/economia.xml",
+    "region": "País Vasco",
+    "ccaa": "País Vasco",
+    "kind": "regional"
+  },
+  {
+    "slug": "deia-economia",
+    "name": "Deia — Economía",
+    "outlet": "Deia",
+    "url": "https://www.deia.eus/economia/",
+    "rss": "https://www.deia.eus/rss/economia.xml",
+    "region": "País Vasco",
+    "ccaa": "País Vasco",
+    "kind": "regional"
+  },
+  {
+    "slug": "ultima-hora-baleares",
+    "name": "Última Hora — Economía",
+    "outlet": "Última Hora",
+    "url": "https://www.ultimahora.es/economia",
+    "rss": "https://www.ultimahora.es/rss/economia.xml",
+    "region": "Baleares",
+    "ccaa": "Islas Baleares",
+    "kind": "regional"
+  },
+  {
+    "slug": "diari-de-mallorca",
+    "name": "Diari de Mallorca — Economía",
+    "outlet": "Diari de Mallorca",
+    "url": "https://www.diariodemallorca.es/economia",
+    "rss": "https://www.diariodemallorca.es/rss/economia.xml",
+    "region": "Baleares",
+    "ccaa": "Islas Baleares",
+    "kind": "regional"
+  },
+  {
+    "slug": "canarias7",
+    "name": "Canarias7 — Economía",
+    "outlet": "Canarias7",
+    "url": "https://www.canarias7.es/economia/",
+    "rss": "https://www.canarias7.es/rss/economia.xml",
+    "region": "Canarias",
+    "ccaa": "Islas Canarias",
+    "kind": "regional"
+  },
+  {
+    "slug": "la-provincia-lpgc",
+    "name": "La Provincia — Economía (Las Palmas)",
+    "outlet": "La Provincia",
+    "url": "https://www.laprovincia.es/economia/",
+    "rss": "https://www.laprovincia.es/rss/economia.xml",
+    "region": "Canarias",
+    "ccaa": "Islas Canarias",
+    "kind": "regional"
+  },
+  {
+    "slug": "el-dia-tenerife",
+    "name": "El Día — Economía (Tenerife)",
+    "outlet": "El Día",
+    "url": "https://www.eldia.es/economia/",
+    "rss": "https://www.eldia.es/rss/economia.xml",
+    "region": "Canarias",
+    "ccaa": "Islas Canarias",
+    "kind": "regional"
+  },
+  {
+    "slug": "el-mundo-castilla-mancha",
+    "name": "El Mundo Castilla-La Mancha",
+    "outlet": "El Mundo CLM",
+    "url": "https://www.elmundocastillalamancha.es/economia/",
+    "rss": "https://www.elmundocastillalamancha.es/rss/economia.xml",
+    "region": "Castilla-La Mancha",
+    "ccaa": "Castilla-La Mancha",
+    "kind": "regional"
+  },
+  {
+    "slug": "lanzadigital",
+    "name": "Lanza Digital (Ciudad Real)",
+    "outlet": "Lanza",
+    "url": "https://www.lanzadigital.com/economia/",
+    "rss": "https://www.lanzadigital.com/rss/economia.xml",
+    "region": "Castilla-La Mancha",
+    "ccaa": "Castilla-La Mancha",
+    "kind": "regional"
+  },
+  {
+    "slug": "extremadura-elperiodico",
+    "name": "El Periódico Extremadura",
+    "outlet": "El Periódico Extremadura",
+    "url": "https://www.elperiodicoextremadura.com/economia/",
+    "rss": "https://www.elperiodicoextremadura.com/rss/economia.xml",
+    "region": "Extremadura",
+    "ccaa": "Extremadura",
+    "kind": "regional"
+  },
+  {
+    "slug": "el-mundo-cantabria",
+    "name": "El Mundo Cantabria",
+    "outlet": "El Mundo Cantabria",
+    "url": "https://www.elmundocantabria.com/economia/",
+    "rss": "https://www.elmundocantabria.com/rss/economia.xml",
+    "region": "Cantabria",
+    "ccaa": "Cantabria",
+    "kind": "regional"
+  }
+]

@@ -6,7 +6,7 @@ export type Sector = 'Alimentacion' | 'Bebidas';
 
 export type Language = 'es';
 
-export type OutletType = 'corporate_newsroom' | 'sector';
+export type OutletType = 'corporate_newsroom' | 'sector' | 'nacional' | 'regional' | 'local';
 
 export interface ScrapedArticle {
   url: string;
@@ -17,6 +17,8 @@ export interface ScrapedArticle {
   outlet: string;
   outletType: OutletType;
   language: Language;
+  region?: string;
+  province?: string;
   raw: {
     rss?: boolean;
     playwright?: boolean;
@@ -43,6 +45,17 @@ export interface SectorialListEntry {
   rssUrl: string | null;
   subsectors: string[];
   notes: string;
+}
+
+export interface PrensaListEntry {
+  slug: string;
+  name: string;
+  outlet: string;
+  url: string;
+  rss: string | null;
+  region: string;
+  ccaa: string;
+  kind: 'nacional' | 'regional' | 'local';
 }
 
 export interface ScrapeOptions {

@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import { createHash } from 'node:crypto';
 import newsroomList from '@/lib/data/newsroom-list.json' with { type: 'json' };
 import sectorialList from '@/lib/data/sectorial-list.json' with { type: 'json' };
-import { scrapeNewsroom, scrapeSectorial } from '@/lib/scrapers/newsroom.js';
+import { scrapeNewsroom } from '@/lib/scrapers/newsroom.js';
 import { scrapeSectorial as _scrapeSectorial } from '@/lib/scrapers/sectorial.js';
 import { isDeimplantation } from '@/lib/filters/deimplantation.js';
 import type { NewsroomListEntry, SectorialListEntry, ScrapedArticle } from '@/lib/scrapers/types.js';

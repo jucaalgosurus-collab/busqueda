@@ -514,8 +514,10 @@ async function scrapeViaHttp(
  * Playwright fallback for the home page and/or any individual article whose
  * extracted body is < 200 chars.
  */
+export type NewsroomScrapeEntry = Pick<NewsroomListEntry, 'slug' | 'name' | 'newsroomUrl' | 'rssUrl'>;
+
 export async function scrapeNewsroom(
-  entry: NewsroomListEntry,
+  entry: NewsroomScrapeEntry,
   opts?: ScrapeOptions,
 ): Promise<ScrapedArticle[]> {
   const maxArticles = opts?.maxArticles ?? DEFAULT_MAX_ARTICLES;
