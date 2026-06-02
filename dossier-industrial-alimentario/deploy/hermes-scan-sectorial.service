@@ -1,0 +1,20 @@
+[Unit]
+Description=HERMES Dossier — Prensa sectorial agent
+After=network.target postgresql.service hermes-dossier.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+EnvironmentFile=/opt/hermes-dossier/.env
+Environment=NODE_ENV=production
+Environment=MAX_PER_SOURCE=15
+ExecStart=/usr/bin/node node_modules/tsx/dist/cli.mjs scripts/scan-sectorial.ts
+StandardOutput=append:/opt/hermes-dossier/logs/agent-sectorial.log
+StandardError=append:/opt/hermes-dossier/logs/agent-sectorial.err
+TimeoutStartSec=1800s
+Nice=10
+
+[Install]
+WantedBy=multi-user.target

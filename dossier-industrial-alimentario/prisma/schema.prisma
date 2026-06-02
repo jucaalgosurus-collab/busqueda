@@ -1,0 +1,288 @@
+// HERMES-DOSSIER — Esquema de Base de Datos
+// Producto: Dossier Industrial Alimentario (A&B OSINT)
+// Detecta SOLO desimplantaciones de grandes empresas A&B en España.
+// 2026-06-02 — Sprint 1 (Cimientos)
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// 1. EMPRESAS — Grandes empresas A&B (CNAE 10+11) en España
+// ============================================================================
+model Company {
+  id          String   @id @default(uuid())
+  cif         String?  @unique
+  name        String
+  slug        String   @unique
+  sector      String   // "Alimentacion" | "Bebidas"
+  subsector   String?  // "Cárnicas", "Lácteos", "Conservas", "Aceite", "Cerveza", etc.
+  cnae        String?  // "10.1", "10.5", "11.0", etc.
+  countryHq   String   @default("ES")
+  region      String?  // CCAA
+  web         String?
+  status      String   @default("active") // active | inactive | acquired
+  tier        String   @default("tier1") // tier1 (top 100 facturación) | tier2 (multinacional con planta) | tier3 (gran capacidad)
+  notes       String?
+
+  operations  Operation[]
+  events      Event[]
+  contacts    Contact[]
+  documents   Document[]
+  sources     ArticleCompany[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sector])
+  @@index([subsector])
+  @@index([region])
+  @@index([tier])
+}
+
+// ============================================================================
+// 2. OPERATIONS — Eventos de DESIMPLANTACIÓN detectados
+// ============================================================================
+model Operation {
+  id           String   @id @default(uuid())
+  companyId    String
+  company      Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  // SOLO desimplantación (cualquier tipo)
+  type         String   // plant_closure | line_closure | ERE | asset_divestment
+                       // machinery_sale | vehicle_fleet_reduction | IT_disposal
+                       // furniture_office_disposal | facility_decommissioning
+                       // production_relocation | end_of_activity
+                       // non_concurso_liquidation | regulatory_driven_closure
+
+  description  String
+  amountEur    Float?
+  jobsAffected Int?
+  announcedAt  DateTime?
+  status       String   @default("announced") // announced | confirmed | cancelled | completed
+  confidence   Float    @default(0.5)         // 0..1
+  sourceId     String?                       // article fuente primaria
+
+  events       Event[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([announcedAt])
+  @@index([companyId, type])
+}
+
+// ============================================================================
+// 3. SOURCES — Fuentes scrapeadas (raw articles / news items)
+// ============================================================================
+model Source {
+  id              String   @id @default(uuid())
+  url             String   @unique
+  title           String
+  outlet          String   // "El País", "Alimarket", "Pescanova Sala de Prensa", etc.
+  outletType      String   // corporate_newsroom | nacional | regional | local
+                            // sector | bofficial | syndicate | linkedin
+  publishedAt     DateTime?
+  language        String   @default("es")
+  country         String   @default("ES")
+  region          String?  // CCAA detectada
+  province        String?
+
+  // Filtro semántico OBLIGATORIO
+  deimplantationSignal Boolean @default(false)
+  outOfScopeReason     String? // "not_deimplantation" | "subasta" | "concurso" | null
+
+  content        String?  @db.Text
+  contentHash    String?
+  scrapedAt      DateTime @default(now())
+  isStale        Boolean  @default(false)
+
+  // Spanish full-text search vector (populated by trigger, do not modify via Prisma)
+  contentTsvector Unsupported("tsvector")?
+
+  companies      ArticleCompany[]
+  events         Event[]
+  contacts       Contact[]
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([outletType])
+  @@index([publishedAt])
+  @@index([deimplantationSignal])
+  @@index([isStale])
+  @@index([region])
+}
+
+// ============================================================================
+// 4. ARTICLE_COMPANY — M:N con sentiment
+// ============================================================================
+model ArticleCompany {
+  articleId  String
+  companyId  String
+  article    Source  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  company    Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  sentiment  Float   @default(0)  // -1..1
+  relevance  Float   @default(0.5) // 0..1
+
+  @@id([articleId, companyId])
+  @@index([companyId])
+}
+
+// ============================================================================
+// 5. CONTACTS — Decisores A&B (para que el depto. comercial los contacte)
+// ============================================================================
+model Contact {
+  id              String   @id @default(uuid())
+  fullName        String
+  currentRole     String?
+  currentCompanyId String?
+  currentCompany  Company? @relation(fields: [currentCompanyId], references: [id], onDelete: SetNull)
+
+  linkedinUrl     String?
+  email           String?
+  emailVerified   Boolean  @default(false)
+  hunterId        String?
+  phone           String?
+  sourceId        String?
+  source          Source?  @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  // Rol decisor Surus
+  roleRelevance   String?  // plant_manager | coo | sustainability | maintenance
+                             // procurement | cfo | ceo | ere_responsible | other
+
+  lastEnrichedAt  DateTime?
+  notes           String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([currentCompanyId])
+  @@index([roleRelevance])
+  @@index([emailVerified])
+}
+
+// ============================================================================
+// 6. EVENTS — Calendario de eventos próximos
+// ============================================================================
+model Event {
+  id          String   @id @default(uuid())
+  type        String   // strike | regulatory | hearing | ere_filing
+                       // closure_announcement | shareholders
+  title       String
+  description String?
+  startsAt    DateTime
+  endsAt      DateTime?
+  companyId   String?
+  operationId String?
+  sourceId    String?
+  company     Company?   @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  operation   Operation? @relation(fields: [operationId], references: [id], onDelete: SetNull)
+  source      Source?    @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime @default(now())
+
+  @@index([startsAt])
+  @@index([type])
+  @@index([companyId])
+}
+
+// ============================================================================
+// 7. SKILLS_EVALUATIONS — MOCR results (Lazy trigger Sprint 5)
+// ============================================================================
+model SkillEvaluation {
+  id              String   @id @default(uuid())
+  documentId      String
+  document        Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  skill           String   // hermes-asset-valuation | hermes-certifications | hermes-technical-audit
+  grade           String?  // A | B | C | D
+  score           Int?     // 0..100
+  findings        Json?
+  evaluatedAt     DateTime @default(now())
+  evaluatorVersion String?
+
+  @@index([documentId])
+  @@index([skill])
+}
+
+// ============================================================================
+// 8. DOCUMENTS — PDFs subidos (MOCR input)
+// ============================================================================
+model Document {
+  id            String   @id @default(uuid())
+  companyId     String?
+  company       Company? @relation(fields: [companyId], references: [id], onDelete: SetNull)
+
+  kind          String   // nameplate | certificate | balance_sheet | photo
+  fileUrl       String
+  fileSize      Int?
+  ocrText       String?  @db.Text
+  ocrProvider   String?  // "gemini-2.5-vision" | "docling" | "ensemble"
+  ocrConfidence Float?
+  sha256        String?
+
+  evaluations   SkillEvaluation[]
+
+  uploadedAt    DateTime @default(now())
+  processedAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([companyId])
+  @@index([kind])
+}
+
+// ============================================================================
+// 9. SEARCH_RUNS — Log de cada ejecución de un agente
+// ============================================================================
+model SearchRun {
+  id               String   @id @default(uuid())
+  agentName        String   // newsrooms-corporativas | prensa-nacional | etc.
+  query            Json?
+  startedAt        DateTime
+  finishedAt       DateTime?
+  itemsFound       Int      @default(0)
+  itemsInScope     Int      @default(0)  // desimplantación
+  itemsOutOfScope  Int      @default(0)
+  itemsNew         Int      @default(0)
+  itemsUpdated     Int      @default(0)
+  itemsStale       Int      @default(0)
+  errorsCount      Int      @default(0)
+  costEur          Float    @default(0)
+
+  createdAt        DateTime @default(now())
+
+  @@index([agentName])
+  @@index([startedAt])
+}
+
+// ============================================================================
+// 10. SCAN_CONFIGS — Configuración de cada agente
+// ============================================================================
+model ScanConfig {
+  id            String   @id @default(uuid())
+  agentName     String   @unique
+  region        String?
+  subsector     String?
+  keywords      String[]
+  sources       String[] // URLs bases
+  cadenceDays   Int      @default(2)
+  isActive      Boolean  @default(true)
+  lastRunAt     DateTime?
+  nextRunAt     DateTime?
+  config        Json?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([nextRunAt])
+}

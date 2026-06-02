@@ -1,0 +1,602 @@
+[
+  {
+    "name": "ElPozo Alimentación",
+    "slug": "elpozo-alimentacion",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Murcia",
+    "newsroomUrl": "https://www.elpozo.com/noticias/",
+    "rssUrl": "https://www.elpozo.com/feed"
+  },
+  {
+    "name": "Foodiverse (antigua Campofrío Food Group)",
+    "slug": "foodiverse",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Castilla y León",
+    "newsroomUrl": "https://foodiverse.com/comunicacion/",
+    "rssUrl": "https://foodiverse.com/feed"
+  },
+  {
+    "name": "Grupo Jorge",
+    "slug": "grupo-jorge",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Aragón",
+    "newsroomUrl": "https://www.grupojorge.com/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Incarlopsa",
+    "slug": "incarlopsa",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Castilla-La Mancha",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Tello",
+    "slug": "grupo-tello",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Castilla-La Mancha",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Coren",
+    "slug": "coren",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.coren.es/comunicacion/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Argal",
+    "slug": "argal",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://argal.com/blog/",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Noel",
+    "slug": "grupo-noel",
+    "sector": "Alimentacion",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Andalucía",
+    "newsroomUrl": "https://www.noel.es/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Leche Pascual (Calidad Pascual)",
+    "slug": "calidad-pascual",
+    "sector": "Alimentacion",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Castilla y León",
+    "newsroomUrl": "https://www.calidadpascual.com/pressroom",
+    "rssUrl": "https://www.calidadpascual.com/feed"
+  },
+  {
+    "name": "Lactalis Iberia",
+    "slug": "lactalis-iberia",
+    "sector": "Alimentacion",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.lactalis.es/sala-de-prensa/",
+    "rssUrl": "https://www.lactalis.es/feed"
+  },
+  {
+    "name": "Danone Iberia",
+    "slug": "danone-iberia",
+    "sector": "Alimentacion",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.danone.es",
+    "rssUrl": null
+  },
+  {
+    "name": "Kaiku Corporación",
+    "slug": "kaiku",
+    "sector": "Alimentacion",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "País Vasco",
+    "newsroomUrl": "https://www.kaiku.es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Covap (Cooperativa Andaluza)",
+    "slug": "covap",
+    "sector": "Alimentacion",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Andalucía",
+    "newsroomUrl": "https://www.covap.es/te-interesa/actualidad/",
+    "rssUrl": null
+  },
+  {
+    "name": "Capsa Food",
+    "slug": "capsa-food",
+    "sector": "Alimentacion",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Asturias",
+    "newsroomUrl": "https://www.capsafood.com/noticias/",
+    "rssUrl": "https://www.capsafood.com/feed"
+  },
+  {
+    "name": "Central Lechera Asturiana",
+    "slug": "central-lechera-asturiana",
+    "sector": "Alimentacion",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Asturias",
+    "newsroomUrl": "https://www.centrallecheraasturiana.es/actualidad/",
+    "rssUrl": "https://www.centrallecheraasturiana.es/feed"
+  },
+  {
+    "name": "Nueva Pescanova",
+    "slug": "nueva-pescanova",
+    "sector": "Alimentacion",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.pescanova.es/noticias/",
+    "rssUrl": "https://www.pescanova.es/feed"
+  },
+  {
+    "name": "Grupo Iberconsa",
+    "slug": "grupo-iberconsa",
+    "sector": "Alimentacion",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.iberconsa.com/noticias",
+    "rssUrl": "https://www.iberconsa.com/feed"
+  },
+  {
+    "name": "Frinsa",
+    "slug": "frinsa",
+    "sector": "Alimentacion",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.frinsa.es/blog",
+    "rssUrl": null
+  },
+  {
+    "name": "Jealsa",
+    "slug": "jealsa",
+    "sector": "Alimentacion",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": "https://jealsa.com/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Pescapuerta",
+    "slug": "pescapuerta",
+    "sector": "Alimentacion",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Congalsa",
+    "slug": "congalsa",
+    "sector": "Alimentacion",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.congalsa.com/noticias",
+    "rssUrl": null
+  },
+  {
+    "name": "Deoleo",
+    "slug": "deoleo",
+    "sector": "Alimentacion",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": "https://deoleo.com/noticias/",
+    "rssUrl": "https://deoleo.com/feed"
+  },
+  {
+    "name": "Borges",
+    "slug": "borges",
+    "sector": "Alimentacion",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.borges.es",
+    "rssUrl": null
+  },
+  {
+    "name": "Acesur",
+    "slug": "acesur",
+    "sector": "Alimentacion",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": "https://acesur.com/es/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Migasa",
+    "slug": "migasa",
+    "sector": "Alimentacion",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": "https://www.migasa.com/noticias",
+    "rssUrl": null
+  },
+  {
+    "name": "Ybarra",
+    "slug": "ybarra",
+    "sector": "Alimentacion",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": "https://www.ybarra.es/actualidad",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo IAN",
+    "slug": "grupo-ian",
+    "sector": "Alimentacion",
+    "subsector": "Conservas",
+    "cnae": "10.3",
+    "region": "Murcia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Hero España",
+    "slug": "hero-espana",
+    "sector": "Alimentacion",
+    "subsector": "Conservas",
+    "cnae": "10.3",
+    "region": "Murcia",
+    "newsroomUrl": "https://www.hero.es",
+    "rssUrl": null
+  },
+  {
+    "name": "Juver Alimentación",
+    "slug": "juver-alimentacion",
+    "sector": "Alimentacion",
+    "subsector": "Conservas",
+    "cnae": "10.3",
+    "region": "Murcia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Panrico",
+    "slug": "panrico",
+    "sector": "Alimentacion",
+    "subsector": "Pan/Pastas",
+    "cnae": "10.7",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Bimbo Iberia",
+    "slug": "grupo-bimbo-iberia",
+    "sector": "Alimentacion",
+    "subsector": "Pan/Pastas",
+    "cnae": "10.7",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.grupobimbo.com/es/prensa/noticias",
+    "rssUrl": null
+  },
+  {
+    "name": "Adam Foods",
+    "slug": "adam-foods",
+    "sector": "Alimentacion",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "País Vasco",
+    "newsroomUrl": "https://adamfoods.com",
+    "rssUrl": null
+  },
+  {
+    "name": "Cerealto Siro",
+    "slug": "cerealto-siro",
+    "sector": "Alimentacion",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Castilla y León",
+    "newsroomUrl": "https://cerealto.com/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Siro",
+    "slug": "siro",
+    "sector": "Alimentacion",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Castilla y León",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Azucarera",
+    "slug": "azucarera",
+    "sector": "Alimentacion",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.azucarera.es/actualidad",
+    "rssUrl": "https://www.azucarera.es/blog"
+  },
+  {
+    "name": "AB Sugar Iberia",
+    "slug": "ab-sugar-iberia",
+    "sector": "Alimentacion",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Idilia Foods (ColaCao, Nocilla)",
+    "slug": "idilia-foods",
+    "sector": "Alimentacion",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.idilia.es/actualidad/",
+    "rssUrl": null
+  },
+  {
+    "name": "Casa Santiveri",
+    "slug": "casa-santiveri",
+    "sector": "Alimentacion",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Nanta (Nutreco)",
+    "slug": "nanta",
+    "sector": "Alimentacion",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.nanta.com",
+    "rssUrl": null
+  },
+  {
+    "name": "Nutreco",
+    "slug": "nutreco",
+    "sector": "Alimentacion",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.nutreco.com/en/media-centre/",
+    "rssUrl": null
+  },
+  {
+    "name": "Piensos del Sur",
+    "slug": "piensos-del-sur",
+    "sector": "Alimentacion",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Vall Companys",
+    "slug": "vall-companys",
+    "sector": "Alimentacion",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Mahou-San Miguel",
+    "slug": "mahou-san-miguel",
+    "sector": "Bebidas",
+    "subsector": "Cerveza",
+    "cnae": "11.05",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.mahou-sanmiguel.com/es-es/sala-de-prensa/listado-notas-prensa",
+    "rssUrl": "https://www.mahou-sanmiguel.com/es-es/sala-de-prensa/listado-notas-prensa/rss"
+  },
+  {
+    "name": "Damm",
+    "slug": "damm",
+    "sector": "Bebidas",
+    "subsector": "Cerveza",
+    "cnae": "11.05",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.damm.com/es/otros-comunicados",
+    "rssUrl": null
+  },
+  {
+    "name": "Hijos de Rivera (Estrella Galicia)",
+    "slug": "hijos-de-rivera",
+    "sector": "Bebidas",
+    "subsector": "Cerveza",
+    "cnae": "11.05",
+    "region": "Galicia",
+    "newsroomUrl": "https://estrellagalicia.es/actualidad",
+    "rssUrl": null
+  },
+  {
+    "name": "Cervezas Alhambra (Grupo Mahou)",
+    "slug": "cervezas-alhambra",
+    "sector": "Bebidas",
+    "subsector": "Cerveza",
+    "cnae": "11.05",
+    "region": "Andalucía",
+    "newsroomUrl": "https://www.cervezasalhambra.es",
+    "rssUrl": null
+  },
+  {
+    "name": "La Zaragozana (Ambar)",
+    "slug": "la-zaragozana",
+    "sector": "Bebidas",
+    "subsector": "Cerveza",
+    "cnae": "11.05",
+    "region": "Aragón",
+    "newsroomUrl": "https://www.ambar.es/noticias",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Freixenet",
+    "slug": "grupo-freixenet",
+    "sector": "Bebidas",
+    "subsector": "Vinos",
+    "cnae": "11.02",
+    "region": "Cataluña",
+    "newsroomUrl": "https://freixenet.com/es/es/temas/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Codorníu",
+    "slug": "codorniu",
+    "sector": "Bebidas",
+    "subsector": "Vinos",
+    "cnae": "11.02",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.codorniu.com/blog",
+    "rssUrl": null
+  },
+  {
+    "name": "J. García Carrión",
+    "slug": "j-garcia-carrion",
+    "sector": "Bebidas",
+    "subsector": "Vinos",
+    "cnae": "11.02",
+    "region": "Murcia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Félix Solís Avantis",
+    "slug": "felix-solis-avantis",
+    "sector": "Bebidas",
+    "subsector": "Vinos",
+    "cnae": "11.02",
+    "region": "Castilla-La Mancha",
+    "newsroomUrl": "https://felixsolisavantis.com/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Bodegas Riojanas",
+    "slug": "bodegas-riojanas",
+    "sector": "Bebidas",
+    "subsector": "Vinos",
+    "cnae": "11.02",
+    "region": "La Rioja",
+    "newsroomUrl": "https://www.bodegasriojanas.com/comunicacion/",
+    "rssUrl": null
+  },
+  {
+    "name": "Marqués de Cáceres",
+    "slug": "marques-de-caceres",
+    "sector": "Bebidas",
+    "subsector": "Vinos",
+    "cnae": "11.02",
+    "region": "La Rioja",
+    "newsroomUrl": "https://www.marquesdecaceres.com/actualidad-marques-de-caceres/",
+    "rssUrl": null
+  },
+  {
+    "name": "Coca-Cola Europacific Partners Iberia",
+    "slug": "coca-cola-europacific-iberia",
+    "sector": "Bebidas",
+    "subsector": "Refrescos",
+    "cnae": "11.07",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.cocacolaep.com/news-and-stories/",
+    "rssUrl": null
+  },
+  {
+    "name": "PepsiCo Iberia",
+    "slug": "pepsico-iberia",
+    "sector": "Bebidas",
+    "subsector": "Refrescos",
+    "cnae": "11.07",
+    "region": "Barcelona",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Corporación Vichy Catalán",
+    "slug": "corporacion-vichy-catalan",
+    "sector": "Bebidas",
+    "subsector": "Aguas",
+    "cnae": "11.07",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.vichycatalan.com/noticias/",
+    "rssUrl": "https://www.vichycatalan.com/feed"
+  },
+  {
+    "name": "Solán de Cabras (Grupo Mahou-San Miguel)",
+    "slug": "solan-de-cabras",
+    "sector": "Bebidas",
+    "subsector": "Aguas",
+    "cnae": "11.07",
+    "region": "Castilla-La Mancha",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Beam Suntory España",
+    "slug": "beam-suntory-espana",
+    "sector": "Bebidas",
+    "subsector": "Licores",
+    "cnae": "11.01",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Destilerías Domecq",
+    "slug": "destilerias-domecq",
+    "sector": "Bebidas",
+    "subsector": "Licores",
+    "cnae": "11.01",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Zamora Company (Licor 43)",
+    "slug": "zamora-company",
+    "sector": "Bebidas",
+    "subsector": "Licores",
+    "cnae": "11.01",
+    "region": "Murcia",
+    "newsroomUrl": "https://www.zamoracompany.com",
+    "rssUrl": null
+  }
+]

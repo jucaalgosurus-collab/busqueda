@@ -1,0 +1,22 @@
+[Unit]
+Description=HERMES Dossier Industrial Alimentario (Next.js)
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+EnvironmentFile=/opt/hermes-dossier/.env
+Environment=NODE_ENV=production
+Environment=PORT=3002
+Environment=HOSTNAME=127.0.0.1
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -p 3002 -H 127.0.0.1
+Restart=on-failure
+RestartSec=5s
+StandardOutput=append:/opt/hermes-dossier/logs/nextjs.log
+StandardError=append:/opt/hermes-dossier/logs/nextjs.err
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

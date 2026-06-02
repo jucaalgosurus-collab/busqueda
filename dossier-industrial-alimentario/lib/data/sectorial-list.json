@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Alimarket",
+    "slug": "alimarket",
+    "baseUrl": "https://www.alimarket.es",
+    "newsroomUrl": "https://www.alimarket.es/alimentacion/noticias",
+    "rssUrl": "https://www.alimarket.es/media/rss/alimentacion.xml",
+    "subsectors": ["General", "Cárnicas", "Lácteos", "Pescado", "Aceite", "Bebidas", "Distribución"],
+    "notes": "Referencia sectorial B2B España. Feed RSS validado RSS 2.0 con items recientes (ej. 02 jun 2026, 'fondo de inversión compra una de las verticales de negocio de Zander Foods'). Portal RSS centralizado en /rss con feeds por vertical (alimentacion.xml, bebidas.xml, distribucion.xml, etc.). Sin paywall; pide registro gratuito con bono 15€. Cobertura nacional todas las CCAA."
+  },
+  {
+    "name": "Revista Aral",
+    "slug": "revista-aral",
+    "baseUrl": "https://www.revistaaral.com",
+    "newsroomUrl": "https://www.revistaaral.com/alimentacion.php",
+    "rssUrl": "https://www.revistaaral.com/feed/all",
+    "subsectors": ["Distribución", "Gran Consumo", "Alimentación", "Bebidas"],
+    "notes": "RSS validado RSS 2.0 con ~50 items/actualización (ej. 02 jun 2026, 'Costasol celebra 40 años...', 'España refuerza su liderazgo acuícola...'). Cubre aperturas, nombramientos, M&A y datos de mercado. Feed autodiscovery en /feed/all. Sin paywall en HTML visible; subsecciones por vertical (consumidor.php, distribucion-con-base-alimentaria.php, bebidas.php)."
+  },
+  {
+    "name": "Retail Actual",
+    "slug": "retail-actual",
+    "baseUrl": "https://www.retailactual.com",
+    "newsroomUrl": "https://www.retailactual.com/noticias",
+    "rssUrl": "https://www.retailactual.com/rss-noticias",
+    "subsectors": ["Producción alimentaria", "Distribución", "Gran Consumo", "Horeca"],
+    "notes": "RSS validado RSS 2.0 (application/rss+xml), 5+ items/día con M&A, aperturas, premios y campañas (ej. 02 jun 2026, 'Coca-Cola, ElPozo y Campofrío, las marcas más elegidas...'). Editado por Infoedita. Revista bimestral + web diaria con newsletter semanal. Sin paywall visible."
+  },
+  {
+    "name": "D/A Retail (Distribución Actualidad)",
+    "slug": "distribucion-actualidad",
+    "baseUrl": "https://www.distribucionactualidad.com",
+    "newsroomUrl": "https://www.distribucionactualidad.com/categoria/super-e-hiper/",
+    "rssUrl": "https://www.distribucionactualidad.com/feed/",
+    "subsectors": ["Retail", "Distribución", "Supermercados", "Horeca", "Franquicias"],
+    "notes": "RSS validado RSS 2.0 con 10 items/actualización (ej. 'Sqrups alcanza las 30 tiendas en Valencia', 'Costasol cumple 40 años como operador de Carrefour en Málaga'). WordPress estándar. Registro/login requerido para contenido completo de algunos artículos (paywall parcial). Fundada 1974; nombre actual 'D/A Retail'. Newsletters: Diario Retail, Omnichannel Retail, Food Marketing."
+  },
+  {
+    "name": "Mercasa",
+    "slug": "mercasa",
+    "baseUrl": "https://www.mercasa.es",
+    "newsroomUrl": "https://www.mercasa.es/noticias/",
+    "rssUrl": "https://www.mercasa.es/feed/",
+    "subsectors": ["Distribución mayorista", "Mercas", "Cadena alimentaria", "Lácteos", "Pescado", "Frutas y hortalizas"],
+    "notes": "Empresa pública del Ministerio de Agricultura. RSS WordPress validado (generator WordPress 6.9.4); items con imagen y categorías (ej. 27 may 2026, 'El 73% de los productos comercializados en Mercamadrid son de origen nacional'). Publica revista 'Distribución y Consumo'. Cobertura institucional mayorista + red Merca (Mercamadrid, Mercabarna, Mercavalencia). Cobertura nacional todas las CCAA."
+  },
+  {
+    "name": "Just-Food (UK, cobertura España)",
+    "slug": "just-food",
+    "baseUrl": "https://www.just-food.com",
+    "newsroomUrl": "https://www.just-food.com/region/western-europe/spain-western-europe/",
+    "rssUrl": "https://www.just-food.com/feed",
+    "subsectors": ["Empresas globales", "M&A internacional", "Cárnicas", "Lácteos", "Bebidas", "Retail"],
+    "notes": "RSS validado RSS 2.0 con items diarios (ej. 'Danish Crown to cut hundreds of jobs', 'Plukon Food Group acquires Spain's Avimosa'). Parte de GlobalData (40+ portales B2B). Sección dedicada 'Spain / Western Europe' con cobertura regular de Nestlé, Plukon, Cerealto, Vall Companys. Inglés; útil para M&A cross-border. Modelo freemium con análisis premium."
+  },
+  {
+    "name": "Eurocarne",
+    "slug": "eurocarne",
+    "baseUrl": "https://www.eurocarne.com",
+    "newsroomUrl": "https://www.eurocarne.com/noticias/",
+    "rssUrl": null,
+    "subsectors": ["Cárnicas", "Carnes frescas", "Elaborados cárnicos", "Logística cárnica", "Retail cárnico", "Maquinaria cárnica"],
+    "notes": "RSS público listado en /rss (sector rss_carnes.xml, rss_elaborados.xml, canal rss_actualidad.xml, rss_empresas.xml) PERO 308 redirect a /rss que devuelve 404 — feed NO scrapeable de forma fiable. REQUIERE HTTP scraping. Revalidar: confirmar si se debe usar la home o seguir el patrón de categorías. Publica en español + inglés. Cobertura internacional fuerte (EU meat industry). Sin paywall visible, banner de cookies."
+  },
+  {
+    "name": "Olimerca",
+    "slug": "olimerca",
+    "baseUrl": "https://www.olimerca.com",
+    "newsroomUrl": "https://www.olimerca.com/noticias/",
+    "rssUrl": "https://olimerca.com/feed",
+    "subsectors": ["Aceite de oliva", "Aceites vegetales", "Almazaras", "Mesa oleícola", "Precios origen"],
+    "notes": "RSS en /feed (mencionado por terceros, NO verificado vía WebFetch — bloqueó con 403; pendiente validación en scraper). Editorial Agora Comunicación y Análisis SL (Madrid). Cobertura semanal de precios origen (Jaén, Córdoba, Sevilla, Granada, Extremadura, Cataluña) y mercado exterior (Italia, Grecia, Túnez). Newsletter por email como canal primario. Especialización vertical máxima: ÚNICA fuente española dedicada a aceite."
+  },
+  {
+    "name": "Interempresas (Alimentación)",
+    "slug": "interempresas",
+    "baseUrl": "https://www.interempresas.net",
+    "newsroomUrl": "https://www.interempresas.net/Alimentaria/",
+    "rssUrl": null,
+    "subsectors": ["Alimentación general", "Cárnica", "Pescado", "Aceite", "Vitivinícola", "Hortofrutícola", "Maquinaria"],
+    "notes": "SIN RSS público verificable (404 en /feed). REQUIERE HTTP scraping. Grupo editorial con subportales verticales: Alimentaria, Industria-Carnica, Industria-Pescado, Produccion-Aceite, Vitivinicola, Distribucion-Hortofruticola, Hosteleria. Útil para cobertura de maquinaria e ingredientes. Modelo B2B técnico-industrial. Cobertura nacional todas las CCAA + internacional UE."
+  },
+  {
+    "name": "FoodBev Media",
+    "slug": "foodbev",
+    "baseUrl": "https://www.foodbev.com",
+    "newsroomUrl": "https://www.foodbev.com/news",
+    "rssUrl": null,
+    "subsectors": ["Bebidas globales", "Food tech", "Ingredientes", "Envase", "Sostenibilidad", "M&A internacional"],
+    "notes": "SIN RSS público (404 en /rss, /feed, /feed.xml, /rss.xml). REQUIERE HTTP scraping. Internacional fuerte; cobertura secundaria para España (usar para validar M&A cross-border y tendencias food tech). Editorial team UK (Sian Yates, Antonia Garrett Peel). Útil como complemento a Just-Food para verificar operaciones internacionales. Inglés."
+  }
+]

@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inteligencia Industrial — Sector Alimentario España | Grupo Surus</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --surus-primary: #0d2b4e;
+  --surus-secondary: #1a5276;
+  --surus-accent: #2e86c1;
+  --surus-light: #aed6f1;
+  --surus-gold: #d4ac0d;
+  --surus-green: #27ae60;
+  --surus-red: #e74c3c;
+  --surus-orange: #f39c12;
+  --surus-purple: #8e44ad;
+  --surus-bg: #f0f2f5;
+  --surus-card: #ffffff;
+  --surus-text: #2c3e50;
+  --surus-muted: #7f8c8d;
+  --surus-border: #e0e4ea;
+  --glass: rgba(255,255,255,0.7);
+  --glass-border: rgba(255,255,255,0.3);
+  --shadow: 0 4px 24px rgba(13,43,78,0.08);
+  --shadow-lg: 0 12px 48px rgba(13,43,78,0.14);
+  --shadow-xl: 0 20px 60px rgba(13,43,78,0.18);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--surus-bg);
+  color: var(--surus-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== ANIMATED BG ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(ellipse at 10% 20%, rgba(46,134,193,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(212,172,13,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(13,43,78,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, var(--surus-primary) 0%, #0f3460 40%, var(--surus-accent) 100%);
+  color: white;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 30px rgba(13,43,78,0.4);
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--surus-gold), transparent);
+  opacity: 0.6;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background: rgba(0,0,0,0.1);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo img {
+  height: 36px;
+  filter: brightness(0) invert(1);
+}
+
+.header-brand {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.header-brand span {
+  font-weight: 300;
+  opacity: 0.85;
+}
+
+.header-meta {
+  text-align: right;
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+.header-meta .author {
+  font-weight: 600;
+  color: var(--surus-gold);
+  font-size: 14px;
+}
+
+/* ===== NAVIGATION ===== */
+.nav-tabs {
+  display: flex;
+  overflow-x: auto;
+  padding: 0 24px;
+  gap: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+.nav-tab {
+  padding: 11px 18px;
+  color: rgba(255,255,255,0.65);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition);
+  white-space: nowrap;
+  user-select: none;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+
+.nav-tab:hover {
+  color: white;
+  background: rgba(255,255,255,0.08);
+}
+
+.nav-tab.active {
+  color: white;
+  border-bottom-color: var(--surus-gold);
+  background: rgba(255,255,255,0.06);
+  font-weight: 600;
+}
+
+.nav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 20%; right: 20%;
+  height: 3px;
+  background: var(--surus-gold);
+  border-radius: 3px 3px 0 0;
+}
+
+/* ===== MAIN ===== */
+.main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+.company-section {
+  display: none;
+  animation: slideIn 0.4s ease;
+}
+
+.company-section.active { display: block; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== HERO CARD ===== */
+.hero-card {
+  background: var(--surus-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  margin-bottom: 24px;
+  border: 1px solid var(--surus-border);
+}
+
+.hero-header {
+  color: white;
+  padding: 28px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-header::before {
+  content: '';
+  position: absolute;
+  top: -60%; right: -5%;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--surus-gold), transparent);
+  opacity: 0.5;
+}
+
+.hero-number {
+  font-size: 90px;
+  font-weight: 900;
+  opacity: 0.06;
+  position: absolute;
+  top: -15px; right: 25px;
+  line-height: 1;
+}
+
+.hero-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+
+.hero-subtitle {
+  font-size: 14.5px;
+  opacity: 0.9;
+  font-weight: 400;
+  position: relative;
+}
+
+.hero-body {
+  padding: 24px 36px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+/* ===== STATUS BADGE ===== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+}
+
+.status-active { background: rgba(39,174,96,0.15); color: var(--surus-green); border: 1px solid rgba(39,174,96,0.3); }
+.status-closing { background: rgba(243,156,18,0.15); color: var(--surus-orange); border: 1px solid rgba(243,156,18,0.3); }
+.status-closed { background: rgba(231,76,60,0.15); color: var(--surus-red); border: 1px solid rgba(231,76,60,0.3); }
+.status-pending { background: rgba(46,134,193,0.15); color: var(--surus-accent); border: 1px solid rgba(46,134,193,0.3); }
+.status-restructuring { background: rgba(142,68,173,0.15); color: var(--surus-purple); border: 1px solid rgba(142,68,173,0.3); }
+
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.status-active .status-dot { background: var(--surus-green); box-shadow: 0 0 6px var(--surus-green); }
+.status-closing .status-dot { background: var(--surus-orange); box-shadow: 0 0 6px var(--surus-orange); }
+.status-closed .status-dot { background: var(--surus-red); box-shadow: 0 0 6px var(--surus-red); }
+.status-pending .status-dot { background: var(--surus-accent); box-shadow: 0 0 6px var(--surus-accent); }
+.status-restructuring .status-dot { background: var(--surus-purple); box-shadow: 0 0 6px var(--surus-purple); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* ===== METRIC CARDS ===== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.metric-card {
+  background: var(--surus-card);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--surus-accent);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, rgba(46,134,193,0.06) 0%, transparent 70%);
+  border-radius: 0 0 0 100%;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--surus-primary);
+  line-height: 1.2;
+}
+
+.metric-label {
+  font-size: 11.5px;
+  color: var(--surus-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+}
+
+/* ===== SECTION CARDS ===== */
+.section-card {
+  background: var(--surus-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid var(--surus-border);
+  transition: var(--transition);
+}
+
+.section-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #f8f9fb 0%, #eef1f6 100%);
+  border-bottom: 1px solid var(--surus-border);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition);
+}
+
+.section-header:hover {
+  background: linear-gradient(135deg, #eef1f6 0%, #e4e9f0 100%);
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--surus-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title .icon { font-size: 18px; }
+
+.section-toggle {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+  color: var(--surus-muted);
+}
+
+.section-card.expanded .section-toggle { transform: rotate(180deg); }
+
+.section-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-card.expanded .section-body { max-height: 8000px; }
+
+.section-content { padding: 22px 24px; }
+
+/* ===== ALERT BOX ===== */
+.alert-box {
+  background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+  border: 2px solid var(--surus-orange);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 14px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.alert-box.critical {
+  background: linear-gradient(135deg, #fdecea 0%, #fadbd8 100%);
+  border-color: var(--surus-red);
+}
+
+.alert-box .a-icon { font-size: 22px; line-height: 1; }
+.alert-box .a-text { font-size: 13.5px; line-height: 1.55; }
+.alert-box .a-text strong { color: var(--surus-primary); }
+
+/* ===== VERIFICATION BOX ===== */
+.verification-box {
+  background: linear-gradient(135deg, #e8f8f0 0%, #d5f5e3 100%);
+  border: 2px solid var(--surus-green);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 14px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.verification-box.warning {
+  background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
+  border-color: var(--surus-orange);
+}
+
+.verification-box .v-icon { font-size: 22px; line-height: 1; }
+.verification-box .v-text { font-size: 13.5px; line-height: 1.55; }
+.verification-box .v-text strong { color: var(--surus-primary); }
+
+/* ===== TABLES ===== */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13.5px;
+}
+
+.data-table thead th {
+  background: linear-gradient(135deg, var(--surus-primary), var(--surus-secondary));
+  color: white;
+  padding: 11px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-table thead th:first-child { border-radius: 8px 0 0 0; }
+.data-table thead th:last-child { border-radius: 0 8px 0 0; }
+
+.data-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--surus-border);
+  vertical-align: top;
+}
+
+.data-table tbody tr:hover { background: #f0f5fa; }
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--surus-accent), var(--surus-light));
+  border-radius: 3px;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 8px 0 8px 24px;
+  font-size: 13.5px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -24px; top: 14px;
+  width: 13px; height: 13px;
+  background: white;
+  border: 3px solid var(--surus-accent);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item.highlight::before {
+  background: var(--surus-accent);
+  border-color: var(--surus-primary);
+  box-shadow: 0 0 8px rgba(46,134,193,0.4);
+}
+
+.timeline-item.critical::before {
+  background: var(--surus-red);
+  border-color: #922b21;
+  box-shadow: 0 0 8px rgba(231,76,60,0.4);
+}
+
+.timeline-date {
+  font-weight: 700;
+  color: var(--surus-accent);
+  font-size: 12.5px;
+}
+
+.timeline-event { color: var(--surus-text); line-height: 1.5; }
+
+/* ===== CHART CONTAINERS ===== */
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin: 14px 0;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* ===== SOURCES ===== */
+.sources { font-size: 12px; color: var(--surus-muted); }
+.sources a {
+  color: var(--surus-accent);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.sources a:hover { color: var(--surus-primary); text-decoration: underline; }
+.sources ol { padding-left: 20px; }
+.sources li { margin-bottom: 4px; }
+
+/* ===== CONTACT CARD ===== */
+.contact-card {
+  background: linear-gradient(135deg, #f8f9fb, #f0f5fa);
+  border-radius: var(--radius-xs);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition);
+  border: 1px solid var(--surus-border);
+}
+
+.contact-card:hover {
+  background: linear-gradient(135deg, #eef1f6, #e4e9f0);
+  border-color: var(--surus-accent);
+}
+
+.contact-name { font-weight: 700; color: var(--surus-primary); font-size: 13.5px; }
+.contact-role { font-size: 12.5px; color: var(--surus-muted); }
+.contact-ref { font-size: 12px; margin-left: auto; }
+.contact-ref a { color: var(--surus-accent); text-decoration: none; }
+
+/* ===== EXECUTIVE SUMMARY ===== */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-stat {
+  text-align: center;
+  padding: 22px 16px;
+  background: var(--surus-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--surus-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-stat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--surus-accent), var(--surus-gold));
+}
+
+.summary-stat .big-number {
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--surus-primary);
+  line-height: 1.1;
+}
+
+.summary-stat .stat-label {
+  font-size: 12px;
+  color: var(--surus-muted);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== OVERVIEW CARDS ===== */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.overview-card {
+  background: var(--surus-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid var(--surus-border);
+}
+
+.overview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: transparent;
+}
+
+.overview-card-header {
+  padding: 18px 20px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.overview-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+}
+
+.overview-card-body { padding: 16px 20px; }
+
+.overview-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.overview-card-sub {
+  font-size: 12.5px;
+  opacity: 0.85;
+}
+
+.overview-card-detail {
+  font-size: 12.5px;
+  color: var(--surus-muted);
+  line-height: 1.55;
+  margin-top: 8px;
+}
+
+.overview-card .status-badge { margin-top: 10px; }
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 2px solid var(--surus-border);
+  background: white;
+  border-radius: 24px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--surus-text);
+}
+
+.filter-btn:hover {
+  border-color: var(--surus-accent);
+  color: var(--surus-accent);
+}
+
+.filter-btn.active {
+  background: var(--surus-accent);
+  border-color: var(--surus-accent);
+  color: white;
+}
+
+/* ===== ADDITIONAL OPS ===== */
+.additional-ops {
+  background: var(--surus-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--surus-border);
+}
+
+.additional-ops h3 {
+  color: var(--surus-primary);
+  margin-bottom: 14px;
+  font-size: 17px;
+}
+
+/* ===== PLATFORMS GRID ===== */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.platform-card {
+  background: linear-gradient(135deg, #f8f9fb, #f0f5fa);
+  border-radius: var(--radius-xs);
+  padding: 14px;
+  border: 1px solid var(--surus-border);
+  transition: var(--transition);
+}
+
+.platform-card:hover {
+  border-color: var(--surus-accent);
+  background: #eef1f6;
+}
+
+.platform-name { font-weight: 700; color: var(--surus-primary); font-size: 13.5px; }
+.platform-url { font-size: 12px; color: var(--surus-accent); word-break: break-all; }
+.platform-detail { font-size: 11.5px; color: var(--surus-muted); margin-top: 3px; }
+
+/* ===== ASSET TAG ===== */
+.asset-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tag-liberated { background: #fdecea; color: var(--surus-red); }
+.tag-available { background: #e8f8f0; color: var(--surus-green); }
+.tag-pending { background: #fef5e7; color: var(--surus-orange); }
+.tag-operational { background: #e8f0fe; color: var(--surus-accent); }
+
+/* ===== KPI ROW ===== */
+.kpi-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+.kpi-item {
+  flex: 1;
+  min-width: 120px;
+  background: linear-gradient(135deg, #f8f9fb, #eef1f6);
+  border-radius: var(--radius-xs);
+  padding: 12px;
+  text-align: center;
+  border: 1px solid var(--surus-border);
+}
+
+.kpi-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--surus-primary);
+}
+
+.kpi-label {
+  font-size: 10.5px;
+  color: var(--surus-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* ===== SEARCH ===== */
+.search-box input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 16px;
+  border: 2px solid var(--surus-border);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: var(--transition);
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: var(--surus-accent);
+  box-shadow: 0 0 0 3px rgba(46,134,193,0.15);
+}
+
+/* ===== GEA TABLE ===== */
+.gea-table {
+  font-size: 13px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 12px 0;
+}
+
+.gea-table th {
+  background: linear-gradient(135deg, #8e44ad, #6c3483);
+  color: white;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gea-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--surus-border);
+}
+
+.gea-table tr:hover td { background: #f8f0fd; }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: linear-gradient(135deg, var(--surus-primary), #0f3460);
+  color: white;
+  padding: 36px 32px;
+  margin-top: 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--surus-gold), transparent, var(--surus-gold));
+}
+
+.footer p {
+  opacity: 0.8;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.footer .surus-tagline {
+  color: var(--surus-gold);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header-top { padding: 10px 16px; flex-direction: column; gap: 8px; }
+  .nav-tabs { padding: 0 12px; }
+  .main { padding: 14px; }
+  .hero-body { grid-template-columns: 1fr; }
+  .hero-header { padding: 18px 20px; }
+  .hero-title { font-size: 20px; }
+  .chart-row { grid-template-columns: 1fr; }
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .section-content { padding: 14px; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .overview-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .nav-tab { padding: 8px 12px; font-size: 11px; }
+}
+
+/* ===== PRINT ===== */
+@media print {
+  .header { position: static; }
+  .section-body { max-height: none !important; }
+  .company-section { display: block !important; page-break-after: always; }
+  .nav-tabs { display: none; }
+  .overview-card:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="header-logo">
+      <img src="https://www.surusin.com/wp-content/uploads/2019/08/logosurus-principal.png" alt="Grupo Surus" onerror="this.style.display='none'">
+      <div>
+        <div class="header-brand">GRUPO SURUS <span>| Inteligencia Industrial</span></div>
+        <div style="font-size:11px;opacity:0.7;">Desimplantación Circular · Escrapalia · 400M€ generados en reuso</div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="author">Juan Carlos Alvarado</div>
+      <div>Representante Grandes Cuentas Sector Alimentación y Bebidas</div>
+      <div style="margin-top:3px;font-size:11px;">Junio 2026 · Actualizado v2 · Clasificación: Confidencial</div>
+    </div>
+  </div>
+  <div class="nav-tabs" id="navTabs">
+    <div class="nav-tab active" data-tab="overview">Cuadro de Mando</div>
+    <div class="nav-tab" data-tab="pescanova">1. Pescanova</div>
+    <div class="nav-tab" data-tab="danone">2. Danone</div>
+    <div class="nav-tab" data-tab="mahou">3. Mahou</div>
+    <div class="nav-tab" data-tab="agama">4. AGAMA/Damm</div>
+    <div class="nav-tab" data-tab="pascual">5. Pascual</div>
+    <div class="nav-tab" data-tab="nestle">6. Nestlé</div>
+    <div class="nav-tab" data-tab="azucarera">7. Azucarera</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="company-section active" id="sec-overview">
+
+  <div class="summary-grid">
+    <div class="summary-stat">
+      <div class="big-number">7</div>
+      <div class="stat-label">Empresas Investigadas</div>
+    </div>
+    <div class="summary-stat">
+      <div class="big-number">9+</div>
+      <div class="stat-label">Operaciones Adicionales</div>
+    </div>
+    <div class="summary-stat">
+      <div class="big-number">12</div>
+      <div class="stat-label">Plataformas Verificadas</div>
+    </div>
+    <div class="summary-stat">
+      <div class="big-number">0</div>
+      <div class="stat-label">Activos Principales en Subasta</div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-btn active" data-filter="all">Todas</div>
+    <div class="filter-btn" data-filter="closing">Cierre/Cesión</div>
+    <div class="filter-btn" data-filter="restructuring">Reestructuración</div>
+    <div class="filter-btn" data-filter="investment">Inversión</div>
+    <div class="filter-btn" data-filter="additional">Operaciones adicionales</div>
+  </div>
+
+  <div class="overview-grid" id="overviewGrid">
+
+    <div class="overview-card" data-type="closing" onclick="showTab('pascual')">
+      <div class="overview-card-header" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">
+        <div class="overview-card-title">Leche Pascual → Casa Tarradellas</div>
+        <div class="overview-card-sub">Lácteo · Gurb (Barcelona)</div>
+        <span class="status-badge status-closing"><span class="status-dot"></span>En ejecución</span>
+      </div>
+      <div class="overview-card-body">
+        <div class="overview-card-detail">Venta planta + desmantelamiento UHT. Cierre 31 jul 2026. Huelga indefinida. Línea UHT 1 desmantelada ANTES de la huelga (ilegal). GUTINVEST vende GEA lácteos en Barcelona — subasta 18 jun. Proyecto AURA (5 sociedades).</div>
+      </div>
+    </div>
+
+    <div class="overview-card" data-type="restructuring" onclick="showTab('nestle')">
+      <div class="overview-card-header" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">
+        <div class="overview-card-title">Nestlé España</div>
+        <div class="overview-card-sub">Alimentación múltiple · 12 centros</div>
+        <span class="status-badge status-restructuring"><span class="status-dot"></span>ERE 267 afectados</span>
+      </div>
+      <div class="overview-card-body">
+        <div class="overview-card-detail">Plan "Fuel for Growth" global (16.000 despidos). Reuniones finales ERE 2-4 jun. Pontecesures: huelga 100%. La Penilla: paros intermitentes reanudan 8 jun. Girona +25 puestos, Sebares +10. Wyeth Ireland en subasta 18 jun (Rabin Worldwide).</div>
+      </div>
+    </div>
+
+    <div class="overview-card" data-type="closing" onclick="showTab('azucarera')">
+      <div class="overview-card-header" style="background:linear-gradient(135deg,#c0392b,#922b21)">
+        <div class="overview-card-title">Azucarera (AB Foods)</div>
+        <div class="overview-card-sub">Azúcar · La Bañeza + Miranda + Jerez</div>
+        <span class="status-badge status-closed"><span class="status-dot"></span>Cierre ejecutado</span>
+      </div>
+      <div class="overview-card-body">
+        <div class="overview-card-detail">La Bañeza cerrada (94 años, 116 despidos). SIN comprador para el suelo. Anclaje estancada. Azucarera rechazó propuestas de la Junta. ACOR rechazó compra. División azúcar 27M£ pérdidas. ABF separa Primark/FoodCo antes finales 2027.</div>
+      </div>
+    </div>
+
+    <div class="overview-card" data-type="investment" onclick="showTab('pescanova')">
+      <div class="overview-card-header" style="background:linear-gradient(135deg,#2e86c1,#1a5276)">
+        <div class="overview-card-title">Nueva Pescanova</div>
+        <div class="overview-card-sub">Pescado congelado · Arteixo → Morás</div>
+        <span class="status-badge status-pending"><span class="status-dot"></span>Proyecto activo</span>
+      </div>
+      <div class="overview-card-body">
+        <div class="overview-card-detail">Traslado 16M€. Parcela Sabón 16.841m² lindante Inditex. Ampliación capital 283M€. Vuelta a beneficios. Profand ya supera en facturación. Sensomare (R&D con IA). Iberconsa en venta 2026 (retrasada).</div>
+      </div>
+    </div>
+
+    <div class="overview-card" data-type="investment" onclick="showTab('danone')">
+      <div class="overview-card-header" style="background:linear-gradient(135deg,#27ae60,#1e8449)">
+        <div class="overview-card-title">Danone España</div>
+        <div class="overview-card-sub">Lácteo · Tres Cantos + Aldaia</div>
+        <span class="status-badge status-active"><span class="status-dot"></span>En inversión</span>
+      </div>
+      <div class="overview-card-body">
+        <div class="overview-card-detail">40M€ Tres Cantos (8ª línea + 5 patentes). 60M€ Aldaia (5.680 paneles solares, 4.000+ cepas fermentadas). Cierres Ochsenfurt Q4/2026 (230 empleados, 63K Tm, 50% capacidad) y Villefranche ~2027. AllSurplus: subastas activas Danone Volvic + Rillieux.</div>
+      </div>
+    </div>
+
+    <div class="overview-card" data-type="investment" onclick="showTab('mahou')">
+      <div class="overview-card-header" style="background:linear-gradient(135deg,#d4ac0d,#b7950b)">
+        <div class="overview-card-title">Mahou San Miguel</div>
+        <div class="overview-card-sub">Cerveza y bebidas · Alovera</div>
+        <span class="status-badge status-active"><span class="status-dot"></span>En inversión</span>
+      </div>
+      <div class="overview-card-body">
+        <div class="overview-card-detail">Inversión acumulada 119+ M€. Almacén 2º sem 2026 (no 2027). Biomasa PERTE 4M€ + 85 GWht. Calderas gas se quedan como 10% back-up. Krones confirmado. Planta: 7M hl/año, 13 líneas, 550 empleados.</div>
+      </div>
+    </div>
+
+    <div class="overview-card" data-type="closing" onclick="showTab('agama')">
+      <div class="overview-card-header" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">
+        <div class="overview-card-title">AGAMA / Grupo Damm</div>
+        <div class="overview-card-sub">Lácteo · Palma de Mallorca</div>
+        <span class="status-badge status-closed"><span class="status-dot"></span>Cerrada 1 abr 2026</span>
+      </div>
+      <div class="overview-card-body">
+        <div class="overview-card-detail">Cierre planta lechera. 14 trabajadores (5 recolocados, 9 indemnización). Damm ofreció activos+marca a cooperativa — fracasó. DAMM Next Generation 42M€ cancelado. Cacaolat valorado en 100M€. Laccao 100% Barcelona. Crisis láctea mallorquina.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Additional Operations -->
+  <div class="additional-ops">
+    <h3>Operaciones Adicionales Detectadas en Subastas y Concursos</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>#</th><th>Compañía</th><th>Subsector</th><th>Ubicación</th><th>Tipo</th><th>Estado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A</td><td>Frost-Trol S.A.</td><td>Refrigeración industrial</td><td>Castellón</td><td>Liquidación concursal</td><td><span class="status-badge status-closed">Completada</span></td></tr>
+        <tr><td>B</td><td>Sesma Brewing (La Petra)</td><td>Cerveza artesanal</td><td>Navarra</td><td>Concurso de acreedores</td><td><span class="status-badge status-closing">En proceso</span></td></tr>
+        <tr><td>C</td><td>Aquamar Gold SLU</td><td>Producción alimentaria</td><td>Málaga</td><td>Subasta concursal</td><td><span class="status-badge status-closing">Activa</span></td></tr>
+        <tr><td>D</td><td>Harinas Bufort S.L.</td><td>Harinas</td><td>Alicante</td><td>Liquidación</td><td><span class="status-badge status-closed">Completada</span></td></tr>
+        <tr><td>E</td><td>Pastelería Quincoces S.A.</td><td>Panadería/pastelería</td><td>Bizkaia</td><td>Subasta concursal</td><td><span class="status-badge status-closing">Activa</span></td></tr>
+        <tr><td>F</td><td>BALNES Europe S.L.</td><td>Café procesado</td><td>Tarragona</td><td>Subasta concursal</td><td><span class="status-badge status-closing">Activa</span></td></tr>
+        <tr><td>G</td><td>Iberconsa</td><td>Pescado congelado</td><td>Vigo</td><td>En venta 2026</td><td><span class="status-badge status-pending">Retrasada</span></td></tr>
+        <tr><td>H</td><td>Nestlé Wyeth (Ireland)</td><td>Fórmula infantil</td><td>Askeaton, Irlanda</td><td>Subasta Rabin Worldwide</td><td><span class="status-badge status-closing">18 jun 2026</span></td></tr>
+        <tr><td>I</td><td>Danone Volvic/Rillieux</td><td>Agua/lácteo</td><td>Francia</td><td>Subasta AllSurplus</td><td><span class="status-badge status-closing">Activa</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Platforms -->
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128269;</span> Plataformas de Subasta Verificadas</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="verification-box">
+          <div class="v-icon">&#9989;</div>
+          <div class="v-text"><strong>Verificación completada (junio 2026):</strong> Ninguno de los activos de las 7 empresas principales aparece en subasta en las 10 plataformas verificadas. Los equipos se liberarán progresivamente. Se detectaron activos de Nestlé (Wyeth Ireland) y Danone (Volvic/Rillieux) en plataformas internacionales. GUTINVEST vende equipos GEA lácteos en Barcelona — sin confirmar origen Pascual.</div>
+        </div>
+        <div class="platforms-grid">
+          <div class="platform-card"><div class="platform-name">Escrapalia (Grupo Surus)</div><div class="platform-url">escrapalia.com</div><div class="platform-detail">Principal subasta industrial España · 226.000+ subastas · 10% comisión</div></div>
+          <div class="platform-card"><div class="platform-name">Eactivos</div><div class="platform-url">eactivos.com</div><div class="platform-detail">Subastas concursales</div></div>
+          <div class="platform-card"><div class="platform-name">Viasubasta</div><div class="platform-url">viasubasta.com</div><div class="platform-detail">Subastas concursales extrajudiciales · 5%+IVA</div></div>
+          <div class="platform-card"><div class="platform-name">Pacelma</div><div class="platform-url">pacelma.es</div><div class="platform-detail">Subastas industriales · 18% comprador</div></div>
+          <div class="platform-card"><div class="platform-name">Surplex</div><div class="platform-url">surplex.com/es</div><div class="platform-detail">Subastas industriales europeas</div></div>
+          <div class="platform-card"><div class="platform-name">Troostwijk</div><div class="platform-url">troostwijkauctions.com</div><div class="platform-detail">Subastas industriales europeas · 18%+IVA</div></div>
+          <div class="platform-card"><div class="platform-name">Industrial Auctions</div><div class="platform-url">industrial-auctions.com</div><div class="platform-detail">Subastas alimentarias europeas</div></div>
+          <div class="platform-card"><div class="platform-name">GUTINVEST</div><div class="platform-url">gutinvest.es</div><div class="platform-detail">Equipos GEA lácteos en Barcelona · Subasta 18 jun</div></div>
+          <div class="platform-card"><div class="platform-name">Rabin Worldwide</div><div class="platform-url">rabinworldwide.com</div><div class="platform-detail">Nestlé Wyeth Askeaton (Irlanda) · Subasta 18 jun 2026</div></div>
+          <div class="platform-card"><div class="platform-name">AllSurplus</div><div class="platform-url">allsurplus.com</div><div class="platform-detail">Subastas activas Danone Volvic + Rillieux-la-Pape</div></div>
+          <div class="platform-card"><div class="platform-name">Machineryline</div><div class="platform-url">machineryline.es</div><div class="platform-detail">Venta/subasta maquinaria industrial</div></div>
+          <div class="platform-card"><div class="platform-name">CFT Auctions</div><div class="platform-url">cftauctions.com</div><div class="platform-detail">Salsas y conservas · Murcia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overview Chart -->
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128202;</span> Comparativa Financiera</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="chart-container" style="height:380px;">
+          <canvas id="overviewChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== PESCANOVA ==================== -->
+<div class="company-section" id="sec-pescanova">
+
+  <div class="hero-card">
+    <div class="hero-header">
+      <div class="hero-number">01</div>
+      <div class="hero-title">NUEVA PESCANOVA</div>
+      <div class="hero-subtitle">Traslado Sabón → Morás · Desinversión Mozambique · Competencia Profesional</div>
+      <span class="status-badge status-pending" style="margin-top:12px"><span class="status-dot"></span>Proyecto activo · Sin inicio de obras</span>
+    </div>
+    <div class="hero-body">
+      <div>
+        <h4 style="color:var(--surus-primary);margin-bottom:10px">Operación Principal</h4>
+        <p style="font-size:13.5px;line-height:1.65">Traslado del Centro Industrial de Arteixo desde Sabón a Morás. Inversión: <strong>16M€</strong>. Capacidad prevista: <strong>23.900 Tm/año</strong>. PIE (Proyecto Industrial Estratégico). Parcela de Sabón (<strong>16.841 m²</strong>) lindante con Inditex (acumula >1M m² en la zona). <strong>Profand ya supera a Pescanova en facturación</strong> (1.300M€ vs 1.053M€). Proyecto Sensomare: R&D con IA, sensores acústicos y visión artificial.</p>
+      </div>
+      <div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-value">1.053,6M€</div><div class="kpi-label">Ventas 2025</div></div>
+          <div class="kpi-item"><div class="kpi-value">+56,5%</div><div class="kpi-label">Δ EBITDA</div></div>
+          <div class="kpi-item"><div class="kpi-value">283M€</div><div class="kpi-label">Ampliación capital</div></div>
+          <div class="kpi-item"><div class="kpi-value">9.035</div><div class="kpi-label">Empleados</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-value">16M€</div><div class="metric-label">Inversión Morás</div></div>
+    <div class="metric-card"><div class="metric-value">16.841 m²</div><div class="metric-label">Parcela Sabón (lindante Inditex)</div></div>
+    <div class="metric-card"><div class="metric-value">23.900 Tm/a</div><div class="metric-label">Capacidad Morás</div></div>
+    <div class="metric-card"><div class="metric-value">98,59%</div><div class="metric-label">Control ABANCA</div></div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128202;</span> Evolución Financiera y Competencia</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="chart-row">
+          <div class="chart-container"><canvas id="pescanovaFinancialChart"></canvas></div>
+          <div class="chart-container"><canvas id="pescanovaComparisonChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128197;</span> Cronología</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="timeline">
+          <div class="timeline-item highlight"><div class="timeline-date">Mayo 2026</div><div class="timeline-event">ABANCA inyecta 279M€ (ampliación total 283M€). Junta General aprueba.</div></div>
+          <div class="timeline-item highlight"><div class="timeline-date">Marzo 2026</div><div class="timeline-event">Resultados 2025: vuelta a beneficios (+1,1 M€). Profand supera en facturación.</div></div>
+          <div class="timeline-item"><div class="timeline-date">Feb 2026</div><div class="timeline-event">Empresa confirma proyecto Morás activo "sin ningún cambio".</div></div>
+          <div class="timeline-item"><div class="timeline-date">Enero 2026</div><div class="timeline-event">Faro de Vigo revela búsqueda de comprador para Pescamar (Mozambique).</div></div>
+          <div class="timeline-item"><div class="timeline-date">Julio 2025</div><div class="timeline-event">Xunta declara el proyecto PIE (15º Proyecto Industrial Estratégico de Galicia).</div></div>
+          <div class="timeline-item"><div class="timeline-date">Abril 2025</div><div class="timeline-event">Xestur adjudica 9 parcelas en Morás a Pescanova por 3,08M€.</div></div>
+          <div class="timeline-item"><div class="timeline-date">Sept 2024</div><div class="timeline-event">Jorge Escudero asume como CEO.</div></div>
+          <div class="timeline-item"><div class="timeline-date">2023</div><div class="timeline-event">Sea2Table 4.0: IA, IoT, Blockchain en 3 plantas gallegas. HoloLens 2 + Dynamics 365.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128736;</span> Inventario Técnico de Activos</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <h4 style="color:var(--surus-primary);margin-bottom:12px">Planta actual de Sabón — A DESALOJAR</h4>
+        <table class="data-table">
+          <thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Superficie parcela</td><td>16.841 m²</td></tr>
+            <tr><td>Ubicación</td><td>Polígono de Sabón, Arteixo (A Coruña)</td></tr>
+            <tr><td>Colindancia</td><td>Única parcela de la manzana que NO pertenece a Inditex</td></tr>
+            <tr><td>Capacidad actual</td><td>70 Tm/día (18h) / 15.000 Tm/año</td></tr>
+            <tr><td>Equipos probables</td><td>Cocederos langostino/gamba (Mecalsa), envasadoras (Kliklok), cámaras frigoríficas (Linde), clasificación por visión artificial</td></tr>
+            <tr><td>Proyecto R&D</td><td>Sensomare: IA + sensores acústicos + visión artificial para control de calidad en tiempo real</td></tr>
+            <tr><td>Estado del suelo</td><td>NO vendido ni puesto a la venta públicamente</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="color:var(--surus-primary);margin:20px 0 12px">Grupo Pescamar (Mozambique) — EN VENTA</h4>
+        <table class="data-table">
+          <thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Flota</td><td>26 buques (4 menos que en 2023)</td></tr>
+            <tr><td>Facturación</td><td>~25 M€/año</td></tr>
+            <tr><td>Resultado UGE Africa</td><td>-13,82 M€ (2025)</td></tr>
+            <tr><td>Inversión original flota</td><td>42,5 M€ (7 barcos, 2017)</td></tr>
+            <tr><td>Estado</td><td>Teasers distribuidos; sin negociaciones formales</td></tr>
+          </tbody>
+        </table>
+
+        <div class="alert-box" style="margin-top:16px">
+          <div class="a-icon">&#9888;</div>
+          <div class="a-text"><strong>Competencia relevante:</strong> Profand (1.300M€ facturación) ya supera a Pescanova. Iberconsa (en venta 2026, retrasada) y la antigua Pescanova SA (sociedad vacía con litigios) son factores a monitorear.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128100;</span> Contactos e Intermediarios</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="contact-card"><div><div class="contact-name">Jorge Juan Escudero Hurtado de Amezaga</div><div class="contact-role">Consejero Delegado (CEO) · 30+ años FMCG</div></div><div class="contact-ref"><a href="https://es.linkedin.com/in/jorge-escudero-hurtado-de-am%C3%A9zaga-54603a7" target="_blank">LinkedIn</a> · <a href="mailto:jescudero@nuevapescanova.com">jescudero@nuevapescanova.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">José María Benavent Valero</div><div class="contact-role">Presidente del Consejo · Ex-CFO R-Cable/Euskaltel</div></div><div class="contact-ref"><a href="https://linkedin.com/in/jose-mar%C3%ADa-benavent-486a9312" target="_blank">LinkedIn</a> · <a href="mailto:jbenavent@nuevapescanova.com">jbenavent@nuevapescanova.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Marta Otero Fernández</div><div class="contact-role">Directora de Calidad y Seguridad Alimentaria (ex-Directora General de Industria)</div></div><div class="contact-ref"><a href="https://linkedin.com/in/marta-otero-fern%C3%A1ndez-2256692b" target="_blank">LinkedIn</a> · <a href="mailto:motero@nuevapescanova.com">motero@nuevapescanova.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Esteban Villanueva Novo</div><div class="contact-role">Director Ejecutivo País · 22+ años en Grupo Pescanova</div></div><div class="contact-ref"><a href="https://linkedin.com/in/esteban-villanueva-novo-828248159" target="_blank">LinkedIn</a> · <a href="mailto:evillanueva@nuevapescanova.com">evillanueva@nuevapescanova.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Nicolás Castrillo Sotelo</div><div class="contact-role">Director de Operaciones de Pesca (Mozambique) · Ingeniero Industrial UVigo</div></div><div class="contact-ref"><a href="https://linkedin.com/in/nicol%C3%A1s-castrillo-sotelo" target="_blank">LinkedIn</a> · <a href="mailto:ncastrillo@nuevapescanova.com">ncastrillo@nuevapescanova.com</a></div></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--surus-muted)">Contacto general: <a href="mailto:comunicacion@nuevapescanova.com" style="color:var(--surus-accent)">comunicacion@nuevapescanova.com</a> · Tel: +34 986 818 100</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#9989;</span> Verificación de Subastas</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="verification-box">
+          <div class="v-icon">&#9989;</div>
+          <div class="v-text"><strong>Resultado:</strong> A junio 2026, NO hay activos de Nueva Pescanova en subastas públicas. La planta de Sabón sigue operativa y el traslado aún no ha comenzado. Escrapalia, Surplex y Troostwijk verificadas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128218;</span> Fuentes Verificables</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content sources">
+        <ol>
+          <li><a href="https://www.elidealgallego.com/a-coruna/2026-02-28/nueva-pescanova-mantiene-activo-proyecto-nueva-fabrica-arteixo-839472.html" target="_blank">El Ideal Gallego — Proyecto Morás activo</a></li>
+          <li><a href="https://www.eldebate.com/espana/galicia/la-coruna/20250402/empresa-historica-sabon-deja-libre-codiciado-solar-pegado-sede-inditex_284352.html" target="_blank">El Debate — Solar codiciado pegado a Inditex</a></li>
+          <li><a href="https://www.lavozdegalicia.es/noticia/somosmar/2025/04/01/nueva-pescanova-trasladara-fabrica-arteixo-poligono-sabon-moras/0003_202504202504011743510168688.htm" target="_blank">La Voz de Galicia — Traslado Sabón a Morás</a></li>
+          <li><a href="https://www.laopinioncoruna.es/gran-coruna/2025/07/21/nueva-pescanova-destina-16-millones-119926523.html" target="_blank">La Opinión A Coruña — 16 millones planta Morás</a></li>
+          <li><a href="https://www.farodevigo.es/economia/2026/01/01/nueva-pescanova-busca-comprador-historica-mozambique-filial-125298245.html" target="_blank">Faro de Vigo — Busca comprador Mozambique</a></li>
+          <li><a href="https://www.nuevapescanova.com/2026/05/05/grupo-nueva-pescanova-refuerza-su-estructura-financiera-con-una-ampliacion-de-capital-de-283-millones-de-euros/" target="_blank">Nueva Pescanova — Ampliación capital 283M€</a></li>
+          <li><a href="https://www.nuevapescanova.com/nuevapescanova/wp-content/uploads/2026/03/EINF-31.12.2025.pdf" target="_blank">Nueva Pescanova — EINF 2025 (PDF)</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DANONE ==================== -->
+<div class="company-section" id="sec-danone">
+
+  <div class="hero-card">
+    <div class="hero-header" style="background:linear-gradient(135deg,#1a6b3c,#2d8f4e)">
+      <div class="hero-number">02</div>
+      <div class="hero-title">DANONE ESPAÑA</div>
+      <div class="hero-subtitle">Reestructuración Europea e Impacto en Activos Ibéricos</div>
+      <span class="status-badge status-active" style="margin-top:12px"><span class="status-dot"></span>En inversión / cierres en Europa</span>
+    </div>
+    <div class="hero-body">
+      <div>
+        <h4 style="color:var(--surus-primary);margin-bottom:10px">Operación Principal</h4>
+        <p style="font-size:13.5px;line-height:1.65">Danone cierra plantas en Europa (Ochsenfurt Q4/2026: <strong>230 empleados</strong>, 63K Tm/año, 50% capacidad; Villefranche/Bledina ~2027: 117 empleados) e invierte en España: <strong>40M€</strong> Tres Cantos (8ª línea + 5 patentes, hub ciencia/salud) y <strong>60M€</strong> Aldaia (5.680 paneles solares, 4.000+ cepas fermentadas, mayor planta láctea Europa, 52% exportación). Bon Preu invierte 30M€ en hub Parets del Vallès.</p>
+      </div>
+      <div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-value">40M€</div><div class="kpi-label">Inv. Tres Cantos</div></div>
+          <div class="kpi-item"><div class="kpi-value">60M€</div><div class="kpi-label">Inv. Aldaia</div></div>
+          <div class="kpi-item"><div class="kpi-value">5</div><div class="kpi-label">Plantas activas</div></div>
+          <div class="kpi-item"><div class="kpi-value">3</div><div class="kpi-label">Plantas cerradas/vendidas</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card" style="border-left-color:#27ae60"><div class="metric-value">Aldaia</div><div class="metric-label">Mayor planta láctea Danone Europa · 5.680 paneles solares · 52% exportación</div></div>
+    <div class="metric-card" style="border-left-color:#27ae60"><div class="metric-value">Tres Cantos</div><div class="metric-label">8ª línea + 5 patentes · Hub ciencia/salud</div></div>
+    <div class="metric-card" style="border-left-color:#e74c3c"><div class="metric-value">Ochsenfurt</div><div class="metric-label">Cierre Q4/2026 · 230 empleados · 63K Tm/año · 50% capacidad</div></div>
+    <div class="metric-card" style="border-left-color:#e74c3c"><div class="metric-value">Villefranche</div><div class="metric-label">Cierre ~2027 · 117 empleados · Procesado cereales (Bledina)</div></div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#127981;</span> Mapa de Plantas Danone</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="chart-container" style="height:280px"><canvas id="danonePlantsChart"></canvas></div>
+        <table class="data-table" style="margin-top:16px">
+          <thead><tr><th>Estado</th><th>Planta</th><th>Ubicación</th><th>Especialidad</th><th>Empleados</th></tr></thead>
+          <tbody>
+            <tr><td><span class="status-badge status-active">Activa</span></td><td>Aldaia</td><td>Valencia</td><td>Leche y productos lácteos · 5.680 paneles solares</td><td>~500</td></tr>
+            <tr><td><span class="status-badge status-active">Activa</span></td><td>Tres Cantos</td><td>Madrid</td><td>8ª línea + 5 patentes · Hub ciencia/salud</td><td>N/D</td></tr>
+            <tr><td><span class="status-badge status-active">Activa</span></td><td>Lanjarón</td><td>Granada</td><td>Agua mineral</td><td>N/D</td></tr>
+            <tr><td><span class="status-badge status-active">Activa</span></td><td>Sant Hilari Sacalm</td><td>Girona</td><td>Agua mineral</td><td>N/D</td></tr>
+            <tr><td><span class="status-badge status-active">Activa</span></td><td>Sigüenza</td><td>Guadalajara</td><td>Agua mineral</td><td>N/D</td></tr>
+            <tr><td><span class="status-badge status-closed">Cerrada</span></td><td>Sevilla</td><td>Sevilla</td><td>Yogures</td><td>Cerrada 2013</td></tr>
+            <tr><td><span class="status-badge status-closed">Cerrada</span></td><td>Salas</td><td>Asturias</td><td>Leche</td><td>Cerrada 2022</td></tr>
+            <tr><td><span class="status-badge status-closed">Vendida</span></td><td>Parets del Vallès</td><td>Barcelona</td><td>Leche · Ahora Bon Preu (30M€ hub)</td><td>Vendida 2024</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box critical">
+    <div class="a-icon">&#128276;</div>
+    <div class="a-text"><strong>SUBASTAS ACTIVAS:</strong> AllSurplus tiene subastas activas de Danone Volvic y Rillieux-la-Pape (Francia). Rabin Worldwide subasta Nestlé Wyeth Askeaton (Irlanda) el 18 de junio 2026. Equipos de Ochsenfurt se esperan en HGP/Apex tras cierre Q4/2026.</div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128100;</span> Contactos Clave</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="contact-card"><div><div class="contact-name">François Lacombe</div><div class="contact-role">Director General Danone Iberia · 25+ años Danone</div></div><div class="contact-ref"><a href="https://linkedin.com/in/francoisalacombe" target="_blank">LinkedIn</a> · <a href="mailto:francois.lacombe@danone.com">francois.lacombe@danone.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Jaime Ávila Carrasco</div><div class="contact-role">Director de Operaciones Aldaia · 24+ años Danone · UPV</div></div><div class="contact-ref"><a href="https://linkedin.com/in/jaime-avila-carrasco-43a23a113" target="_blank">LinkedIn</a> · <a href="mailto:jaime.avila@danone.com">jaime.avila@danone.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">David Ramos</div><div class="contact-role">Plant Manager Tres Cantos · 23+ años Danone · Ex-Plant Manager Aldaia</div></div><div class="contact-ref"><a href="https://linkedin.com/in/david-ramos-4a590762" target="_blank">LinkedIn</a> · <a href="mailto:david.ramos@danone.com">david.ramos@danone.com</a></div></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--surus-muted)">Contacto general: <a href="mailto:contacto@danone.es" style="color:var(--surus-accent)">contacto@danone.es</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#9989;</span> Verificación de Subastas</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="verification-box">
+          <div class="v-icon">&#9989;</div>
+          <div class="v-text"><strong>Resultado:</strong> Sin activos Danone España en subastas públicas. Los cierres de Ochsenfurt (Q4/2026) y Villefranche (~2027) generarán inventarios que HGP y Apex probablemente gestionarán. AllSurplus tiene subastas activas de Danone Volvic y Rillieux-la-Pape (Francia).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128218;</span> Fuentes</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content sources">
+        <ol>
+          <li><a href="https://www.retailactual.com/noticias/20260414/danone-fabrica-tres-cantos-hub-ciencia-inversion" target="_blank">Retail Actual — Danone fábrica Tres Cantos hub ciencia inversión</a></li>
+          <li><a href="https://www.hgpauction.com/" target="_blank">HGP Auctions — Historial liquidaciones Danone Europa</a></li>
+          <li><a href="https://www.apexauctions.com/" target="_blank">Apex Auctions — Historial liquidaciones Danone Europa</a></li>
+          <li><a href="https://www.allsurplus.com/" target="_blank">AllSurplus — Subastas activas Danone Volvic/Rillieux</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MAHOU ==================== -->
+<div class="company-section" id="sec-mahou">
+
+  <div class="hero-card">
+    <div class="hero-header" style="background:linear-gradient(135deg,#d4ac0d,#b7950b)">
+      <div class="hero-number">03</div>
+      <div class="hero-title">MAHOU SAN MIGUEL</div>
+      <div class="hero-subtitle">Inversiones Estratégicas y Liberación de Activos en Alovera</div>
+      <span class="status-badge status-active" style="margin-top:12px"><span class="status-dot"></span>En inversión · Activos a liberar 2026-2027</span>
+    </div>
+    <div class="hero-body">
+      <div>
+        <h4 style="color:var(--surus-primary);margin-bottom:10px">Operación Principal</h4>
+        <p style="font-size:13.5px;line-height:1.65">Inversión acumulada <strong>119+ M€</strong> en Alovera: almacén automatizado 80M€ (2º sem 2026, no 2027 — System Logistics de Dematic, 100K palets, 71 muelles, AR Racking), planta de biomasa 16M€ (ENCE operadora, PERTE 4M€ + 85 GWht, calderas gas se quedan como 10% back-up), y modernización 11M€ (Krones confirmado). Planta: 7M hl/año, 13 líneas, 550 empleados.</p>
+      </div>
+      <div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-value">1.933,5M€</div><div class="kpi-label">Facturación 2024</div></div>
+          <div class="kpi-item"><div class="kpi-value">119+ M€</div><div class="kpi-label">Inversión total Alovera</div></div>
+          <div class="kpi-item"><div class="kpi-value">300,3M€</div><div class="kpi-label">EBITDA</div></div>
+          <div class="kpi-item"><div class="kpi-value">4.419</div><div class="kpi-label">Empleados</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card" style="border-left-color:#d4ac0d"><div class="metric-value">80M€</div><div class="metric-label">Almacén System Logistics · 2º sem 2026</div></div>
+    <div class="metric-card" style="border-left-color:#27ae60"><div class="metric-value">16M€</div><div class="metric-label">Biomasa PERTE 4M€ + 85 GWht</div></div>
+    <div class="metric-card" style="border-left-color:#2e86c1"><div class="metric-value">11M€</div><div class="metric-label">Modernización · Krones</div></div>
+    <div class="metric-card"><div class="metric-value">7M hl/a</div><div class="metric-label">Capacidad planta · 13 líneas</div></div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128736;</span> Equipos a Liberar</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <table class="data-table">
+          <thead><tr><th>Tipo de equipo</th><th>Estado</th><th>Ventana temporal</th><th>Detalle</th></tr></thead>
+          <tbody>
+            <tr><td>Calderas de gas natural</td><td><span class="asset-tag tag-pending">A reducir</span></td><td>2º sem 2026</td><td>Se quedan como 10% back-up (biomasa cubre 90%)</td></tr>
+            <tr><td>Sistemas de almacenaje convencional</td><td><span class="asset-tag tag-pending">A liberar</span></td><td>2º sem 2026</td><td>System Logistics + AR Racking reemplazan</td></tr>
+            <tr><td>Carretillas elevadoras</td><td><span class="asset-tag tag-pending">A liberar</span></td><td>2º sem 2026</td><td>Automatización logística elimina necesidad</td></tr>
+            <tr><td>Líneas de packaging antiguas</td><td><span class="asset-tag tag-available">Potencialmente liberadas</span></td><td>Continuo</td><td>Krones instala nuevas líneas</td></tr>
+          </tbody>
+        </table>
+        <div class="verification-box" style="margin-top:14px">
+          <div class="v-icon">&#9989;</div>
+          <div class="v-text"><strong>Sin activos Mahou en subastas.</strong> Se recomienda contacto con Marc Borreda (Director Centro de Producción + Compras) para explorar disposición de equipos ANTES de que lleguen a plataformas de subasta.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128100;</span> Contactos Clave</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="contact-card"><div><div class="contact-name">Nicolás Castrejón Carrasco</div><div class="contact-role">Director General de Operaciones (DGO) · 34+ años Mahou · Ing. Agrónomo UPM</div></div><div class="contact-ref"><a href="https://linkedin.com/in/nicolas-castrejon-carrasco-61ab5b2b" target="_blank">LinkedIn</a> · <a href="mailto:ncastrejon@mahou-sanmiguel.com">ncastrejon@mahou-sanmiguel.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">César Javier Rodríguez Muñoz</div><div class="contact-role">Director de Fábrica Alovera (desde ene 2026) · Ing. Químico UCM · Brewmaster VLB Berlin</div></div><div class="contact-ref"><a href="https://linkedin.com/in/cesar-javier-rodriguez-munoz-545a54bb" target="_blank">LinkedIn</a> · <a href="mailto:cesar.rodriguez@mahou-sanmiguel.com">cesar.rodriguez@mahou-sanmiguel.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Marc Borreda (Marcos José)</div><div class="contact-role">Director Centro de Producción + Compras Materias Primas · Ing. Industrial UPV · IESE</div></div><div class="contact-ref"><a href="https://linkedin.com/in/marc-borreda-10195358" target="_blank">LinkedIn</a> · <a href="mailto:marc.borreda@mahou-sanmiguel.com">marc.borreda@mahou-sanmiguel.com</a></div></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--surus-muted)">Contacto general: <a href="mailto:info@mahou-sanmiguel.com" style="color:var(--surus-accent)">info@mahou-sanmiguel.com</a> · Tel: +34 917 578 800</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128218;</span> Fuentes</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content sources">
+        <ol>
+          <li><a href="https://www.mahou-sanmiguel.com/es-es/sala-de-prensa/notas-de-prensa/mahou-san-miguel-avanza-en-las-obras-de-su-innovador-almacen-de-alovera" target="_blank">Mahou San Miguel — Almacén automatizado Alovera</a></li>
+          <li><a href="https://www.mahou-sanmiguel.com/es-es/sala-de-prensa/" target="_blank">Mahou San Miguel — Planta biomasa</a></li>
+          <li><a href="https://www.gxo.com/" target="_blank">GXO Logistics — Acuerdo operativo</a></li>
+          <li><a href="https://www.ence.es/" target="_blank">Ence — Operador planta biomasa</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== AGAMA/DAMM ==================== -->
+<div class="company-section" id="sec-agama">
+
+  <div class="hero-card">
+    <div class="hero-header" style="background:linear-gradient(135deg,#c0392b,#922b21)">
+      <div class="hero-number">04</div>
+      <div class="hero-title">AGAMA / GRUPO DAMM</div>
+      <div class="hero-subtitle">Cierre Planta Lechera Palma de Mallorca · Crisis Láctea Balear</div>
+      <span class="status-badge status-closed" style="margin-top:12px"><span class="status-dot"></span>Cerrada 1 abril 2026</span>
+    </div>
+    <div class="hero-body">
+      <div>
+        <h4 style="color:var(--surus-primary);margin-bottom:10px">Operación Principal</h4>
+        <p style="font-size:13.5px;line-height:1.65">Cierre definitivo de la planta lechera AGAMA en Palma de Mallorca. Grupo Damm (2.025M€ facturación) ofreció <strong>activos + marca a la cooperativa</strong> — fracasó. DAMM Next Generation <strong>42M€ cancelado</strong> (18,2M€ + 7,9M€ + 15,7M€ en 3 líneas). Cacaolat valorado en <strong>100M€</strong> (50% vendido a Idilia Foods). Laccao ahora 100% Barcelona. Son Carbo ofreció 800K€ por 51% de Formatges Grimalt. Reclamación de <strong>1,1M€</strong> en subvenciones.</p>
+      </div>
+      <div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-value">2.025M€</div><div class="kpi-label">Facturación Damm</div></div>
+          <div class="kpi-item"><div class="kpi-value">175M€</div><div class="kpi-label">Beneficio neto</div></div>
+          <div class="kpi-item"><div class="kpi-value">14</div><div class="kpi-label">Trabajadores afectados</div></div>
+          <div class="kpi-item"><div class="kpi-value">42M€</div><div class="kpi-label">Proyecto cancelado</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128197;</span> Cronología del Desmantelamiento</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="timeline">
+          <div class="timeline-item critical"><div class="timeline-date">10 abr 2026</div><div class="timeline-event">Fin de los contratos laborales. Damm ofreció activos+marca a cooperativa — fracasó.</div></div>
+          <div class="timeline-item highlight"><div class="timeline-date">1 abr 2026</div><div class="timeline-event">Cese del embotellado.</div></div>
+          <div class="timeline-item"><div class="timeline-date">31 mar 2026</div><div class="timeline-event">Última recogida de leche a ganaderos de Mallorca.</div></div>
+          <div class="timeline-item"><div class="timeline-date">23 mar 2026</div><div class="timeline-event">Acuerdo Damm-trabajadores: 5 recolocados, 9 con indemnización. Ávila (CCOO) se abstiene.</div></div>
+          <div class="timeline-item"><div class="timeline-date">3 mar 2026</div><div class="timeline-event">Damm comunica formalmente el cierre.</div></div>
+          <div class="timeline-item"><div class="timeline-date">Dic 2025</div><div class="timeline-event">Damm deja de comprar leche a ganaderos de Mallorca. Crisis láctea balear.</div></div>
+          <div class="timeline-item"><div class="timeline-date">Sep 2025</div><div class="timeline-event">Trabajadores denuncian desmantelamiento en curso.</div></div>
+          <div class="timeline-item"><div class="timeline-date">Junio 2024</div><div class="timeline-event">Venta del 50% de Cacaolat a Idilia Foods (valoración 100M€).</div></div>
+          <div class="timeline-item"><div class="timeline-date">Junio 2021</div><div class="timeline-event">Traslado de producción Laccao a Barcelona (ahora 100%).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128176;</span> DAMM Next Generation — Desglose Cancelado</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <table class="data-table">
+          <thead><tr><th>Línea</th><th>Inversión</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td>Línea 1 (cerveza especial)</td><td>18,2M€</td><td><span class="status-badge status-closed">Cancelada</span></td></tr>
+            <tr><td>Línea 2 (envases sostenibles)</td><td>7,9M€</td><td><span class="status-badge status-closed">Cancelada</span></td></tr>
+            <tr><td>Línea 3 (digitalización)</td><td>15,7M€</td><td><span class="status-badge status-closed">Cancelada</span></td></tr>
+            <tr style="font-weight:700"><td>TOTAL</td><td>41,8M€</td><td><span class="status-badge status-closed">Cancelado</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#9989;</span> Verificación de Subastas</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="verification-box warning">
+          <div class="v-icon">&#9888;</div>
+          <div class="v-text"><strong>Atención:</strong> Sin activos AGAMA/Damm en subastas públicas. Los trabajadores denunciaron desmantelamiento en septiembre 2025 (6 meses antes del cierre oficial). Es posible que parte de los equipos ya hayan sido trasladados o vendidos internamente. Damm ofreció activos+marca a la cooperativa — la oferta fracasó. Son Carbo ofreció 800K€ por 51% de Formatges Grimalt. Se recomienda contacto con José Joaquín Vila (Director Negocio Lácteo Damm).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128218;</span> Fuentes</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content sources">
+        <ol>
+          <li><a href="https://www.ultimahora.es/noticias/part-forana/2026/03/23/2595143/grupo-damm-llega-principio-acuerdo-los-trabajadores-agama.html" target="_blank">Última Hora — Grupo Damm acuerdo trabajadores AGAMA</a></li>
+          <li><a href="https://www.linkedin.com/in/jose-joaquin-vila-9081313b/" target="_blank">LinkedIn — José Joaquín Vila</a></li>
+          <li><a href="https://www.linkedin.com/in/josepbarbena/" target="_blank">LinkedIn — Josep Barbena</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PASCUAL ==================== -->
+<div class="company-section" id="sec-pascual">
+
+  <div class="hero-card">
+    <div class="hero-header" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">
+      <div class="hero-number">05</div>
+      <div class="hero-title">LECHE PASCUAL → CASA TARRADELLAS</div>
+      <div class="hero-subtitle">Venta Planta de Gurb · Desmantelamiento UHT Ilegal · Subasta GEA 18 Jun</div>
+      <span class="status-badge status-closing" style="margin-top:12px"><span class="status-dot"></span>En ejecución · Cierre 31 jul 2026</span>
+    </div>
+    <div class="hero-body">
+      <div>
+        <h4 style="color:var(--surus-primary);margin-bottom:10px">Operación Principal</h4>
+        <p style="font-size:13.5px;line-height:1.65">Pascual vende planta de Gurb (<strong>46.000 m²</strong> parcela, <strong>12.000 m²</strong> nave) a Casa Tarradellas para fábrica de mozzarella. Línea UHT 1 desmantelada <strong>ANTES de la huelga</strong> (ilegal). Línea UHT 2 en desmantelamiento. Producción Lidl parada feb-mar. Llet Nostra perdió <strong>35M litros</strong> redirigidos. Casa Tarradellas adapta 48K+ m² a partir del 1 de agosto. <strong>Proyecto AURA</strong>: estructura de 5 sociedades. <strong>GUTINVEST subasta 18 jun</strong> con equipos GEA lácteos específicos.</p>
+      </div>
+      <div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-value">929M€</div><div class="kpi-label">Facturación Pascual</div></div>
+          <div class="kpi-item"><div class="kpi-value">1.501M€</div><div class="kpi-label">Facturación Casa Tarradellas</div></div>
+          <div class="kpi-item"><div class="kpi-value">46.000 m²</div><div class="kpi-label">Parcela Gurb</div></div>
+          <div class="kpi-item"><div class="kpi-value">18 jun</div><div class="kpi-label">Subasta GUTINVEST</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUTINVEST alert -->
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#9888;</span> ALERTA: Equipos GEA en GUTINVEST — Subasta 18 Junio 2026</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="alert-box critical">
+          <div class="a-icon">&#128276;</div>
+          <div class="a-text"><strong>GUTINVEST International Assets</strong> subasta el 18 de junio 2026 equipos de marca GEA en Barcelona. Origen Gurb <strong>NO confirmado</strong> pero los equipos GEA son habituales en plantas lácteas UHT. Se recomienda seguimiento activo y contacto con GUTINVEST.</div>
+        </div>
+        <table class="gea-table" style="margin-top:14px">
+          <thead><tr><th>Modelo GEA</th><th>Tipo</th><th>Precio</th><th>Observaciones</th></tr></thead>
+          <tbody>
+            <tr><td>MSA 90-01-076</td><td>Separador centrífugo</td><td>25.000€</td><td>Línea láctea UHT</td></tr>
+            <tr><td>CSA 160-47-076</td><td>Separador centrífugo</td><td>55.000€</td><td>Capacidad superior</td></tr>
+            <tr><td>Varios equipos GEA</td><td>Homogeneizadores, pasteurizadores</td><td>Consultar</td><td>Subasta completa 18 jun</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:12px">
+          <table class="data-table">
+            <thead><tr><th>Línea</th><th>Estado</th><th>Destino</th></tr></thead>
+            <tbody>
+              <tr><td>Línea UHT 1</td><td><span class="asset-tag tag-liberated">Desmantelada (ILEGAL)</span></td><td>Aranda de Duero</td></tr>
+              <tr><td>Línea UHT 2</td><td><span class="asset-tag tag-pending">En desmantelamiento</span></td><td>Desconocido (posible venta/chatarra)</td></tr>
+              <tr><td>Línea Lidl</td><td><span class="asset-tag tag-closed">Parada feb-mar</span></td><td>Producción privada cesada</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128100;</span> Contactos Clave</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="contact-card"><div><div class="contact-name">Tomás Pascual Gómez-Cuéllar</div><div class="contact-role">Presidente Grupo Pascual</div></div><div class="contact-ref"><a href="https://es.linkedin.com/in/tomaspascual" target="_blank">LinkedIn</a> · <a href="mailto:Tomas.Pascual@calidadpascual.com">Tomas.Pascual@calidadpascual.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">César Vargas</div><div class="contact-role">CEO Grupo Pascual (desde ene 2026) · Proyecto AURA (5 sociedades)</div></div><div class="contact-ref"><a href="https://es.linkedin.com/in/cesarvargas" target="_blank">LinkedIn</a> · <a href="mailto:Cesar.Vargas@calidadpascual.com">Cesar.Vargas@calidadpascual.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Mónica Planas</div><div class="contact-role">Directora de Fábrica Gurb</div></div><div class="contact-ref"><a href="https://www.linkedin.com/in/monica-planas-8638b9101" target="_blank">LinkedIn</a> · <a href="mailto:Monica.Planas@calidadpascual.com">Monica.Planas@calidadpascual.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Josep Tarradellas</div><div class="contact-role">Presidente Casa Tarradellas (comprador) · Adaptación 48K+ m² desde 1 ago</div></div><div class="contact-ref"><a href="https://www.linkedin.com/in/josep-t-448a9213" target="_blank">LinkedIn</a> · <a href="mailto:JTarradellas@casatarradellas.es">JTarradellas@casatarradellas.es</a> · <a href="tel:+34938816550">+34 938 816 550</a></div></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--surus-muted)">Contacto general: <a href="mailto:info@calidadpascual.com" style="color:var(--surus-accent)">info@calidadpascual.com</a> · Tel: +34 902 400 300</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128218;</span> Fuentes</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content sources">
+        <ol>
+          <li><a href="https://www.elperiodico.com/es/economia/20260508/trabajadores-leche-pascual-denuncian-desmantela-fabrica-gurb-129987051" target="_blank">El Periódico — Trabajadores Pascual denuncian desmantelamiento Gurb</a></li>
+          <li><a href="https://www.gutinvest.es" target="_blank">GUTINVEST — Equipos GEA Barcelona</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== NESTLE ==================== -->
+<div class="company-section" id="sec-nestle">
+
+  <div class="hero-card">
+    <div class="hero-header" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">
+      <div class="hero-number">06</div>
+      <div class="hero-title">NESTLÉ ESPAÑA</div>
+      <div class="hero-subtitle">ERE 267 Afectados · Plan "Fuel for Growth" · Reuniones Finales 2-4 Jun</div>
+      <span class="status-badge status-restructuring" style="margin-top:12px"><span class="status-dot"></span>Reestructuración · No cierra fábricas</span>
+    </div>
+    <div class="hero-body">
+      <div>
+        <h4 style="color:var(--surus-primary);margin-bottom:10px">Operación Principal</h4>
+        <p style="font-size:13.5px;line-height:1.65">ERE de <strong>267 afectados</strong> (reducido de 301). <strong>Reuniones finales 2-4 junio 2026</strong>. No cierra fábricas — reorganización. Condiciones: 35 días/año (máx. 36 mensualidades) + 3.500€ adicional. Pontecesures: huelga 100%. La Penilla: paros intermitentes reanudan 8 jun. Girona GANA +25 puestos (2 líneas, 15M€ inversión). Sebares GANA +10 puestos (Meritene Drink, 7M€). Pablo Isla, nuevo chairman. Wyeth Ireland en subasta 18 jun (Rabin Worldwide).</p>
+      </div>
+      <div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-value">2.894M€</div><div class="kpi-label">Facturación España 2025</div></div>
+          <div class="kpi-item"><div class="kpi-value">267</div><div class="kpi-label">Afectados ERE</div></div>
+          <div class="kpi-item"><div class="kpi-value">4.158</div><div class="kpi-label">Empleados España</div></div>
+          <div class="kpi-item"><div class="kpi-value">3.000M CHF</div><div class="kpi-label">Ahorro global objetivo</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128202;</span> Centros Afectados por el ERE</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="chart-container" style="height:300px"><canvas id="nestleChart"></canvas></div>
+        <table class="data-table" style="margin-top:16px">
+          <thead><tr><th>Centro</th><th>Despidos</th><th>Condiciones</th><th>Estado sindical</th></tr></thead>
+          <tbody>
+            <tr><td>Esplugues (oficinas)</td><td>158</td><td>35 días/año + 3.500€</td><td>Movilizaciones CCOO</td></tr>
+            <tr><td>La Penilla</td><td>43</td><td>35 días/año + 3.500€</td><td>Paros intermitentes → reanudan 8 jun</td></tr>
+            <tr><td>Pontecesures</td><td>27</td><td>35 días/año + 3.500€</td><td>Huelga 100%</td></tr>
+            <tr><td>Miajadas</td><td>8</td><td>35 días/año + 3.500€</td><td>N/D</td></tr>
+            <tr style="background:#e8f8f0"><td style="color:#27ae60;font-weight:700">Girona (gana puestos)</td><td>-12 +25 = +13</td><td>2 nuevas líneas · 15M€ inversión</td><td>Packaging</td></tr>
+            <tr style="background:#e8f8f0"><td style="color:#27ae60;font-weight:700">Sebares (gana puestos)</td><td>-4 +10 = +6</td><td>Meritene Drink · 7M€ inversión</td><td>Nuevos productos</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box critical">
+    <div class="a-icon">&#128276;</div>
+    <div class="a-text"><strong>SUBASTA NESTLÉ WYETH IRELAND:</strong> Rabin Worldwide subasta la planta Nestlé Wyeth de Askeaton (Irlanda) el 18 de junio 2026. Equipos de fórmula infantil: secadores spray, mezcladores, envasado aséptico, CIP, laboratorios. No es España pero indica el patrón de liquidación de activos Nestlé global.</div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128100;</span> Contactos Clave</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="contact-card"><div><div class="contact-name">Pablo Isla</div><div class="contact-role">Chairman Nestlé (desde 2025, ex-Inditex)</div></div><div class="contact-ref"><a href="mailto:Pablo.Isla@nestle.com">Pablo.Isla@nestle.com</a> · Sin LinkedIn público (consejero global)</div></div>
+        <div class="contact-card"><div><div class="contact-name">Olivier Helfer</div><div class="contact-role">Presidente Nestlé España + CFO Europa</div></div><div class="contact-ref"><a href="https://www.linkedin.com/in/olivier-helfer-8951756/" target="_blank">LinkedIn</a> · <a href="mailto:Olivier.Helfer@es.nestle.com">Olivier.Helfer@es.nestle.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Jordi Llach</div><div class="contact-role">Director General Nestlé España</div></div><div class="contact-ref"><a href="https://www.linkedin.com/in/jordi-llach-b543b915/" target="_blank">LinkedIn</a> · <a href="mailto:Jordi.Llach@es.nestle.com">Jordi.Llach@es.nestle.com</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Meritxell Alegre Puig</div><div class="contact-role">Directora de Cafés Nestlé España</div></div><div class="contact-ref"><a href="https://www.linkedin.com/in/meritxell-alegre-puig-4231341a" target="_blank">LinkedIn</a> · <a href="mailto:meritxell.alegre@nestle.com">meritxell.alegre@nestle.com</a></div></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--surus-muted)">Contacto general: <a href="mailto:nestle.es@nestle.com" style="color:var(--surus-accent)">nestle.es@nestle.com</a> · Tel: +34 900 223 133</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128218;</span> Fuentes</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content sources">
+        <ol>
+          <li><a href="https://www.20minutos.es/lainformacion/economia-y-finanzas/nestle-rebaja-numero-afectados-ere-267-trabajadores-crear-nuevos-puestos-trabajo-girona-sebares_6976452_0.html" target="_blank">20minutos — Nestlé rebaja ERE 267 afectados</a></li>
+          <li><a href="https://www.rabinworldwide.com/" target="_blank">Rabin Worldwide — Subasta Nestlé Wyeth Askeaton 18 jun 2026</a></li>
+          <li><a href="https://www.nestle.es/" target="_blank">Nestlé España — Informes corporativos</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== AZUCARERA ==================== -->
+<div class="company-section" id="sec-azucarera">
+
+  <div class="hero-card">
+    <div class="hero-header" style="background:linear-gradient(135deg,#c0392b,#922b21)">
+      <div class="hero-number">07</div>
+      <div class="hero-title">AZUCARERA (AB FOODS)</div>
+      <div class="hero-subtitle">Cierre La Bañeza · Sin Comprador · Demerger Primark/FoodCo</div>
+      <span class="status-badge status-closed" style="margin-top:12px"><span class="status-dot"></span>Cierre ejecutado · Conversión Miranda</span>
+    </div>
+    <div class="hero-body">
+      <div>
+        <h4 style="color:var(--surus-primary);margin-bottom:10px">Operación Principal</h4>
+        <p style="font-size:13.5px;line-height:1.65">Cierre definitivo de La Bañeza (94 años, 1931-2025, 116 despidos). <strong>SIN comprador para el suelo</strong>. Anclaje estancada. Azucarera rechazó propuestas de la Junta. ACOR rechazó compra. Conversión de Miranda de Ebro a refinería (<strong>27M€</strong>). Equipos valorados a <strong>CERO</strong> en libros. Deterioro contable <strong>119M£</strong>. División azúcar: 27M£ pérdidas. ABF separa Primark de FoodCo antes de finales 2027 (oficial 21 abr 2026). Superficie remolacha -38%. 5 fábricas UE cerradas en 2025.</p>
+      </div>
+      <div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-value">119M£</div><div class="kpi-label">Deterioro contable ABF</div></div>
+          <div class="kpi-item"><div class="kpi-value">0€</div><div class="kpi-label">Valor contable equipos</div></div>
+          <div class="kpi-item"><div class="kpi-value">194</div><div class="kpi-label">Afectados ERE</div></div>
+          <div class="kpi-item"><div class="kpi-value">27M€</div><div class="kpi-label">Inversión Miranda</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card" style="border-left-color:#e74c3c"><div class="metric-value">La Bañeza</div><div class="metric-label">CERRADA · 94 años · 116 despidos · SIN comprador suelo</div></div>
+    <div class="metric-card" style="border-left-color:#f39c12"><div class="metric-value">Miranda</div><div class="metric-label">EN CONVERSIÓN · Refinería 27M€ · +50% capacidad (120K Tm/año)</div></div>
+    <div class="metric-card" style="border-left-color:#2e86c1"><div class="metric-value">Jerez</div><div class="metric-label">Sin molturación 2026 · Refinería caña activa</div></div>
+    <div class="metric-card" style="border-left-color:#27ae60"><div class="metric-value">Benavente</div><div class="metric-label">Operativa · Sin cambios</div></div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128176;</span> Equipos de La Bañeza (Valor Contable = CERO)</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="alert-box">
+          <div class="a-icon">&#9888;</div>
+          <div class="a-text"><strong>OPORTUNIDAD:</strong> AB Foods ha valorado TODOS los equipos de La Bañeza a CERO. Sin comprador para el suelo. Anclaje estancada. Azucarera rechazó propuestas de la Junta y ACOR rechazó compra. Superficie remolacha -38%. Una azucarera centenaria contiene: difusores, evaporadores, cristalizadores, centrífugas, secadores, calderas, turbinas, silos y líneas de envasado — potencial adquisición a precio residual.</div>
+        </div>
+        <table class="data-table" style="margin-top:12px">
+          <thead><tr><th>Tipo de equipo</th><th>Valor contable ABF</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td>Difusores (extracción remolacha)</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmantelados o por desmantelar</td></tr>
+            <tr><td>Evaporadores (concentración jugo)</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmantelados o por desmantelar</td></tr>
+            <tr><td>Cristalizadores</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmantelados o por desmantelar</td></tr>
+            <tr><td>Centrífugas</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmantelados o por desmantelar</td></tr>
+            <tr><td>Calderas de vapor</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmanteladas o por desmantelar</td></tr>
+            <tr><td>Turbinas (cogeneración)</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmanteladas o por desmantelar</td></tr>
+            <tr><td>Silos de almacenaje</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmantelados o por desmantelar</td></tr>
+            <tr><td>Líneas de envasado</td><td><span class="asset-tag tag-liberated">0 €</span></td><td>Desmanteladas o por desmantelar</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card expanded">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128202;</span> ERE y Demerger</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="chart-row">
+          <div class="chart-container"><canvas id="azucareraChart"></canvas></div>
+          <div class="chart-container"><canvas id="azucareraDemergerChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128100;</span> Contactos Clave</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content">
+        <div class="contact-card"><div><div class="contact-name">Juan Luis Rivero Ximenes</div><div class="contact-role">CEO Azucarera (desde 2010)</div></div><div class="contact-ref"><a href="mailto:juanluis.rivero@azucarera.es">juanluis.rivero@azucarera.es</a> · <a href="tel:+34696917533">+34 696 917 533</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">AB Foods / AB Sugar</div><div class="contact-role">Matriz (Londres, cotizada) · Demerger Primark/FoodCo oficial 21 abr 2026</div></div><div class="contact-ref"><a href="https://www.abf.co.uk/" target="_blank">AB Foods</a></div></div>
+        <div class="contact-card"><div><div class="contact-name">Fundación Anclaje</div><div class="contact-role">Reindustrialización La Bañeza · ESTANCADA</div></div><div class="contact-ref"><span style="color:#e74c3c">Sitio web inactivo</span></div></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--surus-muted)">Contacto general: <a href="mailto:juanluis.rivero@azucarera.es" style="color:var(--surus-accent)">juanluis.rivero@azucarera.es</a> · <a href="tel:+34696917533">+34 696 917 533</a> · Torre Spinola, C/ Cardenal Marcelo Spinola 42, 28016 Madrid</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="icon">&#128218;</span> Fuentes</div>
+      <div class="section-toggle">&#9660;</div>
+    </div>
+    <div class="section-body">
+      <div class="section-content sources">
+        <ol>
+          <li><a href="https://elpais.com/economia/2025-05-30/azucarera-sacrifica-la-planta-casi-centenaria-de-la-baneza.html" target="_blank">El País — Azucarera sacrifica planta casi centenaria de La Bañeza</a></li>
+          <li><a href="https://www.abf.co.uk/" target="_blank">AB Foods — Informes corporativos · Demerger Primark/FoodCo</a></li>
+          <li>Fundación Anclaje — Reindustrialización La Bañeza (sitio web inactivo)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <img src="https://www.surusin.com/wp-content/uploads/2019/08/logosurus-principal.png" alt="Grupo Surus" style="height:28px;filter:brightness(0) invert(1);opacity:0.6;margin-bottom:10px" onerror="this.style.display='none'">
+  <p class="surus-tagline">Desimplantación Circular · 400M€ generados en reuso</p>
+  <p>Informe de Inteligencia Industrial — Sector Alimentario España · Junio 2026 · v2 Actualizado</p>
+  <p>Juan Carlos Alvarado · Representante Grandes Cuentas Sector Alimentación y Bebidas · Grupo Surus</p>
+  <p style="margin-top:8px;font-size:11px;opacity:0.5">Clasificación: Confidencial · Escrapalia (226.000+ subastas) · EcoVadis Silver 78/100</p>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+function showTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.company-section').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  document.getElementById(`sec-${tabId}`).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => showTab(tab.dataset.tab));
+});
+
+// ===== EXPANDABLE SECTIONS =====
+function toggleSection(header) {
+  const card = header.parentElement;
+  card.classList.toggle('expanded');
+}
+
+// ===== FILTERS =====
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.overview-card').forEach(card => {
+      if (filter === 'all' || card.dataset.type === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// ===== CHARTS =====
+const chartDefaults = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      labels: { font: { size: 12, family: "'Segoe UI', system-ui, sans-serif" }, color: '#2c3e50' }
+    }
+  }
+};
+
+// Overview chart
+new Chart(document.getElementById('overviewChart'), {
+  type: 'bar',
+  data: {
+    labels: ['N. Pescanova', 'Mahou San Miguel', 'Grupo Damm', 'Leche Pascual', 'Casa Tarradellas', 'Nestlé España', 'Azucarera (ABF)'],
+    datasets: [{
+      label: 'Facturación (M€)',
+      data: [1053.6, 1933.5, 2025, 929, 1501, 2894, null],
+      backgroundColor: ['#2e86c1','#d4ac0d','#c0392b','#e74c3c','#f39c12','#8e44ad','#95a5a6'],
+      borderRadius: 6,
+      barThickness: 40
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Millones €', font: { size: 12 } },
+        ticks: { callback: v => v.toLocaleString() + 'M€' },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: { ticks: { font: { size: 11 }, maxRotation: 45 }, grid: { display: false } }
+    }
+  }
+});
+
+// Pescanova financial chart
+new Chart(document.getElementById('pescanovaFinancialChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Ventas', 'EBITDA', 'Resultado neto'],
+    datasets: [{
+      label: 'M€ (2025)',
+      data: [1053.6, 71.2, 1.1],
+      backgroundColor: ['#2e86c1','#27ae60','#d4ac0d'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    plugins: { ...chartDefaults.plugins, title: { display: true, text: 'Resultados Financieros 2025', font: { size: 14, weight: 'bold' } } },
+    scales: { x: { beginAtZero: true, ticks: { callback: v => v + 'M€' }, grid: { color: 'rgba(0,0,0,0.05)' } } }
+  }
+});
+
+// Pescanova comparison chart (vs Profand)
+new Chart(document.getElementById('pescanovaComparisonChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Nueva Pescanova', 'Profand'],
+    datasets: [
+      {
+        label: 'Facturación (M€)',
+        data: [1053.6, 1300],
+        backgroundColor: ['#2e86c1', '#e74c3c'],
+        borderRadius: 6
+      }
+    ]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: { ...chartDefaults.plugins, title: { display: true, text: 'Facturación vs Competencia', font: { size: 14, weight: 'bold' } }, legend: { display: false } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => v + 'M€' }, grid: { color: 'rgba(0,0,0,0.05)' } } }
+  }
+});
+
+// Danone plants chart
+new Chart(document.getElementById('danonePlantsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Aldaia', 'Tres Cantos', 'Lanjarón', 'S. Hilari', 'Sigüenza', 'Sevilla ✗', 'Salas ✗', 'Parets ✗'],
+    datasets: [{
+      label: 'Estado',
+      data: [500, 200, 100, 100, 80, 0, 0, 0],
+      backgroundColor: ['#27ae60','#27ae60','#27ae60','#27ae60','#27ae60','#e74c3c','#e74c3c','#f39c12'],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      title: { display: true, text: 'Plantas Danone España — Empleados Estimados', font: { size: 14, weight: 'bold' } },
+      legend: { display: false }
+    },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Empleados (~)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// Nestlé ERE chart
+new Chart(document.getElementById('nestleChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Esplugues', 'La Penilla', 'Pontecesures', 'Miajadas', 'Girona', 'Sebares'],
+    datasets: [{
+      label: 'Cambios netos de personal',
+      data: [-158, -43, -27, -8, 13, 6],
+      backgroundColor: function(ctx) {
+        return ctx.raw >= 0 ? '#27ae60' : '#e74c3c';
+      },
+      borderRadius: 6
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      title: { display: true, text: 'ERE Nestlé: Cambios Netos por Centro', font: { size: 14, weight: 'bold' } },
+      legend: { display: false }
+    },
+    scales: {
+      y: { title: { display: true, text: 'Empleados (+ ganancias, - pérdidas)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// Azucarera ERE chart
+new Chart(document.getElementById('azucareraChart'), {
+  type: 'bar',
+  data: {
+    labels: ['La Bañeza', 'Miranda (despidos)', 'Miranda (recolocaciones)', 'Total ERE'],
+    datasets: [{
+      label: 'Personas',
+      data: [116, 13, 37, 194],
+      backgroundColor: ['#e74c3c','#f39c12','#27ae60','#2e86c1'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      title: { display: true, text: 'ERE Azucarera: Despidos y Recolocaciones', font: { size: 14, weight: 'bold' } },
+      legend: { display: false }
+    },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Personas' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// Azucarera demerger chart
+new Chart(document.getElementById('azucareraDemergerChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Azúcar pérdidas (27M£)', 'Deterioro La Bañeza', 'Otro deterioro', 'Beneficio Primark'],
+    datasets: [{
+      data: [27, 119, 50, 751],
+      backgroundColor: ['#e74c3c','#c0392b','#f39c12','#27ae60'],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      title: { display: true, text: 'AB Foods: División Azúcar vs Primark (M£)', font: { size: 14, weight: 'bold' } }
+    }
+  }
+});
+
+// ===== EXPAND ALL ON LOAD =====
+document.querySelectorAll('.section-card.expanded').forEach(card => {
+  card.classList.add('expanded');
+});
+</script>
+
+</body>
+</html>
