@@ -90,8 +90,8 @@ export async function runBoeBopAgent(opts: {
         const { inScope: ok, outReason, signals } = await persistArticle(art);
         if (ok) inScope++; else outOfScope++;
         if (outReason === 'concurso') concursos++;
-        if (signals?.some((s) => /ere|despido|regulacion/i.test(s.label))) eres++;
-        if (signals?.some((s) => /cierre|liquidacion|desmantela/i.test(s.label))) cierres++;
+        if (signals?.some((s) => /ere|despido|regulacion/i.test(s))) eres++;
+        if (signals?.some((s) => /cierre|liquidacion|desmantela/i.test(s))) cierres++;
         upserted++;
       } catch (e) {
         errors++;

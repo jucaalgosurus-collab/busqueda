@@ -6,7 +6,15 @@ export type Sector = 'Alimentacion' | 'Bebidas';
 
 export type Language = 'es';
 
-export type OutletType = 'corporate_newsroom' | 'sector' | 'nacional' | 'regional' | 'local';
+export type OutletType =
+  | 'corporate_newsroom'
+  | 'sector'
+  | 'nacional'
+  | 'regional'
+  | 'local'
+  | 'bofficial'
+  | 'syndicate'
+  | 'linkedin';
 
 export interface ScrapedArticle {
   url: string;

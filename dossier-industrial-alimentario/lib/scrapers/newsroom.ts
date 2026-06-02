@@ -227,7 +227,7 @@ const NOISE_SELECTORS: readonly string[] = [
   '#comments',
 ];
 
-function findContainer($: cheerio.CheerioAPI): cheerio.AnyNode | null {
+function findContainer($: cheerio.CheerioAPI): unknown {
   for (const sel of CONTENT_SELECTORS) {
     const found = $(sel).first();
     if (found.length > 0) {
@@ -260,7 +260,8 @@ function extractFromContainer($: cheerio.CheerioAPI): ArticleContent {
   if (!container) {
     return { title: '', publishedAt: null, content: '' };
   }
-  const $c = $(container);
+  // cheerio 1.0.0 narrows the public surface; pass through via unknown.
+  const $c = $((container as unknown) as string);
   $c.find(NOISE_SELECTORS.join(',')).remove();
 
   const title =

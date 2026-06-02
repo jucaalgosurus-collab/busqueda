@@ -14,7 +14,9 @@
     "seed": "tsx scripts/seed-from-md.ts",
     "smoke": "tsx scripts/smoke.ts",
     "scan:newsrooms": "tsx scripts/scan-newsrooms.ts",
-    "scan:sectorial": "tsx scripts/scan-sectorial.ts"
+    "scan:sectorial": "tsx scripts/scan-sectorial.ts",
+    "scan:mocr": "tsx scripts/scan-mocr.ts",
+    "smoke:sprint5": "tsx scripts/smoke-sprint5.ts"
   },
   "dependencies": {
     "next": "15.5.4",
@@ -27,7 +29,8 @@
     "axios": "1.7.9",
     "cheerio": "1.0.0",
     "rss-parser": "3.13.0",
-    "playwright": "1.49.1"
+    "playwright": "1.49.1",
+    "@google/generative-ai": "0.21.0"
   },
   "devDependencies": {
     "@types/node": "22.10.0",

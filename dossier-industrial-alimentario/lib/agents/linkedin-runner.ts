@@ -149,7 +149,6 @@ export async function runLinkedInAgent(opts: { maxQueries?: number; onlyRoles?: 
             emailVerified: false,
             roleRelevance: inferRoleRelevance(query.role),
             lastEnrichedAt: new Date(),
-            sourceUrl: p.url,
           },
           update: {
             currentRole: query.role.slice(0, 200),

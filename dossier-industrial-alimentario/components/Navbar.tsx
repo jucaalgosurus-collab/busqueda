@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { href: '/empresas', label: 'Empresas' },
   { href: '/eventos', label: 'Eventos' },
   { href: '/contactos', label: 'Contactos' },
+  { href: '/mocr', label: 'MOCR' },
   { href: '/agentes', label: 'Agentes' },
   { href: '/legacy', label: 'Legacy' },
 ];
