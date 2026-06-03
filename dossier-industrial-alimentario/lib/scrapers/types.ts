@@ -13,8 +13,11 @@ export type OutletType =
   | 'regional'
   | 'local'
   | 'bofficial'
+  | 'bofficial_borme'
   | 'syndicate'
-  | 'linkedin';
+  | 'linkedin'
+  | 'auction'
+  | 'regulatorio_aesan';
 
 export interface ScrapedArticle {
   url: string;
@@ -69,6 +72,22 @@ export interface PrensaListEntry {
 export interface ScrapeOptions {
   maxArticles?: number;
   usePlaywright?: boolean;
+  /** Apply UA rotation + realistic headers (default true). */
+  stealth?: boolean;
+  /** Override UA per call (test helper). */
+  userAgent?: string;
+  /** Rate limit in RPS for the HTTP fetch loop (default 0 = no limit). */
+  rate?: number;
+  /** Proxy URL or undefined to use proxy-rotator. */
+  proxy?: string | null;
+  /** Label for the rate-limiter instance (test helper). */
+  limiterKey?: string;
+  /**
+   * QW-8: si se especifica, se descartan artículos con publishedAt < (now - daysBack días).
+   * Items sin publishedAt (null) se INCLUYEN siempre (no se pueden datar).
+   * Default: undefined (sin filtro de fecha).
+   */
+  daysBack?: number;
 }
 
 // Default limits — keep in sync with the spec.
@@ -105,3 +124,110 @@ export const NOISE_HREF_PATTERNS: readonly RegExp[] = [
   /\/terminos/i,
   /\/contacto\/?$/i,
 ];
+
+// ============================================================================
+// B.1 BORME (Boletín Oficial del Registro Mercantil)
+// ============================================================================
+
+/** Fuerza de la señal de desimplantación. B.1 en adelante. */
+export type SignalStrength = 'weak' | 'medium' | 'strong';
+
+/** Tipo de acto BORME detectado (mapeo parcial — extensible). */
+export type BormeActKind =
+  | 'cambio_domicilio'
+  | 'ampliacion_capital'
+  | 'reduccion_capital'
+  | 'disolucion'
+  | 'constitucion'
+  | 'reeleccion'
+  | 'nombramiento'
+  | 'cese'
+  | 'transformacion'
+  | 'fusion_absorcion'
+  | 'escision'
+  | 'modificacion_estatutos'
+  | 'declaracion_concurso'
+  | 'extincion'
+  | 'other';
+
+/** Item crudo scrapeado de BORME (un acto individual). */
+export interface RawBormeItem {
+  /** ID único natural: `<provincia>-<numero>-<indice>`. */
+  id: string;
+  /** Nombre de la empresa tal como aparece en BORME (sin CIF). */
+  companyName: string;
+  /** CIF extraído si está presente (no siempre). */
+  cif: string | null;
+  /** Provincia de la sección del BORME (ej. "ALBACETE", "MADRID"). */
+  provincia: string;
+  /** Identificador BOE (ej. "BORME-A-2026-102-02"). */
+  bormeId: string;
+  /** URL canónica del item (HTML o XML). */
+  url: string;
+  /** Texto completo del acto (incluye nombre + CIF + descripción del acto). */
+  text: string;
+  /** Tipo de acto detectado. */
+  actKind: BormeActKind;
+  /** Fecha de publicación del BORME (YYYY-MM-DD). */
+  publishedAt: string;
+  /** Domicilio social si se pudo extraer (cambio o actual). */
+  domicilio: string | null;
+  /** Capital social si aparece. */
+  capital: string | null;
+}
+
+/** Opciones del scraper BORME. */
+export interface BormeScrapeOptions {
+  /** Días atrás a incluir en la corrida (default 1, ej. 15 para backfill). */
+  daysBack?: number;
+  /** Solo procesar estas provincias (default todas las 17 CCAA + Ceuta/Melilla). */
+  onlyProvincias?: string[];
+  /** Tope de items a procesar (default 1000). */
+  maxItems?: number;
+  /** Use Flaresolverr si BOE responde con Cloudflare (default false, BOE no lo usa). */
+  useFlaresolverr?: boolean;
+  /** Custom user-agent (test helper). */
+  userAgent?: string;
+  /** Logging callback. */
+  onLog?: (msg: string) => void;
+}
+
+// ============================================================================
+// B.2 AESAN (Agencia Española de Seguridad Alimentaria y Nutrición)
+// ============================================================================
+
+/** Item crudo scrapeado del listado de alertas AESAN. */
+export interface RawAesanAlert {
+  /** ID natural: `AESAN-<YYYY>-<NN>` o `AESAN-<YYYY>-Ampliacion-<NN>`. */
+  id: string;
+  /** Título completo de la alerta. */
+  title: string;
+  /** URL canónica de la alerta individual en AESAN. */
+  url: string;
+  /** Fecha de la alerta (formato parseable por Date). */
+  date: string;
+  /** Referencia AESAN (ej. "ES2026/327") si aparece en el título. */
+  reference: string | null;
+  /** Producto afectado (extraído del detalle). */
+  product: string | null;
+  /** Hazard / peligro (Listeria, Salmonella, alérgeno no declarado, etc.). */
+  hazard: string | null;
+  /** Empresa/marca mencionada (si aparece en el detalle). */
+  brand: string | null;
+  /** Texto completo del detalle de la alerta. */
+  content: string;
+}
+
+/** Opciones del scraper AESAN. */
+export interface AesanScrapeOptions {
+  /** Días atrás a incluir (default 7, ej. 30 para backfill). */
+  daysBack?: number;
+  /** Tope de alertas a procesar (default 50). */
+  maxAlerts?: number;
+  /** Throttle entre fetch de detalles (ms, default 3000). */
+  detailDelayMs?: number;
+  /** Custom user-agent (test helper). */
+  userAgent?: string;
+  /** Logging callback. */
+  onLog?: (msg: string) => void;
+}

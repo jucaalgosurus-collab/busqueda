@@ -1,0 +1,13 @@
+[
+  {
+    "id": "aesan-alertas",
+    "agency": "AESAN",
+    "fullName": "Agencia Española de Seguridad Alimentaria y Nutrición",
+    "scope": "alertas alimentarias",
+    "url": "http://www.aesan.gob.es/AECOSAN/web/seguridad_alimentaria/alertas_alimentarias/listado/aecosan_listado_alertas_alimentarias.htm",
+    "type": "html_static",
+    "rateLimitMs": 3000,
+    "requiresStealth": false,
+    "notes": "Listado HTML estático, sin AJAX, sin paginación. Fetch cada alerta individual para extraer producto/hazard/empresa."
+  }
+]
