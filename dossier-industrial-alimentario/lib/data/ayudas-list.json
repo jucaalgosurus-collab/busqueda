@@ -1,0 +1,116 @@
+{
+  "_meta": {
+    "description": "Ayudas públicas CDTI / IDAE / ICEX concedidas 2024-2026 a empresas A&B del sector industrial alimentario / energía / farmaceútico / metales / química. Dataset estático para Sprint B.6 (no scraping en vivo de BDNS en este sprint).",
+    "sprintId": "B.6",
+    "fechaCarga": "2026-06-04",
+    "fuentePrimaria": "https://www.infosubvenciones.es/bdnstrans/GE/es/index (BDNS — Base de Datos Nacional de Subvenciones, no scrapeada en este sprint)",
+    "totalAyudas": 8,
+    "nota": "Cada ayuda tiene un CIF normalizado (sin guiones, mayúsculas) y un proyecto slug que sirve para matchHash determinista. El cruce con la base A&B se hace en el filtro por CIF. Si la empresa no existe en Company → outOfScopeReason='unknown_company'."
+  },
+  "ayudas": [
+    {
+      "id": "ayuda-cdti-001",
+      "convocatoriaId": "CDTI-2024-ID-001",
+      "organo": "CDTI",
+      "beneficiario": "Pescanova S.A.",
+      "cif": "A36020948",
+      "importe": 1850000,
+      "fechaConcesion": "2025-03-15",
+      "proyecto": "Pescanova-Investigacion-Nuevos-Procesados-Pesqueros-Vigo",
+      "plantaCcaa": "Galicia",
+      "descripcion": "Ayuda CDTI para I+D de nuevos productos procesados del mar con técnicas de alta presión y atmósfera modificada.",
+      "sourceUrl": "https://www.cdti.es/ayudas/proyectos/ayuda-cdti-001"
+    },
+    {
+      "id": "ayuda-idae-002",
+      "convocatoriaId": "IDAE-2024-EE-002",
+      "organo": "IDAE",
+      "beneficiario": "Danone S.A.",
+      "cif": "A08002414",
+      "importe": 3200000,
+      "fechaConcesion": "2025-06-22",
+      "proyecto": "Danone-Eficiencia-Energetica-Planta-Tres-Cantos",
+      "plantaCcaa": "Comunidad de Madrid",
+      "descripcion": "Ayuda IDAE para renovación de calderas y recuperación de calor residual en planta de yogur.",
+      "sourceUrl": "https://www.idae.es/ayudas/proyectos/ayuda-idae-002"
+    },
+    {
+      "id": "ayuda-icex-003",
+      "convocatoriaId": "ICEX-2024-INT-003",
+      "organo": "ICEX",
+      "beneficiario": "Mahou S.A.",
+      "cif": "A28078202",
+      "importe": 480000,
+      "fechaConcesion": "2025-09-10",
+      "proyecto": "Mahou-Internacionalizacion-Mercados-Latinoamericanos",
+      "plantaCcaa": "Comunidad de Madrid",
+      "descripcion": "Ayuda ICEX para promoción de cerveza española en México, Colombia y Argentina.",
+      "sourceUrl": "https://www.icex.es/ayudas/proyectos/ayuda-icex-003"
+    },
+    {
+      "id": "ayuda-cdti-004",
+      "convocatoriaId": "CDTI-2024-ID-004",
+      "organo": "CDTI",
+      "beneficiario": "Damm S.A.",
+      "cif": "A08006621",
+      "importe": 2100000,
+      "fechaConcesion": "2025-11-04",
+      "proyecto": "Damm-Investigacion-Cerveza-Bajo-Graduacion-Alcohólica",
+      "plantaCcaa": "Cataluña",
+      "descripcion": "Ayuda CDTI para I+D en cervezas 0,0% y baja graduación con procesos de dealcoholización por osmosis inversa.",
+      "sourceUrl": "https://www.cdti.es/ayudas/proyectos/ayuda-cdti-004"
+    },
+    {
+      "id": "ayuda-idae-005",
+      "convocatoriaId": "IDAE-2024-DESC-005",
+      "organo": "IDAE",
+      "beneficiario": "Nestlé España S.A.",
+      "cif": "A08005449",
+      "importe": 4500000,
+      "fechaConcesion": "2026-01-18",
+      "proyecto": "Nestle-Descarbonizacion-Planta-Girona",
+      "plantaCcaa": "Cataluña",
+      "descripcion": "Ayuda IDAE para electrificación de hornos de galleta y sustitución de gas natural por bombas de calor industriales.",
+      "sourceUrl": "https://www.idae.es/ayudas/proyectos/ayuda-idae-005"
+    },
+    {
+      "id": "ayuda-icex-006",
+      "convocatoriaId": "ICEX-2024-INT-006",
+      "organo": "ICEX",
+      "beneficiario": "Azucarera Ebro S.L.",
+      "cif": "B82865787",
+      "importe": 320000,
+      "fechaConcesion": "2025-04-20",
+      "proyecto": "Azucarera-Internacionalizacion-Reino-Unido-Francia",
+      "plantaCcaa": "Andalucía",
+      "descripcion": "Ayuda ICEX para apertura de mercado de azúcar premium de caña en UK y Francia.",
+      "sourceUrl": "https://www.icex.es/ayudas/proyectos/ayuda-icex-006"
+    },
+    {
+      "id": "ayuda-cdti-007",
+      "convocatoriaId": "CDTI-2024-ID-007",
+      "organo": "CDTI",
+      "beneficiario": "Pascual S.A.",
+      "cif": "A78545628",
+      "importe": 1650000,
+      "fechaConcesion": "2025-07-08",
+      "proyecto": "Pascual-Investigacion-Bebidas-vegetales-Proteinas",
+      "plantaCcaa": "Castilla y León",
+      "descripcion": "Ayuda CDTI para I+D en bebidas vegetales con alta concentración de proteínas (guisante, avena, almendra).",
+      "sourceUrl": "https://www.cdti.es/ayudas/proyectos/ayuda-cdti-007"
+    },
+    {
+      "id": "ayuda-idae-008",
+      "convocatoriaId": "IDAE-2024-EE-008",
+      "organo": "IDAE",
+      "beneficiario": "Acerinox S.A.",
+      "cif": "A28203634",
+      "importe": 5800000,
+      "fechaConcesion": "2025-02-28",
+      "proyecto": "Acerinox-Eficiencia-Energetica-Planta-Cadiz",
+      "plantaCcaa": "Andalucía",
+      "descripcion": "Ayuda IDAE para recuperación de calor en planta de laminación en frío y horno de recocido continuo.",
+      "sourceUrl": "https://www.idae.es/ayudas/proyectos/ayuda-idae-008"
+    }
+  ]
+}

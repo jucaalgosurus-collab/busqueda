@@ -18,7 +18,8 @@ export type OutletType =
   | 'linkedin'
   | 'auction'
   | 'regulatorio_aesan'
-  | 'credito_aseguradora';
+  | 'credito_aseguradora'
+  | 'ayuda_publica';
 
 export interface ScrapedArticle {
   url: string;
@@ -229,6 +230,46 @@ export interface AesanScrapeOptions {
   detailDelayMs?: number;
   /** Custom user-agent (test helper). */
   userAgent?: string;
+  /** Logging callback. */
+  onLog?: (msg: string) => void;
+}
+
+// ============================================================================
+// B.6 Ayudas públicas (CDTI / IDAE / ICEX) — Base de Datos Nacional de Subvenciones
+// ============================================================================
+
+/** Item crudo del dataset estático de ayudas públicas. */
+export interface RawAyudaPublica {
+  /** ID natural: `ayuda-{organoSlug}-{NNN}`. */
+  id: string;
+  /** ID de la convocatoria (ej. "CDTI-2024-ID-001"). */
+  convocatoriaId: string;
+  /** Órgano concedente (CDTI, IDAE, ICEX). */
+  organo: 'CDTI' | 'IDAE' | 'ICEX' | string;
+  /** Razón social del beneficiario. */
+  beneficiario: string;
+  /** CIF del beneficiario (normalizado: sin guiones, mayúsculas). */
+  cif: string;
+  /** Importe concedido en euros. */
+  importe: number;
+  /** Fecha de concesión (YYYY-MM-DD). */
+  fechaConcesion: string;
+  /** Slug del proyecto financiado (sirve para matchHash). */
+  proyecto: string;
+  /** CCAA de la planta beneficiaria. */
+  plantaCcaa: string;
+  /** Descripción corta del proyecto. */
+  descripcion: string;
+  /** URL canónica en el portal del órgano concedente. */
+  sourceUrl: string;
+}
+
+/** Opciones del scraper de ayudas públicas. */
+export interface AyudasScrapeOptions {
+  /** Días atrás a incluir (default 30). */
+  daysBack?: number;
+  /** Tope de ayudas a procesar (default 100). */
+  maxItems?: number;
   /** Logging callback. */
   onLog?: (msg: string) => void;
 }
