@@ -18,6 +18,7 @@ import { NotesEditor } from './_components/NotesEditor';
 import { ActionBar } from './_components/ActionBar';
 import { RegistroMercantilCard } from './_components/RegistroMercantilCard';
 import { FinancialsCard } from './_components/FinancialsCard';
+import { PatentsCard } from './_components/PatentsCard';
 import './empresa.css';
 
 export const dynamic = 'force-dynamic';
@@ -71,10 +72,26 @@ export default async function EmpresaPage({ params }: PageProps) {
         orderBy: { fecha: 'desc' },
         take: 20,
       },
+      patents: {
+        orderBy: { publicationDate: 'desc' },
+        take: 30,
+      },
     },
   });
 
   if (!company) notFound();
+
+  // C.3: lista de patentes de la empresa
+  const patents = company.patents.map((p) => ({
+    publicationNumber: p.publicationNumber,
+    title: p.title,
+    legalStatus: p.legalStatus as 'granted' | 'pending' | 'expired' | 'withdrawn' | 'unknown',
+    publicationDate: p.publicationDate,
+    filingDate: p.filingDate,
+    applicant: p.applicant,
+    cnae: p.cnae,
+    sourceUrl: p.sourceUrl,
+  }));
 
   // C.2: source con outletType='financial' (URL Wikipedia) — para FinancialsCard
   const wikiSource = await prisma.source.findFirst({
@@ -183,6 +200,7 @@ export default async function EmpresaPage({ params }: PageProps) {
           empleadosTotal={company.empleadosTotal}
           fuente={wikiSource?.url ?? null}
         />
+        <PatentsCard patents={patents} />
         <PlantMap plants={company.plants} slug={company.slug} />
         <InventoryTable plants={company.plants} />
         <OperationsTimeline operations={company.operations} events={allEvents} />

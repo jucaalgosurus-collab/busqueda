@@ -20,7 +20,9 @@ export type OutletType =
   | 'regulatorio_aesan'
   | 'credito_aseguradora'
   | 'ayuda_publica'
-  | 'despido_cto';
+  | 'despido_cto'
+  | 'patent'
+  | 'financial';
 
 export interface ScrapedArticle {
   url: string;

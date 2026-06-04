@@ -53,6 +53,7 @@ model Company {
   plantContacts PlantContact[]
   outreachLogs  OutreachLog[]
   bormeEvents   BormeEvent[]
+  patents       Patent[]
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -473,4 +474,40 @@ model BormeEvent {
   @@index([fecha])
   @@index([tipo])
   @@index([companyName])
+}
+
+// ============================================================================
+// 17. PATENT — Patentes / modelos de utilidad del titular (Sprint C.3)
+// Patentes y modelos de utilidad de la OEPM (España) y, opcionalmente,
+// familia internacional vía EPO OPS. Enriquecimiento de cartera IP — no
+// es señal de desimplantación. Empresa con cartera viva = I+D activa.
+// ============================================================================
+model Patent {
+  id                String   @id @default(uuid())
+  companyId         String
+  company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  matchHash         String   @unique // sha256(companyId+pubNumber+titleLower)[:32]
+
+  publicationNumber String   // 'ES1234567A1', 'ES1234567B2', 'EP3456789B1', 'U202400001'
+  title             String   @db.Text
+  applicant         String?  // 'PASCUAL, S.A.U.' o 'GRUPO DAMM, S.L.'
+  inventors         String?  // nombres separados por coma
+
+  filingDate        DateTime? // fecha de solicitud
+  publicationDate   DateTime? // fecha de publicación
+  grantDate         DateTime? // fecha de concesión (null si pending/expired)
+
+  legalStatus       String   // 'granted' | 'pending' | 'expired' | 'withdrawn' | 'unknown'
+  cnae              String?  // clasificación CIP si aparece (ej. 'A23L 1/00')
+  source            String   // 'OEPM Invenes' | 'EPO OPS'
+  sourceUrl         String   // URL al detalle OEPM
+  language          String   @default("es")
+
+  scrapedAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([companyId, publicationDate])
+  @@index([legalStatus])
+  @@index([filingDate])
 }
