@@ -511,3 +511,24 @@ model Patent {
   @@index([legalStatus])
   @@index([filingDate])
 }
+
+// ============================================================================
+// 18. EMAIL_VERIFICATION — Cache de verificación Hunter.io (Sprint D.1.6)
+// Regla 10208: "Si una sede/contacto YA está verificado, NO lo tienes que
+// volver a comprobar ni buscar." Cada verificación Hunter cuesta 1 crédito;
+// este cache evita re-verificar emails ya confirmados durante 30 días.
+// Hunter puede devolver status='unknown' (catch-all / sin info) — también
+// se cachea 30d para no martillear la API. Rate limit (429) NO se persiste.
+// ============================================================================
+model EmailVerification {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  status      String   // 'valid' | 'invalid' | 'accept_all' | 'unknown' | 'disposable' | 'webmail' | 'error'
+  score       Int?     // 0-100 (Hunter score)
+  verifiedAt  DateTime @default(now())
+  expiresAt   DateTime // default = verifiedAt + 30d
+  raw         Json?    // respuesta completa de Hunter por si auditoría
+
+  @@index([email])
+  @@index([expiresAt])
+}
