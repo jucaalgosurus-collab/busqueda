@@ -1,14 +1,18 @@
 // lib/agents/linkedin-runner.ts — Agente 6: LinkedIn OSINT
-// Busca en Google `site:linkedin.com` perfiles de decisores A&B. Extrae URL
+// Busca en cascada de buscadores gratis perfiles de decisores A&B. Extrae URL
 // LinkedIn, nombre, cargo inferido, y los persiste como Contact (rol=...).
 // No contacta a nadie. Solo enriquece.
+//
+// Sprint E.1 — Plan A multi-engine (sin RapidAPI, sin cookie li_at):
+//   1. Google CSE JSON API (gratis 100/día) si GOOGLE_CSE_KEY+CX configurados
+//   2. Brave HTML search (gratis, sin auth) — primario real desde VPS
+//   3. Startpage HTML (proxy Google, gratis)
+//   4. DuckDuckGo HTML (gratis; falla en VPS datacenter)
 import { PrismaClient } from '@prisma/client';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 import { createHash } from 'node:crypto';
 import linkedinQueries from '@/lib/data/linkedin-queries.json' with { type: 'json' };
 import newsroomList from '@/lib/data/newsroom-list.json' with { type: 'json' };
-import { USER_AGENT } from '@/lib/scrapers/types';
+import { searchLinkedInProfiles, type LinkedInProfileHit } from '@/lib/scrapers/linkedin-search';
 
 const prisma = new PrismaClient();
 
@@ -20,38 +24,6 @@ interface LinkedInQuery {
 interface QueryTemplate { role: string; subsector: string; company_hint: string; }
 
 const TOP_COMPANIES = (newsroomList as Array<{ slug: string; name: string; subsector: string }>).slice(0, 60);
-
-function googleSiteLinkedin(q: string, page = 0): string {
-  const start = page * 10;
-  return `https://www.google.com/search?q=${encodeURIComponent(q)}&num=10&start=${start}`;
-}
-
-async function fetchGooglePage(url: string): Promise<string> {
-  const r = await axios.get(url, {
-    headers: {
-      'User-Agent': USER_AGENT,
-      'Accept-Language': 'es-ES,es;q=0.9',
-      Accept: 'text/html',
-    },
-    timeout: 15_000,
-  });
-  return r.data as string;
-}
-
-function extractLinkedInProfiles(html: string): Array<{ url: string; title: string; snippet: string }> {
-  const $ = cheerio.load(html);
-  const results: Array<{ url: string; title: string; snippet: string }> = [];
-  $('a[href*="linkedin.com/in/"]').each((_, el) => {
-    const href = $(el).attr('href');
-    if (!href) return;
-    const clean = href.split('?')[0]?.split('#')[0] ?? href;
-    if (!/\/in\/[A-Za-z0-9_-]+/.test(clean)) return;
-    const text = $(el).text().trim() || $(el).closest('div').text().trim();
-    const parentText = $(el).parent().text().trim();
-    results.push({ url: clean, title: text.slice(0, 200), snippet: parentText.slice(0, 500) });
-  });
-  return results;
-}
 
 function inferRoleRelevance(role: string): 'plant_manager' | 'coo' | 'sustainability' | 'maintenance' | 'procurement' | 'cfo' | 'ceo' | 'ere_responsible' | 'other' {
   const r = role.toLowerCase();
@@ -80,7 +52,8 @@ export interface LinkedInAgentResult {
 
 export async function runGoogleCSEAgent(opts: { maxQueries?: number; onlyRoles?: string[] } = {}): Promise<LinkedInAgentResult> {
   const startedAt = new Date();
-  const maxQ = opts.maxQueries ?? 20;
+  // E.1 conservador: 10-15 queries/día. Brave rate-limita duro desde VPS datacenter.
+  const maxQ = opts.maxQueries ?? 12;
   const onlyRoles = new Set((opts.onlyRoles ?? []).map((r) => r.toLowerCase()));
 
   // Construir queries: por cada (role, company) hasta maxQ
@@ -125,10 +98,14 @@ export async function runGoogleCSEAgent(opts: { maxQueries?: number; onlyRoles?:
 
   for (let i = 0; i < queries.length; i++) {
     const query = queries[i];
-    let profiles: Array<{ url: string; title: string; snippet: string }> = [];
+    let profiles: LinkedInProfileHit[] = [];
     try {
-      const html = await fetchGooglePage(googleSiteLinkedin(query.q));
-      profiles = extractLinkedInProfiles(html);
+      // Cascade: Gemini grounding → Brave HTML (UA rotado) → Startpage → DDG
+      const result = await searchLinkedInProfiles(query.q, { throttleMs: 5000 });
+      profiles = result.hits;
+      if (result.allBlocked) {
+        console.warn(`[linkedin] query "${query.q}" — todos los engines blocked. Considera VPN o API key.`);
+      }
     } catch (e) {
       errors++;
       console.warn(`[linkedin] query failed "${query.q}": ${(e as Error).message}`);
@@ -178,7 +155,7 @@ export async function runGoogleCSEAgent(opts: { maxQueries?: number; onlyRoles?:
             plantId,
             sourceUrl: p.url,
             sourceOutlet: 'LinkedIn',
-            via: 'google_cse',
+            via: 'multi_engine',
             confidence: 0.5,
             lastEnrichedAt: new Date(),
           },
@@ -195,8 +172,12 @@ export async function runGoogleCSEAgent(opts: { maxQueries?: number; onlyRoles?:
         errors++;
       }
     }
-    // Throttle: 1 req / 4s
-    await new Promise((r) => setTimeout(r, 4000));
+    // Throttle conservador (E.1): 5s entre queries + 60s cada 5 queries (Brave 429 mitigation).
+    await new Promise((r) => setTimeout(r, 5000));
+    if (i > 0 && i % 5 === 0) {
+      console.log(`[linkedin] cooldown 60s (anti 429) tras ${i} queries`);
+      await new Promise((r) => setTimeout(r, 60_000));
+    }
     if (i % 5 === 0 || i === queries.length - 1) {
       console.log(`[linkedin] progress: ${i + 1}/${queries.length} queries, profiles=${profilesFound}, contacts=${newContacts}, errors=${errors}`);
     }
