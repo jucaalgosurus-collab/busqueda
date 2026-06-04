@@ -71,7 +71,9 @@ export interface PrensaListEntry {
   rss: string | null;
   region: string;
   ccaa: string;
+  provincia?: string;
   kind: 'nacional' | 'regional' | 'local';
+  keywords?: string[];
 }
 
 export interface ScrapeOptions {

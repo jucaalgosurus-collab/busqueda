@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "el-diario-montanes",
+    "name": "El Diario Montañés",
+    "outlet": "El Diario Montañés",
+    "url": "https://www.eldiariomontanes.es",
+    "rss": "https://www.eldiariomontanes.es/rss/2.0/?section=ultima-hora",
+    "region": "Cantabria",
+    "ccaa": "Cantabria",
+    "provincia": "Cantabria",
+    "kind": "local",
+    "keywords": ["desimplantar", "deslocalización", "cierre planta", "ERE"]
+  },
+  {
+    "slug": "la-nueva-espana",
+    "name": "La Nueva España",
+    "outlet": "La Nueva España",
+    "url": "https://www.lne.es",
+    "rss": "https://www.lne.es/rss/2.0/?section=ultima-hora",
+    "region": "Asturias",
+    "ccaa": "Principado de Asturias",
+    "provincia": "Asturias",
+    "kind": "local",
+    "keywords": ["desimplantar", "cierre fábrica", "ERE"]
+  },
+  {
+    "slug": "el-norte-de-castilla",
+    "name": "El Norte de Castilla",
+    "outlet": "El Norte de Castilla",
+    "url": "https://www.elnortedecastilla.es",
+    "rss": "https://www.elnortedecastilla.es/rss/2.0/?section=ultima-hora",
+    "region": "Castilla y León",
+    "ccaa": "Castilla y León",
+    "provincia": "Valladolid",
+    "kind": "local",
+    "keywords": ["desimplantar", "cierre planta", "ERE"]
+  },
+  {
+    "slug": "diario-de-navarra",
+    "name": "Diario de Navarra",
+    "outlet": "Diario de Navarra",
+    "url": "https://www.diariodenavarra.es",
+    "rss": "https://www.diariodenavarra.es/rss/ultima-hora",
+    "region": "Navarra",
+    "ccaa": "Comunidad Foral de Navarra",
+    "provincia": "Navarra",
+    "kind": "local",
+    "keywords": ["desimplantar", "deslocalización", "cierre"]
+  },
+  {
+    "slug": "la-verdad-murcia",
+    "name": "La Verdad (Murcia)",
+    "outlet": "La Verdad",
+    "url": "https://www.laverdad.es",
+    "rss": "https://www.laverdad.es/rss/2.0/?section=ultima-hora",
+    "region": "Región de Murcia",
+    "ccaa": "Región de Murcia",
+    "provincia": "Murcia",
+    "kind": "local",
+    "keywords": ["desimplantar", "cierre fábrica", "ERE"]
+  },
+  {
+    "slug": "el-periodico-de-aragon",
+    "name": "El Periódico de Aragón",
+    "outlet": "El Periódico de Aragón",
+    "url": "https://www.elperiodicodearagon.com",
+    "rss": "https://www.elperiodicodearagon.com/rss/2.0/?section=ultima-hora",
+    "region": "Aragón",
+    "ccaa": "Aragón",
+    "provincia": "Zaragoza",
+    "kind": "local",
+    "keywords": ["desimplantar", "cierre planta", "ERE"]
+  },
+  {
+    "slug": "el-periodico-mediterraneo",
+    "name": "El Periódico Mediterráneo",
+    "outlet": "El Periódico Mediterráneo",
+    "url": "https://www.elperiodicomediterraneo.com",
+    "rss": "https://www.elperiodicomediterraneo.com/rss/2.0/?section=ultima-hora",
+    "region": "Comunidad Valenciana",
+    "ccaa": "Comunidad Valenciana",
+    "provincia": "Castellón",
+    "kind": "local",
+    "keywords": ["desimplantar", "deslocalización", "cierre"]
+  },
+  {
+    "slug": "diario-de-sevilla",
+    "name": "Diario de Sevilla",
+    "outlet": "Diario de Sevilla",
+    "url": "https://www.diariodesevilla.es",
+    "rss": "https://www.diariodesevilla.es/rss/2.0/?section=ultima-hora",
+    "region": "Andalucía",
+    "ccaa": "Andalucía",
+    "provincia": "Sevilla",
+    "kind": "local",
+    "keywords": ["desimplantar", "cierre fábrica", "ERE"]
+  },
+  {
+    "slug": "el-periodico-extremadura",
+    "name": "El Periódico Extremadura",
+    "outlet": "El Periódico Extremadura",
+    "url": "https://www.elperiodicoextremadura.com",
+    "rss": "https://www.elperiodicoextremadura.com/rss/2.0/?section=ultima-hora",
+    "region": "Extremadura",
+    "ccaa": "Extremadura",
+    "provincia": "Badajoz",
+    "kind": "local",
+    "keywords": ["desimplantar", "deslocalización"]
+  },
+  {
+    "slug": "diario-de-mallorca",
+    "name": "Diario de Mallorca",
+    "outlet": "Diario de Mallorca",
+    "url": "https://www.diariodemallorca.es",
+    "rss": "https://www.diariodemallorca.es/rss/2.0/?section=ultima-hora",
+    "region": "Islas Baleares",
+    "ccaa": "Islas Baleares",
+    "provincia": "Mallorca",
+    "kind": "local",
+    "keywords": ["desimplantar", "cierre planta", "ERE"]
+  }
+]
