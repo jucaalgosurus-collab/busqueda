@@ -64,7 +64,10 @@
     "backfill:source-plant": "tsx scripts/backfill-source-plant.ts",
     "geocode:plants": "tsx lib/agents/geocoding-runner.ts",
     "briefing:daily": "tsx lib/agents/daily-briefing-runner.ts",
-    "notify:strong": "tsx lib/telegram/notify.ts"
+    "notify:strong": "tsx lib/telegram/notify.ts",
+    "test": "node --import tsx --test __tests__/**/*.test.ts",
+    "test:hunter": "node --import tsx --test __tests__/hunter-runner.test.ts",
+    "backfill:email-verification": "tsx scripts/backfill-email-verification.ts"
   },
   "dependencies": {
     "next": "15.5.7",

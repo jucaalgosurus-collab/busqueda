@@ -1,1 +1,17 @@
 .vercel
+node_modules/
+.next/
+out/
+build/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+etc/secrets.env
+etc/master.key.local
+backups/
+logs/
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
