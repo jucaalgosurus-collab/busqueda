@@ -60,7 +60,7 @@ async function getHallazgos(params: SearchParams) {
     where,
     include: {
       company: { select: { id: true, slug: true, name: true, hqRegion: true, sector: true } },
-      plant: { select: { id: true, slug: true, name: true, city: true, ccaa: true } },
+      plant: { select: { id: true, name: true, city: true, ccaa: true } },
     },
     orderBy,
     take: 200,
