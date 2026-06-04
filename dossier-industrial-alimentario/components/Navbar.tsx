@@ -8,6 +8,7 @@ import { GlobalSearch } from './GlobalSearch';
 const NAV_LINKS = [
   { href: '/', label: 'Dashboard' },
   { href: '/hallazgos', label: 'Hallazgos' },
+  { href: '/sala-situacional', label: 'Sala situacional' },
   { href: '/empresas', label: 'Empresas' },
   { href: '/eventos', label: 'Eventos' },
   { href: '/contactos', label: 'Contactos' },
