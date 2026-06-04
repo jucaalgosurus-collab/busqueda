@@ -45,6 +45,26 @@ Tras la auditoría honesta (`memory/audits/2026-06-04-auditoria-honesta-pedido-v
 
 - C.4 Sanciones SANCO/CNMC
 
+## Sprint D.2 (subset) — Sectorización CNAE (2026-06-04, en curso)
+
+Brief usuario (msg 6678): "sectorizacion del tipo de empresa... correos y mensajes de linkedin... solo buscar los contactos de alimentos y bebidas por ahora". Hoy 8 empresas A&B hardcoded, `/empresas` sin filtro CNAE.
+
+**Decisiones Sprint D.2-sectorizacion**:
+- D.2-S1: NO añadir campo nuevo `cnaeCode` — el schema ya tiene `cnae String?` (formato `XX.Y`). Usar ese. Razones: (1) el valor que pide el brief (códigos CNAE 10/11) encaja en `cnae`; (2) añadir un campo nuevo duplica semántica; (3) ya está en `INDUSTRIAS.cnaePrefix`. Documentado en commit.
+- D.2-S2: NO modificar el seed-v6.json (es código de auditoría). Las 8 empresas heredadas conservan su `cnae` actual. Las 12+ nuevas se cargan vía `seed:cnae` script separado.
+- D.2-S3: Seed NUEVO solo añade (no pisa). Upsert por slug, `update` solo si `cnae` actual es null. Si `cnae` ya tiene valor distinto, no se toca.
+- D.2-S4: Smoke test corre en local SIN Next.js. El componente UI se valida con un smoke de imports + JSX (no necesita dev server).
+
+**Entregables D.2-sectorizacion**:
+- `scripts/seed-companies-cnae.ts` — seed con 13 empresas reales verificadas (CNAE 10+11)
+- `scripts/smoke-sectorizacion.ts` — 6 asserts
+- `app/empresas/page.tsx` — añade filtro `?cnae=10|11` (chip) que se combina con `industria`
+- `data/seed-cnae.json` — fuente del seed (con newsroomUrl)
+- `package.json` — `seed:cnae` + `smoke:sectorizacion`
+- 2 commits: schema+seed / filtro UI
+
+**Empresas verificadas (13)**: Calidad Pascual, Mahou-San Miguel, Damm, Danone España, Nestlé España, Nueva Pescanova, Lactalis Iberia, Bimbo, ElPozo, Campofrío, Ibersnacks, Grupo Vivesoy, García Carrión.
+
 ## Bloqueos actuales (sin resolución hasta input de Juan Carlos)
 
 1. **D.1.1 Token Telegram**: requiere acción manual de Juan Carlos en @BotFather. Yo no puedo regenerar tokens.
