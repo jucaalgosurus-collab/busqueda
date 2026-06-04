@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cto-ha-dejado",
+    "label": "CTO ha dejado empresa",
+    "query": "site:linkedin.com \"ha dejado\" CTO \"{empresa}\"",
+    "cargo": "CTO",
+    "senial": "ha dejado"
+  },
+  {
+    "id": "dir-tecnico-cesado",
+    "label": "Director Técnico cesado",
+    "query": "site:linkedin.com \"cesado\" OR \"ya no forma parte\" \"Director Técnico\" \"{empresa}\"",
+    "cargo": "Director Técnico",
+    "senial": "cesado"
+  },
+  {
+    "id": "dir-id-nuevo-reto",
+    "label": "Director I+D nuevo reto",
+    "query": "site:linkedin.com \"nuevo reto\" OR \"se incorpora\" \"Director I+D\" \"{empresa}\"",
+    "cargo": "Director I+D",
+    "senial": "nuevo reto"
+  },
+  {
+    "id": "dir-operaciones-cambio",
+    "label": "Director Operaciones cambio",
+    "query": "site:linkedin.com COO OR \"Director de Operaciones\" \"{empresa}\" deja OR cesado",
+    "cargo": "Director Operaciones",
+    "senial": "cambio"
+  },
+  {
+    "id": "dir-industrial-sale",
+    "label": "Director Industrial sale",
+    "query": "site:linkedin.com \"Director Industrial\" \"{empresa}\" sale OR \"nuevo proyecto\"",
+    "cargo": "Director Industrial",
+    "senial": "sale"
+  },
+  {
+    "id": "dir-planta-deja",
+    "label": "Director de Planta deja",
+    "query": "site:linkedin.com \"Director de Planta\" \"{empresa}\" deja OR cesado",
+    "cargo": "Director de Planta",
+    "senial": "deja"
+  },
+  {
+    "id": "dir-produccion-sale",
+    "label": "Director Producción sale",
+    "query": "site:linkedin.com \"Director de Producción\" \"{empresa}\" OR \"Director Producción\" deja",
+    "cargo": "Director Producción",
+    "senial": "sale"
+  },
+  {
+    "id": "vp-engineering-cambio",
+    "label": "VP Engineering cambio",
+    "query": "site:linkedin.com \"VP Engineering\" OR \"VP of Engineering\" \"{empresa}\" nuevo OR deja",
+    "cargo": "VP Engineering",
+    "senial": "cambio"
+  }
+]

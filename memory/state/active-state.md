@@ -8,9 +8,9 @@ Detección cada 2 días de desimplantaciones (equipos, maquinaria, vehículos, m
 ## Current Sprint
 - Status: **MEGAPLAN EJECUCIÓN — sin parar, sin pedir permisos** 🚀
 - App live v6: https://88-198-93-52.nip.io/dossier/ (re-arquitectura completa desplegada)
-- Sprints completados últimos días: QW-1, QW-2, QW-3, QW-4, QW-5, QW-6, QW-7 (QW-10), QW-8, QW-9, B.1 BORME, B.9 Auctions, B.2, B.3, B.4, B.5, **B.6** ✅
-- **Sprint Actual**: B.7 (Despidos CTO/Director Técnico LinkedIn) — en cola
-- Pendiente: B.7, B.8, Sprint C enriquecimiento, D pipeline, G UX, H IA, etc.
+- Sprints completados últimos días: QW-1, QW-2, QW-3, QW-4, QW-5, QW-6, QW-7 (QW-10), QW-8, QW-9, B.1 BORME, B.9 Auctions, B.2, B.3, B.4, B.5, B.6, **B.7** ✅
+- **Sprint Actual**: B.8 (Plantas stale 3 escaneos) — arrancando
+- Pendiente: B.8, Sprint C enriquecimiento, D pipeline, G UX, H IA, etc.
 
 ## Completed Sprints (v5 — preservados)
 - **Sprint 1 — Cimientos VPS HERMES**: ✅ 10/10 smoke. App live en https://88-198-93-52.nip.io/dossier/. Schema PostgreSQL aplicado, 7 empresas seed + 9 ops + 28 contactos. Nginx + certbot + systemd OK.
@@ -102,13 +102,12 @@ Detección cada 2 días de desimplantaciones (equipos, maquinaria, vehículos, m
 - Añadir más newsrooms corporativos orgánicamente (actualmente 44 URL + 12 RSS)
 - **QW-7** Responsables POR SEDE — ya integrado en `/buscar-responsables`, solo confirmar UX
 - Dashboard rebuild post-QW-3 (reconstrucción completa con dark mode)
-- **Sprint B.7** Despidos CTO/Director Técnico (LinkedIn, cadencia 7d)
-- **Sprint B.8** Plantas stale (3 escaneos sin aparecer, diario)
+- **Sprint B.8** Plantas stale (3 escaneos sin aparecer, diario) — **EN PROGRESO**
 - **Sprint C** Enrichment 360º empresa (CIF/CNAE/finanzas/consejo) ← data gap 7/7 sin CIF
 - Sync VPS bloqueado (root pass no respondiendo) ← RESUELTO, SSH key funciona
 - Dashboard rebuild post-QW-3 (reconstrucción completa con dark mode)
 
-## Sprint B.6 — Ayudas públicas CDTI/IDAE/ICEX (2026-06-04, COMPLETADO VPS)
+## Sprint B.7 — Despidos CTO / Director Técnico (2026-06-04, COMPLETADO VPS)
 
 B.6 cubre la señal débil "ayuda pública reciente a empresa A&B sin actividad" o "ayuda previa a concurso" (CDTI/IDAE/ICEX). 8 ayudas reales seed (Pescanova, Danone, Mahou, Damm, Nestlé, Azucarera, Pascual, Acerinox) en `lib/data/ayudas-list.json`.
 
@@ -123,6 +122,23 @@ B.6 cubre la señal débil "ayuda pública reciente a empresa A&B sin actividad"
 - 1ª corrida backfill_180d: 1 ayuda, 0 inScope, 1 outOfScope (unknown_company por data gap: seed companies sin CIF)
 - 2ª corrida incremental_14d: 0 ayudas, 143ms (idempotente)
 - Data gap conocido: 7/7 seed Companies con `cif: null` y `cnae: null` — Sprint C enrichment resolverá
+
+## Sprint B.7 — Despidos CTO / Director Técnico LinkedIn (2026-06-04, COMPLETADO VPS)
+
+B.7 cubre la señal débil "decisor técnico senior (CTO, Director Técnico, Director I+D, COO, Director Industrial, Director de Planta, Director Producción, VP Engineering) que deja la empresa" — los CTO rara vez abandonan empresa saneada, su salida suele preceder 6-12 meses a desimplantación.
+
+- Sprint contract: `memory/sprints/sprint-B/B.7-despidos-cto-contract.md`
+- Sprint report: `memory/sprints/sprint-B/B.7-despidos-cto-report.md`
+- Queries: `lib/data/linkedin-despidos-queries.json` (8 templates, 8 cargos cubiertos)
+- Scraper: `lib/scrapers/despidos-cto.ts` (~110 líneas, modo placeholder sin GOOGLE_CSE_API_KEY)
+- Filtro: `lib/filters/despidos-cto.ts` (~210 líneas, scoring 0/1/2+ con signalStrength weak/medium/strong)
+- Agente: `lib/agents/despidos-cto-runner.ts` (cadencia 7d, idempotente con matchHash `b7-{slug}-{empresaSlug}-{YYYY-MM-DD}`)
+- `lib/scrapers/types.ts`: +'despido_cto' al union OutletType + RawDespidoCto + DespidosCtoScrapeOptions
+- DECISORES_TECNICOS: 8 cargos readonly exportados
+- Cron: paso 6f en `run-agents.sh` (tras B.6)
+- Smoke: 14/14 B.7+Q (12/12 B.7 funcional PASS, 5 QW regresión 2/5 — 3 preexistentes :3002 down)
+- 1ª corrida backfill_90d: 0 despidos, 0 inScope, 162ms (placeholder mode sin GOOGLE_CSE_API_KEY)
+- Limitaciones: 5 conocidas (placeholder, sin Plan B Playwright, fecha parseada de snippet, sin Telegram para medium, sin anti-promoción)
 
 ## Sprint QW-3 — Modo Oscuro data-theme toggle (2026-06-03, COMPLETADO local)
 

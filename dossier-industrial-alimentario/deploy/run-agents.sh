@@ -70,6 +70,11 @@ echo ""
 echo "▶ AGENT B.6: ayudas públicas CDTI/IDAE/ICEX (dataset estático, cadencia 14d)" | tee -a "$LOG"
 timeout 120 ./node_modules/.bin/tsx lib/agents/ayudas-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ ayudas falló" | tee -a "$LOG"
 
+# 6f. Sprint B.7 Despidos CTO / Director Técnico — LinkedIn (Google CSE, cadencia 7d)
+echo ""
+echo "▶ AGENT B.7: despidos CTO / Director Técnico (LinkedIn, cadencia 7d)" | tee -a "$LOG"
+timeout 240 ./node_modules/.bin/tsx lib/agents/despidos-cto-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ despidos-cto falló" | tee -a "$LOG"
+
 # 7. Verificar emails pendientes con Hunter.io (SIEMPRE corre al final)
 echo "" | tee -a "$LOG"
 echo "▶ HUNTER VERIFY: emails pendientes" | tee -a "$LOG"

@@ -19,7 +19,8 @@ export type OutletType =
   | 'auction'
   | 'regulatorio_aesan'
   | 'credito_aseguradora'
-  | 'ayuda_publica';
+  | 'ayuda_publica'
+  | 'despido_cto';
 
 export interface ScrapedArticle {
   url: string;
@@ -269,6 +270,65 @@ export interface AyudasScrapeOptions {
   /** Días atrás a incluir (default 30). */
   daysBack?: number;
   /** Tope de ayudas a procesar (default 100). */
+  maxItems?: number;
+  /** Logging callback. */
+  onLog?: (msg: string) => void;
+}
+
+// ============================================================================
+// B.7 Despidos CTO / Director Técnico (LinkedIn vía Google CSE)
+// ============================================================================
+
+/** Item crudo de despido de decisor técnico senior detectado vía Google CSE. */
+export interface RawDespidoCto {
+  /** ID natural: `despido-{linkedinSlug}-{fechaDetectada}`. */
+  id: string;
+  /** FK a Company si se matcheó por nombre normalizado. */
+  companyId: string | null;
+  /** Nombre comercial detectado de la empresa. */
+  companyName: string;
+  /** Cargo detectado. */
+  cargo:
+    | 'CTO'
+    | 'Director Técnico'
+    | 'Director I+D'
+    | 'Director Operaciones'
+    | 'Director Industrial'
+    | 'Director de Planta'
+    | 'Director Producción'
+    | 'VP Engineering'
+    | string;
+  /** URL del perfil LinkedIn del decisor. */
+  linkedinUrl: string;
+  /** Slug extraído de la URL (ej. "juan-perez" de "/in/juan-perez/"). */
+  linkedinSlug: string;
+  /** Señal de LinkedIn que motivó la detección. */
+  senialDetectada:
+    | 'ha dejado'
+    | 'cesado'
+    | 'nuevo reto'
+    | 'se incorpora'
+    | 'cambio'
+    | 'sale'
+    | 'deja'
+    | string;
+  /** Fecha detectada (ISO 8601, lo más cercana posible al despido). */
+  fechaDetectada: string;
+  /** Fuente del hit. */
+  fuente: 'google_cse' | 'linkedin_press' | 'press_release' | string;
+  /** URL de la query Google CSE que devolvió este hit. */
+  searchUrl: string;
+  /** URL canónica del hit (LinkedIn post o nota de prensa). */
+  sourceUrl: string;
+  /** Query template que originó el hit (id de linkedin-despidos-queries.json). */
+  queryId: string;
+}
+
+/** Opciones del scraper de despidos CTO. */
+export interface DespidosCtoScrapeOptions {
+  /** Días atrás a incluir (default 90). */
+  daysBack?: number;
+  /** Tope de despidos a procesar (default 50). */
   maxItems?: number;
   /** Logging callback. */
   onLog?: (msg: string) => void;
