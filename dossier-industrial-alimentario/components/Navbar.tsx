@@ -3,6 +3,7 @@
 // Do NOT prepend basePath manually here — that produces /dossier/dossier/...
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
+import { GlobalSearch } from './GlobalSearch';
 
 const NAV_LINKS = [
   { href: '/', label: 'Dashboard' },
@@ -77,6 +78,7 @@ export function Navbar() {
               </Link>
             ))}
           </div>
+          <GlobalSearch />
           <ThemeToggle />
           <span
             title="HERMES Dossier — creado por Juan Carlos Alvarado para Surus Inversa"
