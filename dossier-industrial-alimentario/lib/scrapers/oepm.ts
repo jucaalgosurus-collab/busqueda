@@ -57,14 +57,28 @@ export interface OepmScrapeOptions {
  * - Quita paréntesis y sufijos legales (S.A., S.L., S.A.U., etc.)
  * - Quita comas
  * - Si el nombre es muy largo (> 50 chars), usa solo las 3 primeras palabras
+ *
+ * IMPORTANTE (D.1.8): el sufijo legal debe estar delimitado para no
+ * consumir la "S" de palabras como "San", "Sabadell", "Santa", etc.
+ * Patrón: la S.A./S.L. va precedida por una letra minúscula, espacio,
+ * o es el último token. No puede ir precedida por otra mayúscula que
+ * sea parte de la misma palabra (e.g. "MAHOU SAN MIGUEL, S.A." → la
+ * "S" de "San" NO debe consumirse como S.A.).
  */
 export function buildOepmQuery(companyName: string): string {
   const cleaned = companyName
     .replace(/\(.*?\)/g, '') // quita "(...)"
-    .replace(/,?\s*S\.?A\.?U\.?|,?\s*S\.?A\.?|,?\s*S\.?L\.?|,?\s*S\.?L\.?U\.?|,?\s*S\.?R\.?L\.?/gi, '')
+    // Sufijo legal: solo si va al final del string (anclado con $),
+    // opcionalmente precedido por ", " o ". ". El truco: NO puede estar
+    // pegado a una palabra como "San", "Santa", "Sabadell".
+    // Patrón: (?<![A-ZÁÉÍÓÚÑ]) → la "S" de S.A. NO está precedida por
+    // otra letra (lo que evita consumir la S de "SAN MIGUEL").
+    .replace(/(?<![A-ZÁÉÍÓÚÑ]),?\s*(S\.?\s*A\.?\s*U\.?|S\.?\s*A\.?|S\.?\s*L\.?\s*U\.?|S\.?\s*L\.?|S\.?\s*R\.?\s*L\.?)\.?\s*$/gi, '')
     .replace(/,?\s*SOCIEDAD\s+ANÓNIMA/gi, '')
     .replace(/,?\s*SOCIEDAD\s+LIMITADA/gi, '')
     .replace(/["']/g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/,\s*$/, '') // limpia coma final residual
     .trim();
   // Truncar a 50 chars (límite razonable para Invenes)
   if (cleaned.length > 50) {
