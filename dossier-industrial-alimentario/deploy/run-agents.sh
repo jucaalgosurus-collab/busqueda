@@ -53,6 +53,11 @@ echo "" | tee -a "$LOG"
 echo "▶ AGENT B.2: regulatorio (AESAN alertas alimentarias, cadencia 2d)" | tee -a "$LOG"
 timeout 240 ./node_modules/.bin/tsx lib/agents/regulatorio-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ regulatorio falló" | tee -a "$LOG"
 
+# 6b. Sprint B.3 Renuncias masivas consejeros — reusa Source BORME de B.1
+echo "" | tee -a "$LOG"
+echo "▶ AGENT B.3: renuncias (≥3 ceses consejeros en 90d, cadencia 1d)" | tee -a "$LOG"
+timeout 240 ./node_modules/.bin/tsx lib/agents/renuncias-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ renuncias falló" | tee -a "$LOG"
+
 # 7. Verificar emails pendientes con Hunter.io (SIEMPRE corre al final)
 echo "" | tee -a "$LOG"
 echo "▶ HUNTER VERIFY: emails pendientes" | tee -a "$LOG"
