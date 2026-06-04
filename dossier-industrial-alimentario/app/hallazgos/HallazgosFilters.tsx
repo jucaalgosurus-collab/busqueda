@@ -20,6 +20,7 @@ export function HallazgosFilters({
     industria?: string;
     sede?: string;
     sort?: string;
+    tamano?: 'grandes' | 'todas';
   };
   base: string;
 }) {
@@ -160,6 +161,29 @@ export function HallazgosFilters({
           <option value="empresa">Empresa A-Z</option>
           <option value="sede">Sede A-Z</option>
         </select>
+      </div>
+
+      {/* E.14.2 — Solo grandes (regla 2026-06-04) */}
+      <div style={{ alignSelf: 'end' }}>
+        <button
+          type="button"
+          onClick={() => apply({ tamano: initial.tamano === 'grandes' ? '' : 'grandes' })}
+          aria-pressed={initial.tamano === 'grandes'}
+          title="Solo empresas con facturación ≥50M€, ≥250 empleados o tier A/B"
+          style={{
+            padding: 'var(--space-2) var(--space-3)',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--surus-border)',
+            background: initial.tamano === 'grandes' ? 'var(--surus-primary)' : 'transparent',
+            color: initial.tamano === 'grandes' ? 'white' : 'var(--surus-text)',
+            fontSize: 'var(--text-sm)',
+            cursor: 'pointer',
+            fontWeight: initial.tamano === 'grandes' ? 700 : 500,
+            height: 38,
+          }}
+        >
+          {initial.tamano === 'grandes' ? '✓ ' : ''}Solo grandes
+        </button>
       </div>
 
       <button

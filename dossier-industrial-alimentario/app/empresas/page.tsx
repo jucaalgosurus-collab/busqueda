@@ -11,6 +11,7 @@ interface SearchParams {
   q?: string;
   industria?: string;
   cnae?: string; // '10' | '11' | undefined — Sprint D.2 sectorizacion
+  tamano?: 'grandes' | 'todas'; // E.14.2 — filtro "Solo grandes"
 }
 
 export default async function EmpresasPage({
@@ -24,14 +25,32 @@ export default async function EmpresasPage({
   if (sp.cnae && /^(10|11)$/.test(sp.cnae)) {
     where.cnae = { startsWith: sp.cnae };
   }
+  // Componer AND clauses explícitos para evitar pisar OR.
+  const andClauses: Record<string, unknown>[] = [];
   if (sp.q && sp.q.trim().length > 0) {
-    where.OR = [
-      { name: { contains: sp.q, mode: 'insensitive' } },
-      { subsector: { contains: sp.q, mode: 'insensitive' } },
-    ];
+    andClauses.push({
+      OR: [
+        { name: { contains: sp.q, mode: 'insensitive' } },
+        { subsector: { contains: sp.q, mode: 'insensitive' } },
+      ],
+    });
+  }
+  // E.14.2 — Solo grandes: facturación ≥50M€ OR empleados ≥250 OR tier A/B
+  // (regla 2026-06-04; pyme oculta por defecto).
+  if (sp.tamano === 'grandes') {
+    andClauses.push({
+      OR: [
+        { facturacionM: { gte: 50 } },
+        { empleadosTotal: { gte: 250 } },
+        { tier: { in: ['A', 'B'] } },
+      ],
+    });
+  }
+  if (andClauses.length > 0) {
+    where.AND = andClauses;
   }
 
-  const [companies, sectorCounts, cnaeCounts, totalEmpresas] = await Promise.all([
+  const [companies, sectorCounts, cnaeCounts, totalEmpresas, grandesCount] = await Promise.all([
     prisma.company.findMany({
       where,
       include: {
@@ -49,6 +68,16 @@ export default async function EmpresasPage({
       prisma.company.count({ where: { cnae: { startsWith: '11' } } }),
     ]),
     prisma.company.count(),
+    // E.14.2 — conteo de grandes para el toggle
+    prisma.company.count({
+      where: {
+        OR: [
+          { facturacionM: { gte: 50 } },
+          { empleadosTotal: { gte: 250 } },
+          { tier: { in: ['A', 'B'] } },
+        ],
+      },
+    }),
   ]);
   const base = basePath();
   const cnae10Count = cnaeCounts[0];
@@ -72,6 +101,18 @@ export default async function EmpresasPage({
               <>
                 {' '}
                 Filtro CNAE: <strong>{sp.cnae === '10' ? 'Alimentos' : 'Bebidas'}</strong>.
+              </>
+            )}
+            {sp.tamano === 'grandes' && (
+              <>
+                {' '}
+                <span
+                  className="surus-pill surus-pill-success"
+                  style={{ fontSize: 'var(--text-xs)' }}
+                  title="Facturación ≥50M€ o ≥250 empleados o tier A/B"
+                >
+                  Solo grandes
+                </span>
               </>
             )}
           </p>

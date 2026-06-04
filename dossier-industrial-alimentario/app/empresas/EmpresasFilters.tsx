@@ -9,7 +9,7 @@ export function EmpresasFilters({
   initial,
   base,
 }: {
-  initial: { q?: string; industria?: string };
+  initial: { q?: string; industria?: string; tamano?: 'grandes' | 'todas' };
   base: string;
 }) {
   const router = useRouter();
@@ -37,7 +37,7 @@ export function EmpresasFilters({
       }}
       style={{
         display: 'grid',
-        gridTemplateColumns: '2fr 1fr auto',
+        gridTemplateColumns: '2fr 1fr auto auto',
         gap: 'var(--space-2)',
         marginBottom: 'var(--space-4)',
         alignItems: 'end',
@@ -107,6 +107,40 @@ export function EmpresasFilters({
       >
         Buscar
       </button>
+
+      {/* E.14.2 — toggle Solo grandes (regla 2026-06-04: pyme oculta por defecto) */}
+      <div
+        role="group"
+        aria-label="Filtro tamaño empresa"
+        style={{
+          display: 'inline-flex',
+          border: '1px solid var(--surus-border)',
+          borderRadius: 'var(--radius-md)',
+          overflow: 'hidden',
+          height: 38,
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => apply({ tamano: initial.tamano === 'grandes' ? '' : 'grandes' })}
+          aria-pressed={initial.tamano === 'grandes'}
+          title="Solo empresas con facturación ≥50M€, ≥250 empleados o tier A/B"
+          style={{
+            padding: 'var(--space-2) var(--space-3)',
+            fontSize: 'var(--text-sm)',
+            border: 'none',
+            background: initial.tamano === 'grandes' ? 'var(--surus-primary)' : 'transparent',
+            color: initial.tamano === 'grandes' ? 'white' : 'var(--surus-text)',
+            cursor: 'pointer',
+            fontWeight: initial.tamano === 'grandes' ? 700 : 500,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+          }}
+        >
+          {initial.tamano === 'grandes' ? '✓ ' : ''}Solo grandes
+        </button>
+      </div>
     </form>
   );
 }

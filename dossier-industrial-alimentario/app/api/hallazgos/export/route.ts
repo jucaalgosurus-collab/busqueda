@@ -24,6 +24,13 @@ export async function GET(req: NextRequest) {
   const companyFilter: Record<string, unknown> = {};
   if (sp.get('ccaa')) companyFilter.hqRegion = sp.get('ccaa');
   if (sp.get('industria')) companyFilter.sector = sp.get('industria');
+  if (sp.get('tamano') === 'grandes') {
+    companyFilter.OR = [
+      { facturacionM: { gte: 50 } },
+      { empleadosTotal: { gte: 250 } },
+      { tier: { in: ['A', 'B'] } },
+    ];
+  }
   if (Object.keys(companyFilter).length > 0) where.company = companyFilter;
   const sede = sp.get('sede');
   if (sede && sede.trim().length > 0) {

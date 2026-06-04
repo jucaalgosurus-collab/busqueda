@@ -16,6 +16,7 @@ interface SearchParams {
   industria?: string;
   sede?: string;
   sort?: string; // E.6: 'fecha_desc' (default) | 'fecha_asc' | 'empresa' | 'sede'
+  tamano?: 'grandes' | 'todas'; // E.14.2 — filtro "Solo grandes"
 }
 
 async function getHallazgos(params: SearchParams) {
@@ -27,6 +28,14 @@ async function getHallazgos(params: SearchParams) {
   const companyFilter: Record<string, unknown> = {};
   if (params.ccaa) companyFilter.hqRegion = params.ccaa;
   if (params.industria) companyFilter.sector = params.industria;
+  // E.14.2 — Solo grandes: pyme oculta por defecto.
+  if (params.tamano === 'grandes') {
+    companyFilter.OR = [
+      { facturacionM: { gte: 50 } },
+      { empleadosTotal: { gte: 250 } },
+      { tier: { in: ['A', 'B'] } },
+    ];
+  }
   if (Object.keys(companyFilter).length > 0) where.company = companyFilter;
   if (params.sede) {
     // Filtro por nombre de sede (plant.name). Relación Source.plant.
@@ -87,6 +96,7 @@ export default async function HallazgosPage({
     if (sp.stale) qs.set('stale', sp.stale);
     if (sp.industria) qs.set('industria', sp.industria);
     if (sp.sede) qs.set('sede', sp.sede);
+    if (sp.tamano) qs.set('tamano', sp.tamano);
     qs.set('format', 'csv');
     return `${base}/api/hallazgos/export?${qs.toString()}`;
   })();
@@ -232,6 +242,7 @@ function sortHref(sp: SearchParams, sort: string, base: string): string {
   if (sp.stale) qs.set('stale', sp.stale);
   if (sp.industria) qs.set('industria', sp.industria);
   if (sp.sede) qs.set('sede', sp.sede);
+  if (sp.tamano) qs.set('tamano', sp.tamano);
   qs.set('sort', sort);
   return `${base}/hallazgos?${qs.toString()}`;
 }
