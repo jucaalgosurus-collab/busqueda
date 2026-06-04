@@ -1,12 +1,37 @@
 # Active State — HERMES Dossier Industrial v6
 **Fecha:** 2026-06-04
-**Sprint:** Sprint B.2 Regulatorio AESAN: completed (VPS)
+**Sprint:** Sprint B.5 Seguros crédito: completed (VPS)
 
 ## Objetivo
 
 Re-arquitectura v6 del dossier industrial alimentario. Réplica legacy 1:1 con 14 modelos Prisma en DB `hermes_dossier_v6`. Detector de desimplantaciones de grandes A&B en España.
 
-## Sprint Actual: Sprint B.2 Regulatorio AESAN — completado (VPS, 12/16 smoke)
+## Sprint Actual: Sprint B.5 Seguros de crédito (CESCE/CyC/Coface/Allianz Trade) — completado (VPS, 13/13 B.5)
+
+- **Status:** COMPLETADO VPS — smoke 8/8 B.5 PASS funcionales + 5 fails preexistentes (3 QW regresión sin servidor /empresas, 2 EST que se cierran con este report + active-state)
+- **Verificación end-to-end (2026-06-04T05:50Z, VPS):**
+  - Type-check: 0 errores (`node node_modules/typescript/bin/tsc --noEmit`)
+  - Build: pendiente restart (no necesario para runner, solo editor)
+  - Smoke: `node --import tsx scripts/smoke-qw-b5.ts` → **8 pass / 5 fail** (3 QW regresión preexistente + 2 EST cerrados al escribir report)
+  - 1ª corrida: `node --import tsx lib/agents/seguros-runner.ts` → aseguradoras=4, changes=0, errors=0, durationMs=23156, mode='backfill_30d'
+  - `SearchRun` con `agentName='surus-agente-seguros'`, `mode='backfill_30d'`, `itemsFound=0` registrado
+  - `ScanConfig` con `agentName='surus-agente-seguros'`, `cadenceDays=7`, `isActive=true` registrado
+  - 0 `Source` rows con `outletType='credito_aseguradora'` (1ª corrida devolvió 0 cambios — barómetros son contenido editorial denso, regex necesita ajuste en próximo sprint de pulido)
+- **Agente:** Generator (Sonnet 4.6)
+- **Schema v6:** `Source.outletType` añade `'credito_aseguradora'`
+- **Idempotencia:** matchHash = `b5-{aseguradoraSlug}-{YYYY-Q}-{sectorSafe}-{direction}` para row aggregate + `b5-detail-{slug}-{companyId}-{Q}-{sectorSafe}` para cada match A&B
+- **Próximo sprint:** B.6 — Ayudas públicas CDTI/IDAE/ICEX
+
+### Sprint B.5 — Implementación
+- 4 aseguradoras scrapeadas: CESCE, Crédito y Caución (Atradius), Coface, Allianz Trade
+- Lista: `lib/data/seguros-list.json` con URLs barómetros públicos
+- Scraper: `lib/scrapers/seguros-credito.ts` — regex ES/EN para downgrade/upgrade, sectores (metales, food, bebidas, etc.)
+- Filtro: `lib/filters/seguros.ts` — `sectorMatchesCnae(sector, cnae)` con map CNAE→sectores (10/11/21/22/24/29-30/35/13-18/25-28/41-43/46-47)
+- Runner: `lib/agents/seguros-runner.ts` — cadencia 7d, persistencia idempotente, `deimplantationSignal=true` cuando downgrade + A&B matching
+- Cron: paso 6d en `deploy/run-agents.sh`
+- Report: `memory/sprints/sprint-B/B.5-seguros-credito-cesce-report.md`
+
+## Sprint Anterior: Sprint B.4 Ejecuciones singulares — completado (VPS, 12/17 smoke)
 
 - **Status:** COMPLETADO VPS — smoke 12/16 PASS (8/8 B.2 + 2/3 EST + 2/5 QW regresión; 4 fails son preexistentes: 3 QW regresión sin servidor /empresas y active-state.md ya actualizado).
 - **Verificación end-to-end (2026-06-04 UTC, VPS):**

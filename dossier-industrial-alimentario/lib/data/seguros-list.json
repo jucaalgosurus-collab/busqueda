@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cesce-sala-prensa",
+    "aseguradora": "CESCE",
+    "fullName": "Compañía Española de Seguros de Crédito a la Exportación",
+    "country": "ES",
+    "barometerUrl": "https://www.cesce.es/es/comunicacion/sala-de-prensa",
+    "sectorIndexUrl": "https://www.cesce.es/es/w/category/sala-de-prensa/aseguradoras-de-credito",
+    "cadence": "quarterly",
+    "type": "html_static",
+    "rateLimitMs": 3000,
+    "requiresStealth": false,
+    "notes": "Comunicados de prensa públicos. Detectar 'downgrade' o 'revisión a la baja' en portfolio rating trimestral. Publica también Press Releases sectoriales.",
+    "language": "es"
+  },
+  {
+    "id": "cyc-sala-prensa",
+    "aseguradora": "CreditoYCaucion",
+    "fullName": "Crédito y Caución (Atradius)",
+    "country": "ES",
+    "barometerUrl": "https://www.creditoycaucion.es/sala-prensa",
+    "sectorIndexUrl": "https://www.creditoycaucion.es/sala-prensa/informes-y-estudios",
+    "cadence": "monthly",
+    "type": "html_static",
+    "rateLimitMs": 3000,
+    "requiresStealth": false,
+    "notes": "Informes mensuales y barómetros sectoriales. Publica 'Observatorio del Riesgo' con cambios por sector ES.",
+    "language": "es"
+  },
+  {
+    "id": "coface-newsroom",
+    "aseguradora": "Coface",
+    "fullName": "Coface SA",
+    "country": "MULTI",
+    "barometerUrl": "https://www.coface.com/newsroom",
+    "sectorIndexUrl": "https://www.coface.com/newsroom?tags=Sector",
+    "cadence": "quarterly",
+    "type": "html_static",
+    "rateLimitMs": 4000,
+    "requiresStealth": false,
+    "notes": "Sector barometer trimestral con downgrades/upgrades por país. Ejemplo real 2026-04: 'Metals in Spain' downgrade.",
+    "language": "en"
+  },
+  {
+    "id": "allianz-trade-sector",
+    "aseguradora": "AllianzTrade",
+    "fullName": "Allianz Trade (antes Euler Hermes)",
+    "country": "MULTI",
+    "barometerUrl": "https://www.allianz-trade.com/en/economic-research/sector-risks",
+    "sectorIndexUrl": "https://www.allianz-trade.com/en/economic-research/sector-risks",
+    "cadence": "weekly",
+    "type": "html_static",
+    "rateLimitMs": 3000,
+    "requiresStealth": false,
+    "notes": "Sector risks assessments semanales. Cambios downgrade/upgrade por sector y país (España incluida).",
+    "language": "en"
+  }
+]

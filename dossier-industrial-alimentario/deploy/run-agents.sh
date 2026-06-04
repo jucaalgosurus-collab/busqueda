@@ -60,6 +60,11 @@ echo "" | tee -a "$LOG"
 echo "▶ AGENT B.4: ejecuciones singulares (1+ ejec + 1+ embargo en 90d, sin concursos, cadencia 1d)" | tee -a "$LOG"
 timeout 240 ./node_modules/.bin/tsx lib/agents/ejecuciones-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ ejecuciones falló" | tee -a "$LOG"
 
+# 6d. Sprint B.5 Seguros crédito — CESCE/CyC/Coface/Allianz Trade barómetros sectoriales
+echo "" | tee -a "$LOG"
+echo "▶ AGENT B.5: seguros crédito (downgrades sectoriales ES, cadencia 7d)" | tee -a "$LOG"
+timeout 240 ./node_modules/.bin/tsx lib/agents/seguros-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ seguros falló" | tee -a "$LOG"
+
 # 7. Verificar emails pendientes con Hunter.io (SIEMPRE corre al final)
 echo "" | tee -a "$LOG"
 echo "▶ HUNTER VERIFY: emails pendientes" | tee -a "$LOG"

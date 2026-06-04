@@ -17,7 +17,8 @@ export type OutletType =
   | 'syndicate'
   | 'linkedin'
   | 'auction'
-  | 'regulatorio_aesan';
+  | 'regulatorio_aesan'
+  | 'credito_aseguradora';
 
 export interface ScrapedArticle {
   url: string;
