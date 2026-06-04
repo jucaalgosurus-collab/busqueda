@@ -1,0 +1,19 @@
+[Unit]
+Description=HERMES Dossier — Plantas stale agent (B.8, sin novedad 21d)
+After=network.target postgresql.service hermes-dossier.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+EnvironmentFile=/opt/hermes-dossier/.env
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node node_modules/tsx/dist/cli.mjs lib/agents/plantas-stale-runner.ts
+StandardOutput=append:/opt/hermes-dossier/logs/agent-plantas-stale.log
+StandardError=append:/opt/hermes-dossier/logs/agent-plantas-stale.err
+TimeoutStartSec=300s
+Nice=10
+
+[Install]
+WantedBy=multi-user.target

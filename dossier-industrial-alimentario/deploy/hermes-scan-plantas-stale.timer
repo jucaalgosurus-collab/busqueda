@@ -1,0 +1,11 @@
+[Unit]
+Description=HERMES Dossier — Plantas stale timer (B.8, diario 04:30 UTC, paso 6g)
+Requires=hermes-scan-plantas-stale.service
+
+[Timer]
+OnCalendar=*-*-* 04:30:00
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

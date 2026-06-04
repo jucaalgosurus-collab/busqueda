@@ -1,7 +1,7 @@
-// HERMES-DOSSIER — Esquema de Base de Datos
-// Producto: Dossier Industrial Alimentario (A&B OSINT)
+// HERMES-DOSSIER v6 — Esquema de Base de Datos
+// Producto: Dossier Industrial Alimentario (A&B OSINT) — Réplica legacy 1:1
 // Detecta SOLO desimplantaciones de grandes empresas A&B en España.
-// 2026-06-02 — Sprint 1 (Cimientos)
+// 2026-06-02 — Sprint 6 (Re-arquitectura v6)
 
 generator client {
   provider = "prisma-client-js"
@@ -14,275 +14,434 @@ datasource db {
 }
 
 // ============================================================================
-// 1. EMPRESAS — Grandes empresas A&B (CNAE 10+11) en España
+// 1. COMPANY — Empresa con KPIs (réplica legacy 1:1)
 // ============================================================================
 model Company {
-  id          String   @id @default(uuid())
-  cif         String?  @unique
-  name        String
-  slug        String   @unique
-  sector      String   // "Alimentacion" | "Bebidas"
-  subsector   String?  // "Cárnicas", "Lácteos", "Conservas", "Aceite", "Cerveza", etc.
-  cnae        String?  // "10.1", "10.5", "11.0", etc.
-  countryHq   String   @default("ES")
-  region      String?  // CCAA
-  web         String?
-  status      String   @default("active") // active | inactive | acquired
-  tier        String   @default("tier1") // tier1 (top 100 facturación) | tier2 (multinacional con planta) | tier3 (gran capacidad)
-  notes       String?
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  name          String
+  cif           String?  @unique
+  sector        String   // Industria: 'Alimentos y Bebidas' | 'Industrial' | 'Farmaceutico' | 'Construccion' | 'Energetico' | 'Otro industrial' (brief 2026-06-03 — sectores amplios; subsector conserva el detalle técnico)
+  subsector     String   // 'Pescado congelado', 'Lácteos', 'Cerveza', 'Azúcar', 'Refino de petróleo', etc.
+  cnae          String?  // '10.2', '10.5', '11.0', '21.1', '35.1', etc.
+  parentGroup   String?  // 'AB Foods', 'Grupo Damm', 'Nestlé S.A.', etc.
+  hqCity        String?
+  hqRegion      String?
+  website       String?
+  logoUrl       String?
+  heroImageUrl  String?
 
-  operations  Operation[]
-  events      Event[]
-  contacts    Contact[]
-  documents   Document[]
-  sources     ArticleCompany[]
+  // KPIs globales (réplica legacy)
+  facturacionM     Float?
+  facturacionYear  Int?
+  ebitdaM          Float?
+  beneficioNetoM   Float?
+  deudaNetaM       Float?
+  empleadosTotal   Int?
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  tier          String   @default("A") // 'A' | 'B'
+  status        String   @default("active") // 'active' | 'inactive'
+  priority      Int      @default(0)
 
-  @@index([sector])
-  @@index([subsector])
-  @@index([region])
-  @@index([tier])
+  plants        Plant[]
+  sources       Source[]
+  operations    Operation[]
+  financials    Financial[]
+  notes         Note[]
+  documents     Document[]
+  auctionChecks AuctionCheck[]
+  plantContacts PlantContact[]
+  outreachLogs  OutreachLog[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  lastScannedAt DateTime?
+
+  @@index([sector, subsector])
+  @@index([tier, status])
 }
 
 // ============================================================================
-// 2. OPERATIONS — Eventos de DESIMPLANTACIÓN detectados
+// 2. PLANT — Planta con ubicación + estado + especialidad
 // ============================================================================
-model Operation {
-  id           String   @id @default(uuid())
-  companyId    String
-  company      Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+model Plant {
+  id            String   @id @default(uuid())
+  companyId     String
+  company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
-  // SOLO desimplantación (cualquier tipo)
-  type         String   // plant_closure | line_closure | ERE | asset_divestment
-                       // machinery_sale | vehicle_fleet_reduction | IT_disposal
-                       // furniture_office_disposal | facility_decommissioning
-                       // production_relocation | end_of_activity
-                       // non_concurso_liquidation | regulatory_driven_closure
+  name          String   // 'Alovera', 'Aldaia', 'Gurb', 'Sabón', 'Morás', 'La Bañeza', 'Miranda de Ebro', etc.
+  ccaa          String   // 'Galicia', 'Madrid', 'Cataluña', 'Andalucía', etc.
+  province      String?
+  city          String?
+  address       String?
+  lat           Float?
+  lng           Float?
 
-  description  String
-  amountEur    Float?
-  jobsAffected Int?
-  announcedAt  DateTime?
-  status       String   @default("announced") // announced | confirmed | cancelled | completed
-  confidence   Float    @default(0.5)         // 0..1
-  sourceId     String?                       // article fuente primaria
+  status        String   // 'operativa' | 'en_inversion' | 'en_desmantelamiento' | 'cerrada' | 'vendida' | 'en_proyecto' | 'en_conversion' | 'en_venta'
+  specialty     String?  // 'Leche UHT', 'Agua mineral', 'Azúcar de remolacha', 'Cerveza', 'Pescado congelado'
+  employees     Int?
+  parcelaM2     Float?
+  naveM2        Float?
 
-  events       Event[]
+  closureYear   Int?
+  investmentMEur Float?
+  notes         String?
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  // B.8 — Stale detection (planta sin novedad en 21d)
+  isStale       Boolean   @default(false)
+  staleReason   String?   // 'sin_novedad_21d' | 'cerrada_registrada' | 'estado_terminal' | 'planta_recien_creada' | null
+  staleAt       DateTime? // última vez que se marcó stale
+  staleCheckedAt DateTime? // última vez que se evaluó
 
-  @@index([type])
+  inventory     TechnicalInventory[]
+  contacts      PlantContact[]
+  events        TimelineEvent[]
+  documents     Document[]
+  operations    Operation[]
+  sources       Source[]  // QW-10: noticias asociadas a esta sede
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([companyId, name])
   @@index([status])
-  @@index([announcedAt])
-  @@index([companyId, type])
-}
-
-// ============================================================================
-// 3. SOURCES — Fuentes scrapeadas (raw articles / news items)
-// ============================================================================
-model Source {
-  id              String   @id @default(uuid())
-  url             String   @unique
-  title           String
-  outlet          String   // "El País", "Alimarket", "Pescanova Sala de Prensa", etc.
-  outletType      String   // corporate_newsroom | nacional | regional | local
-                            // sector | bofficial | syndicate | linkedin
-  publishedAt     DateTime?
-  language        String   @default("es")
-  country         String   @default("ES")
-  region          String?  // CCAA detectada
-  province        String?
-
-  // Filtro semántico OBLIGATORIO
-  deimplantationSignal Boolean @default(false)
-  outOfScopeReason     String? // "not_deimplantation" | "subasta" | "concurso" | null
-
-  content        String?  @db.Text
-  contentHash    String?
-  scrapedAt      DateTime @default(now())
-  isStale        Boolean  @default(false)
-
-  // Spanish full-text search vector (populated by trigger, do not modify via Prisma)
-  contentTsvector Unsupported("tsvector")?
-
-  companies      ArticleCompany[]
-  events         Event[]
-  contacts       Contact[]
-
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  @@index([outletType])
-  @@index([publishedAt])
-  @@index([deimplantationSignal])
+  @@index([ccaa])
   @@index([isStale])
-  @@index([region])
+  @@index([staleCheckedAt])
 }
 
 // ============================================================================
-// 4. ARTICLE_COMPANY — M:N con sentiment
+// 3. PLANT_CONTACT — Contacto ASIGNADO A PLANTA concreta (clave: persona + instalación)
 // ============================================================================
-model ArticleCompany {
-  articleId  String
-  companyId  String
-  article    Source  @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  company    Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  sentiment  Float   @default(0)  // -1..1
-  relevance  Float   @default(0.5) // 0..1
+model PlantContact {
+  id            String   @id @default(uuid())
+  plantId       String
+  plant         Plant    @relation(fields: [plantId], references: [id], onDelete: Cascade)
+  companyId     String
+  company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
-  @@id([articleId, companyId])
-  @@index([companyId])
-}
+  fullName      String
+  role          String   // 'Director de Planta', 'Director de Operaciones', 'CEO', 'Plant Manager', etc.
+  roleCategory  String?  // 'plant_manager' | 'coo' | 'cfo' | 'ceo' | 'procurement' | 'sustainability' | 'maintenance' | 'ere_responsible' | 'other'
 
-// ============================================================================
-// 5. CONTACTS — Decisores A&B (para que el depto. comercial los contacte)
-// ============================================================================
-model Contact {
-  id              String   @id @default(uuid())
-  fullName        String
-  currentRole     String?
-  currentCompanyId String?
-  currentCompany  Company? @relation(fields: [currentCompanyId], references: [id], onDelete: SetNull)
+  // Datos de contacto (enriquecidos)
+  linkedinUrl   String?
+  email         String?
+  emailVerified Boolean  @default(false)
+  hunterId      String?
+  phone         String?
 
-  linkedinUrl     String?
-  email           String?
-  emailVerified   Boolean  @default(false)
-  hunterId        String?
-  phone           String?
-  sourceId        String?
-  source          Source?  @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+  // Origen y confianza
+  sourceUrl     String?  // URL donde se encontró la persona
+  sourceOutlet  String?  // 'LinkedIn', 'El País', 'Hunter.io', 'El Periódico'
+  via           String?  // 'google_cse' | 'playwright' — método de captura (Plan B 2026-06-03)
+  confidence    Float    @default(0.5)
+  lastEnrichedAt DateTime?
+  notes         String?
 
-  // Rol decisor Surus
-  roleRelevance   String?  // plant_manager | coo | sustainability | maintenance
-                             // procurement | cfo | ceo | ere_responsible | other
+  outreachLogs  OutreachLog[]
 
-  lastEnrichedAt  DateTime?
-  notes           String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  @@index([currentCompanyId])
-  @@index([roleRelevance])
+  @@index([plantId])
+  @@index([companyId, roleCategory])
+  @@index([linkedinUrl])
   @@index([emailVerified])
 }
 
 // ============================================================================
-// 6. EVENTS — Calendario de eventos próximos
+// 4. TECHNICAL_INVENTORY — Inventario técnico con brand + model + specs
 // ============================================================================
-model Event {
-  id          String   @id @default(uuid())
-  type        String   // strike | regulatory | hearing | ere_filing
-                       // closure_announcement | shareholders
-  title       String
-  description String?
-  startsAt    DateTime
-  endsAt      DateTime?
-  companyId   String?
-  operationId String?
-  sourceId    String?
-  company     Company?   @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  operation   Operation? @relation(fields: [operationId], references: [id], onDelete: SetNull)
-  source      Source?    @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+model TechnicalInventory {
+  id            String   @id @default(uuid())
+  plantId       String
+  plant         Plant    @relation(fields: [plantId], references: [id], onDelete: Cascade)
 
-  createdAt   DateTime @default(now())
+  category      String   // 'linea_produccion' | 'caldera' | 'sistema_almacenaje' | 'envasado' | 'refrigeracion' | 'logistica' | 'co_generacion' | 'packaging' | 'molino' | 'horno' | 'edificio' | 'parcela'
+  brand         String?  // 'GEA', 'WEG', 'Krones', 'Linde', 'Magnon/Ence', 'HoloLens', etc.
+  model         String?  // 'MSA 90-01-076', 'Dynamics 365', 'Frame 5'
+  specs         String?  // '2 calderas 10 MWt', '70 Tm/día', '85K → 120K t/año'
+  quantity      Int?
+  status        String   // 'operativo' | 'a_sustituir' | 'liberado' | 'desmantelado' | 'vendido' | 'en_uso' | 'en_obra'
 
-  @@index([startsAt])
-  @@index([type])
-  @@index([companyId])
+  releaseWindow String?  // 'Q2 2026', '2027', '2do sem 2026'
+  estimatedValueEur Float?
+  source        String?
+  notes         String?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([plantId, status])
+  @@index([category, brand])
 }
 
 // ============================================================================
-// 7. SKILLS_EVALUATIONS — MOCR results (Lazy trigger Sprint 5)
+// 5. OPERATION — Operación de desimplantación / inversión / ERE
+// ============================================================================
+model Operation {
+  id            String   @id @default(uuid())
+  companyId     String
+  company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  plantId       String?
+  plant         Plant?   @relation(fields: [plantId], references: [id])
+
+  type          String   // 'plant_closure' | 'line_closure' | 'ERE' | 'plant_sale' | 'relocation' | 'investment' | 'divestment' | 'biomass_plant' | 'warehouse' | 'decommissioning' | 'acquisition' | 'concurso_acreedores' | 'subasta'
+  title         String
+  description   String?  @db.Text
+  amountMeur    Float?
+  jobsAffected  Int?
+  announcedAt   DateTime
+  status        String   @default("announced") // 'announced' | 'in_negotiation' | 'in_execution' | 'executed' | 'cancelled' | 'in_scope' | 'out_of_scope'
+  confidence    Float    @default(0.7)
+  sourceUrl     String?
+  sourceOutlet  String?
+
+  events        TimelineEvent[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([companyId, type])
+  @@index([plantId])
+  @@index([announcedAt])
+  @@index([status])
+}
+
+// ============================================================================
+// 6. TIMELINE_EVENT — Eventos cronológicos datados
+// ============================================================================
+model TimelineEvent {
+  id            String   @id @default(uuid())
+  plantId       String?
+  plant         Plant?   @relation(fields: [plantId], references: [id])
+  operationId   String?
+  operation     Operation? @relation(fields: [operationId], references: [id])
+  companyId     String
+
+  date          DateTime
+  title         String
+  description   String?
+  impact        String?
+  sourceUrl     String?
+  sourceOutlet  String?
+
+  createdAt     DateTime @default(now())
+
+  @@index([companyId, date])
+  @@index([plantId, date])
+  @@index([date])
+}
+
+// ============================================================================
+// 7. FINANCIAL — Datos financieros: inversiones, desinversiones, KPIs
+// ============================================================================
+model Financial {
+  id            String   @id @default(uuid())
+  companyId     String
+  company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  year          Int
+  concept       String   // 'Almacén automatizado Alovera', 'Planta biomasa', 'Modernización 2022', 'Ampliación capital 283M€'
+  amountMeur    Float
+  category      String?  // 'investment' | 'divestment' | 'capital_increase' | 'debt_restructuring' | 'impairment' | 'revenue' | 'ebitda'
+  plantId       String?
+  sourceUrl     String?
+  notes         String?
+
+  createdAt     DateTime @default(now())
+
+  @@index([companyId, year])
+  @@index([category])
+}
+
+// ============================================================================
+// 8. SOURCE — Fuentes scrapeadas (URLs clickeables)
+// ============================================================================
+model Source {
+  id            String   @id @default(uuid())
+  companyId     String?
+  company       Company? @relation(fields: [companyId], references: [id])
+
+  // QW-10: noticia → planta (sede) — null si la noticia no se asocia a una sede concreta
+  plantId       String?
+  plant         Plant?   @relation(fields: [plantId], references: [id], onDelete: SetNull)
+
+  url           String   @unique
+  title         String
+  outlet        String
+  outletType    String   // 'corporate_newsroom' | 'nacional' | 'regional' | 'local' | 'sector' | 'bofficial' | 'syndicate' | 'linkedin'
+  language      String   @default("es")
+  publishedAt   DateTime?
+  scrapedAt     DateTime @default(now())
+  contentHash   String?
+
+  // Filtro desimplantación
+  deimplantationSignal Boolean @default(false)
+  outOfScopeReason     String?
+  isStale              Boolean @default(false)
+
+  contentText   String?  @db.Text
+  contentTsv    Unsupported("tsvector")?
+
+  @@index([companyId, publishedAt])
+  @@index([plantId])
+  @@index([outletType])
+  @@index([deimplantationSignal])
+  @@index([isStale])
+  @@index([publishedAt])
+}
+
+// ============================================================================
+// 9. AUCTION_CHECK — Verificación de subastas por plataforma
+// ============================================================================
+model AuctionCheck {
+  id            String   @id @default(uuid())
+  companyId     String
+  company       Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyName   String
+  platform      String   // 'Escrapalia', 'Surplex', 'Troostwijk', 'GUTINVEST', 'HGP', 'Apex', 'CFT', 'Industrial Auctions', 'Machineryline'
+  result        String   // 'sin_activos' | 'activos_detectados' | 'historial' | 'no_verificado'
+  details       String?
+  checkedAt     DateTime @default(now())
+
+  @@index([companyId, platform])
+  @@index([checkedAt])
+}
+
+// ============================================================================
+// 10. DOCUMENT — PDFs (EINF) e imágenes (logo, hero, planta)
+// ============================================================================
+model Document {
+  id            String   @id @default(uuid())
+  companyId     String?
+  company       Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  plantId       String?
+  plant         Plant?   @relation(fields: [plantId], references: [id], onDelete: Cascade)
+
+  kind          String   // 'pdf' | 'logo' | 'hero' | 'plant_photo' | 'nameplate' | 'certificate' | 'balance_sheet' | 'photo' | 'press_release'
+  fileUrl       String
+  fileName      String
+  fileSize      Int?
+  mimeType      String?
+  externalUrl   String?  // Para documentos remotos (ej. EINF en nueva-pescanova.com)
+
+  // Para MOCR
+  ocrText       String?  @db.Text
+  ocrProvider   String?  // 'gemini' | 'docling'
+  ocrConfidence Float?
+  ocrEvaluatedAt DateTime?
+
+  uploadedAt    DateTime @default(now())
+  uploadedBy    String?  @default("anon")
+
+  evaluations   SkillEvaluation[]
+
+  @@index([companyId, kind])
+  @@index([plantId, kind])
+}
+
+// ============================================================================
+// 11. NOTE — Notas editables (sin auth)
+// ============================================================================
+model Note {
+  id            String   @id @default(uuid())
+  companyId     String?
+  company       Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  plantId       String?
+  contactId     String?
+  operationId   String?
+
+  body          String   @db.Text
+  author        String   @default("anonimo")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([companyId])
+  @@index([plantId])
+}
+
+// ============================================================================
+// 12. SCAN_CONFIG — Configuración cadencia 2-tier
+// ============================================================================
+model ScanConfig {
+  id            String   @id @default(uuid())
+  agentName     String   @unique
+  cadenceDays   Int      @default(2)
+  firstRunBackfillDays Int  @default(15)
+  lastRunAt     DateTime?
+  lastBackfillAt DateTime?
+  isFirstRun    Boolean  @default(true)
+  isActive      Boolean  @default(true)
+  queryConfig   Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// ============================================================================
+// 13. SEARCH_RUN — Log de runs
+// ============================================================================
+model SearchRun {
+  id            String   @id @default(uuid())
+  agentName     String
+  query         Json?
+  startedAt     DateTime @default(now())
+  finishedAt    DateTime?
+  itemsFound    Int      @default(0)
+  itemsNew      Int      @default(0)
+  itemsUpdated  Int      @default(0)
+  itemsInScope  Int      @default(0)
+  itemsOutOfScope Int    @default(0)
+  errorsCount   Int      @default(0)
+  costEur       Float    @default(0)
+  mode          String?  // 'backfill_15d' | 'incremental_2d'
+
+  @@index([agentName, startedAt])
+}
+
+// ============================================================================
+// 14. SKILL_EVALUATION — MOCR results
 // ============================================================================
 model SkillEvaluation {
   id              String   @id @default(uuid())
   documentId      String
   document        Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  skill           String   // hermes-asset-valuation | hermes-certifications | hermes-technical-audit
-  grade           String?  // A | B | C | D
-  score           Int?     // 0..100
+  skill           String   // 'hermes-asset-valuation' | 'hermes-certifications' | 'hermes-technical-audit'
+  grade           String?  // 'A' | 'B' | 'C' | 'D'
+  score           Int?
   findings        Json?
   evaluatedAt     DateTime @default(now())
   evaluatorVersion String?
 
   @@index([documentId])
-  @@index([skill])
+  @@index([skill, grade])
 }
 
 // ============================================================================
-// 8. DOCUMENTS — PDFs subidos (MOCR input)
+// 15. OUTREACH_LOG — Audit log de generación de borradores outreach (QW-9)
 // ============================================================================
-model Document {
-  id            String   @id @default(uuid())
-  companyId     String?
-  company       Company? @relation(fields: [companyId], references: [id], onDelete: SetNull)
+model OutreachLog {
+  id          String   @id @default(uuid())
+  companyId   String
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  contactId   String
+  contact     PlantContact @relation(fields: [contactId], references: [id], onDelete: Cascade)
 
-  kind          String   // nameplate | certificate | balance_sheet | photo
-  fileUrl       String
-  fileSize      Int?
-  ocrText       String?  @db.Text
-  ocrProvider   String?  // "gemini-2.5-vision" | "docling" | "ensemble"
-  ocrConfidence Float?
-  sha256        String?
+  channel     String   // 'email' | 'linkedin_dm_short' | 'linkedin_dm_long' | 'preview_only'
+  subject     String
+  body        String   @db.Text
+  status      String   @default("generated") // 'generated' | 'copied' | 'sent_external' | 'discarded'
+  hash        String   // SHA-256(body) para trazabilidad
+  seed        Int      // seed determinista usado para DeepSeek
+  model       String   @default("deepseek-chat")
+  painPointCount Int  @default(0)
+  wordCount   Int      @default(0)
 
-  evaluations   SkillEvaluation[]
+  createdAt   DateTime @default(now())
+  createdBy   String   @default("anon")
 
-  uploadedAt    DateTime @default(now())
-  processedAt   DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  @@index([companyId])
-  @@index([kind])
-}
-
-// ============================================================================
-// 9. SEARCH_RUNS — Log de cada ejecución de un agente
-// ============================================================================
-model SearchRun {
-  id               String   @id @default(uuid())
-  agentName        String   // newsrooms-corporativas | prensa-nacional | etc.
-  query            Json?
-  startedAt        DateTime
-  finishedAt       DateTime?
-  itemsFound       Int      @default(0)
-  itemsInScope     Int      @default(0)  // desimplantación
-  itemsOutOfScope  Int      @default(0)
-  itemsNew         Int      @default(0)
-  itemsUpdated     Int      @default(0)
-  itemsStale       Int      @default(0)
-  errorsCount      Int      @default(0)
-  costEur          Float    @default(0)
-
-  createdAt        DateTime @default(now())
-
-  @@index([agentName])
-  @@index([startedAt])
-}
-
-// ============================================================================
-// 10. SCAN_CONFIGS — Configuración de cada agente
-// ============================================================================
-model ScanConfig {
-  id            String   @id @default(uuid())
-  agentName     String   @unique
-  region        String?
-  subsector     String?
-  keywords      String[]
-  sources       String[] // URLs bases
-  cadenceDays   Int      @default(2)
-  isActive      Boolean  @default(true)
-  lastRunAt     DateTime?
-  nextRunAt     DateTime?
-  config        Json?
-
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  @@index([isActive])
-  @@index([nextRunAt])
+  @@index([companyId, createdAt])
+  @@index([contactId, channel])
+  @@index([status])
 }

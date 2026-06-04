@@ -75,6 +75,11 @@ echo ""
 echo "▶ AGENT B.7: despidos CTO / Director Técnico (LinkedIn, cadencia 7d)" | tee -a "$LOG"
 timeout 240 ./node_modules/.bin/tsx lib/agents/despidos-cto-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ despidos-cto falló" | tee -a "$LOG"
 
+# 6g. Sprint B.8 Plantas stale — sin novedad 21d (cadencia 1d)
+echo ""
+echo "▶ AGENT B.8: plantas stale (sin novedad 21d, cadencia 1d)" | tee -a "$LOG"
+timeout 60 ./node_modules/.bin/tsx lib/agents/plantas-stale-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ plantas-stale falló" | tee -a "$LOG"
+
 # 7. Verificar emails pendientes con Hunter.io (SIEMPRE corre al final)
 echo "" | tee -a "$LOG"
 echo "▶ HUNTER VERIFY: emails pendientes" | tee -a "$LOG"
