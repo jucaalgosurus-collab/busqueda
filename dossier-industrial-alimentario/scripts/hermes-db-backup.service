@@ -1,0 +1,20 @@
+# /etc/systemd/system/hermes-db-backup.service
+# Backup diario de la DB hermes_dossier vía pg_dump.
+# Usa EnvironmentFile (NO password inline) y script externo (ExecStart simple).
+[Unit]
+Description=HERMES Dossier - backup diario DB hermes_dossier
+After=postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/hermes/hermes.env
+ExecStart=/opt/hermes-dossier/scripts/backup-db.sh
+User=root
+Group=root
+StandardOutput=append:/var/log/hermes-scan/backup.log
+StandardError=append:/var/log/hermes-scan/backup.log
+TimeoutStartSec=600
+
+[Install]
+WantedBy=multi-user.target

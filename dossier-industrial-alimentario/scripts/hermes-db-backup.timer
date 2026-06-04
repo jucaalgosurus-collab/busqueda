@@ -1,0 +1,14 @@
+# /etc/systemd/system/hermes-db-backup.timer
+# Dispara el backup diario a las 03:30 UTC (05:30 Madrid).
+# Antes del daily-report (06:00 UTC) para que siempre haya un backup fresco.
+[Unit]
+Description=HERMES Dossier - timer backup diario 03:30 UTC (05:30 Madrid)
+Requires=hermes-db-backup.service
+
+[Timer]
+OnCalendar=*-*-* 03:30:00
+Persistent=true
+Unit=hermes-db-backup.service
+
+[Install]
+WantedBy=timers.target

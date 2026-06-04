@@ -84,7 +84,7 @@ export async function runNewsroomsAgent(opts: { maxPerSource?: number; onlySlugs
     const entry = entries[i];
     let articles: ScrapedArticle[] = [];
     try {
-      articles = await scrapeNewsroom(entry, { maxArticles: maxPer, usePlaywright: true });
+      articles = await scrapeNewsroom(entry, { maxArticles: maxPer, usePlaywright: true, daysBack: 2 });
     } catch (e) {
       errors++;
       console.warn(`[newsrooms] ${entry.slug} scraper threw: ${(e as Error).message}`);
@@ -146,7 +146,7 @@ export async function runSectorialAgent(opts: { maxPerSource?: number; onlySlugs
     const entry = entries[i];
     let articles: ScrapedArticle[] = [];
     try {
-      articles = await _scrapeSectorial(entry, { maxArticles: maxPer, usePlaywright: true });
+      articles = await _scrapeSectorial(entry, { maxArticles: maxPer, usePlaywright: true, daysBack: 2 });
     } catch (e) {
       errors++;
       console.warn(`[sectorial] ${entry.slug} scraper threw: ${(e as Error).message}`);
