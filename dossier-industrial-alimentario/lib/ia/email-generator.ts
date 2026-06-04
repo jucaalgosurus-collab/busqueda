@@ -14,6 +14,7 @@ import {
   extractPainPoints,
   seedForContact,
   seedForChannel,
+  passesToneCheck,
   type PainPoint,
   type PromptVars,
 } from '@/lib/email/personalize';
@@ -64,8 +65,8 @@ function pickTemplateId(input: EmailGeneratorInput): string {
   if (sector === 'Alimentos y Bebidas') return 'QW-5-AB-PLANT-01';
   if (sector === 'Industrial' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-IND-CFO-01';
   if (sector === 'Industrial') return 'QW-5-IND-PLANT-01';
-  if (sector === 'Farmaceutico' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-PHARM-CFO-01';
-  if (sector === 'Farmaceutico') return 'QW-5-PHARM-PLANT-01';
+  if (sector === 'Equipamiento Medico Laboratorio Biotecnologia' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-PHARM-CFO-01';
+  if (sector === 'Equipamiento Medico Laboratorio Biotecnologia') return 'QW-5-PHARM-PLANT-01';
   if (sector === 'Construccion' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-CONST-CFO-01';
   if (sector === 'Construccion') return 'QW-5-CONST-PLANT-01';
   return 'QW-5-AB-PLANT-01'; // fallback A&B planta
@@ -187,7 +188,6 @@ export async function generateEmailDraft(
   }
 
   const wordCount = countWords(body);
-  const { passesToneCheck } = await import('@/lib/email/personalize.js');
   const toneOk = passesToneCheck(`${subject}\n${body}`);
 
   return {

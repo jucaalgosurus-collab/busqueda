@@ -47,10 +47,14 @@ interface DashboardData {
 const SECTOR_COLOR: Record<string, string> = {
   'Alimentos y Bebidas': '#c89b3c',
   Construccion: '#c47b00',
-  Industrial: '#134373',
-  Farmaceutico: '#1d6f42',
-  Energetico: '#b1342b',
-  'Otro industrial': '#7d8597',
+  Vehiculos: '#5a7da3',
+  Maquinaria: '#134373',
+  'Stock industrial': '#0a2540',
+  'Equipamiento Medico Laboratorio Biotecnologia': '#1d6f42',
+  'Propiedad Intelectual Marcas y Patentes': '#6c4ab6',
+  Energia: '#b1342b',
+  Patentes: '#7d8597',
+  'Industria en General': '#5a5f6e',
 };
 
 export default function DashboardPage() {

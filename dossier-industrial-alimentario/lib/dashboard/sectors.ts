@@ -1,4 +1,6 @@
 // lib/dashboard/sectors.ts — QW-6: orden fijo de sectores en dashboard.
+// Sprint E.3: actualizado a 10 sectores. 'Industrial' → 'Industria en General',
+// 'Otro industrial' eliminado, 'Farmaceutico'/'Energetico' renombrados a etiquetas nuevas.
 //
 // Brief 2026-06-03 (Juan Carlos): "DEJAR POR SUPUESTO SIEMPRE ALIMENTACION Y BEBIDAS
 // PRIMERO, LUEGO CONSTRUCCION". Por tanto, el orden de sectores en dashboard
@@ -7,19 +9,27 @@
 export const SECTOR_ORDER: readonly string[] = [
   'Alimentos y Bebidas',
   'Construccion',
-  'Industrial',
-  'Farmaceutico',
-  'Energetico',
-  'Otro industrial',
+  'Vehiculos',
+  'Maquinaria',
+  'Stock industrial',
+  'Equipamiento Medico Laboratorio Biotecnologia',
+  'Propiedad Intelectual Marcas y Patentes',
+  'Energia',
+  'Patentes',
+  'Industria en General',
 ] as const;
 
 export const SECTOR_ACCENT: Record<string, string> = {
   'Alimentos y Bebidas': 'var(--surus-accent)',
   Construccion: 'var(--surus-warning)',
-  Industrial: 'var(--surus-primary-500)',
-  Farmaceutico: 'var(--surus-success)',
-  Energetico: 'var(--surus-danger)',
-  'Otro industrial': 'var(--surus-text-muted)',
+  Vehiculos: 'var(--surus-primary-400)',
+  Maquinaria: 'var(--surus-primary-500)',
+  'Stock industrial': 'var(--surus-primary-700)',
+  'Equipamiento Medico Laboratorio Biotecnologia': 'var(--surus-success)',
+  'Propiedad Intelectual Marcas y Patentes': 'var(--surus-info)',
+  Energia: 'var(--surus-danger)',
+  Patentes: 'var(--surus-text-muted)',
+  'Industria en General': 'var(--surus-text-secondary)',
 };
 
 export interface SectorCount {

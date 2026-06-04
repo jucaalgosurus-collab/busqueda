@@ -53,9 +53,8 @@ function isAbCompany(
     const prefix = cnae.slice(0, 2);
     if (AB_CNAE_PREFIXES.includes(prefix)) return true;
   }
-  if (sector === 'Alimentos y Bebidas' || sector === 'Industrial' || sector === 'Energetico' || sector === 'Farmaceutico') {
-    return true;
-  }
+  // E.3: contactos habilitados SOLO para A&B (regla usuario).
+  if (sector === 'Alimentos y Bebidas') return true;
   return false;
 }
 

@@ -21,7 +21,7 @@ model Company {
   slug          String   @unique
   name          String
   cif           String?  @unique
-  sector        String   // Industria: 'Alimentos y Bebidas' | 'Industrial' | 'Farmaceutico' | 'Construccion' | 'Energetico' | 'Otro industrial' (brief 2026-06-03 — sectores amplios; subsector conserva el detalle técnico)
+  sector        String   // Industria (sprint E.3, 10 sectores del brief 2026-06-04). Ver lib/industria.ts:IndustriaSector. Ejemplos: 'Alimentos y Bebidas' | 'Construccion' | 'Vehiculos' | 'Maquinaria' | 'Stock industrial' | 'Equipamiento Medico Laboratorio Biotecnologia' | 'Propiedad Intelectual Marcas y Patentes' | 'Energia' | 'Patentes' | 'Industria en General'
   subsector     String   // 'Pescado congelado', 'Lácteos', 'Cerveza', 'Azúcar', 'Refino de petróleo', etc.
   cnae          String?  // '10.2', '10.5', '11.0', '21.1', '35.1', etc.
   parentGroup   String?  // 'AB Foods', 'Grupo Damm', 'Nestlé S.A.', etc.
@@ -279,6 +279,10 @@ model Source {
   scrapedAt     DateTime @default(now())
   contentHash   String?
 
+  // E.3: sector transversal (vía outletType) o por CNAE de companyId. Se computa
+  // en E.3b backfill y al ingestar nuevas sources.
+  sector        String?
+
   // Filtro desimplantación
   deimplantationSignal Boolean @default(false)
   outOfScopeReason     String?
@@ -293,6 +297,7 @@ model Source {
   @@index([deimplantationSignal])
   @@index([isStale])
   @@index([publishedAt])
+  @@index([sector])
 }
 
 // ============================================================================

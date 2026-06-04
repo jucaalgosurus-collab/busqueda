@@ -1,86 +1,76 @@
 // lib/industria.ts
 // Taxonomía de sectores industriales cubiertos por HERMES Dossier.
-// Brief 2026-06-03 (Juan Carlos): sectores amplios — 'alimentos y bebidas',
-// 'industrial', 'farmaceutico', 'construccion', 'energetico', etc. El
-// subsector mantiene el detalle técnico (Cárnicas, Lácteos, Refino, etc.).
+// Sprint E.3 — 10 sectores del brief 2026-06-04. La taxonomía anterior (6 sectores)
+// se reemplaza por esta más granular. Backwards compat: 'Otro industrial' → 'Industria en General'.
 //
 // Reglas duras (ver plan /memoria):
 // - Cobertura SOLO España (17 CCAA), sin Latam/UK/DE.
-// - CONTACTOS enriquecidos SOLO para A&B (sector='Alimentos y Bebidas')
-//   por orden del usuario. Resto: detección + ficha, sin contactos.
+// - CONTACTOS enriquecidos SOLO para A&B (sector='Alimentos y Bebidas') por orden del usuario.
+//   Resto: detección + ficha, sin contactos.
 // - NO concursos de acreedores, NO subastas (lo lleva otro dpto. Surus).
+//
+// 3 categorías transversales (sin CNAE):
+//   - 'Stock industrial': tickers bursátiles (CNMV, BME Growth, índices IBEX)
+//   - 'Propiedad Intelectual Marcas y Patentes': OEPM/EUIPO (vía outletType='patent' / 'trademark')
+//   - 'Patentes': alias de PI, queda como tag dentro de PI en queries
 //
 // Fuentes CNAE: https://www.ine.es/daco/daco42/clasificaciones/cnae25/notas.pdf
 
 export type IndustriaSector =
-  | 'Alimentos y Bebidas'   // CNAE 10+11 — alimentación + bebidas (unificado)
-  | 'Industrial'            // CNAE 13-33 — manufacturas, química, plástico, metales, transporte, etc.
-  | 'Farmaceutico'          // CNAE 21 — productos farmacéuticos
-  | 'Construccion'          // CNAE 41-43 — construcción y actividades inmobiliarias industriales
-  | 'Energetico'            // CNAE 05-09, 19, 35 — extractivas, refino, energía eléctrica
-  | 'Otro industrial';      // catch-all
+  | 'Alimentos y Bebidas'                           // 1 — CNAE 10+11
+  | 'Construccion'                                  // 2 — CNAE 41-43
+  | 'Vehiculos'                                     // 3 — CNAE 29-30
+  | 'Maquinaria'                                    // 4 — CNAE 28
+  | 'Stock industrial'                              // 5 — sin CNAE, tickers bursátiles
+  | 'Equipamiento Medico Laboratorio Biotecnologia' // 6 — CNAE 21, 26.6, 32.5, 72.11
+  | 'Propiedad Intelectual Marcas y Patentes'       // 7 — transversal, vía OEPM/EUIPO
+  | 'Energia'                                       // 8 — CNAE 05-09, 19, 35
+  | 'Patentes'                                      // 9 — alias de PI, tag-only
+  | 'Industria en General';                         // 10 — resto CNAE 13-33
 
-// Mapa de subsectores granulares (referencia técnica, sin afectar a la jerarquía superior).
-// Cualquier CNAE industrial mapea primero a sector amplio; el subsector conserva el detalle.
+// Mapa de subsectores granulares por sector amplio. Solo referencia técnica;
+// la jerarquía superior manda en la UI y en Company.sector.
 export const SUBSECTORES_POR_SECTOR: Record<IndustriaSector, string[]> = {
   'Alimentos y Bebidas': [
-    // CNAE 10 — Alimentación
-    'Cárnicas',          // 10.1
-    'Pescado',           // 10.2
-    'Frutas y verduras', // 10.3
-    'Aceites',           // 10.4
-    'Lácteos',           // 10.5
-    'Pan, pastas, galletas', // 10.7
-    'Azúcar, chocolate, confitería', // 10.8
-    'Piensos',           // 10.9
-    'Platos preparados', // 10.85
-    'Otros alimentación',
-    // CNAE 11 — Bebidas
-    'Aguas minerales',  // 11.0
-    'Refrescos',         // 11.0
-    'Cerveza',           // 11.0
-    'Vinos',             // 11.0
-    'Licores y espirituosos', // 11.0
-    'Sidra',             // 11.0
-  ],
-  Industrial: [
-    'Textil',                // 13
-    'Confección',            // 14
-    'Cuero y calzado',       // 15
-    'Madera y corcho',       // 16
-    'Papel',                 // 17
-    'Artes gráficas',        // 18
-    'Química',               // 20
-    'Caucho y plásticos',    // 22
-    'Productos minerales no metálicos', // 23
-    'Metalurgia',            // 24
-    'Productos metálicos',   // 25
-    'Maquinaria y equipo',   // 28
-    'Vehículos de motor',    // 29
-    'Otro material de transporte', // 30
-    'Muebles',               // 31
-    'Otras manufacturas',    // 32-33
-  ],
-  Farmaceutico: [
-    'Principios activos',  // 21.1
-    'Preparados farmacéuticos', // 21.2
-    'Medicamentos veterinarios', // 21.2
+    'Cárnicas', 'Pescado', 'Frutas y verduras', 'Aceites', 'Lácteos',
+    'Pan, pastas, galletas', 'Azúcar, chocolate, confitería', 'Piensos',
+    'Platos preparados', 'Otros alimentación',
+    'Aguas minerales', 'Refrescos', 'Cerveza', 'Vinos',
+    'Licores y espirituosos', 'Sidra',
   ],
   Construccion: [
-    'Construcción de edificios', // 41
-    'Ingeniería civil',         // 42
-    'Actividades de construcción especializadas', // 43
+    'Construcción de edificios', 'Ingeniería civil', 'Actividades de construcción especializadas',
   ],
-  Energetico: [
-    'Extracción de carbón',     // 05
-    'Extracción de crudo/gas',  // 06-09
-    'Refino de petróleo',       // 19
-    'Energía eléctrica',        // 35.1
-    'Gas y vapor',              // 35.2-35.3
-    'Renovables',               // 35.1
+  Vehiculos: [
+    'Vehículos de motor', 'Componentes de vehículos', 'Otro material de transporte',
   ],
-  'Otro industrial': [
-    'No clasificado',
+  Maquinaria: [
+    'Maquinaria industrial', 'Maquinaria agrícola', 'Maquinaria de uso específico',
+  ],
+  'Stock industrial': [
+    'IBEX 35', 'Mercado Continuo', 'BME Growth', 'MAB', 'Tickers BME',
+  ],
+  'Equipamiento Medico Laboratorio Biotecnologia': [
+    'Principios activos', 'Preparados farmacéuticos', 'Medicamentos veterinarios',
+    'Equipos médicos', 'Material quirúrgico', 'Diagnóstico in vitro',
+    'Biotecnología', 'I+D biomédica',
+  ],
+  'Propiedad Intelectual Marcas y Patentes': [
+    'Patentes nacionales (OEPM)', 'Patentes europeas (EPO)', 'Marcas nacionales (OEPM)',
+    'Marcas europeas (EUIPO)', 'Modelos de utilidad', 'Diseños industriales',
+  ],
+  Energia: [
+    'Extracción de carbón', 'Extracción de crudo/gas', 'Refino de petróleo',
+    'Energía eléctrica', 'Gas y vapor', 'Renovables',
+  ],
+  Patentes: [
+    'Tag-only: igual a Propiedad Intelectual',
+  ],
+  'Industria en General': [
+    'Textil', 'Confección', 'Cuero y calzado', 'Madera y corcho', 'Papel',
+    'Artes gráficas', 'Química', 'Caucho y plásticos',
+    'Productos minerales no metálicos', 'Metalurgia', 'Productos metálicos',
+    'Muebles', 'Otras manufacturas',
   ],
 };
 
@@ -90,43 +80,87 @@ export const INDUSTRIAS: Array<{
   cnaePrefix: string[];
   descripcion: string;
   contactosHabilitados: boolean;
+  /** Si true, sector se asigna por outletType/heurística (no por CNAE). */
+  transversal: boolean;
 }> = [
   { sector: 'Alimentos y Bebidas', label: 'Alimentos y Bebidas', cnaePrefix: ['10', '11'],
-    descripcion: 'Industria de la alimentación y fabricación de bebidas (CNAE 10+11). Cárnicas, lácteos, pescado, aceite, pan, azúcar, piensos, aguas, cervezas, vinos, refrescos, licores.',
-    contactosHabilitados: true },
-  { sector: 'Industrial', label: 'Industrial', cnaePrefix: ['13', '14', '15', '16', '17', '18', '20', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33'],
-    descripcion: 'Industria manufacturera diversa: textil, madera, papel, química, plástico, metales, maquinaria, vehículos, material de transporte, muebles, etc.',
-    contactosHabilitados: false },
-  { sector: 'Farmaceutico', label: 'Farmacéutico', cnaePrefix: ['21'],
-    descripcion: 'Fabricación de productos farmacéuticos de base y preparados farmacéuticos.',
-    contactosHabilitados: false },
+    descripcion: 'Industria de la alimentación y bebidas (CNAE 10+11).',
+    contactosHabilitados: true, transversal: false },
   { sector: 'Construccion', label: 'Construcción', cnaePrefix: ['41', '42', '43'],
-    descripcion: 'Construcción de edificios, ingeniería civil y actividades especializadas de construcción.',
-    contactosHabilitados: false },
-  { sector: 'Energetico', label: 'Energético', cnaePrefix: ['05', '06', '07', '08', '09', '19', '35'],
-    descripcion: 'Industrias extractivas, refino de petróleo, energía eléctrica, gas, vapor, aire acondicionado y renovables.',
-    contactosHabilitados: false },
-  { sector: 'Otro industrial', label: 'Otro industrial', cnaePrefix: [],
-    descripcion: 'Cualquier otro CNAE industrial no categorizado',
-    contactosHabilitados: false },
+    descripcion: 'Construcción y actividades especializadas (CNAE 41-43).',
+    contactosHabilitados: false, transversal: false },
+  { sector: 'Vehiculos', label: 'Vehículos', cnaePrefix: ['29', '30'],
+    descripcion: 'Vehículos de motor y otro material de transporte (CNAE 29-30).',
+    contactosHabilitados: false, transversal: false },
+  { sector: 'Maquinaria', label: 'Maquinaria', cnaePrefix: ['28'],
+    descripcion: 'Maquinaria y equipo mecánico (CNAE 28).',
+    contactosHabilitados: false, transversal: false },
+  { sector: 'Stock industrial', label: 'Stock industrial', cnaePrefix: [],
+    descripcion: 'Transversal: cobertura de tickers bursátiles (IBEX, MAB, BME Growth). Sin CNAE.',
+    contactosHabilitados: false, transversal: true },
+  { sector: 'Equipamiento Medico Laboratorio Biotecnologia',
+    label: 'Equipamiento médico, laboratorio y biotecnología',
+    cnaePrefix: ['21', '26.6', '32.5', '72.11'],
+    descripcion: 'Farmacéutico (21), equipos médicos (26.6, 32.5), I+D biotecnológica (72.11).',
+    contactosHabilitados: false, transversal: false },
+  { sector: 'Propiedad Intelectual Marcas y Patentes',
+    label: 'Propiedad Intelectual: marcas y patentes',
+    cnaePrefix: [],
+    descripcion: 'Transversal: outletType=patent|trademark (OEPM, EUIPO). Sin CNAE.',
+    contactosHabilitados: false, transversal: true },
+  { sector: 'Energia', label: 'Energía', cnaePrefix: ['05', '06', '07', '08', '09', '19', '35'],
+    descripcion: 'Extractivas, refino, energía eléctrica, gas, vapor, renovables.',
+    contactosHabilitados: false, transversal: false },
+  { sector: 'Patentes', label: 'Patentes (tag)', cnaePrefix: [],
+    descripcion: 'Alias de Propiedad Intelectual. Queda como tag de query, no sector real.',
+    contactosHabilitados: false, transversal: true },
+  { sector: 'Industria en General', label: 'Industria en general', cnaePrefix: ['13', '14', '15', '16', '17', '18', '20', '22', '23', '24', '25', '27', '31', '32', '33'],
+    descripcion: 'Resto de manufacturas: textil, papel, química, plásticos, metales, muebles, etc.',
+    contactosHabilitados: false, transversal: false },
 ];
 
-// Devuelve el sector industrial a partir de un código CNAE de 2 dígitos
+export const INDUSTRIAS_POR_SECTOR: Record<IndustriaSector, typeof INDUSTRIAS[number]> =
+  INDUSTRIAS.reduce((acc, ind) => {
+    acc[ind.sector] = ind;
+    return acc;
+  }, {} as Record<IndustriaSector, typeof INDUSTRIAS[number]>);
+
 export function sectorFromCnae(cnae: string | null | undefined): IndustriaSector {
-  if (!cnae) return 'Otro industrial';
+  if (!cnae) return 'Industria en General';
+  // Soporta prefijos de 2 dígitos y sub-prefijos (ej. "26.6", "32.5", "72.11")
   const prefix = cnae.split('.')[0].trim();
+  const subPrefix = cnae.trim();
   for (const ind of INDUSTRIAS) {
+    if (ind.transversal) continue;
+    if (ind.cnaePrefix.includes(subPrefix)) return ind.sector;
     if (ind.cnaePrefix.includes(prefix)) return ind.sector;
   }
-  return 'Otro industrial';
+  return 'Industria en General';
 }
 
-// Devuelve las industrias para las que SÍ se extraen contactos (FASE 4+5)
-// Por ahora: solo Alimentación + Bebidas
 export function industriasConContactos(): IndustriaSector[] {
   return INDUSTRIAS.filter((i) => i.contactosHabilitados).map((i) => i.sector);
 }
 
 export function labelDeIndustria(sector: string): string {
   return INDUSTRIAS.find((i) => i.sector === sector)?.label || sector;
+}
+
+/**
+ * Transversal: detecta sector por outletType en vez de CNAE.
+ * Usado cuando un Source llega sin CNAE claro (OEPM, CNMV, etc).
+ */
+export function sectorFromOutlet(outletType: string | null | undefined): IndustriaSector | null {
+  if (!outletType) return null;
+  const lower = outletType.toLowerCase();
+  if (lower === 'patent' || lower === 'trademark') return 'Propiedad Intelectual Marcas y Patentes';
+  if (lower === 'bofficial' || lower === 'cnmv') return 'Stock industrial';
+  if (lower === 'regulatorio_aesan') return 'Alimentos y Bebidas';
+  return null;
+}
+
+/** True si el sector es transversal (no se infiere por CNAE). */
+export function isTransversal(sector: string): boolean {
+  const ind = INDUSTRIAS.find((i) => i.sector === sector);
+  return ind?.transversal ?? false;
 }
