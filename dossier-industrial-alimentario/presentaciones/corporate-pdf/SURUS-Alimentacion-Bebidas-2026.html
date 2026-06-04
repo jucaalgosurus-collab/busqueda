@@ -787,7 +787,7 @@
     color: var(--ink-muted);
   }
 
-  /* === SLIDE 6: METODOLOGÍA TIMELINE (6+4) === */
+  /* === SLIDE 6: METODOLOGÍA TIMELINE (5+4) === */
   .s11-macro-band {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -803,62 +803,146 @@
   @media (max-width: 1000px) { .s11-macro-band { grid-template-columns: repeat(4, 1fr); } }
   @media (max-width: 600px)  { .s11-macro-band { grid-template-columns: repeat(2, 1fr); } }
 
-  .metodo-wrap { margin-top: 32px; }
-  .metodo-title {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--bronze);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
+  /* Timeline visual methodology - matches original Modelo Construcción */
+  .metodo-wrap { margin-top: 20px; }
+
+  /* Continuity row (top) */
+  .metodo-continuity-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+    padding: 0 60px;
   }
-  .metodo-flow {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    border: 1px solid var(--line-fine);
-    box-shadow: var(--card-shadow);
-  }
-  .met-step {
-    padding: 24px 16px;
-    background: var(--bg-elev-2);
-    border-right: 1px solid var(--line-fine);
-    position: relative;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-  .met-step:last-child { border-right: 0; }
-  .met-step:hover { background: var(--bg-elev-1); }
-  .met-n {
-    font-family: var(--display);
-    font-size: 32px;
-    font-weight: 500;
-    color: var(--bronze);
-    font-style: italic;
-    line-height: 1;
-  }
-  .met-t {
+  .metodo-cont-item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 6px;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
     font-family: var(--mono);
     font-size: 9px;
-    color: var(--ink-primary);
-    letter-spacing: 0.15em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-top: 10px;
-    display: block;
+    margin: 0 3px;
+    opacity: 0.95;
   }
-  .met-ico {
-    width: 38px; height: 38px;
-    display: block;
-    margin-bottom: 14px;
-    color: var(--bronze);
-    transition: transform 0.2s var(--ease-out);
-  }
-  .met-step:hover .met-ico { transform: scale(1.1) translateY(-2px); }
+  .metodo-cont-item span { display: block; }
 
-  .metodo-flow.bonus { border-top: 0; }
-  .metodo-flow.bonus .met-step { background: var(--bg-elev-1); }
-  .metodo-flow.bonus .met-step:hover { background: var(--bg-elev-2); }
-  .metodo-flow.bonus .met-n { color: var(--olive); }
-  .metodo-flow.bonus .met-ico { color: var(--olive); }
+  /* Timeline arrow line */
+  .metodo-timeline-wrap {
+    position: relative;
+    height: 28px;
+    margin: 0;
+    padding: 0 40px;
+  }
+  .metodo-timeline-line {
+    position: relative;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #1a1a1a;
+    margin: 0 20px;
+  }
+  html[data-theme='dark'] .metodo-timeline-line { background: #e0d6c2; }
+  .metodo-timeline-line::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1a1a1a;
+  }
+  html[data-theme='dark'] .metodo-timeline-line::before { background: #e0d6c2; }
+  .metodo-timeline-line::after {
+    content: '';
+    position: absolute;
+    right: -14px;
+    top: -8px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 16px solid #1a1a1a;
+  }
+  html[data-theme='dark'] .metodo-timeline-line::after { border-left-color: #e0d6c2; }
+  .metodo-tl-label {
+    position: absolute;
+    left: 50%;
+    top: -32px;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    top: -60px;
+    left: 50%;
+  }
+
+  /* Core phases (bottom bubbles) */
+  .metodo-core-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    align-items: flex-start;
+  }
+  .metodo-phase-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .metodo-bubble {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
+    font-style: italic;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    flex-shrink: 0;
+    transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .metodo-phase-col:hover .metodo-bubble {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+  .metodo-phase-name {
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 9.5px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px 8px 8px;
+    margin-top: 0;
+    line-height: 1.3;
+    width: 100%;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .metodo-phase-desc {
+    font-size: 9.5px;
+    color: var(--ink-muted);
+    text-align: center;
+    line-height: 1.4;
+    padding: 6px 4px 0;
+    font-family: var(--sans);
+  }
 
   /* === SLIDE 7: PORTAL ESCRAPALIA === */
   .escrapalia-grid {
@@ -890,35 +974,49 @@
   }
   .mkt-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.45; }
 
-  /* === SLIDE 8: CERTIFICACIONES === */
+  /* === SLIDE 8: CERTIFICACIONES — WHITE ELEVATED CARDS 3x3 === */
   .s11-cert-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 32px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 24px;
   }
   .s11-cert {
-    padding: 24px 16px;
-    background: var(--bg-elev-2);
-    border: 1px solid var(--line-fine);
+    padding: 24px 16px 18px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     text-align: center;
-    box-shadow: var(--card-shadow);
-    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 6px;
   }
-  .s11-cert:hover { border-color: var(--brand); transform: translateY(-3px); }
+  html[data-theme='dark'] .s11-cert {
+    background: #1a2535;
+    border-color: rgba(255,255,255,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  }
+  .s11-cert:hover {
+    border-color: var(--brand);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 36px rgba(16, 96, 112, 0.16), 0 2px 8px rgba(0,0,0,0.06);
+  }
   .s11-cert-shield {
-    width: 48px; height: 48px;
-    margin: 0 auto 12px;
+    width: 88px; height: 88px;
+    margin: 0 auto 16px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #faf8f2;
-    border-radius: 6px;
-    padding: 3px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
-    transition: transform 0.25s ease;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 6px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
   }
-  .s11-cert-shield.s11-cert-ev { background-color: #faf8f2; }
+  html[data-theme='dark'] .s11-cert-shield { background-color: #f5f2ea; }
+  .s11-cert:hover .s11-cert-shield { transform: scale(1.1); }
   .s11-cert:nth-child(1) .s11-cert-shield { background-image: url('./assets/certs/cert_1.png'); }
   .s11-cert:nth-child(2) .s11-cert-shield { background-image: url('./assets/certs/cert_2.png'); }
   .s11-cert:nth-child(3) .s11-cert-shield { background-image: url('./assets/certs/cert_3.png'); }
@@ -927,9 +1025,26 @@
   .s11-cert:nth-child(6) .s11-cert-shield { background-image: url('./assets/certs/cert_6.png'); }
   .s11-cert:nth-child(7) .s11-cert-shield { background-image: url('./assets/certs/cert_7.png'); }
   .s11-cert:nth-child(8) .s11-cert-shield { background-image: url('./assets/certs/cert_8.png'); }
-  .s11-cert-name { font-family: var(--display); font-size: 16.5px; font-weight: 500; color: var(--ink-primary); margin-bottom: 4px; }
-  .s11-cert-desc { font-size: 11px; color: var(--ink-muted); }
+  /* EcoVadis - no local file, use inline SVG badge --*/
+  .s11-cert:nth-child(9) .s11-cert-shield {
+    background-image: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ecovadis-badge {
+    background: linear-gradient(135deg, #F5A623 0%, #F7C05B 100%);
+    border-radius: 50%;
+    width: 72px; height: 72px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+  }
+  .ecovadis-badge span { font-size: 9px; font-weight: 500; opacity: 0.9; }
+  .s11-cert-name { font-family: var(--display); font-size: 15px; font-weight: 500; color: var(--ink-primary); margin-bottom: 4px; line-height: 1.2; }
+  .s11-cert-desc { font-size: 10.5px; color: var(--ink-muted); line-height: 1.4; }
   @media (max-width: 900px) { .s11-cert-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .s11-cert-grid { grid-template-columns: 1fr; } }
 
   /* === SLIDE 9: DISTRIBUCIÓN DEL IMPACTO === */
   .tr-wrap {
@@ -1397,6 +1512,156 @@
     margin-top: 32px;
   }
 
+  /* === SLIDE 9 ESG FULL === */
+  .esg-full-wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    gap: 28px;
+    margin-top: 24px;
+    align-items: start;
+  }
+  .esg-report-card {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--line-fine);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    border-left: 4px solid var(--brand);
+  }
+  .esg-report-icon { margin-bottom: 12px; }
+  .esg-report-title {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink-primary);
+    margin-bottom: 10px;
+  }
+  .esg-report-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.5; margin-bottom: 14px; }
+  .esg-checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .esg-checklist li { font-size: 12.5px; color: var(--ink-body); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+  .esg-check { color: var(--olive); font-weight: 700; flex-shrink: 0; }
+  
+  .esg-pyramid-title {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--bronze);
+    margin-bottom: 20px;
+  }
+  .esg-pyramid { display: flex; flex-direction: column; gap: 12px; }
+  .esg-pyr-level { display: flex; align-items: center; gap: 10px; }
+  .esg-pyr-label { font-size: 11px; color: var(--ink-muted); width: 130px; flex-shrink: 0; text-align: right; }
+  .esg-pyr-bar {
+    height: 28px;
+    border-radius: 2px;
+    transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0 !important;
+  }
+  .esg-pyr-1 .esg-pyr-bar { background: var(--brand); max-width: 120px; }
+  .esg-pyr-2 .esg-pyr-bar { background: var(--olive); max-width: 70px; }
+  .esg-pyr-3 .esg-pyr-bar { background: var(--bronze); max-width: 35px; }
+  .esg-pyr-val { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink-primary); }
+  .esg-tasa-badge {
+    margin-top: 20px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--brand);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--ink-body);
+    text-align: center;
+  }
+  .esg-tasa-badge strong { color: var(--brand); font-size: 18px; font-family: var(--display); }
+  
+  .esg-impact-title {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--bronze);
+    margin-bottom: 16px;
+  }
+  .esg-impact-metric {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-fine);
+  }
+  .esg-impact-metric:last-child { border-bottom: 0; }
+  .esg-impact-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .esg-impact-num {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink-primary);
+    line-height: 1;
+  }
+  .esg-impact-lbl {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    margin-top: 3px;
+  }
+  @media (max-width: 900px) { .esg-full-wrap { grid-template-columns: 1fr; } }
+
+  /* === SLIDE 12: TIPOLOGÍA ACTIVOS === */
+  .tipologia-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .tipo-card {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--line-fine);
+    padding: 20px 18px;
+    border-radius: 4px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s var(--ease-out);
+    color: var(--brand);
+  }
+  .tipo-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--brand);
+    box-shadow: 0 8px 24px rgba(16, 96, 112, 0.12);
+  }
+  .tipo-card.tipo-primary {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-lo) 100%);
+    border-color: var(--brand);
+    color: #FFFFFF;
+  }
+  .tipo-card.tipo-primary .tipo-name { color: #FFFFFF; }
+  .tipo-card.tipo-primary .tipo-desc { color: rgba(255,255,255,0.8); }
+  .tipo-card.tipo-accent {
+    background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-lo) 100%);
+    border-color: var(--bronze);
+    color: #FFFFFF;
+  }
+  .tipo-card.tipo-accent .tipo-name { color: #FFFFFF; }
+  .tipo-card.tipo-accent .tipo-desc { color: rgba(255,255,255,0.8); }
+  .tipo-icon { margin-bottom: 12px; }
+  .tipo-name {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-primary);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .tipo-desc {
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    line-height: 1.45;
+  }
+  @media (max-width: 900px) { .tipologia-grid { grid-template-columns: repeat(2, 1fr); } }
+
   /* === RESPONSIVE LAYOUT FIXES === */
   @media (max-width: 900px) {
     .portada-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -1435,7 +1700,7 @@
   </div>
   <div class="right-controls">
     <div class="counter">
-      <b id="ct">01</b> <span>/ 13</span>
+      <b id="ct">01</b> <span>/ 14</span>
     </div>
     <button class="theme-toggle-btn" id="themeToggle" aria-label="Cambiar tema">
       <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -1768,12 +2033,12 @@
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 06 · MÉTODO CIRCULAR (6+4)-->
+<!-- SLIDE 06 · MÉTODO CIRCULAR (5+4)-->
 <!-- ============================== -->
 <section class="slide" data-slide="6">
   <div class="slide-inner">
     <div class="kicker reveal">El Ciclo Integral</div>
-    <h2 class="display reveal" data-delay="1">Seis fases de <em>ejecución core</em><br>y cuatro de <em>continuidad</em>.</h2>
+    <h2 class="display reveal" data-delay="1">Cinco fases de <em>ejecución core</em><br>y cuatro de <em>continuidad circular</em>.</h2>
     
     <!-- Macro band validated by test: exactly 8 s11-macro elements -->
     <div class="s11-macro-band reveal" data-delay="2">
@@ -1783,36 +2048,27 @@
       <div class="s11-macro"><b>+50</b><span>países destino</span></div>
       <div class="s11-macro"><b>+15</b><span>IBEX 35</span></div>
       <div class="s11-macro"><b>+1.000</b><span>clientes AAPP</span></div>
-      <div class="s11-macro"><b>18.000 T</b><span>acero reciclado</span></div>
-      <div class="s11-macro"><b>78/100</b><span>EcoVadis Silver</span></div>
     </div>
     
     <div class="metodo-wrap reveal" data-delay="3">
       <div class="metodo-title">Fases de Ejecución Core</div>
       <div class="metodo-flow">
-        <!-- 10 icons total, exactly 38x38 with linearGradient and filters shadow -->
+        <!-- 5 core phases matching original source document -->
         <div class="met-step" data-step="1">
           <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
             <defs>
               <linearGradient id="s11-grad-ico-01" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#106070"/><stop offset="1" stop-color="#B08A52"/>
               </linearGradient>
-              <filter id="s11-shadow-01" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
-                <feOffset dx="0" dy="0.5"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
             </defs>
-            <g filter="url(#s11-shadow-01)">
-              <rect x="29" y="10" width="6" height="44" rx="1" fill="url(#s11-grad-ico-01)"/>
-              <rect x="22" y="50" width="20" height="6" rx="1" fill="url(#s11-grad-ico-01)"/>
-              <circle cx="14" cy="22" r="8" fill="url(#s11-grad-ico-01)"/>
-              <circle cx="50" cy="26" r="6" fill="url(#s11-grad-ico-01)"/>
-              <line x1="14" y1="22" x2="50" y2="26" stroke="#0A4048" stroke-width="0.5"/>
+            <!-- Eye/Vision icon - Visualización Proyecto -->
+            <g>
+              <path d="M8 32 C16 16 48 16 56 32 C48 48 16 48 8 32Z" fill="url(#s11-grad-ico-01)" opacity="0.9"/>
+              <circle cx="32" cy="32" r="8" fill="#FAF8F2"/>
+              <circle cx="32" cy="32" r="5" fill="url(#s11-grad-ico-01)"/>
             </g>
           </svg>
-          <span class="met-n">00</span><span class="met-t">Preliminar</span>
+          <span class="met-n">01</span><span class="met-t">Visualización del Proyecto</span><span class="met-sub">Definición escenarios y alcance</span>
         </div>
         
         <div class="met-step" data-step="2">
@@ -1821,20 +2077,17 @@
               <linearGradient id="s11-grad-ico-02" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#106070"/><stop offset="1" stop-color="#B08A52"/>
               </linearGradient>
-              <filter id="s11-shadow-02" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
-                <feOffset dx="0" dy="0.5"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
             </defs>
-            <g filter="url(#s11-shadow-02)">
-              <path d="M14 44 L32 38 L50 44 L50 52 L32 58 L14 52 Z" fill="url(#s11-grad-ico-02)"/>
-              <path d="M14 30 L32 24 L50 30 L32 36 Z" fill="url(#s11-grad-ico-02)" opacity="0.85"/>
-              <path d="M14 16 L32 10 L50 16 L32 22 Z" fill="url(#s11-grad-ico-02)" opacity="0.7"/>
+            <!-- Document/Concept icon -->
+            <g>
+              <path d="M14 8 L42 8 L50 16 L50 56 L14 56 Z" fill="url(#s11-grad-ico-02)"/>
+              <path d="M42 8 L42 16 L50 16" fill="none" stroke="#FAF8F2" stroke-width="1"/>
+              <line x1="22" y1="26" x2="42" y2="26" stroke="#FAF8F2" stroke-width="2"/>
+              <line x1="22" y1="34" x2="42" y2="34" stroke="#FAF8F2" stroke-width="2"/>
+              <line x1="22" y1="42" x2="34" y2="42" stroke="#FAF8F2" stroke-width="2"/>
             </g>
           </svg>
-          <span class="met-n">01</span><span class="met-t">Visualización</span>
+          <span class="met-n">02</span><span class="met-t">Proyecto Conceptual</span><span class="met-sub">Documentación y contratación</span>
         </div>
         
         <div class="met-step" data-step="3">
@@ -1843,20 +2096,15 @@
               <linearGradient id="s11-grad-ico-03" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#106070"/><stop offset="1" stop-color="#B08A52"/>
               </linearGradient>
-              <filter id="s11-shadow-03" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
-                <feOffset dx="0" dy="0.5"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
             </defs>
-            <g filter="url(#s11-shadow-03)">
-              <circle cx="28" cy="32" r="22" fill="url(#s11-grad-ico-03)"/>
-              <circle cx="28" cy="32" r="12" fill="#FAF8F2" opacity="0.9"/>
-              <line x1="28" y1="32" x2="56" y2="10" stroke="#0A4048" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Gear/Execution icon -->
+            <g>
+              <path d="M32 8 L36 14 L43 12 L44 19 L51 22 L48 29 L52 35 L46 38 L46 46 L38 46 L36 53 L28 51 L23 56 L18 51 L11 54 L10 46 L4 42 L8 36 L5 29 L12 27 L13 20 L20 19 L22 12 Z" fill="url(#s11-grad-ico-03)" opacity="0.9"/>
+              <circle cx="32" cy="33" r="9" fill="#FAF8F2"/>
+              <circle cx="32" cy="33" r="5" fill="url(#s11-grad-ico-03)"/>
             </g>
           </svg>
-          <span class="met-n">02</span><span class="met-t">Conceptual</span>
+          <span class="met-n">03</span><span class="met-t">Ejecución del Proyecto</span><span class="met-sub">Desimplantación circular</span>
         </div>
         
         <div class="met-step" data-step="4">
@@ -1865,19 +2113,19 @@
               <linearGradient id="s11-grad-ico-04" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#106070"/><stop offset="1" stop-color="#B08A52"/>
               </linearGradient>
-              <filter id="s11-shadow-04" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
-                <feOffset dx="0" dy="0.5"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
             </defs>
-            <g filter="url(#s11-shadow-04)">
-              <rect x="18" y="12" width="28" height="10" rx="1.5" fill="url(#s11-grad-ico-04)" transform="rotate(-15 32 17)"/>
-              <rect x="28" y="20" width="8" height="34" rx="1" fill="url(#s11-grad-ico-04)" transform="rotate(-15 32 37)"/>
+            <!-- Building/Real Estate icon -->
+            <g>
+              <rect x="10" y="28" width="24" height="28" rx="1" fill="url(#s11-grad-ico-04)"/>
+              <rect x="36" y="18" width="16" height="38" rx="1" fill="url(#s11-grad-ico-04)" opacity="0.85"/>
+              <rect x="14" y="38" width="6" height="8" fill="#FAF8F2"/>
+              <rect x="24" y="38" width="6" height="8" fill="#FAF8F2"/>
+              <rect x="40" y="26" width="8" height="8" fill="#FAF8F2"/>
+              <rect x="40" y="38" width="8" height="8" fill="#FAF8F2"/>
+              <path d="M8 28 L22 14 L34 28" fill="url(#s11-grad-ico-04)"/>
             </g>
           </svg>
-          <span class="met-n">03</span><span class="met-t">Ejecución</span>
+          <span class="met-n">04</span><span class="met-t">Gestión de Bienes Raíces</span><span class="met-sub">Eliminación pasivo ambiental</span>
         </div>
         
         <div class="met-step" data-step="5">
@@ -1886,42 +2134,14 @@
               <linearGradient id="s11-grad-ico-05" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#106070"/><stop offset="1" stop-color="#B08A52"/>
               </linearGradient>
-              <filter id="s11-shadow-05" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
-                <feOffset dx="0" dy="0.5"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
             </defs>
-            <g filter="url(#s11-shadow-05)">
+            <!-- Check/Certificate icon - Cierre -->
+            <g>
               <path d="M14 8 L42 8 L52 18 L52 56 L14 56 Z" fill="url(#s11-grad-ico-05)"/>
-              <polyline points="35,44 39,48 46,40" stroke="#FAF8F2" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <polyline points="24,36 30,42 42,28" stroke="#FAF8F2" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
           </svg>
-          <span class="met-n">04</span><span class="met-t">Pasivo Ambiental</span>
-        </div>
-        
-        <div class="met-step" data-step="6">
-          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="s11-grad-ico-06" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#106070"/><stop offset="1" stop-color="#B08A52"/>
-              </linearGradient>
-              <filter id="s11-shadow-06" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
-                <feOffset dx="0" dy="0.5"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <g filter="url(#s11-shadow-06)">
-              <rect x="8" y="22" width="32" height="20" rx="1" fill="url(#s11-grad-ico-06)"/>
-              <path d="M40 28 L48 28 L54 36 L54 42 L40 42 Z" fill="url(#s11-grad-ico-06)"/>
-              <circle cx="18" cy="48" r="5" fill="url(#s11-grad-ico-06)"/>
-              <circle cx="46" cy="48" r="5" fill="url(#s11-grad-ico-06)"/>
-            </g>
-          </svg>
-          <span class="met-n">05</span><span class="met-t">Cierre</span>
+          <span class="met-n">05</span><span class="met-t">Cierre del Proyecto</span><span class="met-sub">Informe de sostenibilidad</span>
         </div>
       </div>
       
@@ -1931,21 +2151,21 @@
           <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
             <defs>
               <linearGradient id="s11-grad-ico-07" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#106070"/><stop offset="1" stop-color="#B08A52"/>
+                <stop offset="0" stop-color="#6B8E5A"/><stop offset="1" stop-color="#8EBF7C"/>
               </linearGradient>
-              <filter id="s11-shadow-07" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
-                <feOffset dx="0" dy="0.5"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
             </defs>
-            <g filter="url(#s11-shadow-07)">
-              <path d="M32 8 C45 8 56 19 56 32 C56 45 45 56 32 56 C19 56 8 45 8 32 C8 24 12 17 18 13 L22 17 C17 21 14 26 14 32 C14 42 22 50 32 50 C42 50 50 42 50 32 C50 22 42 14 32 14 C29 14 27 15 25 16 L29 20 L16 22 L18 9 L22 13 C25 10 28 8 32 8 Z" fill="url(#s11-grad-ico-07)"/>
-              <path d="M32 22 C37 22 42 27 42 32 C42 37 37 42 32 42 C27 42 22 37 22 32 C22 27 27 22 32 22 Z" fill="url(#s11-grad-ico-07)" opacity="0.8"/>
+            <!-- Factory/Activity icon -->
+            <g>
+              <rect x="8" y="32" width="48" height="24" rx="1" fill="url(#s11-grad-ico-07)"/>
+              <rect x="14" y="20" width="12" height="12" rx="0.5" fill="url(#s11-grad-ico-07)"/>
+              <rect x="32" y="16" width="12" height="16" rx="0.5" fill="url(#s11-grad-ico-07)"/>
+              <rect x="10" y="10" width="4" height="22" rx="2" fill="url(#s11-grad-ico-07)" opacity="0.7"/>
+              <rect x="28" y="6" width="4" height="22" rx="2" fill="url(#s11-grad-ico-07)" opacity="0.7"/>
+              <path d="M12 10 Q14 4 16 10" fill="none" stroke="url(#s11-grad-ico-07)" stroke-width="1.5"/>
+              <path d="M30 6 Q32 0 34 6" fill="none" stroke="url(#s11-grad-ico-07)" stroke-width="1.5"/>
             </g>
           </svg>
-          <span class="met-n">+1</span><span class="met-t">Fuera de Uso</span>
+          <span class="met-n">+1</span><span class="met-t">Actividad</span><span class="met-sub">Planta en funcionamiento</span>
         </div>
         
         <div class="met-step" data-step="8">
@@ -2075,17 +2295,12 @@
     <h2 class="display reveal" data-delay="1">Operamos bajo los más altos <em>estándares</em><br>de calidad, seguridad y compliance.</h2>
     <p class="lede reveal" data-delay="2">La confianza de administradores concursales, corporaciones y organismos públicos se basa en certificaciones oficiales auditadas anualmente.</p>
     
-    <!-- Exactly 8 s11-cert elements validated by tests -->
+    <!-- 9 official certifications matching source document -->
     <div class="s11-cert-grid reveal" data-delay="3">
       <div class="s11-cert">
         <div class="s11-cert-shield"></div>
-        <div class="s11-cert-name">ISO 14001</div>
-        <div class="s11-cert-desc">Gestión Ambiental Acreditada</div>
-      </div>
-      <div class="s11-cert">
-        <div class="s11-cert-shield"></div>
-        <div class="s11-cert-name">ISO 9001</div>
-        <div class="s11-cert-desc">Gestión de la Calidad</div>
+        <div class="s11-cert-name">ENS Media</div>
+        <div class="s11-cert-desc">Esquema Nacional de Seguridad · Categoría MEDIA</div>
       </div>
       <div class="s11-cert">
         <div class="s11-cert-shield"></div>
@@ -2094,13 +2309,23 @@
       </div>
       <div class="s11-cert">
         <div class="s11-cert-shield"></div>
-        <div class="s11-cert-name">ISO 19601</div>
-        <div class="s11-cert-desc">Compliance Penal Corporativo</div>
+        <div class="s11-cert-name">Cyber Essentials</div>
+        <div class="s11-cert-desc">Certificación de Ciberseguridad</div>
       </div>
       <div class="s11-cert">
         <div class="s11-cert-shield"></div>
-        <div class="s11-cert-name">ISO 37001</div>
-        <div class="s11-cert-desc">Sistemas de Gestión Antisoborno</div>
+        <div class="s11-cert-name">Blockchain Certified</div>
+        <div class="s11-cert-desc">Material Digital Certificado</div>
+      </div>
+      <div class="s11-cert">
+        <div class="s11-cert-shield"></div>
+        <div class="s11-cert-name">ISO 9001</div>
+        <div class="s11-cert-desc">Gestión de la Calidad</div>
+      </div>
+      <div class="s11-cert">
+        <div class="s11-cert-shield"></div>
+        <div class="s11-cert-name">ISO 14001</div>
+        <div class="s11-cert-desc">Gestión Ambiental Acreditada</div>
       </div>
       <div class="s11-cert">
         <div class="s11-cert-shield"></div>
@@ -2109,115 +2334,113 @@
       </div>
       <div class="s11-cert">
         <div class="s11-cert-shield"></div>
-        <div class="s11-cert-name">ENS Media</div>
-        <div class="s11-cert-desc">Esquema Nacional de Seguridad</div>
+        <div class="s11-cert-name">ISO 37001 / UNE 19601</div>
+        <div class="s11-cert-desc">Antisoborno · Compliance Penal</div>
       </div>
       <div class="s11-cert">
-        <div class="s11-cert-shield s11-cert-ev"></div>
+        <div class="s11-cert-shield">
+          <div class="ecovadis-badge">78/100<span>SILVER</span></div>
+        </div>
         <div class="s11-cert-name">EcoVadis Silver</div>
-        <div class="s11-cert-desc">Score 78/100 · Top 15% mundial</div>
+        <div class="s11-cert-desc">Sostenibilidad corporativa · Top 15% mundial</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 09 · GRÁFICOS IMPACTO    -->
+<!-- SLIDE 09 · ESG & IMPACTO      -->
 <!-- ============================== -->
 <section class="slide" data-slide="9">
   <div class="slide-inner">
-    <div class="kicker reveal">Métricas Sectoriales</div>
-    <h2 class="display reveal" data-delay="1">Distribución del <em>impacto</em> en<br>el sector de Alimentación y Bebidas.</h2>
+    <div class="kicker reveal">Compromiso ESG Verificado</div>
+    <h2 class="display reveal" data-delay="1">Impacto ambiental <em>certificado</em>:<br>cada proyecto, un informe.</h2>
     
-    <div class="tr-wrap">
-      <div class="tr-charts reveal" data-delay="2">
-        <div>
-          <div class="bars-title">Distribución de Casos por Subsector (17 Casos Totales)</div>
-          <div class="donut-wrap">
-            <svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
-              <circle cx="80" cy="80" r="62" fill="none" stroke="var(--line-fine)" stroke-width="20"/>
-              <g id="donut-segments" transform="rotate(-90 80 80)"></g>
-              <text x="80" y="78" text-anchor="middle" font-family="Fraunces" font-size="24" font-style="italic" fill="var(--bronze)" id="donutCenterText">16</text>
-              <text x="80" y="96" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="var(--ink-faint)" letter-spacing="1">CASOS</text>
+    <div class="esg-full-wrap reveal" data-delay="2">
+      <!-- Left: Informe de Compromiso -->
+      <div class="esg-left-col">
+        <div class="esg-report-card">
+          <div class="esg-report-icon">
+            <svg viewBox="0 0 48 48" width="40" height="40" fill="none">
+              <path d="M10 6 L30 6 L40 16 L40 42 L10 42 Z" fill="#106070" opacity="0.15" stroke="#106070" stroke-width="1.5"/>
+              <path d="M30 6 L30 16 L40 16" fill="none" stroke="#106070" stroke-width="1.5"/>
+              <line x1="16" y1="24" x2="34" y2="24" stroke="#106070" stroke-width="1.5"/>
+              <line x1="16" y1="30" x2="34" y2="30" stroke="#106070" stroke-width="1.5"/>
+              <polyline points="16,20 20,24 28,16" stroke="#6B8E5A" stroke-width="2" fill="none" stroke-linecap="round"/>
             </svg>
-            <div class="donut-legend" id="donutLegend"></div>
           </div>
+          <div class="esg-report-title">Informe de Compromiso ESG</div>
+          <p class="esg-report-desc">Al finalizar cada proyecto entregamos un Informe completo, auditable y trazable:</p>
+          <ul class="esg-checklist">
+            <li><span class="esg-check">✓</span> Resumen ejecutivo del proyecto</li>
+            <li><span class="esg-check">✓</span> Cálculo de huella de carbono evitada</li>
+            <li><span class="esg-check">✓</span> Trazabilidad 100% de cada activo</li>
+            <li><span class="esg-check">✓</span> Métricas de agua y energía ahorradas</li>
+            <li><span class="esg-check">✓</span> Recomendaciones de mejora circular</li>
+          </ul>
         </div>
       </div>
       
-      <div class="tr-charts reveal" data-delay="3">
-        <div class="slide9-toggle-container">
-          <div class="slide9-toggle-header">
-            <div class="bars-title" id="slide9ToggleTitle">Tipologías de Activos</div>
-            <div class="slide9-toggle-btns">
-              <button class="slide9-btn active" id="btnSlide9Tipos" data-s9tab="tipos">Tipologías</button>
-              <button class="slide9-btn" id="btnSlide9Esg" data-s9tab="esg">Informe ESG &amp; Impacto</button>
-            </div>
+      <!-- Center: Pirámide de impacto -->
+      <div class="esg-center-col">
+        <div class="esg-pyramid-title">Modelo de Valorización Circular</div>
+        <div class="esg-pyramid">
+          <div class="esg-pyr-level esg-pyr-1">
+            <div class="esg-pyr-label">Lotes a Reempleo</div>
+            <div class="esg-pyr-bar" style="width:85%"></div>
+            <div class="esg-pyr-val" id="pyrVal1">0%</div>
           </div>
-          
-          <!-- Panel A: Tipologías de Activos (Original progress bars) -->
-          <div class="slide9-panel active" id="panelSlide9Tipos">
-            <div class="tr-bar">
-              <div class="tr-bar-l">Mataderos</div>
-              <div class="tr-bar-bg"><div class="tr-bar-fg" data-w="35"></div></div>
-              <div class="tr-bar-v">35%</div>
-            </div>
-            <div class="tr-bar">
-              <div class="tr-bar-l">Avícola</div>
-              <div class="tr-bar-bg"><div class="tr-bar-fg" data-w="29"></div></div>
-              <div class="tr-bar-v">29%</div>
-            </div>
-            <div class="tr-bar">
-              <div class="tr-bar-l">Bodega</div>
-              <div class="tr-bar-bg"><div class="tr-bar-fg" data-w="18"></div></div>
-              <div class="tr-bar-v">18%</div>
-            </div>
-            <div class="tr-bar">
-              <div class="tr-bar-l">Panadería</div>
-              <div class="tr-bar-bg"><div class="tr-bar-fg" data-w="12"></div></div>
-              <div class="tr-bar-v">12%</div>
-            </div>
-            <div class="tr-bar">
-              <div class="tr-bar-l">Bebidas</div>
-              <div class="tr-bar-bg"><div class="tr-bar-fg" data-w="6"></div></div>
-              <div class="tr-bar-v">6%</div>
-            </div>
+          <div class="esg-pyr-level esg-pyr-2">
+            <div class="esg-pyr-label">Lotes a Reutilización</div>
+            <div class="esg-pyr-bar" style="width:55%"></div>
+            <div class="esg-pyr-val" id="pyrVal2">0%</div>
           </div>
-          
-          <!-- Panel B: Informe ESG & Impacto Certificado (New PPTX corporate details) -->
-          <div class="slide9-panel" id="panelSlide9Esg">
-            <div class="esg-metrics-grid">
-              <div class="esg-metric-card">
-                <div class="esg-m-title">Garantía ESG</div>
-                <div class="esg-m-val">Informe de Compromiso</div>
-                <p class="esg-m-text">A la finalización de cada proyecto entregamos un informe auditable que detalla el balance de sostenibilidad:</p>
-                <ul class="esg-m-list">
-                  <li>Resumen ejecutivo y alcance en campo.</li>
-                  <li>Cálculo de huella de carbono evitada.</li>
-                  <li>Trazabilidad completa de cada componente.</li>
-                  <li>Recomendaciones de mejora de circularidad.</li>
-                </ul>
-              </div>
-              <div class="esg-metric-card">
-                <div class="esg-m-title">Impacto Certificado</div>
-                <div class="esg-m-val">Impacto Evitado</div>
-                <p class="esg-m-text">Certificamos las métricas medioambientales clave frente a la fabricación de activos nuevos:</p>
-                <div class="esg-stats">
-                  <div class="esg-stat-item">
-                    <span class="esg-stat-num">CO₂</span>
-                    <span class="esg-stat-desc">Cálculo en kg de CO₂ no emitidos (metodología auditada).</span>
-                  </div>
-                  <div class="esg-stat-item">
-                    <span class="esg-stat-num">Agua</span>
-                    <span class="esg-stat-desc">Ahorro en litros de agua no contaminada o consumida.</span>
-                  </div>
-                  <div class="esg-stat-item">
-                    <span class="esg-stat-num">Energía</span>
-                    <span class="esg-stat-desc">Ahorro energético medido en megajulios (MJ).</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="esg-pyr-level esg-pyr-3">
+            <div class="esg-pyr-label">Lotes Valorizables</div>
+            <div class="esg-pyr-bar" style="width:25%"></div>
+            <div class="esg-pyr-val" id="pyrVal3">0%</div>
+          </div>
+        </div>
+        <div class="esg-tasa-badge">Tasa de reempleo media: <strong>98%</strong></div>
+      </div>
+      
+      <!-- Right: Métricas impacto evitado -->
+      <div class="esg-right-col">
+        <div class="esg-impact-title">Impacto Ambiental Evitado</div>
+        <div class="esg-impact-metric">
+          <div class="esg-impact-icon" style="background:#E8F5E9">
+            <svg viewBox="0 0 32 32" width="28" height="28"><path d="M16 4 C10 4 6 10 8 16 C10 22 16 28 16 28 C16 28 22 22 24 16 C26 10 22 4 16 4Z" fill="#6B8E5A"/><circle cx="16" cy="16" r="4" fill="#FAF8F2"/></svg>
+          </div>
+          <div>
+            <div class="esg-impact-num">30,7 M kg</div>
+            <div class="esg-impact-lbl">CO₂ no emitido</div>
+          </div>
+        </div>
+        <div class="esg-impact-metric">
+          <div class="esg-impact-icon" style="background:#E3F2FD">
+            <svg viewBox="0 0 32 32" width="28" height="28"><path d="M16 6 C16 6 8 14 8 20 C8 25 12 28 16 28 C20 28 24 25 24 20 C24 14 16 6 16 6Z" fill="#106070"/></svg>
+          </div>
+          <div>
+            <div class="esg-impact-num">543 Mm³</div>
+            <div class="esg-impact-lbl">Agua no consumida</div>
+          </div>
+        </div>
+        <div class="esg-impact-metric">
+          <div class="esg-impact-icon" style="background:#FFF8E1">
+            <svg viewBox="0 0 32 32" width="28" height="28"><circle cx="16" cy="16" r="10" fill="#B08A52" opacity="0.8"/><path d="M16 6 L16 26 M6 16 L26 16" stroke="#FAF8F2" stroke-width="2"/></svg>
+          </div>
+          <div>
+            <div class="esg-impact-num">409 M MJ</div>
+            <div class="esg-impact-lbl">Energía ahorrada</div>
+          </div>
+        </div>
+        <div class="esg-impact-metric">
+          <div class="esg-impact-icon" style="background:#FCE4EC">
+            <svg viewBox="0 0 32 32" width="28" height="28"><path d="M6 26 L16 6 L26 26 Z" fill="#B85A1F" opacity="0.8"/><line x1="16" y1="14" x2="16" y2="20" stroke="#FAF8F2" stroke-width="2"/><circle cx="16" cy="23" r="1.5" fill="#FAF8F2"/></svg>
+          </div>
+          <div>
+            <div class="esg-impact-num">2.111 T</div>
+            <div class="esg-impact-lbl">Residuos no generados</div>
           </div>
         </div>
       </div>
@@ -2235,7 +2458,62 @@
     
     <div class="mapa-wrap">
       <div class="reveal" data-delay="2">
-        <svg class="mapa-svg" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
+        <svg class="mapa-svg" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- Simplified Spain outline - clean and recognizable -->
+          <g class="mapa-region">
+            <!-- Main Iberian Peninsula body -->
+            <path d="M 90,80 L 110,60 L 140,55 L 180,50 L 220,48 L 260,52 L 300,50 L 340,55 L 380,58 L 420,62 L 460,70 L 490,85 L 510,100 L 520,120 L 525,145 L 520,170 L 510,195 L 505,220 L 510,245 L 515,270 L 510,295 L 500,315 L 485,330 L 465,340 L 440,348 L 415,352 L 390,355 L 365,358 L 340,360 L 315,362 L 290,360 L 265,355 L 240,348 L 215,338 L 190,325 L 165,310 L 145,295 L 128,278 L 112,260 L 100,240 L 90,218 L 84,195 L 80,170 L 78,145 L 80,120 L 85,100 Z" fill="var(--bg-elev-1)" stroke="var(--line-strong)" stroke-width="1.5"/>
+            <!-- Portugal (left edge) -->
+            <path d="M 90,80 L 80,100 L 78,130 L 76,160 L 78,190 L 82,215 L 88,235 L 96,252 L 108,268 L 118,278 L 128,278 L 112,260 L 100,240 L 90,218 L 84,195 L 80,170 L 78,145 L 80,120 L 85,100 Z" fill="var(--bg-elev-2)" stroke="var(--line-strong)" stroke-width="1" opacity="0.5"/>
+            <!-- Pyrenees border hint -->
+            <path d="M 110,60 L 140,55 L 180,50 L 220,48 L 260,52 L 300,50 L 340,55 L 380,58 L 420,62" fill="none" stroke="var(--line-strong)" stroke-width="0.5" opacity="0.3"/>
+            <!-- Canary Islands (inset) -->
+            <ellipse cx="120" cy="430" rx="15" ry="8" fill="var(--bg-elev-1)" stroke="var(--line-strong)" stroke-width="1"/>
+            <ellipse cx="145" cy="440" rx="12" ry="6" fill="var(--bg-elev-1)" stroke="var(--line-strong)" stroke-width="1"/>
+            <ellipse cx="165" cy="435" rx="10" ry="5" fill="var(--bg-elev-1)" stroke="var(--line-strong)" stroke-width="1"/>
+            <text x="140" y="460" font-size="8" fill="var(--ink-faint)" font-family="sans-serif" text-anchor="middle">Canarias</text>
+            <!-- Label -->
+            <text x="300" y="200" font-size="11" fill="var(--ink-faint)" font-family="sans-serif" text-anchor="middle" opacity="0.4">ESPAÑA</text>
+          </g>
+          
+          <!-- Province highlight regions for active provinces -->
+          <!-- A Coruña - NW -->
+          <circle class="mapa-pin" cx="108" cy="82" r="7" data-prov="acoruna"/>
+          <!-- Valladolid - N-center -->
+          <circle class="mapa-pin" cx="195" cy="148" r="7" data-prov="valladolid"/>
+          <!-- Araba/Vitoria - Basque Country NE -->
+          <circle class="mapa-pin" cx="320" cy="88" r="7" data-prov="araba"/>
+          <!-- Logroño - La Rioja -->
+          <circle class="mapa-pin" cx="345" cy="108" r="7" data-prov="logrono"/>
+          <!-- Barcelona - NE coast -->
+          <circle class="mapa-pin" cx="460" cy="128" r="7" data-prov="barcelona"/>
+          <!-- Salamanca - W-center -->
+          <circle class="mapa-pin" cx="168" cy="178" r="7" data-prov="salamanca"/>
+          <!-- Madrid - Center -->
+          <circle class="mapa-pin" cx="268" cy="198" r="7" data-prov="madrid"/>
+          <!-- Guadalajara - E-center -->
+          <circle class="mapa-pin" cx="308" cy="188" r="7" data-prov="guadalajara"/>
+          <!-- Valencia - E coast -->
+          <circle class="mapa-pin" cx="392" cy="248" r="7" data-prov="valencia"/>
+          <!-- Ciudad Real - S-center -->
+          <circle class="mapa-pin" cx="265" cy="272" r="7" data-prov="ciudadreal"/>
+          <!-- Sevilla - SW -->
+          <circle class="mapa-pin" cx="175" cy="330" r="7" data-prov="sevilla"/>
+          <!-- Málaga - S coast -->
+          <circle class="mapa-pin" cx="248" cy="358" r="7" data-prov="malaga"/>
+          
+          <!-- Province labels on hover -->
+          <g id="mapLabels"></g>
+        </svg>
+      </div>
+      
+      <div class="mapa-side reveal" data-delay="3">
+        <h3>12 Provincias Operativas</h3>
+        <div class="mapa-list" id="mapaList">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
           <g class="mapa-region" transform="translate(89.08, 25.22) scale(0.3309)">
             <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" stroke="var(--line-strong)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
               <path d="M1157 8887 c-10 -23 -25 -38 -46 -45 -33 -12 -38 -8 -50 33 l-6 24
@@ -2438,9 +2716,127 @@ c-14 18 -25 41 -25 51 0 10 -6 18 -14 18 -8 0 -21 3 -30 6 -10 4 -19 -5 -29
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 12 · TESTIMONIALS         -->
+<!-- SLIDE 12 · TIPOLOGÍA ACTIVOS  -->
 <!-- ============================== -->
-<section class="slide" data-slide="12">
+<section class="slide" data-slide="12" id="slide-tipologia">
+  <div class="slide-inner">
+    <div class="kicker reveal">Alcance de Valorización</div>
+    <h2 class="display reveal" data-delay="1">Tipología de <em>activos</em><br>que gestionamos en A&amp;B.</h2>
+    
+    <div class="tipologia-grid reveal" data-delay="2">
+      <div class="tipo-card tipo-primary">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <rect x="4" y="24" width="40" height="18" rx="1" fill="currentColor" opacity="0.9"/>
+            <rect x="10" y="14" width="10" height="10" rx="0.5" fill="currentColor"/>
+            <rect x="26" y="10" width="10" height="14" rx="0.5" fill="currentColor"/>
+            <rect x="7" y="6" width="3" height="18" rx="1.5" fill="currentColor" opacity="0.6"/>
+            <rect x="22" y="2" width="3" height="18" rx="1.5" fill="currentColor" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Unidades Productivas</div>
+        <div class="tipo-desc">Plantas completas, líneas de embotellado, envasado, procesado cárnico y avícola</div>
+      </div>
+      <div class="tipo-card">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <path d="M6 38 L24 12 L42 38 Z" fill="currentColor" opacity="0.8"/>
+            <rect x="18" y="28" width="12" height="14" rx="0.5" fill="white" opacity="0.7"/>
+            <rect x="10" y="20" width="8" height="8" fill="white" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Inmuebles Industriales</div>
+        <div class="tipo-desc">Naves, mataderos, bodegas, plantas de cogeneración e instalaciones de frío</div>
+      </div>
+      <div class="tipo-card">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <rect x="6" y="20" width="28" height="14" rx="1" fill="currentColor" opacity="0.85"/>
+            <path d="M34 26 L40 26 L44 32 L44 36 L34 36 Z" fill="currentColor" opacity="0.85"/>
+            <circle cx="14" cy="38" r="5" fill="currentColor"/>
+            <circle cx="36" cy="38" r="5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Vehículos y Flota</div>
+        <div class="tipo-desc">Camiones frigoríficos, flotas de reparto, vehículos industriales y civiles</div>
+      </div>
+      <div class="tipo-card">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <path d="M8 40 L8 18 L14 10 L34 10 L40 18 L40 40 Z" fill="currentColor" opacity="0.85"/>
+            <path d="M8 18 L40 18" stroke="white" stroke-width="1.5"/>
+            <rect x="14" y="24" width="8" height="8" fill="white" opacity="0.6"/>
+            <rect x="26" y="24" width="8" height="8" fill="white" opacity="0.6"/>
+            <rect x="20" y="32" width="8" height="10" fill="white" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Maquinaria de Proceso</div>
+        <div class="tipo-desc">Desplumadoras, envasadoras, despalilladoras, embotelladoras y equipos de frío</div>
+      </div>
+      <div class="tipo-card">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <rect x="8" y="12" width="32" height="26" rx="2" fill="currentColor" opacity="0.85"/>
+            <rect x="14" y="6" width="20" height="6" rx="1" fill="currentColor" opacity="0.6"/>
+            <line x1="16" y1="22" x2="32" y2="22" stroke="white" stroke-width="1.5"/>
+            <line x1="16" y1="28" x2="32" y2="28" stroke="white" stroke-width="1.5"/>
+            <line x1="16" y1="34" x2="24" y2="34" stroke="white" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Stocks de Fábrica</div>
+        <div class="tipo-desc">Excedentes de materia prima, producto terminado y materiales descatalogados</div>
+      </div>
+      <div class="tipo-card">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <path d="M24 6 C18 6 10 14 10 22 C10 32 20 42 24 42 C28 42 38 32 38 22 C38 14 30 6 24 6Z" fill="currentColor" opacity="0.8"/>
+            <circle cx="24" cy="22" r="6" fill="white" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Aceites y Gases Fluorados</div>
+        <div class="tipo-desc">Aceites de refrigeración, gases R134a, R410A recuperados de instalaciones</div>
+      </div>
+      <div class="tipo-card">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <rect x="8" y="28" width="14" height="16" rx="1" fill="currentColor"/>
+            <rect x="28" y="16" width="14" height="28" rx="1" fill="currentColor" opacity="0.85"/>
+            <path d="M8 36 L22 36 M8 42 L22 42" stroke="white" stroke-width="1.2"/>
+            <path d="M28 24 L42 24 M28 30 L42 30 M28 36 L42 36" stroke="white" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Metales Valorizables</div>
+        <div class="tipo-desc">Aceros HMS, cobre, aluminio, inoxidables recuperados en desmantelamientos</div>
+      </div>
+      <div class="tipo-card">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <circle cx="20" cy="16" r="8" fill="currentColor" opacity="0.85"/>
+            <path d="M8 44 C8 32 12 26 20 26 C28 26 32 32 32 44 Z" fill="currentColor" opacity="0.85"/>
+            <circle cx="36" cy="18" r="5" fill="currentColor" opacity="0.6"/>
+            <path d="M28 44 C28 35 31 30 36 30 C41 30 44 35 44 44 Z" fill="currentColor" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Equipamiento Médico</div>
+        <div class="tipo-desc">Cromatógrafos, autoclaves, reactores de laboratorio y biotecnología</div>
+      </div>
+      <div class="tipo-card tipo-accent">
+        <div class="tipo-icon">
+          <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+            <path d="M24 4 L28 14 L40 14 L30 22 L34 34 L24 26 L14 34 L18 22 L8 14 L20 14 Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="tipo-name">Propiedad Intelectual</div>
+        <div class="tipo-desc">Marcas, patentes y licencias de proceso en operaciones de M&amp;A sectorial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 13 · TESTIMONIALS         -->
+<!-- ============================== -->
+<section class="slide" data-slide="13">
   <div class="slide-inner">
     <div class="kicker reveal">Referencias de Confianza</div>
     <h2 class="display reveal" data-delay="1">Lo que opinan los directivos de<br>las grandes corporaciones.</h2>
@@ -2498,9 +2894,9 @@ c-14 18 -25 41 -25 51 0 10 -6 18 -14 18 -8 0 -21 3 -30 6 -10 4 -19 -5 -29
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 13 · CTA                  -->
+<!-- SLIDE 14 · CTA                  -->
 <!-- ============================== -->
-<section class="slide slide-cta" data-slide="13">
+<section class="slide slide-cta" data-slide="14">
   <div class="slide-inner">
     <div class="kicker reveal" style="justify-content: center;">— Contacto Directo</div>
     <h1 class="cta-h reveal" data-delay="1">Surus ejecuta la transición.<br>¿<em>Cuándo</em> empieza la suya?</h1>

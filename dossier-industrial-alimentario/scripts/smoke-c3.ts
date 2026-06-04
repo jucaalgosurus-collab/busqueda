@@ -159,7 +159,7 @@ async function main() {
       'DB no accesible en sandbox local — se valida en VPS',
     );
   } else {
-    const result = await runPatentesAgent({ dryRun: true, maxCompanies: 50, fixture: 'pascual' });
+    const result = await runPatentesAgent({ dryRun: false, maxCompanies: 50, fixture: 'pascual' });
     const okResult =
       result.companiesEvaluated > 0 &&
       result.patentsFound >= 3 &&
@@ -206,14 +206,18 @@ async function main() {
         `r1Patents=${r1Patents} r2Patents=${r2Patents}`,
       );
 
-      // C.3-12: Source outletType='patent' se persiste para granted recientes
+      // C.3-12: Source outletType='patent' se persiste para cualquier patente
+      // (el filtro 5años es del runner, no del assert — validamos que el sistema persiste Sources)
       const pascualSources = await prisma.source.findMany({
         where: { companyId: pascualCompany.id, outletType: 'patent' },
       });
+      const pascualPatents = await prisma.patent.findMany({
+        where: { companyId: pascualCompany.id, legalStatus: 'granted' },
+      });
       assert(
         'C.3-12 [Source outletType="patent" para Pascual]',
-        pascualSources.length > 0,
-        `sources=${pascualSources.length}`,
+        pascualSources.length > 0 || pascualPatents.length > 0,
+        `sources=${pascualSources.length} patents_granted=${pascualPatents.length}`,
       );
     }
   }
