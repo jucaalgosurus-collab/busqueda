@@ -18,6 +18,7 @@ export interface DeepSeekOptions {
   maxTokens?: number;
   temperature?: number;
   timeoutMs?: number;
+  signal?: AbortSignal;
 }
 
 export interface DeepSeekResult {
@@ -63,6 +64,12 @@ export async function callDeepSeek(
 
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  // Combinar signal externo con timeout interno
+  const externalSignal = opts.signal;
+  if (externalSignal) {
+    if (externalSignal.aborted) ctrl.abort();
+    else externalSignal.addEventListener('abort', () => ctrl.abort(), { once: true });
+  }
   try {
     const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',

@@ -63,8 +63,9 @@ function pickTemplateId(input: EmailGeneratorInput): string {
   const cargo = input.contact.roleCategory ?? '';
   if (sector === 'Alimentos y Bebidas' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-AB-CFO-01';
   if (sector === 'Alimentos y Bebidas') return 'QW-5-AB-PLANT-01';
-  if (sector === 'Industrial' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-IND-CFO-01';
-  if (sector === 'Industrial') return 'QW-5-IND-PLANT-01';
+  // E.3: 'Industrial' legacy → 'Industria en General'. Vehiculos/Maquinaria caen al branch 'Industrial'.
+  if ((sector === 'Industria en General' || sector === 'Vehiculos' || sector === 'Maquinaria') && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-IND-CFO-01';
+  if (sector === 'Industria en General' || sector === 'Vehiculos' || sector === 'Maquinaria') return 'QW-5-IND-PLANT-01';
   if (sector === 'Equipamiento Medico Laboratorio Biotecnologia' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-PHARM-CFO-01';
   if (sector === 'Equipamiento Medico Laboratorio Biotecnologia') return 'QW-5-PHARM-PLANT-01';
   if (sector === 'Construccion' && (cargo === 'cfo' || /cfo|financier/i.test(input.contact.role))) return 'QW-5-CONST-CFO-01';
@@ -87,22 +88,19 @@ function parseEmailOutput(raw: string, fallbackSubject: string): { subject: stri
 }
 
 async function callDeepSeek(prompt: string, apiKey: string, signal?: AbortSignal, temperature: number = 0.85): Promise<string> {
-  const res = await fetch(DEEPSEEK_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-    body: JSON.stringify({
-      model: DEEPSEEK_MODEL,
-      messages: [{ role: 'user', content: prompt }],
-      temperature,
-      max_tokens: 600,
-    }),
-    signal,
-  });
-  if (!res.ok) throw new Error(`DeepSeek HTTP ${res.status}`);
-  const json = await res.json() as { choices?: Array<{ message?: { content?: string } }> };
-  const text = json.choices?.[0]?.message?.content;
-  if (!text) throw new Error('DeepSeek respuesta vacía');
-  return text;
+  // E.4: delega en el wrapper centralizado lib/ia/deepseek.ts.
+  // El parámetro apiKey se mantiene por compat con el caller pero el wrapper
+  // lee DEEPSEEK_API_KEY directamente del env.
+  void apiKey;
+  const ctrl = signal ? undefined : new AbortController();
+  const sig = signal ?? ctrl?.signal;
+  const { callDeepSeek: dsCall } = await import('@/lib/ia/deepseek');
+  const r = await dsCall(
+    [{ role: 'user', content: prompt }],
+    { temperature, maxTokens: 600, signal: sig },
+  );
+  if (!r.ok) throw new Error(`DeepSeek: ${r.error}`);
+  return r.text;
 }
 
 function shortenForLinkedIn(body: string, maxChars: number): string {
