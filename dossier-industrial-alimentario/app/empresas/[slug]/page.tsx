@@ -16,6 +16,7 @@ import { SourcesList } from './_components/SourcesList';
 import { DocumentsGrid } from './_components/DocumentsGrid';
 import { NotesEditor } from './_components/NotesEditor';
 import { ActionBar } from './_components/ActionBar';
+import { RegistroMercantilCard } from './_components/RegistroMercantilCard';
 import './empresa.css';
 
 export const dynamic = 'force-dynamic';
@@ -65,6 +66,10 @@ export default async function EmpresaPage({ params }: PageProps) {
         include: { evaluations: true },
       },
       plantContacts: true,
+      bormeEvents: {
+        orderBy: { fecha: 'desc' },
+        take: 20,
+      },
     },
   });
 
@@ -155,6 +160,13 @@ export default async function EmpresaPage({ params }: PageProps) {
       />
       <main id="main">
         <KpiBento company={company} />
+        <RegistroMercantilCard
+          cif={company.cif}
+          cnae={company.cnae}
+          hqCity={company.hqCity}
+          hqRegion={company.hqRegion}
+          events={company.bormeEvents}
+        />
         <PlantMap plants={company.plants} slug={company.slug} />
         <InventoryTable plants={company.plants} />
         <OperationsTimeline operations={company.operations} events={allEvents} />

@@ -52,6 +52,7 @@ model Company {
   auctionChecks AuctionCheck[]
   plantContacts PlantContact[]
   outreachLogs  OutreachLog[]
+  bormeEvents   BormeEvent[]
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -444,4 +445,32 @@ model OutreachLog {
   @@index([companyId, createdAt])
   @@index([contactId, channel])
   @@index([status])
+}
+
+// ============================================================================
+// 16. BORME_EVENT — Eventos BORME histórico 365d para enriquecer Company (Sprint C.1)
+// ============================================================================
+model BormeEvent {
+  id            String   @id @default(uuid())
+  companyId     String?
+  company       Company? @relation(fields: [companyId], references: [id], onDelete: SetNull)
+
+  matchHash     String   @unique // sha256(cif+tipo+fecha+bormeId) para idempotencia
+  cif           String?  // CIF normalizado (sin guiones/espacios, mayúsculas)
+  companyName   String   // nombre tal como aparece en BORME
+  fecha         DateTime // fecha publicación BORME
+  tipo          String   // 'constitucion'|'cambio_domicilio'|'ampliacion_capital'|'reduccion_capital'|'escision'|'cuentas'|'consejo'|'disolucion'|'nombramiento'|'cese'|'reeleccion'|'transformacion'|'fusion_absorcion'|'modificacion_estatutos'|'extincion'|'declaracion_concurso'
+  bormeId       String   // ej: 'BORME-A-2026-45-12'
+  provincia     String   // 'ALBACETE', 'MADRID', etc.
+  domicilio     String?  // domicilio social si aparece
+  capital       String?  // capital social si aparece
+  rawText       String   @db.Text // texto completo del acto
+  fuente        String   // URL al BORME original
+  matchedAt     DateTime @default(now())
+
+  @@index([companyId])
+  @@index([cif])
+  @@index([fecha])
+  @@index([tipo])
+  @@index([companyName])
 }
