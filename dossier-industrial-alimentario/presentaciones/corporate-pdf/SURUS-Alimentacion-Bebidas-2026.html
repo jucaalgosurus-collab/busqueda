@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valorización Industrial Circular · Alimentación y Bebidas · Dossier Surus 2026</title>
+<meta name="description" content="Valorización industrial circular en Alimentación y Bebidas: 17 casos verificados de desimplantación y segunda vida de activos. Datos literales del PDF oficial Surus.">
+<meta name="keywords" content="valorización industrial, desimplantación circular, segunda vida activos, economía circular industrial, Alimentación y Bebidas, sector A&B, subastas industriales, Escrapalia, Surus">
+<meta property="og:title" content="Valorización industrial circular · 17 casos A&B verificados · Dossier Surus 2026">
+<meta property="og:description" content="Cada activo industrial encuentra su siguiente destino. 17 casos verificados de Alimentación y Bebidas, datos literales del PDF oficial Surus.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://alimentos-ten.vercel.app/SURUS-Alimentacion-Bebidas-2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* === TOKENS · MODO CLARO === */
+  :root {
+    /* Surfaces */
+    --bg-deep:      #FFFFFF;
+    --bg-elev-1:    #FAF8F3;   /* off-white cálido */
+    --bg-elev-2:    #F1ECE0;   /* card sutil */
+    --bg-tint:      #F5F1E8;   /* tinte cálido para bloques */
+    --line-fine:    #E4DED0;   /* separador fino */
+    --line-strong:  #C8BFA8;   /* separador fuerte */
+    /* Textos (validados WCAG AA sobre #FFFFFF) */
+    --ink-primary:  #0E1F26;   /* grafito teal oscuro · 16.9:1 */
+    --ink-body:     #2D2D2D;   /* grafito cuerpo · 13.8:1 */
+    --ink-muted:    #717171;   /* gris labels · 4.88:1 */
+    --ink-faint:    #9A9A9A;   /* gris muy suave */
+    /* Brand */
+    --brand:        #106070;   /* teal oficial Surus · 7.17:1 */
+    --brand-hi:     #1A7A8A;   /* teal claro para hover */
+    --brand-lo:     #0A4A56;   /* teal profundo */
+    --bronze:       #B08A52;   /* SOLO ornamentos/numeros · 3.18:1 (no texto) */
+    --bronze-hi:    #C9A36B;
+    --bronze-lo:    #7A5E38;
+    --olive:        #6B8E4F;   /* sage profundo · OK sobre blanco */
+    --sage:         #8A9A5B;
+    --serif-italic: #5A6B5A;   /* verde sage oscuro para italicas */
+    --signal-warn:  #B85A1F;   /* naranja profundo */
+
+    --display: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, 'SF Pro Display', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', Menlo, monospace;
+
+    --gutter: clamp(24px, 4vw, 80px);
+    --max-w: 1440px;
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    background: var(--bg-deep);
+    overflow-x: hidden;
+  }
+  body {
+    background: var(--bg-deep);
+    color: var(--ink-body);
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 450;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Atmospheric grain (detrás de TODO, no afecta contenido ni imágenes) */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.45  0 0 0 0 0.30  0 0 0 0.10 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* === HEADER (transparente, no tapa nada) === */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px var(--gutter);
+    background: transparent;
+    pointer-events: none;
+  }
+  .topbar > * { pointer-events: auto; }
+  .brand {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-primary);
+    display: flex; gap: 10px; align-items: center;
+  }
+  .brand .dot { width: 6px; height: 6px; background: var(--brand); border-radius: 50%; }
+  .counter {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.18em;
+  }
+  .counter b {
+    color: var(--ink-primary);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-line {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: linear-gradient(90deg, var(--bronze-lo) 0%, var(--bronze) 50%, var(--bronze-hi) 100%);
+    z-index: 250;
+    width: 0%;
+    transition: width 100ms linear;
+  }
+
+  /* === NAV DOTS === */
+  .nav-dots {
+    position: fixed; right: 28px; top: 50%; transform: translateY(-50%);
+    z-index: 150;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--line-strong);
+    border: 0;
+    cursor: pointer;
+    transition: all 280ms var(--ease-out);
+    padding: 0;
+  }
+  .nav-dot:hover { background: var(--ink-muted); transform: scale(1.3); }
+  .nav-dot.active { background: var(--brand); transform: scale(1.8); }
+
+  /* === BOTONES DE NAVEGACIÓN VISIBLES === */
+  .nav-btn {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    z-index: 160;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-primary);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(14, 31, 38, 0.08), 0 1px 2px rgba(14, 31, 38, 0.04);
+    transition: all 220ms var(--ease-out);
+    padding: 0;
+  }
+  .nav-btn:hover {
+    background: var(--brand);
+    color: #FFFFFF;
+    border-color: var(--brand);
+    transform: translateY(-50%) scale(1.06);
+    box-shadow: 0 6px 24px rgba(16, 96, 112, 0.18);
+  }
+  .nav-btn:active { transform: translateY(-50%) scale(0.96); }
+  .nav-btn:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 4px;
+  }
+  .nav-btn:disabled,
+  .nav-btn.is-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .nav-btn-prev { left: 28px; }
+  .nav-btn-next { right: 28px; }
+  .nav-btn svg { width: 20px; height: 20px; display: block; }
+
+  @media (max-width: 768px) {
+    .nav-btn { width: 44px; height: 44px; }
+    .nav-btn-prev { left: 12px; }
+    .nav-btn-next { right: 12px; }
+    .nav-btn svg { width: 16px; height: 16px; }
+  }
+
+  /* === SLIDES === */
+  .slide {
+    min-height: 100vh;
+    min-height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding: clamp(60px, 7vh, 90px) var(--gutter) clamp(50px, 5vh, 80px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--line-fine);
+    z-index: 2;
+  }
+  .slide-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Reveal animations on scroll */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out); }
+  .reveal.in, .no-js .reveal { opacity: 1; transform: translateY(0); }
+  .reveal[data-delay="1"] { transition-delay: 100ms; }
+  .reveal[data-delay="2"] { transition-delay: 200ms; }
+  .reveal[data-delay="3"] { transition-delay: 300ms; }
+  .reveal[data-delay="4"] { transition-delay: 400ms; }
+  .reveal[data-delay="5"] { transition-delay: 500ms; }
+  .reveal[data-delay="6"] { transition-delay: 600ms; }
+
+  /* === TYPE === */
+  .kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--bronze);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .kicker::before {
+    content: ''; width: 28px; height: 1px; background: var(--bronze);
+  }
+  h1.display {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink-primary);
+    font-style: normal;
+  }
+  h1.display em { color: var(--brand); font-style: italic; font-weight: 500; }
+  h2.display {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(28px, 3.8vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink-primary);
+  }
+  h2.display em { color: var(--brand); font-style: italic; font-weight: 500; }
+  h2.display u {
+    text-decoration: none;
+    border-bottom: 1px solid var(--bronze);
+    padding-bottom: 4px;
+  }
+  .lede {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(16px, 1.2vw, 20px);
+    line-height: 1.45;
+    color: var(--ink-muted);
+    max-width: 64ch;
+    margin-top: 20px;
+  }
+  .micro {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* === SLIDE 01 · COVER === */
+  .portada-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: center;
+  }
+  .portada-img-wrap {
+    position: relative;
+    aspect-ratio: 5/6;
+    max-height: 78vh;
+    overflow: hidden;
+    background: var(--bg-elev-1);
+  }
+  .portada-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: contrast(1.08) saturate(0.78) brightness(0.92);
+    transition: transform 1.2s var(--ease-out);
+  }
+  .slide.in .portada-img-wrap img { transform: scale(1.0); }
+  .portada-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(11,12,16,0) 50%, rgba(11,12,16,0.55) 100%);
+    pointer-events: none;
+  }
+  .auth-caption {
+    position: absolute;
+    bottom: 18px; left: 18px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-primary);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: rgba(11,12,16,0.7);
+    backdrop-filter: blur(6px);
+    padding: 7px 12px;
+    border-left: 2px solid var(--bronze);
+    z-index: 3;
+  }
+  .auth-caption::before {
+    content: ''; display: inline-block; width: 5px; height: 5px;
+    background: var(--bronze); border-radius: 50%;
+    margin-right: 9px; vertical-align: middle;
+  }
+  .portada-meta {
+    display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap;
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 7px 11px;
+    border: 1px solid var(--line-fine);
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+  .badge.gold { color: var(--bronze-hi); border-color: var(--bronze); }
+  .badge.olive { color: var(--olive); border-color: var(--olive); }
+  .cta-top {
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink-primary);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--bronze);
+    align-self: flex-start;
+    transition: gap 240ms var(--ease-out), color 240ms;
+  }
+  .cta-top:hover { gap: 18px; color: var(--brand); }
+  .cta-top::after { content: '↓'; }
+
+  /* === SLIDE 02 · 17 CASOS BENTO === */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 96px;
+    gap: 1px;
+    background: var(--line-fine);
+    border: 1px solid var(--line-fine);
+    margin-top: 32px;
+  }
+  .bento-cell {
+    background: var(--bg-deep);
+    padding: 18px 16px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background 280ms;
+    position: relative;
+    overflow: hidden;
+  }
+  .bento-cell:hover { background: var(--bg-elev-1); }
+  .bento-cell.lg { grid-column: span 3; grid-row: span 2; }
+  .bento-cell.md { grid-column: span 2; grid-row: span 2; }
+  .bento-cell.sm { grid-column: span 2; }
+  .bento-n {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--bronze);
+    line-height: 1;
+    font-style: italic;
+  }
+  .bento-cell.lg .bento-n { font-size: 52px; }
+  .bento-name {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-primary);
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+  }
+  .bento-cell.lg .bento-name { font-size: 19px; margin-top: 6px; }
+  .bento-loc {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .bento-sub {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--bronze);
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .bento-tag {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--bronze);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line-fine);
+  }
+  .bento-cell.lg .bento-tag { font-size: 9px; }
+
+  /* === SLIDE 03 · DOLORES === */
+  .dolores-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(40px, 5vw, 80px);
+    align-items: start;
+    margin-top: 32px;
+  }
+  .dolores-pull {
+    position: sticky; top: 120px;
+  }
+  .dolores-pull blockquote {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--ink-primary);
+    letter-spacing: -0.01em;
+  }
+  .dolores-pull blockquote::before {
+    content: '"';
+    font-size: 64px;
+    color: var(--bronze);
+    line-height: 0;
+    vertical-align: -20px;
+    margin-right: 4px;
+  }
+  .dolores-pull .attr {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+  .dolores-list {
+    border-top: 1px solid var(--line-fine);
+  }
+  .dolor {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line-fine);
+    align-items: baseline;
+  }
+  .dolor-n {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--bronze);
+    font-style: italic;
+  }
+  .dolor-content h3 {
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink-primary);
+    margin-bottom: 6px;
+  }
+  .dolor-content p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+  }
+
+  /* === SLIDE 04 · SOLUCION === */
+  .sol-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line-fine);
+    border: 1px solid var(--line-fine);
+    margin-top: 32px;
+  }
+  .sol-cell {
+    background: var(--bg-deep);
+    padding: 28px 24px;
+    min-height: 320px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background 320ms;
+  }
+  .sol-cell:hover { background: var(--bg-elev-1); }
+  .sol-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--bronze);
+    letter-spacing: 0.32em;
+    font-weight: 500;
+  }
+  .sol-name {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink-primary);
+    margin-top: 14px;
+    font-style: italic;
+    line-height: 1.1;
+  }
+  .sol-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    margin-top: 16px;
+  }
+  .sol-out {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--bronze);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-fine);
+    line-height: 1.6;
+  }
+
+  /* === SLIDE 04 · SOLUCION             -->
+  /* === SLIDE 05 · METODOLOGÍA TIMELINE === */
+  .metodo-wrap {
+    margin-top: 32px;
+  }
+  .metodo-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--bronze);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .metodo-title::before { content: 'FASE 1 · CORE'; color: var(--bronze-hi); }
+  .metodo-flow {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line-fine);
+    border-bottom: 1px solid var(--line-fine);
+  }
+  .met-step {
+    padding: 28px 18px;
+    border-right: 1px solid var(--line-fine);
+    text-align: left;
+    position: relative;
+  }
+  .met-step:last-child { border-right: 0; }
+  .met-n {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--bronze);
+    font-style: italic;
+    line-height: 1;
+    display: block;
+  }
+  .met-t {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-muted);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .met-step::after {
+    content: '→';
+    position: absolute; right: -10px; top: 50%;
+    color: var(--bronze); font-size: 18px;
+    transform: translateY(-50%); z-index: 2;
+  }
+  .met-step:last-child::after { content: ''; }
+
+  .metodo-flow.bonus { border-top: 0; background: var(--bg-elev-1); }
+  .metodo-flow.bonus .met-n { color: var(--olive); }
+  .metodo-flow.bonus .met-step::after { color: var(--olive); }
+  .metodo-title.bonus::before { content: 'FASE 2 · CONTINUIDAD'; color: var(--olive); }
+
+  /* === METODOLOGÍA · ICONOS SVG === */
+  .met-ico {
+    width: 38px; height: 38px;
+    display: block;
+    margin-bottom: 14px;
+    color: var(--bronze);
+    transition: transform 220ms ease, filter 220ms ease;
+  }
+  .metodo-flow.bonus .met-ico { color: var(--olive); }
+  .met-step:hover .met-ico { transform: translateY(-2px); filter: brightness(1.08); }
+  .met-step { display: flex; flex-direction: column; align-items: flex-start; }
+  .met-step .met-ico { margin-bottom: 16px; }
+  @media (max-width: 900px) {
+    .met-ico { width: 32px; height: 32px; margin-bottom: 12px; }
+  }
+  @media (hover: none) {
+    .met-step:hover .met-ico { transform: none; }
+  }
+
+  /* === S11 · MACRO BAND === */
+  .s11-macro-band {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 12px;
+    margin: 18px 0 24px;
+    padding: 18px 0;
+    border-top: 1px solid var(--rule, #d9d3c4);
+    border-bottom: 1px solid var(--rule, #d9d3c4);
+  }
+  .s11-macro { text-align: center; }
+  .s11-macro b { display: block; font-family: var(--display); font-size: 22px; font-weight: 500; color: var(--teal, #106070); line-height: 1.1; }
+  .s11-macro span { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink, #2a2a2a); opacity: 0.7; margin-top: 4px; line-height: 1.2; }
+  @media (max-width: 1200px) { .s11-macro-band { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 600px)  { .s11-macro-band { grid-template-columns: repeat(2, 1fr); } }
+
+  /* === S11 · CERTIFICACIONES === */
+  .s11-cert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+  .s11-cert { padding: 28px 16px; background: var(--surface, #f7f4ed); border: 1px solid var(--rule, #d9d3c4); border-radius: 6px; text-align: center; transition: all 240ms ease; }
+  .s11-cert:hover { border-color: var(--bronze, #B08A52); transform: translateY(-2px); }
+  .s11-cert-shield { width: 36px; height: 36px; margin: 0 auto 14px; background: linear-gradient(135deg, var(--teal, #106070) 0%, var(--bronze, #B08A52) 100%); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+  .s11-cert-ev .s11-cert-shield { background: linear-gradient(135deg, #6B8E4F 0%, #B08A52 100%); }
+  .s11-cert-name { font-family: var(--display); font-size: 18px; font-weight: 500; color: var(--ink, #1a1a1a); margin-bottom: 4px; }
+  .s11-cert-desc { font-size: 12px; color: var(--ink, #2a2a2a); opacity: 0.6; }
+  @media (max-width: 900px) { .s11-cert-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* === SLIDE 06 · TRACK RECORD · CHARTS === */
+  .tr-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(40px, 5vw, 80px);
+    margin-top: 48px;
+  }
+  .tr-metrics { display: flex; flex-direction: column; }
+  .tr-m {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-fine);
+  }
+  .tr-m-v {
+    font-family: var(--display);
+    font-size: clamp(32px, 3.6vw, 48px);
+    font-weight: 500;
+    color: var(--bronze);
+    font-style: italic;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .tr-m-l {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .tr-charts { display: flex; flex-direction: column; gap: 32px; }
+
+  /* Donut */
+  .donut-wrap { display: flex; align-items: center; gap: 24px; }
+  .donut-svg { flex-shrink: 0; }
+  .donut-legend { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .donut-legend-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-muted); }
+  .donut-legend-row .swatch { width: 10px; height: 10px; flex-shrink: 0; border-radius: 1px; }
+  .donut-legend-row b { color: var(--ink-primary); font-weight: 500; margin-left: auto; font-variant-numeric: tabular-nums; }
+
+  /* Bars */
+  .bars-title { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px; }
+  .tr-bar {
+    display: grid; grid-template-columns: 100px 1fr 40px;
+    align-items: center; gap: 14px;
+    margin-bottom: 12px;
+  }
+  .tr-bar-l {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .tr-bar-bg {
+    height: 5px; background: var(--line-fine); position: relative; overflow: hidden;
+  }
+  .tr-bar-fg {
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: linear-gradient(90deg, var(--bronze-lo) 0%, var(--bronze-hi) 100%);
+    width: 0;
+    transition: width 1400ms var(--ease-quart);
+  }
+  .tr-bar-v {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-primary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* === MAPA ESPAÑA === */
+  .mapa-wrap {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(40px, 5vw, 80px);
+    margin-top: 40px;
+    align-items: center;
+  }
+  .mapa-svg { width: 100%; height: auto; max-height: 56vh; }
+  .mapa-pin {
+    fill: var(--bronze);
+    stroke: var(--bg-deep);
+    stroke-width: 1;
+    cursor: pointer;
+    transition: all 200ms;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .mapa-pin:hover { fill: var(--bronze-hi); r: 6; }
+  .mapa-pin.active { fill: var(--bronze-hi); animation: pinPulse 2s infinite; }
+  @keyframes pinPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .mapa-region {
+    fill: var(--bg-elev-1);
+    stroke: var(--line-strong);
+    stroke-width: 0.5;
+    transition: fill 200ms;
+  }
+  .mapa-region:hover { fill: var(--bg-elev-2); }
+
+  .mapa-side h3 {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink-primary);
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+  .mapa-list {
+    display: flex; flex-direction: column; gap: 10px;
+    max-height: 50vh; overflow-y: auto;
+  }
+  .mapa-row {
+    display: grid; grid-template-columns: 26px 1fr;
+    gap: 12px; align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-fine);
+    transition: background 200ms;
+  }
+  .mapa-row:hover { background: var(--bg-elev-1); padding-left: 6px; }
+  .mapa-row-pin {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--bronze);
+    margin-left: 9px;
+  }
+  .mapa-row-name { font-size: 13px; color: var(--ink-primary); font-family: var(--display); }
+  .mapa-row-loc { font-family: var(--mono); font-size: 9px; color: var(--ink-faint); letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* === CASO SLIDES === */
+  .caso-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 4vw, 64px);
+    align-items: center;
+  }
+  .caso-img-wrap {
+    position: relative;
+    aspect-ratio: 4/5;
+    max-height: 72vh;
+    overflow: hidden;
+    background: var(--bg-elev-1);
+  }
+  .caso-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: contrast(1.08) saturate(0.82);
+  }
+  .caso-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(11,12,16,0) 60%, rgba(11,12,16,0.5) 100%);
+  }
+  .caso-content { display: flex; flex-direction: column; }
+  .caso-num-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--bronze);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .caso-title {
+    font-family: var(--display);
+    font-size: clamp(32px, 3.6vw, 52px);
+    font-weight: 400;
+    color: var(--ink-primary);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin: 8px 0 8px;
+    white-space: nowrap;
+  }
+  .caso-title em { color: var(--brand); font-style: italic; font-weight: 500; }
+  .caso-loc {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .caso-desc {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin-top: 20px;
+    max-width: 52ch;
+  }
+  .caso-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    margin-top: 24px;
+    border-top: 1px solid var(--line-fine);
+    border-bottom: 1px solid var(--line-fine);
+  }
+  .caso-stat {
+    padding: 14px 12px 14px 0;
+    border-right: 1px solid var(--line-fine);
+  }
+  .caso-stat:last-child { border-right: 0; padding-right: 0; }
+  .caso-stat-v {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--bronze);
+    line-height: 1;
+    font-style: italic;
+    font-variant-numeric: tabular-nums;
+  }
+  .caso-stat-l {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .caso-profit {
+    margin-top: 20px;
+    padding: 14px 18px;
+    background: var(--bg-elev-1);
+    border-left: 2px solid var(--bronze);
+  }
+  .caso-profit-l {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .caso-profit-v {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink-primary);
+    margin-top: 4px;
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  /* === CASO COUNTERS === */
+  .counters-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line-fine);
+    border: 1px solid var(--line-fine);
+    margin-top: 32px;
+  }
+  .counter-cell {
+    background: var(--bg-deep);
+    padding: 24px 20px;
+    min-height: 170px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .counter-cell-v {
+    font-family: var(--display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 500;
+    color: var(--bronze);
+    font-style: italic;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .counter-cell-l {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+  .counter-cell-source {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    opacity: 0.7;
+  }
+
+  /* === SLIDE 14 · PRUEBA SOCIAL === */
+  .ps-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--line-fine);
+    border: 1px solid var(--line-fine);
+    margin-top: 40px;
+  }
+  .ps-cell {
+    background: var(--bg-deep);
+    padding: 24px 22px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 220px;
+    transition: background 240ms;
+  }
+  .ps-cell:hover { background: var(--bg-elev-1); }
+  .ps-q {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-primary);
+    line-height: 1.4;
+  }
+  .ps-q::before { content: '"'; color: var(--bronze); font-size: 22px; line-height: 0; vertical-align: -4px; margin-right: 3px; }
+  .ps-meta {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: auto;
+    line-height: 1.5;
+  }
+  .ps-meta b { color: var(--bronze); font-weight: 600; }
+
+  /* === SLIDE 15 · CTA === */
+  .slide-cta {
+    text-align: center;
+    align-items: center;
+  }
+  .slide-cta .slide-inner { display: flex; flex-direction: column; align-items: center; }
+  .cta-h {
+    font-family: var(--display);
+    font-size: clamp(40px, 5.6vw, 88px);
+    font-weight: 400;
+    color: var(--ink-primary);
+    line-height: 1.0;
+    max-width: 14ch;
+    margin: 0 auto;
+    letter-spacing: -0.025em;
+  }
+  .cta-h em { color: var(--brand); font-style: italic; font-weight: 500; }
+  .cta-h u { text-decoration: none; border-bottom: 2px solid var(--bronze); padding-bottom: 6px; }
+  .cta-m {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    max-width: 52ch;
+    margin: 32px auto 0;
+  }
+  .cta-actions {
+    display: flex; gap: 18px; justify-content: center; margin-top: 48px; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    text-decoration: none;
+    transition: all 240ms var(--ease-out);
+    border: 1px solid transparent;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 500;
+  }
+  .btn-primary { background: var(--bronze); color: var(--bg-deep); }
+  .btn-primary:hover { background: var(--bronze-hi); transform: translateY(-2px); }
+  .btn-secondary { border-color: var(--line-strong); color: var(--ink-primary); }
+  .btn-secondary:hover { border-color: var(--brand); color: var(--brand); }
+  .cta-foot {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-top: 64px;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 1024px) {
+    .bento { grid-template-columns: repeat(4, 1fr); }
+    .bento-cell.lg, .bento-cell.md { grid-column: span 2; }
+    .bento-cell.sm { grid-column: span 2; }
+    .dolores-wrap, .tr-wrap, .mapa-wrap, .caso-grid { grid-template-columns: 1fr; }
+    .sol-grid { grid-template-columns: 1fr; }
+    .ps-grid { grid-template-columns: 1fr; }
+    .counters-grid { grid-template-columns: repeat(2, 1fr); }
+    .metodo-flow { grid-template-columns: repeat(3, 1fr); }
+    .met-step { border-bottom: 1px solid var(--line-fine); }
+    .met-step::after { display: none; }
+    .nav-dots { display: none; }
+  }
+  @media (max-width: 640px) {
+    .bento { grid-template-columns: repeat(2, 1fr); }
+    .bento-cell.lg, .bento-cell.md, .bento-cell.sm { grid-column: span 1; }
+    .counters-grid { grid-template-columns: 1fr; }
+    .portada-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="progress"></div>
+
+<header class="topbar">
+  <a class="brand" href="https://www.surusin.com" target="_blank" rel="noopener" aria-label="Surus · ir a surusin.com"><img src="./assets/logosurus-2022.png" alt="Surus · Desimplantación Industrial"></a>
+  <div class="counter">Slide <b id="ct">01</b><span style="color: var(--ink-faint);"> / 17</span></div>
+</header>
+
+<nav class="nav-dots" id="navDots" aria-label="Navegación de slides"></nav>
+
+<button class="nav-btn nav-btn-prev" id="navPrev" type="button" aria-label="Slide anterior (←)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+<button class="nav-btn nav-btn-next" id="navNext" type="button" aria-label="Siguiente slide (→)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+</button>
+
+<!-- ============================== -->
+<!-- SLIDE 01 · PORTADA              -->
+<!-- ============================== -->
+<section class="slide" data-slide="1">
+  <div class="slide-inner">
+    <div class="portada-grid">
+      <div>
+        <div class="kicker reveal" data-delay="0">Valorización industrial circular · Alimentación y Bebidas · España · 2026</div>
+        <h1 class="display reveal" data-delay="1"><em>Valorización</em> industrial circular:<br>cada activo encuentra su <em>siguiente destino</em>.</h1>
+        <p class="lede reveal" data-delay="2">Dossier C-Level con <b style="color: var(--ink-primary); font-style: normal;">17 casos verificados</b> de Alimentación y Bebidas extraídos del dossier oficial Surus. Datos literales — sin maquillaje.</p>
+        <div class="portada-meta reveal" data-delay="3">
+          <span class="badge gold">17 casos A&amp;B</span>
+          <span class="badge">12 provincias</span>
+          <span class="badge olive">5 subsectores</span>
+          <span class="badge">PDF Surus oficial</span>
+        </div>
+        <a class="cta-top reveal" data-delay="4" href="#slide-2">Iniciar dossier</a>
+      </div>
+      <div class="portada-img-wrap reveal" data-delay="2">
+        <img src="./assets/real/cover-portada.webp" alt="Cubierta dossier Surus A&B oficial" loading="eager" fetchpriority="high">
+        <div class="auth-caption">100% Authentic · PDF oficial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 02 · 17 CASOS BENTO       -->
+<!-- ============================== -->
+<section class="slide" data-slide="2">
+  <div class="slide-inner">
+    <div class="kicker reveal">El sector A&amp;B en cifras</div>
+    <h2 class="display reveal" data-delay="1">Diecisiete operaciones<br><em>verificadas</em> del dossier oficial.</h2>
+    <p class="lede reveal" data-delay="2">Concurso, cierre de planta, sustitución de línea o desinversión. Surus opera como advisor y plataforma de subasta — Escrapalia — para desimplantar cualquier activo industrial del sector A&amp;B.</p>
+
+    <div class="bento reveal" data-delay="3">
+      <div class="bento-cell lg">
+        <div>
+          <div class="bento-n">17</div>
+          <div class="bento-name">Casos documentados</div>
+          <div class="bento-loc">Sector A&amp;B · 2008-2026</div>
+        </div>
+        <div class="bento-tag">Cifra del dossier oficial</div>
+      </div>
+      <div class="bento-cell md">
+        <div>
+          <div class="bento-n">12</div>
+          <div class="bento-name">Provincias cubiertas</div>
+          <div class="bento-loc">Sevilla → Araba</div>
+        </div>
+        <div class="bento-tag">Cobertura nacional</div>
+      </div>
+      <div class="bento-cell md">
+        <div>
+          <div class="bento-n">5</div>
+          <div class="bento-name">Subsectores</div>
+          <div class="bento-loc">Cárnico · Vino · Bebidas · Pan · Conservas</div>
+        </div>
+        <div class="bento-tag">Multisectorial</div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">5.059 m²</div>
+          <div class="bento-name">Casalobos</div>
+          <div class="bento-loc">Bodega · Ciudad Real</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">180.000 €</div>
+          <div class="bento-name">SADA-Nutreco</div>
+          <div class="bento-loc">Subasta verificada</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">6.000/h</div>
+          <div class="bento-name">AVICU</div>
+          <div class="bento-loc">Pollos · Stork PMT</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">1.000/h</div>
+          <div class="bento-name">Señorío de Molina</div>
+          <div class="bento-loc">Conejos · Guadalajara</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">5 M€</div>
+          <div class="bento-name">Fricarne</div>
+          <div class="bento-loc">Facturación 2022</div>
+          <div class="bento-sub">+150.000 € en venta en subasta</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">1.290</div>
+          <div class="bento-name">Panificadora Baix</div>
+          <div class="bento-loc">Clientes B2B</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">1.186 m²</div>
+          <div class="bento-name">Cuniporc</div>
+          <div class="bento-loc">Matadero · Salamanca</div>
+          <div class="bento-sub">+62.500 € en venta en subasta</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">1,55 M€</div>
+          <div class="bento-name">Domingo del Palacio</div>
+          <div class="bento-loc">Nave industrial</div>
+        </div>
+      </div>
+      <div class="bento-cell sm">
+        <div>
+          <div class="bento-n">XS40</div>
+          <div class="bento-name">Garvens PepsiCo</div>
+          <div class="bento-loc">Controladora industrial</div>
+          <div class="bento-sub">3.600 € Garvens XS40</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 03 · DOLORES              -->
+<!-- ============================== -->
+<section class="slide" data-slide="3">
+  <div class="slide-inner">
+    <div class="kicker reveal">Lo que la dirección general calla</div>
+    <h2 class="display reveal" data-delay="1">Cinco <em>problemas</em> que ningún<br>C-Level dice en abierto.</h2>
+
+    <div class="dolores-wrap">
+      <div class="dolores-pull reveal" data-delay="2">
+        <blockquote>El 80% de las desimplantaciones se gestionan como gasto. El 20% se gestionan como ciclo.</blockquote>
+        <div class="attr">— Observatorio Surus · 2026</div>
+      </div>
+      <div class="dolores-list reveal" data-delay="3">
+        <div class="dolor">
+          <div class="dolor-n">01</div>
+          <div class="dolor-content">
+            <h3>Concurso de acreedores</h3>
+            <p>La planta cierra por inviabilidad. Hay que deshacerse de todo — maquinaria, inmuebles, stocks — en semanas, no meses. Y el administrador concursal exige transparencia, no tratos de favor.</p>
+          </div>
+        </div>
+        <div class="dolor">
+          <div class="dolor-n">02</div>
+          <div class="dolor-content">
+            <h3>Sustitución de línea productiva</h3>
+            <p>La línea se reemplaza por una más moderna. Lo viejo funciona. Tirarla cuesta dinero y contamina. Venderla exige mercado, precio y gestión logística de retirada.</p>
+          </div>
+        </div>
+        <div class="dolor">
+          <div class="dolor-n">03</div>
+          <div class="dolor-content">
+            <h3>Cierre de planta geográfica</h3>
+            <p>Deslocalización, fin de concesión, impacto regulatorio. La planta entera (m², equipos, residuos) se convierte en un pasivo que lastra el EBITDA. Hay que convertirlo en liquidez.</p>
+          </div>
+        </div>
+        <div class="dolor">
+          <div class="dolor-n">04</div>
+          <div class="dolor-content">
+            <h3>Reestructuración post-adquisición</h3>
+            <p>Compraste una empresa concursada. Los activos heredados no encajan con tu plan industrial. ¿Cómo monetizas lo que no vas a usar sin destruir el valor de lo que sí conservas?</p>
+          </div>
+        </div>
+        <div class="dolor">
+          <div class="dolor-n">05</div>
+          <div class="dolor-content">
+            <h3>Desinversión con criterios ESG</h3>
+            <p>El consejo exige economía circular, descarbonización, reporte no financiero. Tirar a vertedero ya no es opción. Necesitas trazabilidad de valorización industrial y segunda vida acreditable de cada lote.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 04 · SOLUCION             -->
+<!-- ============================== -->
+<section class="slide" data-slide="4">
+  <div class="slide-inner">
+    <div class="kicker reveal">Tres servicios para tres momentos críticos</div>
+    <h2 class="display reveal" data-delay="1">Surus no compra.<br>Surus <em>conecta</em> y ejecuta la transición.</h2>
+
+    <div class="sol-grid reveal" data-delay="2">
+      <div class="sol-cell">
+        <div>
+          <div class="sol-num">01 · ASESORAMIENTO</div>
+          <div class="sol-name">Asesoramiento concursal</div>
+          <div class="sol-desc">Inventario, tasación y plan de liquidación para administradores concursales y direcciones generales en crisis. Defensa ante el juzgado, marketing del activo, gestión de pujas, reporting notarial.</div>
+        </div>
+        <div class="sol-out">→ Activos maximizados<br>→ Plazos cumplidos</div>
+      </div>
+      <div class="sol-cell">
+        <div>
+          <div class="sol-num">02 · DESIMPLANTACIÓN</div>
+          <div class="sol-name">Desimplantación industrial</div>
+          <div class="sol-desc">Demolición recuperable, descontaminación, gestión de residuos, valorización. La planta se vacía dejando el suelo disponible para nuevo uso industrial, logístico o residencial — con trazabilidad ESG completa.</div>
+        </div>
+        <div class="sol-out">→ Suelo liberado<br>→ Trazabilidad circular</div>
+      </div>
+      <div class="sol-cell">
+        <div>
+          <div class="sol-num">03 · SUBASTA</div>
+          <div class="sol-name">Subasta online Escrapalia</div>
+          <div class="sol-desc">Plataforma propia con +415.000 usuarios registrados y +240.000 subastas celebradas. Comercialización, puja, adjudicación y retirada. Activos industriales vendidos en días, no meses. Reducción media de coste de gestión del 40%.</div>
+        </div>
+        <div class="sol-out">→ 415K+ usuarios registrados<br>→ 240K+ subastas celebradas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 05 · METODOLOGÍA          -->
+<!-- ============================== -->
+<section class="slide" data-slide="5">
+  <div class="slide-inner">
+    <div class="kicker reveal">El ciclo 6+4 de Surus</div>
+    <h2 class="display reveal" data-delay="1">Seis fases de <em>ejecución</em><br>y cuatro de continuidad.</h2>
+
+    <div class="s11-macro-band reveal" data-delay="2">
+      <div class="s11-macro"><b>+400 M€</b><span>generados</span></div>
+      <div class="s11-macro"><b>30,7 M</b><span>kg CO₂ evitados</span></div>
+      <div class="s11-macro"><b>98%</b><span>tasa reempleo</span></div>
+      <div class="s11-macro"><b>+27</b><span>países</span></div>
+      <div class="s11-macro"><b>+15</b><span>IBEX 35</span></div>
+      <div class="s11-macro"><b>+1.000</b><span>clientes</span></div>
+      <div class="s11-macro"><b>18.000 T</b><span>capacidad</span></div>
+      <div class="s11-macro"><b>78/100</b><span>EcoVadis Silver</span></div>
+    </div>
+
+    <div class="metodo-wrap reveal" data-delay="3">
+      <div class="metodo-title">FASE 1 · CORE</div>
+      <div class="metodo-flow">
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-01" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-01" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-01)">
+              <!-- Balanza industrial asimétrica con aguja -->
+              <rect x="29" y="10" width="6" height="44" rx="1" fill="url(#s11-grad-ico-01)"/>
+              <rect x="22" y="50" width="20" height="6" rx="1" fill="url(#s11-grad-ico-01)"/>
+              <rect x="30" y="14" width="4" height="4" fill="url(#s11-grad-ico-01)"/>
+              <line x1="32" y1="14" x2="32" y2="22" stroke="#0A4048" stroke-width="0.5"/>
+              <circle cx="14" cy="22" r="8" fill="url(#s11-grad-ico-01)"/>
+              <circle cx="50" cy="26" r="6" fill="url(#s11-grad-ico-01)"/>
+              <line x1="14" y1="22" x2="50" y2="26" stroke="#0A4048" stroke-width="0.5" stroke-dasharray="1 1"/>
+              <line x1="22" y1="22" x2="32" y2="14" stroke="#0A4048" stroke-width="0.5"/>
+              <line x1="42" y1="26" x2="32" y2="14" stroke="#0A4048" stroke-width="0.5"/>
+            </g>
+          </svg>
+          <span class="met-n">01</span><span class="met-t">Tasación</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-02" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-02" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-02)">
+              <!-- 3 bloques apilados isométricos -->
+              <path d="M14 44 L32 38 L50 44 L50 52 L32 58 L14 52 Z" fill="url(#s11-grad-ico-02)"/>
+              <path d="M14 30 L32 24 L50 30 L32 36 Z" fill="url(#s11-grad-ico-02)" opacity="0.85"/>
+              <path d="M14 16 L32 10 L50 16 L32 22 Z" fill="url(#s11-grad-ico-02)" opacity="0.7"/>
+              <line x1="32" y1="10" x2="32" y2="22" stroke="#0A4048" stroke-width="0.5" opacity="0.4"/>
+              <line x1="32" y1="24" x2="32" y2="36" stroke="#0A4048" stroke-width="0.5" opacity="0.4"/>
+              <line x1="32" y1="38" x2="32" y2="58" stroke="#0A4048" stroke-width="0.5" opacity="0.4"/>
+            </g>
+          </svg>
+          <span class="met-n">02</span><span class="met-t">Inventario</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-03" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-03" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-03)">
+              <!-- Diana con flecha (targeting) -->
+              <circle cx="28" cy="32" r="22" fill="url(#s11-grad-ico-03)"/>
+              <circle cx="28" cy="32" r="15" fill="#FAF8F2" opacity="0.95"/>
+              <circle cx="28" cy="32" r="10" fill="url(#s11-grad-ico-03)"/>
+              <circle cx="28" cy="32" r="5" fill="#FAF8F2"/>
+              <circle cx="28" cy="32" r="2" fill="url(#s11-grad-ico-03)"/>
+              <!-- Flecha -->
+              <line x1="28" y1="32" x2="56" y2="10" stroke="#0A4048" stroke-width="1.2" stroke-linecap="round"/>
+              <polygon points="56,10 52,12 54,16" fill="#0A4048"/>
+              <polygon points="56,10 50,8 52,12" fill="#0A4048"/>
+            </g>
+          </svg>
+          <span class="met-n">03</span><span class="met-t">Marketing</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-04" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-04" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-04)">
+              <!-- Martillo de subastador -->
+              <rect x="18" y="12" width="28" height="10" rx="1.5" fill="url(#s11-grad-ico-04)" transform="rotate(-15 32 17)"/>
+              <rect x="28" y="20" width="8" height="34" rx="1" fill="url(#s11-grad-ico-04)" transform="rotate(-15 32 37)"/>
+              <rect x="22" y="42" width="20" height="6" rx="1" fill="url(#s11-grad-ico-04)"/>
+              <line x1="22" y1="18" x2="42" y2="18" stroke="#0A4048" stroke-width="0.5" transform="rotate(-15 32 17)"/>
+            </g>
+          </svg>
+          <span class="met-n">04</span><span class="met-t">Subasta</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-05" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-05" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-05)">
+              <!-- Documento con check -->
+              <path d="M14 8 L42 8 L52 18 L52 56 L14 56 Z" fill="url(#s11-grad-ico-05)"/>
+              <path d="M42 8 L42 18 L52 18" fill="url(#s11-grad-ico-05)" opacity="0.7"/>
+              <rect x="20" y="24" width="20" height="2" fill="#FAF8F2" opacity="0.7"/>
+              <rect x="20" y="30" width="16" height="2" fill="#FAF8F2" opacity="0.5"/>
+              <circle cx="40" cy="44" r="9" fill="#FAF8F2"/>
+              <polyline points="35,44 39,48 46,40" stroke="#106070" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+          <span class="met-n">05</span><span class="met-t">Adjudicación</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-06" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-06" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-06)">
+              <!-- Camión de carga con ruedas -->
+              <rect x="8" y="22" width="32" height="20" rx="1" fill="url(#s11-grad-ico-06)"/>
+              <path d="M40 28 L48 28 L54 36 L54 42 L40 42 Z" fill="url(#s11-grad-ico-06)"/>
+              <rect x="42" y="32" width="6" height="6" fill="#FAF8F2" opacity="0.7"/>
+              <rect x="12" y="26" width="10" height="12" fill="#FAF8F2" opacity="0.4"/>
+              <rect x="24" y="26" width="10" height="12" fill="#FAF8F2" opacity="0.4"/>
+              <circle cx="18" cy="48" r="5" fill="url(#s11-grad-ico-06)"/>
+              <circle cx="18" cy="48" r="2" fill="#FAF8F2"/>
+              <circle cx="46" cy="48" r="5" fill="url(#s11-grad-ico-06)"/>
+              <circle cx="46" cy="48" r="2" fill="#FAF8F2"/>
+            </g>
+          </svg>
+          <span class="met-n">06</span><span class="met-t">Retirada</span>
+        </div>
+      </div>
+
+      <div class="metodo-title bonus" style="margin-top: 36px;">FASE 2 · CONTINUIDAD</div>
+      <div class="metodo-flow bonus">
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-07" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-07" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-07)">
+              <!-- Cadena de 3 eslabones conectados -->
+              <rect x="6" y="22" width="20" height="20" rx="10" fill="url(#s11-grad-ico-07)"/>
+              <rect x="24" y="22" width="20" height="20" rx="10" fill="url(#s11-grad-ico-07)"/>
+              <rect x="42" y="22" width="20" height="20" rx="10" fill="url(#s11-grad-ico-07)"/>
+              <circle cx="16" cy="32" r="5" fill="#FAF8F2" opacity="0.6"/>
+              <circle cx="34" cy="32" r="5" fill="#FAF8F2" opacity="0.6"/>
+              <circle cx="52" cy="32" r="5" fill="#FAF8F2" opacity="0.6"/>
+            </g>
+          </svg>
+          <span class="met-n">+1</span><span class="met-t">Trazabilidad ESG</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-08" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-08" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-08)">
+              <!-- Documento con sello circular -->
+              <path d="M12 6 L42 6 L52 16 L52 58 L12 58 Z" fill="url(#s11-grad-ico-08)"/>
+              <path d="M42 6 L42 16 L52 16" fill="url(#s11-grad-ico-08)" opacity="0.6"/>
+              <rect x="18" y="20" width="22" height="2" fill="#FAF8F2" opacity="0.7"/>
+              <rect x="18" y="26" width="18" height="2" fill="#FAF8F2" opacity="0.5"/>
+              <!-- Sello circular -->
+              <circle cx="38" cy="44" r="10" fill="none" stroke="#FAF8F2" stroke-width="1.5"/>
+              <circle cx="38" cy="44" r="7" fill="none" stroke="#FAF8F2" stroke-width="0.8" stroke-dasharray="2 1"/>
+              <text x="38" y="46" text-anchor="middle" font-family="serif" font-size="6" fill="#FAF8F2" font-weight="700">NOT</text>
+            </g>
+          </svg>
+          <span class="met-n">+2</span><span class="met-t">Reporting notarial</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-09" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-09" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-09)">
+              <!-- Dos siluetas humanas -->
+              <circle cx="22" cy="18" r="6" fill="url(#s11-grad-ico-09)"/>
+              <path d="M10 52 C10 40 14 32 22 32 C30 32 34 40 34 52 Z" fill="url(#s11-grad-ico-09)"/>
+              <circle cx="42" cy="18" r="6" fill="url(#s11-grad-ico-09)" opacity="0.85"/>
+              <path d="M30 52 C30 40 34 32 42 32 C50 32 54 40 54 52 Z" fill="url(#s11-grad-ico-09)" opacity="0.85"/>
+            </g>
+          </svg>
+          <span class="met-n">+3</span><span class="met-t">Reempleo personal</span>
+        </div>
+        <div class="met-step">
+          <svg class="met-ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="s11-grad-ico-10" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#106070"/>
+                <stop offset="1" stop-color="#B08A52"/>
+              </linearGradient>
+              <filter id="s11-shadow-10" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.5"/>
+                <feOffset dx="0" dy="0.5"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#s11-shadow-10)">
+              <!-- Gráfica de barras descendente -->
+              <line x1="6" y1="56" x2="58" y2="56" stroke="url(#s11-grad-ico-10)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="6" y1="56" x2="6" y2="10" stroke="url(#s11-grad-ico-10)" stroke-width="2" stroke-linecap="round"/>
+              <rect x="14" y="14" width="8" height="42" rx="1" fill="url(#s11-grad-ico-10)"/>
+              <rect x="28" y="24" width="8" height="32" rx="1" fill="url(#s11-grad-ico-10)" opacity="0.8"/>
+              <rect x="42" y="36" width="8" height="20" rx="1" fill="url(#s11-grad-ico-10)" opacity="0.6"/>
+              <polyline points="18,14 32,24 46,36 56,40" stroke="#0A4048" stroke-width="0.8" fill="none" opacity="0.5"/>
+            </g>
+          </svg>
+          <span class="met-n">+4</span><span class="met-t">Liquidación final</span>
+        </div>
+        <div class="met-step"></div>
+        <div class="met-step"></div>
+      </div>
+    </div>
+
+    <p class="lede reveal" data-delay="3" style="margin-top: 56px;">Las cuatro fases adicionales son las que diferencian a Surus: lo que un bróker convencional nunca ofrece — circularidad acreditable, gestión de personas y reporte formal.</p>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 06 · TRACK RECORD         -->
+<!-- ============================== -->
+<section class="slide" data-slide="6">
+  <div class="slide-inner">
+    <div class="kicker reveal">Track record A&amp;B</div>
+    <h2 class="display reveal" data-delay="1">Los números que <em>importan</em><br>en este sector.</h2>
+
+    <div class="tr-wrap">
+      <div class="tr-metrics reveal" data-delay="2">
+        <div class="tr-m">
+          <div class="tr-m-v" data-counter="17">0</div>
+          <div class="tr-m-l">Casos A&amp;B documentados<br>en dossier oficial</div>
+        </div>
+        <div class="tr-m">
+          <div class="tr-m-v" data-counter="12">0</div>
+          <div class="tr-m-l">Provincias con operación<br>verificada en PDF</div>
+        </div>
+        <div class="tr-m">
+          <div class="tr-m-v" data-counter="200" data-suffix="K+">0</div>
+          <div class="tr-m-l">Usuarios activos<br>en plataforma Escrapalia</div>
+        </div>
+        <div class="tr-m">
+          <div class="tr-m-v" data-counter="100" data-suffix="%">0</div>
+          <div class="tr-m-l">Lotes adjudicados en casos<br>verificados del PDF</div>
+        </div>
+      </div>
+
+      <div class="tr-charts reveal" data-delay="3">
+        <!-- DONUT -->
+        <div>
+          <div class="bars-title">Distribución por subsector · 17 casos</div>
+          <div class="donut-wrap">
+            <svg class="donut-svg" width="180" height="180" viewBox="0 0 180 180">
+              <circle cx="90" cy="90" r="70" fill="none" stroke="var(--line-fine)" stroke-width="22"/>
+              <g id="donut-segments" transform="rotate(-90 90 90)"></g>
+              <text x="90" y="86" text-anchor="middle" font-family="Fraunces" font-size="28" font-style="italic" fill="var(--bronze-hi)">17</text>
+              <text x="90" y="104" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="var(--ink-faint)" letter-spacing="2">CASOS</text>
+            </svg>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+        </div>
+        <!-- BARS -->
+        <div>
+          <div class="bars-title">Activos por tipología</div>
+          <div class="tr-bar"><div class="tr-bar-l">Matadero</div><div class="tr-bar-bg"><div class="tr-bar-fg" data-w="35"></div></div><div class="tr-bar-v">35%</div></div>
+          <div class="tr-bar"><div class="tr-bar-l">Avícola</div><div class="tr-bar-bg"><div class="tr-bar-fg" data-w="29"></div></div><div class="tr-bar-v">29%</div></div>
+          <div class="tr-bar"><div class="tr-bar-l">Bodega</div><div class="tr-bar-bg"><div class="tr-bar-fg" data-w="18"></div></div><div class="tr-bar-v">18%</div></div>
+          <div class="tr-bar"><div class="tr-bar-l">Panadería</div><div class="tr-bar-bg"><div class="tr-bar-fg" data-w="12"></div></div><div class="tr-bar-v">12%</div></div>
+          <div class="tr-bar"><div class="tr-bar-l">Bebidas</div><div class="tr-bar-bg"><div class="tr-bar-fg" data-w="6"></div></div><div class="tr-bar-v">6%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 07 · MAPA ESPAÑA          -->
+<!-- ============================== -->
+<section class="slide" data-slide="7">
+  <div class="slide-inner">
+    <div class="kicker reveal">Cobertura geográfica verificada</div>
+    <h2 class="display reveal" data-delay="1">12 provincias, <em>un solo</em> dossier.</h2>
+
+    <div class="mapa-wrap">
+      <div class="reveal" data-delay="2">
+        <svg class="mapa-svg" viewBox="0 0 500 480" xmlns="http://www.w3.org/2000/svg">
+          <!-- Spain outline (simplified) -->
+          <g class="mapa-region" stroke="var(--line-strong)">
+            <!-- Peninsula -->
+            <path d="M 100 100 L 150 80 L 200 75 L 250 80 L 300 90 L 360 95 L 400 110 L 430 130 L 450 160 L 460 200 L 450 240 L 440 270 L 420 300 L 400 320 L 380 340 L 360 350 L 340 360 L 320 370 L 300 380 L 280 395 L 260 410 L 240 415 L 220 410 L 200 400 L 180 385 L 160 365 L 140 340 L 125 315 L 110 285 L 95 250 L 85 215 L 80 180 L 85 145 Z"/>
+            <!-- Balearic Islands (Mallorca) -->
+            <ellipse cx="430" cy="350" rx="22" ry="14"/>
+          </g>
+          <!-- 12 Pins -->
+          <!-- Sevilla -->
+          <g class="mapa-pin" data-prov="sevilla">
+            <circle cx="115" cy="305" r="5"/>
+            <circle cx="115" cy="305" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Valladolid -->
+          <g class="mapa-pin" data-prov="valladolid">
+            <circle cx="195" cy="145" r="5"/>
+            <circle cx="195" cy="145" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Málaga -->
+          <g class="mapa-pin" data-prov="malaga">
+            <circle cx="160" cy="335" r="5"/>
+            <circle cx="160" cy="335" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Ciudad Real -->
+          <g class="mapa-pin" data-prov="ciudadreal">
+            <circle cx="225" cy="270" r="5"/>
+            <circle cx="225" cy="270" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- A Coruña -->
+          <g class="mapa-pin" data-prov="acoruna">
+            <circle cx="80" cy="100" r="5"/>
+            <circle cx="80" cy="100" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Araba -->
+          <g class="mapa-pin" data-prov="araba">
+            <circle cx="265" cy="110" r="5"/>
+            <circle cx="265" cy="110" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Barcelona -->
+          <g class="mapa-pin" data-prov="barcelona">
+            <circle cx="370" cy="200" r="5"/>
+            <circle cx="370" cy="200" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Valencia -->
+          <g class="mapa-pin" data-prov="valencia">
+            <circle cx="310" cy="245" r="5"/>
+            <circle cx="310" cy="245" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Guadalajara -->
+          <g class="mapa-pin" data-prov="guadalajara">
+            <circle cx="260" cy="220" r="5"/>
+            <circle cx="260" cy="220" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Salamanca -->
+          <g class="mapa-pin" data-prov="salamanca">
+            <circle cx="165" cy="170" r="5"/>
+            <circle cx="165" cy="170" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Logroño -->
+          <g class="mapa-pin" data-prov="logrono">
+            <circle cx="265" cy="145" r="5"/>
+            <circle cx="265" cy="145" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Madrid -->
+          <g class="mapa-pin" data-prov="madrid">
+            <circle cx="240" cy="240" r="5"/>
+            <circle cx="240" cy="240" r="9" fill="none" stroke="var(--bronze)" stroke-width="0.5" opacity="0.4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="mapa-side reveal" data-delay="3">
+        <h3>Doce puntos rojos,<br>diecisiete operaciones.</h3>
+        <div class="mapa-list" id="mapa-list">
+          <div class="mapa-row" data-prov="sevilla"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">SADA-Nutreco</div><div class="mapa-row-loc">Sevilla · Valladolid</div></div></div>
+          <div class="mapa-row" data-prov="malaga"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">San Miguel</div><div class="mapa-row-loc">Málaga</div></div></div>
+          <div class="mapa-row" data-prov="ciudadreal"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Bodega Casalobos</div><div class="mapa-row-loc">Ciudad Real</div></div></div>
+          <div class="mapa-row" data-prov="logrono"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Bodegas Darien</div><div class="mapa-row-loc">Logroño</div></div></div>
+          <div class="mapa-row" data-prov="barcelona"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Panificadora Baix</div><div class="mapa-row-loc">Barcelona</div></div></div>
+          <div class="mapa-row" data-prov="valencia"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Fricarne</div><div class="mapa-row-loc">Valencia</div></div></div>
+          <div class="mapa-row" data-prov="madrid"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Bellsolà</div><div class="mapa-row-loc">Alcobendas · Madrid</div></div></div>
+          <div class="mapa-row" data-prov="acoruna"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Nauterra (Calvo)</div><div class="mapa-row-loc">A Coruña</div></div></div>
+          <div class="mapa-row" data-prov="madrid"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Central de Carnes Premium</div><div class="mapa-row-loc">Madrid</div></div></div>
+          <div class="mapa-row" data-prov="guadalajara"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">AVICU · Stork PMT</div><div class="mapa-row-loc">Guadalajara</div></div></div>
+          <div class="mapa-row" data-prov="madrid"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Domingo del Palacio</div><div class="mapa-row-loc">Alcobendas · Madrid</div></div></div>
+          <div class="mapa-row" data-prov="salamanca"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Cuniporc</div><div class="mapa-row-loc">Salamanca</div></div></div>
+          <div class="mapa-row" data-prov="guadalajara"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Señorío de Molina</div><div class="mapa-row-loc">Guadalajara</div></div></div>
+          <div class="mapa-row" data-prov="salamanca"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Mataderos Salamanca</div><div class="mapa-row-loc">Salamanca</div></div></div>
+          <div class="mapa-row" data-prov="araba"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">PepsiCo</div><div class="mapa-row-loc">Araba</div></div></div>
+          <div class="mapa-row" data-prov="barcelona"><div class="mapa-row-pin"></div><div><div class="mapa-row-name">Mercabarna</div><div class="mapa-row-loc">Barcelona</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 08 · CASO SADA/NUTRECO    -->
+<!-- ============================== -->
+<section class="slide" data-slide="8">
+  <div class="slide-inner">
+    <div class="caso-grid">
+      <div class="caso-img-wrap reveal" data-delay="0">
+        <img src="./assets/real/sada-nutreco.webp" alt="Desmantelamiento SADA Nutreco Sevilla Valladolid" loading="lazy">
+        <div class="auth-caption">100% Authentic · PDF oficial</div>
+      </div>
+      <div class="caso-content">
+        <div class="caso-num-tag reveal">Caso 01 · Avícola</div>
+        <h2 class="caso-title reveal" data-delay="1">SADA<em>Nutreco</em></h2>
+        <div class="caso-loc reveal" data-delay="2">La Rinconada (Sevilla) · Valladolid</div>
+        <p class="caso-desc reveal" data-delay="3">Desmantelamiento y demolición recuperable de las instalaciones de procesamiento avícola del grupo líder en producción integrada de pollo en España. SURUS operó como único contratista principal, gestionando residuos y subasta de activos: plataformas, limpiadoras, tanques, desplumadoras.</p>
+        <div class="caso-stats reveal" data-delay="4">
+          <div class="caso-stat"><div class="caso-stat-v" data-counter="2">0</div><div class="caso-stat-l">Plantas<br>desmanteladas</div></div>
+          <div class="caso-stat"><div class="caso-stat-v" data-counter="100" data-suffix="%">0</div><div class="caso-stat-l">Activos<br>subastados</div></div>
+          <div class="caso-stat"><div class="caso-stat-v" data-counter="1">0</div><div class="caso-stat-l">Contratista<br>principal</div></div>
+        </div>
+        <div class="caso-profit reveal" data-delay="5">
+          <div class="caso-profit-l">Beneficio económico · verificado PDF p.2</div>
+          <div class="caso-profit-v">180.000 € en venta en subasta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 09 · CASO SAN MIGUEL      -->
+<!-- ============================== -->
+<section class="slide" data-slide="9">
+  <div class="slide-inner">
+    <div class="caso-grid">
+      <div class="caso-img-wrap reveal" data-delay="0">
+        <img src="./assets/real/sanmiguel-linea.webp" alt="Línea embotellado San Miguel Málaga" loading="lazy">
+        <div class="auth-caption">100% Authentic · PDF oficial</div>
+      </div>
+      <div class="caso-content">
+        <div class="caso-num-tag reveal">Caso 02 · Bebidas</div>
+        <h2 class="caso-title reveal" data-delay="1">San<em>Miguel</em></h2>
+        <div class="caso-loc reveal" data-delay="2">Planta Málaga</div>
+        <p class="caso-desc reveal" data-delay="3">La planta cervecera de San Miguel en Málaga sustituyó la maquinaria de una línea de embotellado. Siguiendo con sus objetivos de sostenibilidad, dieron una segunda vida a sus equipos industriales antes de optar por el reciclaje. SURUS comercializó la línea completa a través de Escrapalia.</p>
+        <div class="caso-stats reveal" data-delay="4">
+          <div class="caso-stat"><div class="caso-stat-v">1</div><div class="caso-stat-l">Línea completa<br>de embotellado</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">2ª</div><div class="caso-stat-l">Vida útil<br>acreditada</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">35</div><div class="caso-stat-l">Máquinas<br>subastadas</div></div>
+        </div>
+        <div class="caso-profit reveal" data-delay="5">
+          <div class="caso-profit-l">Modalidad · PDF p.2</div>
+          <div class="caso-profit-v">Venta en subasta · Cerveza · Línea completa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 10 · CASO NAUTERRA        -->
+<!-- ============================== -->
+<section class="slide" data-slide="10">
+  <div class="slide-inner">
+    <div class="caso-grid">
+      <div class="caso-img-wrap reveal" data-delay="0">
+        <img src="./assets/real/nauterra-calvo.webp" alt="Nauterra conservas Calvo A Coruña" loading="lazy">
+        <div class="auth-caption">100% Authentic · PDF oficial</div>
+      </div>
+      <div class="caso-content">
+        <div class="caso-num-tag reveal">Caso 03 · Conservas</div>
+        <h2 class="caso-title reveal" data-delay="1">Nauterra<em>(antes Calvo)</em></h2>
+        <div class="caso-loc reveal" data-delay="2">A Coruña</div>
+        <p class="caso-desc reveal" data-delay="3">Conservas Calvo, una de las compañías líderes en alimentación a nivel global, anunció en septiembre de 2017 el cierre de su fábrica de Esteiro, en Muros (A Coruña). SURUS gestionó la subasta de depósitos, inmueble y residuos valorizables para asegurar la máxima recuperación económica de la desinversión.</p>
+        <div class="caso-stats reveal" data-delay="4">
+          <div class="caso-stat"><div class="caso-stat-v">2017</div><div class="caso-stat-l">Año del<br>cierre</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">100%</div><div class="caso-stat-l">Activos<br>en subasta</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">Global</div><div class="caso-stat-l">Multinacional<br>alimentaria</div></div>
+        </div>
+        <div class="caso-profit reveal" data-delay="5">
+          <div class="caso-profit-l">Modalidad · PDF p.5</div>
+          <div class="caso-profit-v">Subasta · Depósitos + inmueble + residuos valorizables</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 11 · CASO PEPSICO         -->
+<!-- ============================== -->
+<section class="slide" data-slide="11">
+  <div class="slide-inner">
+    <div class="caso-grid">
+      <div class="caso-img-wrap reveal" data-delay="0">
+        <img src="./assets/real/pepsico-araba.webp" alt="Garvens XS40 PepsiCo Araba" loading="lazy">
+        <div class="auth-caption">100% Authentic · PDF oficial</div>
+      </div>
+      <div class="caso-content">
+        <div class="caso-num-tag reveal">Caso 04 · Maquinaria precisión</div>
+        <h2 class="caso-title reveal" data-delay="1">Pepsi<em>Co</em></h2>
+        <div class="caso-loc reveal" data-delay="2">Planta Araba (País Vasco)</div>
+        <p class="caso-desc reveal" data-delay="3">SURUS lideró la desinversión y valorización de un activo técnico de precisión para la multinacional PepsiCo. La operativa se centró en la subasta online a través de Escrapalia de una controladora de peso industrial Garvens XS40 — equipo especializado en el control de peso de alta precisión para líneas de bebidas.</p>
+        <div class="caso-stats reveal" data-delay="4">
+          <div class="caso-stat"><div class="caso-stat-v">XS40</div><div class="caso-stat-l">Garvens<br>controladora</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">Online</div><div class="caso-stat-l">Subasta<br>Escrapalia</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">Fortune</div><div class="caso-stat-l">500<br>cliente</div></div>
+        </div>
+        <div class="caso-profit reveal" data-delay="5">
+          <div class="caso-profit-l">Modalidad · PDF p.9</div>
+          <div class="caso-profit-v">Subasta online · Maquinaria de precisión industrial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 12 · CASO BODEGA CASALOBOS -->
+<!-- ============================== -->
+<section class="slide" data-slide="12">
+  <div class="slide-inner">
+    <div class="caso-grid">
+      <div class="caso-img-wrap reveal" data-delay="0">
+        <img src="./assets/real/casalobos-bodega.webp" alt="Bodega Casalobos Abencys Ciudad Real" loading="lazy">
+        <div class="auth-caption">100% Authentic · PDF oficial</div>
+      </div>
+      <div class="caso-content">
+        <div class="caso-num-tag reveal">Caso 05 · Bodega</div>
+        <h2 class="caso-title reveal" data-delay="1">Bodega<em>Casalobos</em></h2>
+        <div class="caso-loc reveal" data-delay="2">Picón · Porzuna (Ciudad Real)</div>
+        <p class="caso-desc reveal" data-delay="3">La Bodega Casalobos, ubicada entre Picón y Porzuna, se creó en 2003 por 23 socios y entró en concurso de acreedores en 2011. Contaba con tres plantas que formaban un edificio de 5.059 metros cuadrados: nave de crianza en botella, almacenes, línea de embotellado, nave de elaboración, laboratorio y otras instalaciones. SURUS fue designado para la venta en subasta a través de Escrapalia.</p>
+        <div class="caso-stats reveal" data-delay="4">
+          <div class="caso-stat"><div class="caso-stat-v" data-counter="5059">0</div><div class="caso-stat-l">m²<br>construidos</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">3</div><div class="caso-stat-l">Plantas<br>edificio</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">100%</div><div class="caso-stat-l">Activos<br>vendidos</div></div>
+        </div>
+        <div class="caso-profit reveal" data-delay="5">
+          <div class="caso-profit-l">Beneficio verificado · PDF p.3</div>
+          <div class="caso-profit-v">Venta 100% activos · Depósitos 10K + 15K litros</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 13 · CASO MERCABARNA + FRICARNE -->
+<!-- ============================== -->
+<section class="slide" data-slide="13">
+  <div class="slide-inner">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 80px); align-items: center;">
+      <div>
+        <div class="caso-img-wrap reveal" data-delay="0">
+          <img src="./assets/real/mercabarna-barcelona.webp" alt="Desimplantación matadero Mercabarna" loading="lazy">
+          <div class="auth-caption">100% Authentic · PDF oficial</div>
+        </div>
+        <div class="caso-profit" style="margin-top: 24px;">
+          <div class="caso-profit-l">Caso 06 · Mercabarna</div>
+          <div class="caso-profit-v">Desimplantación estratégica del matadero central</div>
+        </div>
+      </div>
+      <div>
+        <div class="caso-img-wrap reveal" data-delay="1">
+          <img src="./assets/real/fricarne-supermercados.webp" alt="Supermercados Fricarne Valencia" loading="lazy">
+          <div class="auth-caption">100% Authentic · PDF oficial</div>
+        </div>
+        <div class="caso-stats" style="margin-top: 24px;">
+          <div class="caso-stat"><div class="caso-stat-v" data-counter="10">0</div><div class="caso-stat-l">Supermercados<br>Fricarne</div></div>
+          <div class="caso-stat"><div class="caso-stat-v" data-counter="5" data-suffix="M€">0</div><div class="caso-stat-l">Facturación<br>2022</div></div>
+          <div class="caso-stat"><div class="caso-stat-v">VLC</div><div class="caso-stat-l">Valencia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 14 · COUNTERS ANIMADOS   -->
+<!-- ============================== -->
+<section class="slide" data-slide="14">
+  <div class="slide-inner">
+    <div class="kicker reveal">Cifras verificadas, en bruto</div>
+    <h2 class="display reveal" data-delay="1">Seis <em>números</em> que resumen<br>el alcance real.</h2>
+
+    <div class="counters-grid reveal" data-delay="2">
+      <div class="counter-cell">
+        <div>
+          <div class="counter-cell-v" data-counter="180000" data-prefix="€" data-suffix="">0</div>
+          <div class="counter-cell-l">SADA-Nutreco<br>Subasta verificada</div>
+        </div>
+        <div class="counter-cell-source">PDF p.2</div>
+      </div>
+      <div class="counter-cell">
+        <div>
+          <div class="counter-cell-v" data-counter="5059" data-suffix=" m²">0</div>
+          <div class="counter-cell-l">Casalobos<br>Bodega Ciudad Real</div>
+        </div>
+        <div class="counter-cell-source">PDF p.3</div>
+      </div>
+      <div class="counter-cell">
+        <div>
+          <div class="counter-cell-v" data-counter="6000" data-suffix="/h">0</div>
+          <div class="counter-cell-l">AVICU<br>Pollos · Stork PMT</div>
+        </div>
+        <div class="counter-cell-source">PDF p.6</div>
+      </div>
+      <div class="counter-cell">
+        <div>
+          <div class="counter-cell-v" data-counter="1290">0</div>
+          <div class="counter-cell-l">Panificadora Baix<br>Clientes B2B</div>
+        </div>
+        <div class="counter-cell-source">PDF p.4</div>
+      </div>
+      <div class="counter-cell">
+        <div>
+          <div class="counter-cell-v" data-counter="1000" data-suffix="/h">0</div>
+          <div class="counter-cell-l">Señorío de Molina<br>Conejos</div>
+        </div>
+        <div class="counter-cell-source">PDF p.8</div>
+      </div>
+      <div class="counter-cell">
+        <div>
+          <div class="counter-cell-v" data-counter="1186" data-suffix=" m²">0</div>
+          <div class="counter-cell-l">Cuniporc<br>Matadero Salamanca</div>
+        </div>
+        <div class="counter-cell-source">PDF p.7</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 15 · CERTIFICACIONES       -->
+<!-- ============================== -->
+<section class="slide" data-slide="15">
+  <div class="slide-inner">
+    <div class="kicker reveal">Acreditaciones</div>
+    <h2 class="display reveal" data-delay="1">Acreditaciones y <em>certificaciones</em><br>que avalan cada operación.</h2>
+
+    <div class="s11-cert-grid reveal" data-delay="2">
+      <div class="s11-cert"><div class="s11-cert-shield"></div><div class="s11-cert-name">ISO 14001</div><div class="s11-cert-desc">Gestión ambiental</div></div>
+      <div class="s11-cert"><div class="s11-cert-shield"></div><div class="s11-cert-name">ISO 9001</div><div class="s11-cert-desc">Calidad</div></div>
+      <div class="s11-cert"><div class="s11-cert-shield"></div><div class="s11-cert-name">ISO 27001</div><div class="s11-cert-desc">Seguridad información</div></div>
+      <div class="s11-cert"><div class="s11-cert-shield"></div><div class="s11-cert-name">ISO 19601</div><div class="s11-cert-desc">Compliance penal</div></div>
+      <div class="s11-cert"><div class="s11-cert-shield"></div><div class="s11-cert-name">ISO 37001</div><div class="s11-cert-desc">Antisoborno</div></div>
+      <div class="s11-cert"><div class="s11-cert-shield"></div><div class="s11-cert-name">ISO 45001</div><div class="s11-cert-desc">Seguridad y salud</div></div>
+      <div class="s11-cert"><div class="s11-cert-shield"></div><div class="s11-cert-name">ENS Media</div><div class="s11-cert-desc">Esquema Nacional Seguridad</div></div>
+      <div class="s11-cert"><div class="s11-cert-shield s11-cert-ev"></div><div class="s11-cert-name">EcoVadis Silver</div><div class="s11-cert-desc">78/100 · Top 15% mundial</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 16 · PRUEBA SOCIAL        -->
+<!-- ============================== -->
+<section class="slide" data-slide="16">
+  <div class="slide-inner">
+    <div class="kicker reveal">Lo que dicen los clientes</div>
+    <h2 class="display reveal" data-delay="1">Diez <em>testimonios</em> verificados<br>de clientes industriales.</h2>
+
+    <div class="ps-grid reveal" data-delay="2">
+      <div class="ps-cell">
+        <div class="ps-q">"La colaboración con SURUS ha permitido iniciar un camino de éxito en la enajenación de equipos y materiales obsoletos de REE. Gracias a su profesionalidad y búsqueda continua de los mejores resultados, ha sido posible implementar esta solución sostenible."</div>
+        <div class="ps-meta"><b>Ana Villuendas Adé</b><br>Red Eléctrica de España · Dirección de Aprovisionamientos</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"Trabajar con SURUS ha supuesto un gran cambio de mentalidad en la visión del material descartado para nuestras operaciones, pasando de considerarlo un estorbo sin valor a un bien que puede tener gran utilidad para terceros."</div>
+        <div class="ps-meta"><b>Lorenzo López Sánchez</b><br>Repsol · Global Manager Drilling and Completions Categories</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"La colaboración entre los expertos de AECOM y SURUS aporta herramientas y soluciones que permiten abordar los proyectos de desimplantación de acuerdo con las actuales demandas sociales, ambientales y regulatorias."</div>
+        <div class="ps-meta"><b>César Asensio</b><br>AECOM · Director de Sostenibilidad y Medio Ambiente</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"Esta colaboración con SURUS, que cuenta con un importante bagaje de conocimiento, sin duda va a reforzar la actividad de EnergyLoop y proporcionará un fuerte empuje a la economía circular, mejorando la competitividad y la sostenibilidad."</div>
+        <div class="ps-meta"><b>Luis Sanz</b><br>EnergyLoop · Director Gerente</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"Los profesionales de SURUS nos han prestado el soporte necesario a lo largo del proceso de comercialización y subasta, así como en las gestiones necesarias para formalizar el traspaso de la propiedad de las aeronaves a los nuevos propietarios."</div>
+        <div class="ps-meta"><b>Belén Muñoz Guerrero</b><br>SENASA · Subdirectora Planificación y Recursos Corporativos</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"Gracias a SURUS y a su web Escrapalia hemos podido hacer las adjudicaciones a través de subastas totalmente transparentes que se adaptan a nuestras necesidades."</div>
+        <div class="ps-meta"><b>Juan Martino</b><br>SIGNUS · Director Operaciones y Logística</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"El modelo propuesto por SURUS con su web Escrapalia es innovador y ambicioso: con ellos hemos conseguido todos los objetivos propuestos y, en todos los casos, superando nuestras expectativas."</div>
+        <div class="ps-meta"><b>Enric Porta Doménech</b><br>Deloitte Financial Advisory · Assistant Manager</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"Siempre he recomendado a SURUS y Escrapalia a nuestros clientes. No solo son absolutamente eficientes en la obtención de mejores resultados en la liquidación de activos, sino que además el trato y grado de satisfacción son excelentes."</div>
+        <div class="ps-meta"><b>José Antonio Cadahia Casla</b><br>Roca Junyent · Socio</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"Capaces, resolutivos e innovadores, el equipo de SURUS Escrapalia superó nuestras expectativas desde el primer momento, y desde luego hemos vuelto a trabajar con ellos."</div>
+        <div class="ps-meta"><b>Paula Pérez</b><br>Abencys · Senior Economist</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-q">"Confiamos en SURUS para la comercialización de activos, equipamiento e instalaciones de nuestros laboratorios con el objetivo de darles una segunda vida y lograr un retorno económico y sostenible."</div>
+        <div class="ps-meta"><b>Ivan José Galindo Cardiel</b><br>WorldPathol · CEO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SLIDE 16 · CTA                  -->
+<!-- ============================== -->
+<section class="slide slide-cta" data-slide="17">
+  <div class="slide-inner">
+    <div class="kicker reveal" style="justify-content: center;">— Contacto</div>
+    <h1 class="cta-h reveal" data-delay="1">Surus ejecuta la transición.<br>¿<em>Cuándo</em> empieza la suya?</h1>
+    <p class="cta-m reveal" data-delay="2">El 80% de las desimplantaciones industriales se gestionan como gasto. El 20% se gestionan como ciclo. Surus opera en el 20% — y lo entrega con caja, reporte y trazabilidad circular.</p>
+    <div class="cta-actions reveal" data-delay="3">
+      <a class="btn btn-primary" href="mailto:jalvarado@surusin.com">Hablemos · jalvarado@surusin.com →</a>
+      <a class="btn btn-secondary" href="https://www.surusin.com" target="_blank" rel="noopener">surusin.com</a>
+    </div>
+    <div class="cta-foot reveal" data-delay="4">Juan Carlos Alvarado · Grupo Surus · Dossier C-Level confidencial</div>
+  </div>
+</section>
+
+<!-- ============================== -->
+<!-- SCRIPTS · INTERACTIVIDAD        -->
+<!-- ============================== -->
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('ct');
+  const progress = document.getElementById('progress');
+  const navDots = document.getElementById('navDots');
+
+  // Build nav dots
+  slides.forEach((s, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', `Ir a slide ${i+1}`);
+    dot.addEventListener('click', () => s.scrollIntoView({behavior: 'smooth'}));
+    navDots.appendChild(dot);
+  });
+
+  // === Donut chart ===
+  const segments = [
+    {label: 'Cárnico',     val: 5, color: '#B08A52'},
+    {label: 'Avícola',     val: 3, color: '#C9A36B'},
+    {label: 'Bodega',      val: 3, color: '#7A5E38'},
+    {label: 'Panadería',   val: 2, color: '#8A9A5B'},
+    {label: 'Bebidas',     val: 1, color: '#6B8E5A'},
+    {label: 'Supermercado',val: 1, color: '#C77B3A'},
+    {label: 'Conservas',   val: 1, color: '#5C6170'},
+    {label: 'Otros',       val: 1, color: '#3D414F'}
+  ];
+  const total = segments.reduce((a,b) => a+b.val, 0);
+  const segG = document.getElementById('donut-segments');
+  const legend = document.getElementById('donut-legend');
+  const radius = 70;
+  const circ = 2 * Math.PI * radius;
+  let offset = 0;
+  segments.forEach(seg => {
+    const len = (seg.val / total) * circ;
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', '90');
+    c.setAttribute('cy', '90');
+    c.setAttribute('r', String(radius));
+    c.setAttribute('fill', 'none');
+    c.setAttribute('stroke', seg.color);
+    c.setAttribute('stroke-width', '22');
+    c.setAttribute('stroke-dasharray', `0 ${circ}`);
+    c.style.transition = 'stroke-dasharray 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    segG.appendChild(c);
+    // Legend
+    const row = document.createElement('div');
+    row.className = 'donut-legend-row';
+    row.innerHTML = `<span class="swatch" style="background:${seg.color}"></span><span>${seg.label}</span><b>${seg.val}</b>`;
+    legend.appendChild(row);
+  });
+  function animateDonut() {
+    const donutSlide = document.querySelector('[data-slide="6"]');
+    if (!donutSlide || !donutSlide.classList.contains('in')) return;
+    let cum = 0;
+    Array.from(segG.children).forEach((c, i) => {
+      const len = (segments[i].val / total) * circ;
+      c.setAttribute('stroke-dasharray', `${len} ${circ - len}`);
+      c.setAttribute('stroke-dashoffset', String(-cum));
+      cum += len;
+    });
+  }
+
+  // === Reveal + counters on slide-in ===
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        // Trigger all reveals inside this slide
+        e.target.querySelectorAll('.reveal').forEach(r => r.classList.add('in'));
+        // Trigger counters inside this slide
+        e.target.querySelectorAll('[data-counter]').forEach(el => animateCounter(el));
+        // Trigger bars inside this slide
+        e.target.querySelectorAll('.tr-bar-fg').forEach(el => {
+          const w = el.dataset.w;
+          if (w) setTimeout(() => { el.style.width = w + '%'; }, 200);
+        });
+        // Trigger donut
+        if (e.target.dataset.slide === '6') setTimeout(animateDonut, 300);
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '0px 0px -10% 0px' });
+  slides.forEach(s => revealObs.observe(s));
+
+  // FALLBACK: Si el observer no dispara (algunos browsers), forzar reveal tras 500ms
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+    document.querySelectorAll('.slide:not(.in)').forEach(el => el.classList.add('in'));
+    // Animate bars
+    document.querySelectorAll('.tr-bar-fg').forEach(el => {
+      const w = el.dataset.w;
+      if (w && el.style.width === '') el.style.width = w + '%';
+    });
+    // Animate counters
+    document.querySelectorAll('[data-counter]').forEach(el => animateCounter(el));
+    // Animate donut
+    if (document.querySelector('[data-slide="6"]')) setTimeout(animateDonut, 300);
+  }, 800);
+
+  // SAFETY: Forzar visibilidad tras 2s pase lo que pase
+  setTimeout(() => {
+    document.querySelectorAll('.reveal, .slide').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }, 2500);
+
+  // === Counter animation ===
+  function animateCounter(el) {
+    if (el.dataset.animated) return;
+    el.dataset.animated = '1';
+    const target = parseFloat(el.dataset.counter);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1600;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 4);
+      const val = Math.round(target * eased);
+      el.textContent = prefix + formatNumber(val) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = prefix + formatNumber(target) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  function formatNumber(n) {
+    if (n >= 1000) return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return String(n);
+  }
+
+  // === Slide counter + progress ===
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const n = parseInt(e.target.dataset.slide);
+        counter.textContent = String(n).padStart(2, '0');
+        const pct = (n / slides.length) * 100;
+        progress.style.width = pct + '%';
+        document.querySelectorAll('.nav-dot').forEach((d, i) => {
+          d.classList.toggle('active', i + 1 === n);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => counterObs.observe(s));
+
+  // === Map pin/list interaction ===
+  const pins = document.querySelectorAll('.mapa-pin');
+  const rows = document.querySelectorAll('.mapa-row');
+  function highlight(prov) {
+    pins.forEach(p => p.classList.toggle('active', p.dataset.prov === prov));
+    rows.forEach(r => r.style.background = r.dataset.prov === prov ? 'var(--bg-elev-1)' : '');
+  }
+  pins.forEach(p => p.addEventListener('mouseenter', () => highlight(p.dataset.prov)));
+  pins.forEach(p => p.addEventListener('mouseleave', () => {
+    pins.forEach(x => x.classList.remove('active'));
+    rows.forEach(r => r.style.background = '');
+  }));
+  rows.forEach(r => r.addEventListener('mouseenter', () => highlight(r.dataset.prov)));
+  rows.forEach(r => r.addEventListener('mouseleave', () => {
+    pins.forEach(x => x.classList.remove('active'));
+    rows.forEach(r => r.style.background = '');
+  }));
+
+  // === Keyboard nav (Enter, Space, flechas, PageUp/Down, Home/End) ===
+  function getCurrentIndex() {
+    return Array.from(slides).findIndex(s => {
+      const r = s.getBoundingClientRect();
+      return r.top >= -100 && r.top < window.innerHeight/2;
+    });
+  }
+  function goToSlide(n) {
+    const target = Math.max(0, Math.min(slides.length - 1, n));
+    if (slides[target]) slides[target].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    // Ignorar si el foco está en un input/textarea (defensivo)
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+    const cur = getCurrentIndex();
+    if (cur < 0) return;
+
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      if (cur < slides.length - 1) goToSlide(cur + 1);
+    }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === 'Enter' && e.shiftKey)) {
+      e.preventDefault();
+      if (cur > 0) goToSlide(cur - 1);
+    }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goToSlide(cur + 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); goToSlide(cur - 1); }
+    if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+    if (e.key === 'End')  { e.preventDefault(); goToSlide(slides.length - 1); }
+  });
+
+  // === Botones de navegación visibles (click) ===
+  const btnPrev = document.getElementById('navPrev');
+  const btnNext = document.getElementById('navNext');
+  function updateBtnState() {
+    const cur = getCurrentIndex();
+    if (btnPrev) btnPrev.classList.toggle('is-disabled', cur <= 0);
+    if (btnNext) btnNext.classList.toggle('is-disabled', cur >= slides.length - 1 || cur < 0);
+  }
+  if (btnPrev) btnPrev.addEventListener('click', () => { const c = getCurrentIndex(); if (c > 0) goToSlide(c - 1); });
+  if (btnNext) btnNext.addEventListener('click', () => { const c = getCurrentIndex(); if (c < slides.length - 1) goToSlide(c + 1); });
+  // Actualizar estado disabled al cambiar de slide
+  document.addEventListener('scroll', () => {
+    if (window._navBtnRaf) return;
+    window._navBtnRaf = requestAnimationFrame(() => {
+      updateBtnState();
+      window._navBtnRaf = null;
+    });
+  }, { passive: true });
+  updateBtnState();
+})();
+</script>
+
+</body>
+</html>
