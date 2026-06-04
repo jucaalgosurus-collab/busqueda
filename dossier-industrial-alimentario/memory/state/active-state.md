@@ -17,20 +17,21 @@ Tras la auditoría honesta (`memory/audits/2026-06-04-auditoria-honesta-pedido-v
 
 ## Sprint D.1 — Fixes críticos (PRIORIDAD)
 
-| # | Fix | Tipo | Bloquea |
-|---|-----|------|---------|
-| D.1.0 | Decisión deploy: Vercel (build Next.js) vs abrir VPS:3002 con TLS — **REQUIERE INPUT** | DECISION | deploy |
-| D.1.1 | Regenerar token Telegram (bot JuanAlimentosbot id 8430000566) en `@BotFather`, actualizar `/opt/hermes-dossier/.env.telegram` | OPS manual | Reportes Telegram |
-| D.1.2 | Mover `Surus2024!` de `bot.py` y `daily-report.sh` a `/etc/hermes/hermes.env` chmod 600, rotar password DB | OPS+SECRET | credencial expuesta |
-| D.1.3 | Investigar 4 procesos `aionui`/`aioncore` (5 puertos) + `tor`/`cups` innecesarios | OPS | superficie sospechosa |
-| D.1.4 | Aplicar `daysBack: 2` a `lib/agents/runner.ts:87` (newsroom) | CODE 1 línea | "BASURA" 50% de hallazgos |
-| D.1.5 | Purgar 121 sources pre-2025-01-01 de DB | SQL | ruido |
-| D.1.6 | Cache de verificación Hunter: tabla `EmailVerification { email UNIQUE, status, verifiedAt }` con TTL 30d. Regla 10208 | CODE+SCHEMA | re-trabajo |
-| D.1.7 | Backup diario DB: cron `pg_dump hermes_dossier \| gzip > /opt/hermes-dossier/backups/db-$(date +%F).sql.gz` retain 7d | OPS | disaster recovery |
-| D.1.8 | Fix query builder C.3 patentes: 0 in-scope en 3 ejecuciones del timer | CODE | C.3 agente no produce valor |
-| D.1.9 | LinkedIn: arreglar cookie (regenerar) o cambiar a RapidAPI alternativo | OPS+CODE | contactos planta |
-| D.1.10 | Auditar `surusclientes.vercel.app` para aprender patrón de referencia — **REQUIERE INPUT** | RESEARCH | UI quality |
-| D.1.11 | Ocultar panel admin (auth o ruta no-listada) — msg 7729 | CODE | outreach seguro |
+| # | Fix | Estado | Evidencia |
+|---|-----|--------|-----------|
+| D.1.0 | Decisión deploy: Vercel (landing) + VPS (dossier con TLS) | ✅ DECIDIDO | OK explícito usuario |
+| D.1.1 | Regenerar token Telegram, inyectar sin logs | ✅ HECHO | `getMe` HTTP 200, bot `JuanAlimentosbot` |
+| D.1.1b | TELEGRAM_CHAT_ID=8430000566 era el ID del BOT, no del chat con usuario | 🔴 BLOQUEANTE | Fix requiere que JC abra chat con bot y mande /start |
+| D.1.2 | Mover `Surus2024!` de unit files a `/etc/hermes/hermes.env` (mode 600) | ✅ HECHO | `hermes-daily-report.service` reescrito, validado con arranque real |
+| D.1.3 | Investigar `aionui`/`aioncore` (5 puertos) | ✅ HECHO | Legítimos (instalados 24/05/2026), UFW bloquea :3000 |
+| D.1.4 | `daysBack: 2` en `runner.ts:87` (newsroom) y `:149` (sectorial) | ✅ HECHO | Smoke 7/7 PASS, commit 258a6a8 |
+| D.1.5 | 121 sources pre-2025-01-01 → `isStale=true` (no destructivo) | ✅ HECHO | UPDATE 121, conteo 3613 fresh / 121 stale |
+| D.1.6 | Cache verificación Hunter (regla 10208) | ⏳ PENDIENTE | Sprint D.2 |
+| D.1.7 | Backup diario DB: `hermes-db-backup.{service,timer}` | ✅ HECHO | Primer backup 2.7MB OK, próximo 5 jun 03:30 UTC |
+| D.1.8 | Fix query builder C.3 patentes: 0 in-scope en 3 runs | ⏳ PENDIENTE | Sprint D.2 |
+| D.1.9 | Auditar `surusclientes.vercel.app` para patrón | ✅ HECHO | Spec clonable en `2026-06-04-auditoria-forense-3-agentes.md` |
+| D.1.10 | LinkedIn: arreglar cookie o RapidAPI | ⏳ PENDIENTE | Requiere acción manual JC |
+| D.1.11 | Ocultar panel admin (auth) — msg 7729 | ⏳ PENDIENTE | Sprint D.2 |
 
 ## Sprint D.2 — Mejoras (post-D.1)
 
