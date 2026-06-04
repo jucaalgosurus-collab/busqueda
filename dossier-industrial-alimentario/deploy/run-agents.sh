@@ -10,9 +10,6 @@ cd /opt/hermes-dossier/apps/dossier-industrial
 set -a
 source /etc/hermes-dossier.env
 set +a
-# DATABASE_URL loaded from /etc/hermes-dossier.env
-# HUNTER_API_KEY loaded from /etc/hermes-dossier.env
-# GEMINI_API_KEY loaded from /etc/hermes-dossier.env
 
 LOG_DIR=/var/log/hermes-scan
 mkdir -p "$LOG_DIR"
@@ -57,6 +54,11 @@ timeout 240 ./node_modules/.bin/tsx lib/agents/regulatorio-runner.ts 2>&1 | tail
 echo "" | tee -a "$LOG"
 echo "▶ AGENT B.3: renuncias (≥3 ceses consejeros en 90d, cadencia 1d)" | tee -a "$LOG"
 timeout 240 ./node_modules/.bin/tsx lib/agents/renuncias-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ renuncias falló" | tee -a "$LOG"
+
+# 6c. Sprint B.4 Ejecuciones singulares (no concursos) — tensión financiera pre-concursal
+echo "" | tee -a "$LOG"
+echo "▶ AGENT B.4: ejecuciones singulares (1+ ejec + 1+ embargo en 90d, sin concursos, cadencia 1d)" | tee -a "$LOG"
+timeout 240 ./node_modules/.bin/tsx lib/agents/ejecuciones-runner.ts 2>&1 | tail -20 | tee -a "$LOG" || echo "  ✗ ejecuciones falló" | tee -a "$LOG"
 
 # 7. Verificar emails pendientes con Hunter.io (SIEMPRE corre al final)
 echo "" | tee -a "$LOG"
