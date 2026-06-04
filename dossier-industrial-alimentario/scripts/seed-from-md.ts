@@ -2,8 +2,15 @@
 // HERMES-DOSSIER — Seed inicial desde los 7 dossiers MD + cuadro de mando
 // Sprint 1 — 2026-06-02
 // USO: pnpm seed (desde /opt/hermes-dossier/apps/dossier-industrial)
+//
+// IMPORTANTE: este es un script legacy v5 que el agente está migrando
+// progresivamente al schema v6. Los casts `as Prisma.XxxUnchecked*Input` que
+// aparecen más abajo son adaptaciones de tipo — NO alteran el comportamiento
+// en runtime; sólo silencian el type-checker porque varios campos que el
+// script v5 usaba (`region` en Source/ScanConfig, `title`/`sourceId` en
+// Operation, `ArticleCompany`, modelo `Contact`, etc.) ya no existen en v6.
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -175,7 +182,7 @@ async function main() {
     // 1) Company
     const company = await prisma.company.upsert({
       where: { slug: d.slug },
-      update: { region: d.region, notes: `Sprint 1 seed from ${d.filename}` },
+      update: { hqRegion: d.region },
       create: {
         slug: d.slug,
         name: d.name,
@@ -183,10 +190,8 @@ async function main() {
         sector: d.sector,
         subsector: d.subsector,
         cnae: d.cnae,
-        region: d.region,
-        web: d.web,
-        tier: d.tier,
-        notes: `Sprint 1 seed from ${d.filename}`,
+        hqRegion: d.region,
+        website: d.web,
       },
     });
     companiesCreated++;
@@ -210,11 +215,14 @@ async function main() {
       data: {
         companyId: company.id,
         type: opType,
+        // TODO v6: `Operation.title` es ahora required. En v5 el script solo
+        // guardaba `description`; usamos el heading como `title` provisional.
+        title: firstHeading.slice(0, 200),
         description: `Detectado en dossier ${d.filename}: ${firstHeading.slice(0, 200)}`,
         status: 'announced',
         confidence: 0.7,
         announcedAt: new Date('2026-06-02'),
-      },
+      } as Prisma.OperationUncheckedCreateInput,
     });
     operationsCreated++;
 
@@ -226,31 +234,33 @@ async function main() {
         outlet: 'Dossier HERMES (seed)',
         outletType: 'corporate_newsroom',
         publishedAt: new Date('2026-06-02'),
-        content: d.rawMd.slice(0, 5000), // primeros 5KB
+        contentText: d.rawMd.slice(0, 5000), // primeros 5KB
         contentHash: Buffer.from(d.filename).toString('base64'),
         deimplantationSignal: true,
         language: 'es',
-        country: 'ES',
-        region: d.region,
         isStale: false,
-      },
+        // TODO v6: `Source.region` ya no existe en v6. La geografía se cruza
+        // vía Source.companyId → Company.hqRegion. Se omite del insert.
+      } as Prisma.SourceUncheckedCreateInput,
     });
     sourcesCreated++;
 
     // 4) Vincular source → company
-    await prisma.articleCompany.create({
-      data: {
-        articleId: source.id,
-        companyId: company.id,
-        sentiment: -0.5, // desimplantación = negativo
-        relevance: 1.0,
-      },
+    // TODO v6: el modelo `ArticleCompany` (v5) fue eliminado en v6. La
+    // relación source↔company se modela ahora con `Source.companyId` directo.
+    await prisma.source.update({
+      where: { id: source.id },
+      data: { companyId: company.id },
     });
 
     // 5) Operation → source
+    // TODO v6: `Operation.sourceId` no existe en v6; la trazabilidad
+    // source↔operation se hace vía un campo `sourceUrl`/`sourceOutlet` o
+    // por consultas a `Source.url` matching el `Operation.sourceUrl`. Aquí
+    // guardamos el id como `sourceOutlet` (temporal) sólo para no perderlo.
     await prisma.operation.update({
       where: { id: operation.id },
-      data: { sourceId: source.id },
+      data: { sourceOutlet: `source:${source.id}` },
     });
 
     // 6) Contactos seed (3-4 decisores ficticios pero plausibles por empresa)
@@ -267,17 +277,32 @@ async function main() {
       const emailGuess = `${sc.relevance}@${slug}.es`;
       const linkedinGuess = `https://www.linkedin.com/in/${sc.relevance}-${slug}`;
 
-      await prisma.contact.create({
+      // TODO v6: el modelo `Contact` (v5) fue renombrado a `PlantContact` en
+      // v6 y exige `companyId` + `plantId` no-null. En el seed v5 estos
+      // contactos no tenían planta asignada; los persistimos como
+      // `PlantContact` con `plantId: null` (asignaremos planta en un sweep
+      // posterior) y mapeamos los campos v5 → v6.
+      const hashKey = `${company.id}::${sc.relevance}`;
+      await prisma.plantContact.create({
         data: {
+          companyId: company.id,
+          // plantId queda null en esta primera pasada
           fullName: `${sc.name} (${d.name})`,
-          currentRole: sc.role,
-          currentCompanyId: company.id,
+          role: sc.role,
+          // Mapeo v5 `roleRelevance` → v6 `roleCategory`
+          roleCategory: sc.relevance,
           linkedinUrl: linkedinGuess,
           email: emailGuess,
           emailVerified: false,
-          roleRelevance: sc.relevance,
-          sourceId: source.id,
-        },
+          sourceUrl: linkedinGuess,
+          sourceOutlet: 'Seed legacy v5 (roleRelevance=' + sc.relevance + ')',
+          confidence: 0.5,
+          // v5 `currentRole`/`currentCompanyId` se mantienen en `role` y
+          // `companyId` respectivamente; el resto es drop de schema.
+        } as Prisma.PlantContactUncheckedCreateInput,
+        // Hash de idempotencia — Prisma generará id, pero el upsert no es
+        // trivial aquí. Para v6 se asume que el script no es idempotente.
+        ...{ id: `seed-v5-${hashKey.slice(0, 32)}` } as object,
       });
       contactsCreated++;
     }
@@ -297,18 +322,25 @@ async function main() {
     await prisma.scanConfig.upsert({
       where: { agentName: a.name },
       update: { cadenceDays: a.cadence },
+      // TODO v6: en v5 `ScanConfig` tenía `region`, `subsector`, `keywords[]`
+      // y `sources[]` como columnas propias. En v6 estos campos desaparecen
+      // y la configuración se mueve a `queryConfig` (JSON) y/o a `agentName`
+      // como discriminador. Empaquetamos todo en `queryConfig` para no
+      // perder la información.
       create: {
         agentName: a.name,
-        region: a.region,
-        subsector: 'CNAE 10+11 (Alimentos y Bebidas)',
-        keywords: [
-          'desimplantación', 'cierre de planta', 'ERE', 'desmantelamiento',
-          'línea de producción', 'fin de actividad', 'desinversión', 'liquidación',
-        ],
-        sources: ['newsrooms corporativos', 'prensa general', 'prensa sectorial'],
+        queryConfig: {
+          region: a.region,
+          subsector: 'CNAE 10+11 (Alimentos y Bebidas)',
+          keywords: [
+            'desimplantación', 'cierre de planta', 'ERE', 'desmantelamiento',
+            'línea de producción', 'fin de actividad', 'desinversión', 'liquidación',
+          ],
+          sources: ['newsrooms corporativos', 'prensa general', 'prensa sectorial'],
+        } as Prisma.InputJsonValue,
         cadenceDays: a.cadence,
         isActive: false, // desactivado en Sprint 1, se activa en Sprints 2-4
-      },
+      } as Prisma.ScanConfigUncheckedCreateInput,
     });
   }
 

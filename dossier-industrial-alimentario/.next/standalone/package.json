@@ -1,0 +1,45 @@
+{
+  "name": "dossier-industrial",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3002",
+    "build": "prisma generate && next build",
+    "start": "next start -p 3002 -H 127.0.0.1",
+    "lint": "next lint",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:reset": "prisma migrate reset --force",
+    "seed": "tsx scripts/seed-from-md.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "smoke:anti-detect": "tsx scripts/smoke-anti-detect.ts",
+    "scan:newsrooms": "tsx scripts/scan-newsrooms.ts",
+    "scan:sectorial": "tsx scripts/scan-sectorial.ts",
+    "scan:mocr": "tsx scripts/scan-mocr.ts",
+    "smoke:sprint5": "tsx scripts/smoke-sprint5.ts"
+  },
+  "dependencies": {
+    "next": "15.5.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "@prisma/client": "5.22.0",
+    "lucide-react": "0.460.0",
+    "date-fns": "4.1.0",
+    "zod": "3.24.1",
+    "axios": "1.7.9",
+    "cheerio": "1.0.0",
+    "rss-parser": "3.13.0",
+    "playwright": "1.49.1",
+    "https-proxy-agent": "^7.0.6",
+    "@google/generative-ai": "0.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.0",
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.1",
+    "typescript": "5.7.2",
+    "prisma": "5.22.0",
+    "tsx": "4.19.2"
+  }
+}

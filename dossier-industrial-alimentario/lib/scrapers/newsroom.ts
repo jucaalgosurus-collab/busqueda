@@ -6,8 +6,10 @@
 //   2. HTTP       — axios + cheerio on entry.newsroomUrl, extract article links
 //                   from <article>/<div class="post">/<li class="entry">, then
 //                   GET each article and extract { title, content, publishedAt }.
-//   3. Playwright — fallback when cheerio content is < 200 chars OR fewer than
-//                   5 article links were found on the home page.
+//                   Optionally wrapped in rate-limiter + UA rotation + proxy.
+//   3. Playwright — stealth-enhanced fallback when cheerio content is < 200
+//                   chars OR fewer than 5 article links were found on the home
+//                   page. Uses playwright-extra + playwright-stealth.
 //
 // All side effects are wrapped in try/catch; a failing source returns [] and
 // logs a structured warning. The function never throws.
@@ -20,6 +22,12 @@ import * as cheerio from 'cheerio';
 import crypto from 'node:crypto';
 import Parser from 'rss-parser';
 
+import {
+  buildRealisticHeaders,
+  getRateLimiter,
+  getUserAgentRotator,
+  type StealthBrowser,
+} from './anti-detect/index';
 import {
   DEFAULT_MAX_ARTICLES,
   HTTP_RETRIES,
@@ -34,7 +42,7 @@ import {
   type NewsroomListEntry,
   type ScrapedArticle,
   type ScrapeOptions,
-} from './types.js';
+} from './types';
 
 // --- shared types (consumed by sectorial.ts) ---
 
@@ -58,20 +66,37 @@ export interface ArticleContent {
 
 // --- HTTP ---
 
-function makeHttp(): AxiosInstance {
-  return axios.create({
+function makeHttp(opts: { stealth?: boolean; userAgent?: string; proxy?: string | null } = {}): AxiosInstance {
+  const useStealth = opts.stealth ?? true;
+  const headers = useStealth
+    ? buildRealisticHeaders()
+    : {
+        'User-Agent': opts.userAgent ?? USER_AGENT,
+        Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'es-ES,es;q=0.9,en;q=0.7',
+      };
+  if (opts.userAgent) {
+    headers['User-Agent'] = opts.userAgent;
+  }
+  const axiosConfig: Record<string, unknown> = {
     timeout: HTTP_TIMEOUT_MS,
-    headers: {
-      'User-Agent': USER_AGENT,
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'Accept-Language': 'es-ES,es;q=0.9,en;q=0.7',
-    },
+    headers,
     // Do not throw on non-2xx — we want to inspect body anyway.
     validateStatus: () => true,
     // Keep raw text instead of axios auto-parsing to JSON.
     responseType: 'text',
-    transformResponse: [(data) => data],
-  });
+    transformResponse: [(data: unknown) => data],
+  };
+  if (opts.proxy) {
+    axiosConfig.proxy = false;
+    axiosConfig.httpsAgent = undefined;
+    axiosConfig.httpAgent = undefined;
+    // axios 1.7+ does not accept `proxy: 'url'` for HTTP proxy directly;
+    // a real SOCKS/HTTP proxy support requires https-proxy-agent.
+    // We accept a string but warn — actual proxying requires custom agent.
+    // TODO(sidecar): install https-proxy-agent when HERMES_PROXIES is set.
+  }
+  return axios.create(axiosConfig as never);
 }
 
 function sleep(ms: number): Promise<void> {
@@ -294,24 +319,43 @@ function extractFromContainer($: cheerio.CheerioAPI): ArticleContent {
   return { title, publishedAt, content };
 }
 
-// --- Playwright ---
+// --- Playwright (stealth-enhanced) ---
 
-async function maybeRenderWithPlaywright(url: string): Promise<string | null> {
-  let browser: import('playwright').Browser | null = null;
+async function maybeRenderWithPlaywright(
+  url: string,
+  opts: { stealth?: boolean } = {},
+): Promise<string | null> {
+  const useStealth = opts.stealth ?? true;
+  let sb: StealthBrowser | null = null;
   try {
-    // Lazy import — Playwright is heavy and only loaded when actually needed.
-    const { chromium } = await import('playwright');
-    browser = await chromium.launch({ headless: true });
-    const context = await browser.newContext({
-      userAgent: USER_AGENT,
-      locale: 'es-ES',
-    });
-    const page = await context.newPage();
+    if (useStealth) {
+      const { getStealthBrowser } = await import('./anti-detect/index.js');
+      sb = await getStealthBrowser({ headless: true });
+    } else {
+      const { chromium } = await import('playwright');
+      const browser = await chromium.launch({ headless: true });
+      sb = {
+        browser,
+        contexts: [],
+        newPage: async (pageOpts?: Record<string, unknown>) => {
+          const context = await browser.newContext({
+            userAgent: USER_AGENT,
+            locale: 'es-ES',
+            ...((pageOpts as Record<string, unknown>) ?? {}),
+          });
+          sb!.contexts.push(context);
+          return context.newPage();
+        },
+        close: async () => {
+          try { await browser.close(); } catch { /* ignore */ }
+        },
+      };
+    }
+    const page = await sb.newPage();
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: PLAYWRIGHT_TIMEOUT_MS });
     // Give JS-rendered content a moment to hydrate.
     await page.waitForTimeout(PLAYWRIGHT_WAIT_MS);
     const html = await page.content();
-    await context.close();
     return html;
   } catch (e) {
     console.warn({
@@ -321,9 +365,9 @@ async function maybeRenderWithPlaywright(url: string): Promise<string | null> {
     });
     return null;
   } finally {
-    if (browser) {
+    if (sb) {
       try {
-        await browser.close();
+        await sb.close();
       } catch {
         // Ignore close errors.
       }
@@ -334,6 +378,7 @@ async function maybeRenderWithPlaywright(url: string): Promise<string | null> {
 async function extractArticleContent(
   http: AxiosInstance,
   url: string,
+  opts: { stealth?: boolean } = {},
 ): Promise<ArticleContent & { usedPlaywright: boolean }> {
   const html = await httpGetText(http, url);
   const $ = cheerio.load(html);
@@ -341,7 +386,7 @@ async function extractArticleContent(
   let usedPlaywright = false;
 
   if (extracted.content.length < MIN_USEFUL_CHARS) {
-    const rendered = await maybeRenderWithPlaywright(url);
+    const rendered = await maybeRenderWithPlaywright(url, opts);
     if (rendered) {
       const $$ = cheerio.load(rendered);
       extracted = extractFromContainer($$);
@@ -403,10 +448,22 @@ async function scrapeViaRss(
   maxArticles: number,
   fetchMsStart: number,
   outletType: ScrapedArticle['outletType'],
+  opts: ScrapeOptions = {},
 ): Promise<ScrapedArticle[]> {
   if (!entry.rssUrl) return [];
+  const useStealth = opts.stealth ?? true;
+  const ua = opts.userAgent ?? (useStealth ? getUserAgentRotator().pick() : USER_AGENT);
+  const rate = opts.rate ?? 0;
+  const limiter = rate > 0
+    ? getRateLimiter(opts.limiterKey ?? `rss-${entry.slug}`, { requestsPerSecond: rate, label: `rss-${entry.slug}` })
+    : null;
+  if (limiter) await limiter.acquire();
   try {
-    const feed = await rssParser.parseURL(entry.rssUrl);
+    const parser = new Parser({
+      timeout: HTTP_TIMEOUT_MS,
+      headers: { 'User-Agent': ua },
+    });
+    const feed = await parser.parseURL(entry.rssUrl);
     const items = (feed.items ?? []).slice(0, maxArticles);
     const articles: ScrapedArticle[] = [];
     for (const item of items) {
@@ -445,10 +502,18 @@ async function scrapeViaHttp(
   fetchMsStart: number,
   usePlaywright: boolean,
   outletType: ScrapedArticle['outletType'],
+  opts: ScrapeOptions = {},
 ): Promise<ScrapedArticle[]> {
   if (!entry.newsroomUrl) return [];
+  const rate = opts.rate ?? 0;
+  const limiter = rate > 0
+    ? getRateLimiter(opts.limiterKey ?? `http-${entry.slug}`, { requestsPerSecond: rate, label: `http-${entry.slug}` })
+    : null;
+  const useStealth = opts.stealth ?? true;
+
   let html: string;
   try {
+    if (limiter) await limiter.acquire();
     html = await httpGetText(http, entry.newsroomUrl);
   } catch (e) {
     console.warn({
@@ -463,7 +528,7 @@ async function scrapeViaHttp(
 
   // Playwright fallback on the HOME when cheerio is useless.
   if (usePlaywright && (links.length < MIN_ARTICLE_LINKS || html.length < 500)) {
-    const rendered = await maybeRenderWithPlaywright(entry.newsroomUrl);
+    const rendered = await maybeRenderWithPlaywright(entry.newsroomUrl, { stealth: useStealth });
     if (rendered) {
       links = extractArticleLinks(rendered, entry.newsroomUrl);
     }
@@ -475,7 +540,8 @@ async function scrapeViaHttp(
   const articles: ScrapedArticle[] = [];
   for (const link of limited) {
     try {
-      const result = await extractArticleContent(http, link.href);
+      if (limiter) await limiter.acquire();
+      const result = await extractArticleContent(http, link.href, { stealth: useStealth });
       const title = (result.title || link.text || '').trim();
       if (!title) continue;
       const content = result.content;
@@ -524,15 +590,26 @@ export async function scrapeNewsroom(
   const maxArticles = opts?.maxArticles ?? DEFAULT_MAX_ARTICLES;
   const usePlaywright = opts?.usePlaywright ?? true;
   const fetchMsStart = Date.now();
-  const http = makeHttp();
+  const http = makeHttp({ stealth: opts?.stealth, userAgent: opts?.userAgent, proxy: opts?.proxy });
   const shared = toSharedEntry(entry);
 
   if (entry.rssUrl) {
-    const rssArticles = await scrapeViaRss(shared, maxArticles, fetchMsStart, 'corporate_newsroom');
-    if (rssArticles.length > 0) return rssArticles;
+    const rssArticles = await scrapeViaRss(shared, maxArticles, fetchMsStart, 'corporate_newsroom', opts);
+    if (rssArticles.length > 0) return applyDaysBackFilter(rssArticles, opts?.daysBack);
   }
 
-  return scrapeViaHttp(shared, http, maxArticles, fetchMsStart, usePlaywright, 'corporate_newsroom');
+  const httpArticles = await scrapeViaHttp(shared, http, maxArticles, fetchMsStart, usePlaywright, 'corporate_newsroom', opts);
+  return applyDaysBackFilter(httpArticles, opts?.daysBack);
+}
+
+/**
+ * QW-8: Filtra artículos con publishedAt < (now - daysBack días).
+ * Items sin publishedAt (null) se INCLUYEN (no se pueden datar; no queremos perderlos).
+ */
+export function applyDaysBackFilter(articles: ScrapedArticle[], daysBack: number | undefined): ScrapedArticle[] {
+  if (daysBack === undefined || daysBack <= 0) return articles;
+  const cutoff = Date.now() - daysBack * 24 * 60 * 60 * 1000;
+  return articles.filter((a) => a.publishedAt === null || a.publishedAt.getTime() >= cutoff);
 }
 
 // --- Internal exports (consumed by sectorial.ts) ---

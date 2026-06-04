@@ -69,9 +69,9 @@ const checks = {
   C23_AnaVilluendas: await page.evaluate(() => document.body.textContent.includes('Ana Villuendas')),
   C24_LorenzoLopez: await page.evaluate(() => document.body.textContent.includes('Lorenzo López')),
   C25_GalindoCardiel: await page.evaluate(() => document.body.textContent.includes('Galindo Cardiel')),
-  C26_slidesCount17: data.slidesCount === 17,
+  C26_slidesCount13: data.slidesCount === 13,
   C27_noConsoleErrors: errs.length === 0,
-  C28_counterTotal: data.totalText === '/ 17',
+  C28_counterTotal: data.totalText === '/ 13',
   C29_h1EmCorrect: await page.evaluate(() => {
     // Test the hero h1.display em (Valorización) and CTA cta-h em (Cuándo)
     const heroEm = document.querySelector('h1.display em')?.textContent;
@@ -88,21 +88,21 @@ console.log(JSON.stringify({ data, checks, errors: errs }, null, 2));
 if (!fs.existsSync('./_validate-desktop')) fs.mkdirSync('./_validate-desktop');
 
 await page.evaluate(() => {
-  const slide = document.querySelector('[data-slide="5"]');
+  const slide = document.querySelector('[data-slide="6"]');
   if (slide) slide.scrollIntoView({ behavior: 'instant' });
 });
 await page.waitForTimeout(1500);
 await page.screenshot({ path: './_validate-desktop/s11-slide5-iconos-macros.png', fullPage: false });
 
 await page.evaluate(() => {
-  const slide = document.querySelector('[data-slide="15"]');
+  const slide = document.querySelector('[data-slide="8"]');
   if (slide) slide.scrollIntoView({ behavior: 'instant' });
 });
 await page.waitForTimeout(1500);
 await page.screenshot({ path: './_validate-desktop/s11-slide15-certs.png', fullPage: false });
 
 await page.evaluate(() => {
-  const slide = document.querySelector('[data-slide="16"]');
+  const slide = document.querySelector('[data-slide="12"]');
   if (slide) slide.scrollIntoView({ behavior: 'instant' });
 });
 await page.waitForTimeout(1500);
@@ -110,7 +110,7 @@ await page.screenshot({ path: './_validate-desktop/s11-slide16-testimonios.png',
 
 // Close-up of icon 1
 await page.evaluate(() => {
-  const slide = document.querySelector('[data-slide="5"]');
+  const slide = document.querySelector('[data-slide="6"]');
   if (slide) slide.scrollIntoView({ behavior: 'instant' });
 });
 await page.waitForTimeout(1500);

@@ -56,7 +56,7 @@ async function main() {
   });
 
   // 6) Decisores LinkedIn con linkedinUrl ≥ 5 (umbral v1: 1 query genera 0-3)
-  const contactsWithLi = await prisma.contact.count({ where: { linkedinUrl: { not: null } } });
+  const contactsWithLi = await prisma.plantContact.count({ where: { linkedinUrl: { not: null } } });
   asserts.push({
     name: '6. ≥5 contactos con LinkedIn',
     pass: contactsWithLi >= 5,
@@ -74,21 +74,21 @@ async function main() {
     detail: runLi ? `id=${runLi.id} profiles=${runLi.itemsFound} contacts=${runLi.itemsInScope}` : 'no run',
   });
 
-  // 8) Roles relevantes representados: al menos 2 distintos roleRelevance
-  const roles = await prisma.contact.groupBy({
-    by: ['roleRelevance'],
+  // 8) Roles relevantes representados: al menos 2 distintos roleCategory
+  const roles = await prisma.plantContact.groupBy({
+    by: ['roleCategory'],
     where: { linkedinUrl: { not: null } },
-    _count: { roleRelevance: true },
+    _count: { roleCategory: true },
   });
   asserts.push({
     name: '8. ≥2 roles distintos representados',
     pass: roles.length >= 2,
-    detail: `roles=${roles.length} (${roles.map((r) => r.roleRelevance).join(', ')})`,
+    detail: `roles=${roles.length} (${roles.map((r) => r.roleCategory).join(', ')})`,
   });
 
   // 9) Hunter.io enricher (si corrió): al menos 1 email_verified
   // (opcional si HUNTER_API_KEY no está configurado)
-  const verified = await prisma.contact.count({ where: { emailVerified: true } });
+  const verified = await prisma.plantContact.count({ where: { emailVerified: true } });
   asserts.push({
     name: '9. Hunter enricher (≥1 email_verified) — opcional si HUNTER_API_KEY activa',
     pass: verified >= 1,

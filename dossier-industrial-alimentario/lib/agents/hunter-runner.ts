@@ -51,13 +51,13 @@ export async function runHunterEnricher(opts: { maxContacts?: number; onlyCompan
   const only = new Set(opts.onlyCompanyIds ?? []);
 
   // Buscar Contacts sin email verificado y que tengan linkedinUrl (señal de calidad)
-  const candidates = await prisma.contact.findMany({
+  const candidates = await prisma.plantContact.findMany({
     where: {
       emailVerified: false,
       linkedinUrl: { not: null },
-      ...(only.size > 0 ? { currentCompanyId: { in: [...only] } } : {}),
+      ...(only.size > 0 ? { companyId: { in: [...only] } } : {}),
     },
-    include: { currentCompany: true },
+    include: { company: true },
     take: max,
     orderBy: { lastEnrichedAt: 'asc' },
   });
@@ -65,13 +65,13 @@ export async function runHunterEnricher(opts: { maxContacts?: number; onlyCompan
   let enriched = 0, notFound = 0, errors = 0;
   for (let i = 0; i < candidates.length; i++) {
     const c = candidates[i];
-    if (!c.currentCompany?.web) { notFound++; continue; }
+    if (!c.company?.website) { notFound++; continue; }
     let domain: string;
-    try { domain = new URL(c.currentCompany.web).hostname.replace(/^www\./, ''); }
+    try { domain = new URL(c.company.website).hostname.replace(/^www\./, ''); }
     catch { notFound++; continue; }
     const res = await findEmailByNameAndDomain({ fullName: c.fullName, domain });
     if (res) {
-      await prisma.contact.update({
+      await prisma.plantContact.update({
         where: { id: c.id },
         data: { email: res.email, emailVerified: true, lastEnrichedAt: new Date() },
       });

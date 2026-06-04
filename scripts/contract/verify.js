@@ -58,12 +58,12 @@ function evaluateContract(contractFile, results) {
   const content = fs.readFileSync(contractFile, 'utf-8');
 
   // Extract criteria from contract
-  const criteriaMatch = content.match(/## Success Criteria\n([\s\S]*?)(?=\n## )/);
+  const criteriaMatch = content.match(/## Success Criteria\r?\n([\s\S]*?)(?=\r?\n## )/);
   if (!criteriaMatch) {
     return { pass: false, reason: 'No success criteria found in contract' };
   }
 
-  const criteria = criteriaMatch[1].trim().split('\n').filter(l => l.trim());
+  const criteria = criteriaMatch[1].trim().split(/\r?\n/).filter(l => l.trim());
   let allPass = true;
   const details = [];
 

@@ -1,0 +1,20 @@
+# /etc/systemd/system/hermes-daily-report.service
+# Genera y envía el reporte diario a las 08:00 hora local Madrid (06:00 UTC)
+[Unit]
+Description=HERMES Dossier - reporte diario 08:00 (notifica por Telegram)
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+Environment=DATABASE_URL=postgresql://surus:Surus2024!@127.0.0.1:5432/hermes_dossier?schema=public
+Environment=TELEGRAM_BOT_TOKEN_FILE=/opt/hermes-dossier/.env.telegram
+ExecStart=/opt/hermes-dossier/scripts/daily-report.sh
+User=root
+Group=root
+StandardOutput=append:/var/log/hermes-scan/daily-report.log
+StandardError=append:/var/log/hermes-scan/daily-report.log
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target

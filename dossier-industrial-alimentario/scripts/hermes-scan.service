@@ -1,0 +1,25 @@
+# /etc/systemd/system/hermes-scan.service
+# Servicio principal que ejecuta todos los agentes de HERMES Dossier
+[Unit]
+Description=HERMES Dossier - scan de fuentes OSINT (newsrooms, prensa, BOE, sectorial)
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+Environment=DATABASE_URL=postgresql://surus:Surus2024!@127.0.0.1:5432/hermes_dossier?schema=public
+Environment=HUNTER_API_KEY=ce0edc32d98cd7d9e02a5e64ac67ff8f69c66f6e
+Environment=GEMINI_API_KEY=AQ.Ab8RN6Jfno8IljblLQgO-UKoyO9OfDcQy7a2Y0-QvR1T4K2wRg
+ExecStart=/bin/bash /opt/hermes-dossier/scripts/run-agents.sh
+User=root
+Group=root
+StandardOutput=append:/var/log/hermes-scan/scan.log
+StandardError=append:/var/log/hermes-scan/scan.log
+TimeoutStartSec=1500
+KillMode=mixed
+KillSignal=SIGTERM
+SuccessExitStatus=0
+
+[Install]
+WantedBy=multi-user.target

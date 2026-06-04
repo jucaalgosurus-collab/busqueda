@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky-av" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1818"/>
+      <stop offset="60%" stop-color="#2a2828"/>
+      <stop offset="100%" stop-color="#4a4848"/>
+    </linearGradient>
+    <linearGradient id="ground-av" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2520"/>
+      <stop offset="100%" stop-color="#0a0808"/>
+    </linearGradient>
+    <linearGradient id="concrete-av" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a6a5a"/>
+      <stop offset="50%" stop-color="#4a3a2a"/>
+      <stop offset="100%" stop-color="#2a1a0a"/>
+    </linearGradient>
+    <linearGradient id="metal-av" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="40%" stop-color="#8a8a8a"/>
+      <stop offset="60%" stop-color="#5a5a5a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow-av" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#c9a961" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#c9a961" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="noise-av">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="17"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#sky-av)"/>
+  <rect y="280" width="600" height="120" fill="url(#ground-av)"/>
+  <circle cx="300" cy="200" r="200" fill="url(#glow-av)"/>
+
+  <!-- Distant industrial silhouette -->
+  <g fill="#1a1a18" opacity="0.7">
+    <rect x="0" y="220" width="60" height="60"/>
+    <rect x="540" y="215" width="60" height="65"/>
+    <rect x="20" y="190" width="6" height="30"/>
+    <rect x="566" y="180" width="6" height="35"/>
+  </g>
+
+  <!-- Main cárnica building (AVICU) -->
+  <g>
+    <!-- Building 1 (tall) -->
+    <path d="M40 280 L40 100 L120 60 L120 280 Z" fill="url(#concrete-av)"/>
+    <path d="M120 100 L200 60 L200 280 L120 280 Z" fill="#5a4030"/>
+    <!-- Roof -->
+    <path d="M40 100 L120 60 L200 100 Z" fill="#2a2a28"/>
+    <path d="M40 100 L120 60 L200 100 L200 108 L120 68 L40 108 Z" fill="#0a0a0a" opacity="0.4"/>
+    <!-- Saw-tooth roof -->
+    <path d="M40 100 L55 80 L55 110 L70 90 L70 120 L85 100 L85 130 L100 110 L100 140 L115 120 L115 150 L130 130 L130 160 L145 140 L145 170 L160 150 L160 180 L175 160 L175 190 L190 170 L190 200 L200 190" fill="none" stroke="#0a0a0a" stroke-width="1.5" opacity="0.7"/>
+    <!-- Windows (cámaras) -->
+    <g fill="#0a0a08" opacity="0.9">
+      <rect x="55" y="130" width="20" height="30"/>
+      <rect x="85" y="130" width="20" height="30"/>
+      <rect x="115" y="130" width="20" height="30"/>
+      <rect x="145" y="130" width="20" height="30"/>
+      <rect x="175" y="130" width="20" height="30"/>
+    </g>
+    <g fill="none" stroke="#3a2a18" stroke-width="1">
+      <rect x="55" y="130" width="20" height="30"/>
+      <rect x="85" y="130" width="20" height="30"/>
+      <rect x="115" y="130" width="20" height="30"/>
+      <rect x="145" y="130" width="20" height="30"/>
+      <rect x="175" y="130" width="20" height="30"/>
+    </g>
+    <!-- Loading bay door -->
+    <rect x="60" y="200" width="120" height="80" fill="#0a0a05"/>
+    <line x1="78" y1="200" x2="78" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="98" y1="200" x2="98" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="118" y1="200" x2="118" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="138" y1="200" x2="138" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="158" y1="200" x2="158" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="178" y1="200" x2="178" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+  </g>
+
+  <!-- Building 2 (long nave) -->
+  <g>
+    <path d="M220 280 L220 130 L300 90 L300 280 Z" fill="url(#concrete-av)"/>
+    <path d="M300 130 L420 90 L420 280 L300 280 Z" fill="#5a4030"/>
+    <path d="M220 130 L300 90 L420 130 Z" fill="#2a2a28"/>
+    <path d="M220 130 L300 90 L420 130 L420 138 L300 98 L220 138 Z" fill="#0a0a0a" opacity="0.4"/>
+    <!-- Saw-tooth roof -->
+    <path d="M220 130 L240 110 L240 140 L260 120 L260 150 L280 130 L280 160 L300 140 L300 170 L320 150 L320 180 L340 160 L340 190 L360 170 L360 200 L380 180 L380 210 L400 190 L400 220 L420 200" fill="none" stroke="#0a0a0a" stroke-width="1.5" opacity="0.7"/>
+    <!-- Windows -->
+    <g fill="#0a0a08" opacity="0.9">
+      <rect x="240" y="160" width="20" height="30"/>
+      <rect x="270" y="160" width="20" height="30"/>
+      <rect x="300" y="160" width="20" height="30"/>
+      <rect x="330" y="160" width="20" height="30"/>
+      <rect x="360" y="160" width="20" height="30"/>
+      <rect x="390" y="160" width="20" height="30"/>
+    </g>
+    <g fill="none" stroke="#3a2a18" stroke-width="1">
+      <rect x="240" y="160" width="20" height="30"/>
+      <rect x="270" y="160" width="20" height="30"/>
+      <rect x="300" y="160" width="20" height="30"/>
+      <rect x="330" y="160" width="20" height="30"/>
+      <rect x="360" y="160" width="20" height="30"/>
+      <rect x="390" y="160" width="20" height="30"/>
+    </g>
+    <!-- Loading bay -->
+    <rect x="245" y="215" width="150" height="65" fill="#0a0a05"/>
+    <line x1="265" y1="215" x2="265" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="285" y1="215" x2="285" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="305" y1="215" x2="305" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="325" y1="215" x2="325" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="345" y1="215" x2="345" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="365" y1="215" x2="365" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+    <line x1="385" y1="215" x2="385" y2="280" stroke="#3a2a18" stroke-width="0.8"/>
+  </g>
+
+  <!-- Big chimney with smoke -->
+  <g>
+    <rect x="445" y="40" width="18" height="240" fill="url(#concrete-av)"/>
+    <rect x="445" y="38" width="18" height="4" fill="#3a2a18"/>
+    <rect x="445" y="40" width="18" height="6" fill="#5a4a30"/>
+    <ellipse cx="454" cy="40" rx="9" ry="3" fill="#3a2a18"/>
+    <!-- Red/white bands (signal) -->
+    <rect x="445" y="80" width="18" height="6" fill="#c9302c"/>
+    <rect x="445" y="120" width="18" height="6" fill="#c9302c"/>
+    <rect x="445" y="160" width="18" height="6" fill="#c9302c"/>
+    <rect x="445" y="200" width="18" height="6" fill="#c9302c"/>
+    <rect x="445" y="240" width="18" height="6" fill="#c9302c"/>
+    <!-- Smoke -->
+    <ellipse cx="454" cy="25" rx="14" ry="18" fill="#3a3530" opacity="0.5"/>
+    <ellipse cx="450" cy="5" rx="18" ry="20" fill="#2a2520" opacity="0.4"/>
+    <ellipse cx="460" cy="-10" rx="22" ry="22" fill="#1a1815" opacity="0.3"/>
+  </g>
+
+  <!-- Steel silos for pienso -->
+  <g>
+    <ellipse cx="490" cy="160" rx="20" ry="5" fill="url(#metal-av)"/>
+    <path d="M470 160 L470 280 Q470 290 490 290 Q510 290 510 280 L510 160" fill="url(#metal-av)"/>
+    <ellipse cx="490" cy="160" rx="20" ry="5" fill="#5a5a5a"/>
+    <ellipse cx="490" cy="280" rx="20" ry="5" fill="#1a1a1a"/>
+    <line x1="490" y1="148" x2="490" y2="125" stroke="#3a3a3a" stroke-width="1.5"/>
+  </g>
+
+  <!-- Foreground conveyor + chickens processing line -->
+  <g transform="translate(50,275)">
+    <line x1="0" y1="0" x2="200" y2="0" stroke="#1a1a1a" stroke-width="3"/>
+    <g fill="#3a3a3a">
+      <circle cx="20" cy="0" r="3"/>
+      <circle cx="50" cy="0" r="3"/>
+      <circle cx="80" cy="0" r="3"/>
+      <circle cx="110" cy="0" r="3"/>
+      <circle cx="140" cy="0" r="3"/>
+      <circle cx="170" cy="0" r="3"/>
+      <circle cx="200" cy="0" r="3"/>
+    </g>
+  </g>
+
+  <!-- Control panel / industrial equipment -->
+  <g transform="translate(530,260)">
+    <rect x="0" y="0" width="50" height="25" fill="#1a1a1a"/>
+    <rect x="2" y="2" width="46" height="21" fill="#0a0a0a"/>
+    <text x="25" y="14" text-anchor="middle" font-family="Courier New, monospace" font-size="6" fill="#4ade80">STORK</text>
+    <text x="25" y="20" text-anchor="middle" font-family="Courier New, monospace" font-size="6" fill="#4ade80">6.000/h</text>
+  </g>
+
+  <!-- Subtle dust -->
+  <ellipse cx="200" cy="290" rx="80" ry="3" fill="#fff" opacity="0.08"/>
+
+  <rect width="600" height="400" filter="url(#noise-av)" opacity="0.45"/>
+
+  <radialGradient id="vig-av" cx="0.5" cy="0.5" r="0.7">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.7"/>
+  </radialGradient>
+  <rect width="600" height="400" fill="url(#vig-av)"/>
+
+  <rect x="20" y="340" width="450" height="50" fill="#0d0e12" opacity="0.9"/>
+  <rect x="20" y="340" width="3" height="50" fill="#c9a961"/>
+  <text x="38" y="362" font-family="Georgia, serif" font-size="20" font-weight="700" fill="#c9a961" letter-spacing="2">AVICU · COMPLEJO CÁRNICO</text>
+  <text x="38" y="380" font-family="Arial, sans-serif" font-size="9" fill="#a0aec0" letter-spacing="3">DESINVERSIÓN LÍNEAS STORK PMT · 6.000 POLLOS/HORA · GUADALAJARA</text>
+</svg>

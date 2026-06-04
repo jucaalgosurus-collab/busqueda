@@ -158,7 +158,7 @@ try {
   if (fs.existsSync(STATE_FILE)) {
     const existing = fs.readFileSync(STATE_FILE, 'utf-8');
     const extractSection = (content, name) => {
-      const regex = new RegExp(`## ${name}\\n([\\s\\S]*?)(?=\\n## |$)`, 'm');
+      const regex = new RegExp(`## ${name}\\r?\\n([\\s\\S]*?)(?=\\r?\\n## |$)`, 'm');
       const match = content.match(regex);
       return match ? match[1].trim() : '';
     };

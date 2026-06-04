@@ -88,5 +88,86 @@
     "rssUrl": null,
     "subsectors": ["Bebidas globales", "Food tech", "Ingredientes", "Envase", "Sostenibilidad", "M&A internacional"],
     "notes": "SIN RSS público (404 en /rss, /feed, /feed.xml, /rss.xml). REQUIERE HTTP scraping. Internacional fuerte; cobertura secundaria para España (usar para validar M&A cross-border y tendencias food tech). Editorial team UK (Sian Yates, Antonia Garrett Peel). Útil como complemento a Just-Food para verificar operaciones internacionales. Inglés."
+  },
+  {
+    "name": "TechFood Magazine",
+    "slug": "techfood-magazine",
+    "baseUrl": "https://www.techfoodmag.com",
+    "newsroomUrl": "https://www.techfoodmag.com/noticias/",
+    "rssUrl": null,
+    "subsectors": ["Food tech", "Automatización industrial", "Robótica alimentaria", "Visión artificial", "IoT en planta", "Industria 4.0"],
+    "notes": "Revista B2B española especializada en tecnología para la industria alimentaria. SIN RSS público verificable. REQUIERE HTTP scraping. Cobertura nacional todas las CCAA. Útil para inventarios técnicos (líneas, robots, visión artificial) en desimplantaciones. Edición en español."
+  },
+  {
+    "name": "IPMark",
+    "slug": "ipmark",
+    "baseUrl": "https://ipmark.com",
+    "newsroomUrl": "https://ipmark.com/category/gran-consumo/",
+    "rssUrl": "https://ipmark.com/feed/",
+    "subsectors": ["Gran Consumo", "Marketing alimentario", "Distribución", "Bebidas", "Retail"],
+    "notes": "Revista especializada en marketing y comunicación. RSS validado WordPress. Cobertura del lado demanda (campañas, lanzamientos, comportamiento consumidor) complementaria a Alimarket/Eurocarne (lado oferta)."
+  },
+  {
+    "name": "Beverage Daily",
+    "slug": "beverage-daily",
+    "baseUrl": "https://www.beveragedaily.com",
+    "newsroomUrl": "https://www.beveragedaily.com/News/",
+    "rssUrl": null,
+    "subsectors": ["Bebidas globales", "Cerveza", "Vino", "Refrescos", "Aguas", "Energéticas", "M&A internacional"],
+    "notes": "Pertenece a William Reed (mismo grupo que Just-Food). SIN RSS público. REQUIERE HTTP scraping. Cobertura internacional fuerte. Útil para cross-validar movimientos de Mahou San Miguel, Damm, Codorníu, J. García Carrión. Inglés. Freemium con análisis premium."
+  },
+  {
+    "name": "Bakery & Snacks (William Reed)",
+    "slug": "bakery-snacks",
+    "baseUrl": "https://www.bakeryandsnacks.com",
+    "newsroomUrl": "https://www.bakeryandsnacks.com/News/",
+    "rssUrl": null,
+    "subsectors": ["Panadería industrial", "Bollería", "Galletas", "Snacks", "Patatas fritas", "Frutos secos"],
+    "notes": "William Reed. SIN RSS público. REQUIERE HTTP scraping. Cobertura internacional. Útil para empresas como Bimbo, Vicky Foods (Dolce), Frit Ravich. Inglés."
+  },
+  {
+    "name": "Confectionery News (William Reed)",
+    "slug": "confectionery-news",
+    "baseUrl": "https://www.confectionerynews.com",
+    "newsroomUrl": "https://www.confectionerynews.com/News/",
+    "rssUrl": null,
+    "subsectors": ["Chocolates", "Caramelos", "Golosinas", "Ingredientes confitería", "M&A internacional"],
+    "notes": "William Reed. SIN RSS público. REQUIERE HTTP scraping. Cobertura de Lacasa, Suchard, Valor, Natra. Internacional fuerte. Inglés."
+  },
+  {
+    "name": "SeafoodSource",
+    "slug": "seafoodsource",
+    "baseUrl": "https://www.seafoodsource.com",
+    "newsroomUrl": "https://www.seafoodsource.com/news",
+    "rssUrl": "https://www.seafoodsource.com/news/rss",
+    "subsectors": ["Pesca", "Acuicultura", "Pescado congelado", "Conservas pescado", "Mariscos", "Sostenibilidad marina"],
+    "notes": "RSS validado. Cobertura internacional con sección España. Imprescindible para Pescanova, Jealsa-Rianxeira, Conservas Garavilla, Grupo Calvo (Nauterra), Iberconsa. Inglés."
+  },
+  {
+    "name": "Meat+Poultry",
+    "slug": "meat-poultry",
+    "baseUrl": "https://www.meatpoultry.com",
+    "newsroomUrl": "https://www.meatpoultry.com/articles/",
+    "rssUrl": null,
+    "subsectors": ["Cárnicas", "Aves", "Porcino", "Vacuno", "Procesado cárnico", "M&A internacional"],
+    "notes": "B2B US-based con cobertura internacional. SIN RSS público. REQUIERE HTTP scraping. Útil para ElPozo, Campofrío Food Group, Grupo Jorge, Vall Companys, Incarlopsa, Coren. Inglés."
+  },
+  {
+    "name": "Food Navigator (William Reed)",
+    "slug": "food-navigator",
+    "baseUrl": "https://www.foodnavigator.com",
+    "newsroomUrl": "https://www.foodnavigator.com/News/",
+    "rssUrl": null,
+    "subsectors": ["Alimentación global", "Ingredientes", "Etiquetado", "Regulación UE", "Sostenibilidad", "Innovación"],
+    "notes": "William Reed. SIN RSS público. REQUIERE HTTP scraping. Cubre regulación alimentaria UE, tendencias ingredientes, etiquetado NutriScore. Complementario a IPMark (consumidor) y Alimarket (oferta). Inglés."
+  },
+  {
+    "name": "Food Safety News",
+    "slug": "food-safety-news",
+    "baseUrl": "https://www.foodsafetynews.com",
+    "newsroomUrl": "https://www.foodsafetynews.com/",
+    "rssUrl": "https://www.foodsafetynews.com/feed/",
+    "subsectors": ["Seguridad alimentaria", "Alertas sanitarias", "AESAN", "EFSA", "Brotes", "Sanciones alimentarias"],
+    "notes": "RSS validado. Cobertura internacional. Crucial para detectar alertas AESAN que afecten a plantas específicas (retiradas, sanciones, brotes). Inglés. Sirve como complemento a BOE/AESAN oficial."
   }
 ]

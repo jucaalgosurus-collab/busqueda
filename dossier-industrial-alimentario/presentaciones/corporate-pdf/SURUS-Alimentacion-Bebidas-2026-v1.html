@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>SURUS · Desimplantación Circular · Alimentación y Bebidas 2026</title>
+<style>
+/* ============================================================
+   SURUS · PRESENTACIÓN CORPORATIVA C-LEVEL
+   Formato: A4 Landscape, PDF-ready, fondo oscuro nativo
+   Estilo: Bloomberg Terminal × Apple premium
+   13 slides, sin JS, sin fuentes externas
+   ============================================================ */
+
+/* ---------- PAGE SETUP: A4 LANDSCAPE + DARK BACKGROUND ---------- */
+@page { size: A4 landscape; margin: 10mm; background-color: #0d0e12; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #0d0e12; color: #ffffff; font-family: Arial, Helvetica, "Helvetica Neue", system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ---------- VARIABLES DE DISEÑO ---------- */
+:root {
+  --bg: #0d0e12;
+  --bg-2: #13151c;
+  --bg-3: #1a1d26;
+  --line: #2a2f3a;
+  --line-2: #3a4150;
+  --text: #ffffff;
+  --muted: #a0aec0;
+  --muted-2: #6b7280;
+  --accent: #c9a961;       /* dorado Surus desaturado */
+  --accent-2: #8a9a5b;     /* verde oliva circular */
+  --good: #4ade80;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --serif: Georgia, "Times New Roman", serif;
+}
+
+/* ---------- SLIDE BASE ---------- */
+.slide {
+  width: 277mm;   /* A4 landscape - 20mm márgenes */
+  height: 190mm;  /* A4 landscape - 20mm márgenes */
+  padding: 14mm 16mm;
+  page-break-after: always;
+  break-after: page;
+  position: relative;
+  background: #0d0e12;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.slide:last-child { page-break-after: auto; break-after: auto; }
+
+/* ---------- HEADER BAR ---------- */
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6mm; margin-bottom: 8mm;
+}
+.topbar-left { display: flex; align-items: center; gap: 6mm; }
+.topbar img.logo { height: 9mm; filter: brightness(1.05); }
+.topbar .brand { font-size: 9pt; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+.topbar .right { font-size: 8.5pt; color: var(--muted); text-align: right; line-height: 1.5; }
+.topbar .right b { color: var(--text); font-weight: 600; }
+
+/* ---------- TYPOGRAPHY ---------- */
+.kicker { font-size: 8.5pt; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 3mm; }
+h1 { font-size: 28pt; font-weight: 700; line-height: 1.05; color: #fff; letter-spacing: -0.015em; }
+h2 { font-size: 16pt; font-weight: 600; line-height: 1.15; color: #fff; letter-spacing: -0.01em; }
+h3 { font-size: 11pt; font-weight: 600; color: #fff; }
+h4 { font-size: 9.5pt; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+p { font-size: 9.5pt; line-height: 1.55; color: var(--muted); }
+.lede { font-size: 13pt; line-height: 1.35; color: #fff; font-weight: 400; }
+.big-number { font-size: 56pt; font-weight: 700; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+.big-number.white { color: #fff; }
+.metric-label { font-size: 8.5pt; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 1mm; }
+.eyebrow { font-size: 8pt; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.18em; }
+
+/* ---------- LAYOUT GRID ---------- */
+.row { display: flex; gap: 6mm; }
+.row.tight { gap: 4mm; }
+.col { flex: 1; }
+.col-2 { flex: 2; }
+.col-3 { flex: 3; }
+.col-4 { flex: 4; }
+.col-fit { flex: 0 0 auto; }
+.stack > * + * { margin-top: 5mm; }
+
+/* ---------- CARDS / PANELS ---------- */
+.panel {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 2mm;
+  padding: 6mm 7mm;
+}
+.panel.alt { background: var(--bg-3); }
+.panel.accent { border-left: 1.5mm solid var(--accent); }
+.panel.good { border-left: 1.5mm solid var(--good); }
+.panel.warn { border-left: 1.5mm solid var(--warn); }
+
+/* ---------- TABLES ---------- */
+table {
+  width: 100%; border-collapse: collapse; font-size: 8.8pt;
+}
+th {
+  text-align: left; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.08em; font-size: 7.5pt;
+  padding: 2.5mm 3mm; border-bottom: 1px solid var(--line-2);
+}
+td {
+  padding: 2.4mm 3mm; color: var(--text); border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+td.num { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--accent); }
+td.mute { color: var(--muted); }
+
+/* ---------- BADGES / CHIPS ---------- */
+.badge {
+  display: inline-block; padding: 0.6mm 2.2mm; border-radius: 1mm;
+  font-size: 7.2pt; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; border: 0.5px solid var(--line-2);
+}
+.badge.gold { background: rgba(201,169,97,0.12); color: var(--accent); border-color: var(--accent); }
+.badge.olive { background: rgba(138,154,91,0.14); color: var(--accent-2); border-color: var(--accent-2); }
+.badge.gray { background: var(--bg-3); color: var(--muted); }
+.badge.red { background: rgba(248,113,113,0.10); color: var(--bad); border-color: var(--bad); }
+.badge.green { background: rgba(74,222,128,0.10); color: var(--good); border-color: var(--good); }
+
+/* ---------- DIVIDER ---------- */
+hr { border: none; border-top: 1px solid var(--line); margin: 5mm 0; }
+hr.thick { border-top: 1px solid var(--line-2); }
+
+/* ---------- FOOTER ---------- */
+.footer {
+  position: absolute; left: 16mm; right: 16mm; bottom: 8mm;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 7.2pt; color: var(--muted-2); letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.footer .pageno { color: var(--accent); font-weight: 600; }
+
+/* ---------- UTILITIES ---------- */
+.gap-1 { height: 2mm; } .gap-2 { height: 4mm; } .gap-3 { height: 6mm; } .gap-4 { height: 8mm; } .gap-5 { height: 10mm; }
+.text-mute { color: var(--muted); } .text-white { color: #fff; } .text-accent { color: var(--accent); } .text-good { color: var(--good); }
+.text-center { text-align: center; } .text-right { text-align: right; }
+.mt-1 { margin-top: 2mm; } .mt-2 { margin-top: 4mm; } .mt-3 { margin-top: 6mm; } .mt-4 { margin-top: 8mm; }
+.mb-1 { margin-bottom: 2mm; } .mb-2 { margin-bottom: 4mm; } .mb-3 { margin-bottom: 6mm; }
+.mono { font-family: "SF Mono", "JetBrains Mono", "Courier New", monospace; font-variant-numeric: tabular-nums; }
+.upper { text-transform: uppercase; letter-spacing: 0.12em; }
+.divider-dot { color: var(--line-2); margin: 0 2mm; }
+
+/* ---------- BAR CHART (CSS puro) ---------- */
+.bars { display: flex; align-items: flex-end; gap: 4mm; height: 38mm; margin: 4mm 0 2mm; padding-bottom: 1mm; border-bottom: 1px solid var(--line-2); }
+.bar { flex: 1; background: linear-gradient(180deg, var(--accent) 0%, #8a7842 100%); border-radius: 0.6mm 0.6mm 0 0; position: relative; min-width: 6mm; }
+.bar.olive { background: linear-gradient(180deg, var(--accent-2) 0%, #5a6642 100%); }
+.bar.gray { background: linear-gradient(180deg, #4a5160 0%, #2a2f3a 100%); }
+.bar .val { position: absolute; top: -5mm; left: 0; right: 0; text-align: center; font-size: 8.5pt; font-weight: 700; color: #fff; }
+.bar .lbl { position: absolute; bottom: -6mm; left: 0; right: 0; text-align: center; font-size: 7.2pt; color: var(--muted); }
+
+/* ---------- HORIZONTAL BAR (single metric) ---------- */
+.hbar { display: flex; align-items: center; gap: 4mm; margin: 1.5mm 0; }
+.hbar .track { flex: 1; height: 3mm; background: var(--bg-3); border-radius: 0.5mm; overflow: hidden; }
+.hbar .fill { height: 100%; background: var(--accent); border-radius: 0.5mm; }
+.hbar .fill.olive { background: var(--accent-2); }
+.hbar .fill.gray { background: #4a5160; }
+.hbar .pct { width: 12mm; font-size: 8.5pt; font-weight: 600; color: var(--accent); text-align: right; }
+.hbar .lbl { width: 50mm; font-size: 8.5pt; color: var(--text); }
+
+/* ---------- FLOW DIAGRAM ---------- */
+.flow { display: flex; align-items: center; gap: 2mm; margin: 4mm 0; }
+.flow .step { flex: 1; padding: 3mm 4mm; background: var(--bg-2); border: 1px solid var(--line); border-radius: 1.5mm; text-align: center; }
+.flow .step b { display: block; font-size: 8.5pt; color: #fff; margin-bottom: 0.5mm; }
+.flow .step span { font-size: 7.2pt; color: var(--muted); }
+.flow .arrow { color: var(--accent); font-size: 14pt; font-weight: 300; }
+.flow .step.re { border-color: var(--accent-2); background: rgba(138,154,91,0.08); }
+.flow .step.re b { color: var(--accent-2); }
+
+/* ---------- COVER SPECIFICS ---------- */
+.cover { justify-content: space-between; }
+.cover-mark { width: 32mm; height: auto; margin-bottom: 6mm; }
+.cover h1 { font-size: 48pt; line-height: 0.98; letter-spacing: -0.025em; }
+.cover .sub { font-size: 14pt; color: var(--muted); margin-top: 6mm; max-width: 200mm; line-height: 1.4; }
+.cover-meta { display: flex; gap: 12mm; border-top: 1px solid var(--line-2); padding-top: 5mm; }
+.cover-meta .item .lbl { font-size: 7.5pt; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.15em; }
+.cover-meta .item .val { font-size: 10pt; color: #fff; font-weight: 600; margin-top: 1mm; }
+
+/* ---------- CASE STUDY LAYOUT ---------- */
+.case-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--line-2); padding-bottom: 4mm; margin-bottom: 5mm; }
+.case-head .who .kicker { margin-bottom: 1mm; }
+.case-head h2 { font-size: 24pt; }
+.case-head .pill { display: flex; gap: 2mm; }
+.case-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+.case-kpi { background: var(--bg-2); border: 1px solid var(--line); border-radius: 1.5mm; padding: 4mm 5mm; }
+.case-kpi .num { font-size: 22pt; font-weight: 700; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
+.case-kpi .lbl { font-size: 7.5pt; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 1.5mm; line-height: 1.3; }
+.case-kpi.olive .num { color: var(--accent-2); }
+
+/* ---------- TESTIMONIAL QUOTE ---------- */
+.quote {
+  border-left: 1.5mm solid var(--accent);
+  padding: 3mm 5mm 3mm 6mm;
+  background: var(--bg-2);
+  border-radius: 0 1.5mm 1.5mm 0;
+  margin: 3mm 0;
+}
+.quote p { font-size: 9.5pt; color: #fff; line-height: 1.5; font-style: italic; }
+.quote .attr { font-size: 8pt; color: var(--muted); margin-top: 2mm; }
+.quote .attr b { color: var(--accent); font-weight: 600; }
+
+/* ---------- INFINITE LIST (no overflow) ---------- */
+ul.tight { list-style: none; }
+ul.tight li { font-size: 8.8pt; line-height: 1.5; color: var(--text); padding: 1mm 0 1mm 5mm; position: relative; }
+ul.tight li::before { content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+/* ---------- PRINT SAFETY ---------- */
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .slide { page-break-after: always; break-after: page; }
+  .slide:last-child { page-break-after: auto; }
+}
+
+/* ============================================================
+   SLIDE 1 — COVER
+   ============================================================ */
+.slide-1 { background: radial-gradient(ellipse at 75% 30%, rgba(201,169,97,0.06) 0%, transparent 50%), #0d0e12; }
+.slide-1 .meta-block { display: flex; flex-direction: column; }
+.slide-1 .row-tags { display: flex; gap: 2mm; margin-top: 8mm; }
+.slide-1 .stamp { position: absolute; right: 16mm; top: 14mm; text-align: right; }
+.slide-1 .stamp .date { font-size: 9pt; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+.slide-1 .stamp .conf { font-size: 7.5pt; color: var(--bad); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 1mm; }
+
+/* ============================================================
+   SLIDE 13 — CTA
+   ============================================================ */
+.cta-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8mm; }
+.cta-left h1 { font-size: 36pt; line-height: 1; }
+.cta-left .lede { font-size: 14pt; margin-top: 6mm; }
+.cta-right .panel { padding: 7mm 8mm; }
+.signature { margin-top: 8mm; padding-top: 5mm; border-top: 1px solid var(--line-2); }
+.signature .name { font-size: 14pt; color: #fff; font-weight: 600; }
+.signature .role { font-size: 9pt; color: var(--muted); margin-top: 1mm; }
+.signature .contact { font-size: 8.5pt; color: var(--muted); margin-top: 2mm; line-height: 1.6; }
+.signature .contact b { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SLIDE 1 — PORTADA
+     ============================================================ -->
+<section class="slide slide-1 cover">
+  <div class="stamp">
+    <div class="date">Junio · 2026</div>
+    <div class="conf">Confidencial · C-Level</div>
+  </div>
+
+  <div class="meta-block">
+    <img class="cover-mark" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANYAAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec891TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+
+    <div class="kicker">Sector Alimentación y Bebidas · España 2026</div>
+    <h1>Desimplantación<br>circular para los<br>giros que redefinen<br>el A&amp;B español.</h1>
+
+    <p class="sub">Siete grupos líderes — Pescanova, Danone, Pascual, Mahou, Damm, Nestlé y Azucarera — liberan en 2026 más de <span class="text-accent"><b>2.000 millones de euros</b></span> en activos industriales maduros. Surus convierte ese capital detenido en liquidez, plusvalía de suelo y métricas CSRD auditables.</p>
+
+    <div class="row-tags">
+      <span class="badge gold">Asesoramiento</span>
+      <span class="badge gold">Desimplantaciones</span>
+      <span class="badge gold">Reempleo</span>
+      <span class="badge olive">+15 IBEX 35</span>
+      <span class="badge olive">98% reempleo</span>
+      <span class="badge gray">EcoVadis Silver 78/100</span>
+    </div>
+  </div>
+
+  <div class="cover-meta">
+    <div class="item">
+      <div class="lbl">Preparado para</div>
+      <div class="val">Comités de Dirección A&amp;B</div>
+    </div>
+    <div class="item">
+      <div class="lbl">Por</div>
+      <div class="val">Juan Carlos Alvarado · Grupo Surus</div>
+    </div>
+    <div class="item">
+      <div class="lbl">Periodo de análisis</div>
+      <div class="val">2024 – Q2 2026</div>
+    </div>
+    <div class="item">
+      <div class="lbl">Versión</div>
+      <div class="val">v6 · 13 diapositivas</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 2 — CONTEXTO: 7 GRUPOS A&B EN RECONVERSIÓN
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANYAAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec891TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>01 · Contexto sectorial</b><br>Siete líderes reconfiguran su huella industrial</div>
+  </div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col-3">
+      <div class="kicker">La cifra que importa</div>
+      <h1 style="font-size: 22pt; line-height: 1.1;">Siete cierres,<br>traslados o ERE<br>en dieciocho meses.</h1>
+      <p class="mt-3">El sector alimentación y bebidas español atraviesa la mayor reconversión industrial desde 2008. Los movimientos simultáneos en Pescanova, Danone, Pascual, Mahou, Damm, Nestlé y Azucarera liberan una masa crítica de suelo, líneas UHT, equipos GEA, almacenes automatizados y plantas centenarias con un valor de recuperación superior a los <b>2.000 M€</b>.</p>
+      <p class="mt-2">Esta ventana solo se abre una vez por década.</p>
+    </div>
+
+    <div class="col-2">
+      <h4 class="mb-2">Cuadro de mando · 7 grupos</h4>
+      <table>
+        <thead><tr><th>Grupo</th><th>Operación</th><th class="text-right">Magnitud</th></tr></thead>
+        <tbody>
+          <tr><td><b>Nueva Pescanova</b></td><td class="mute">Traslado Sabón → Morás</td><td class="num text-right">16 M€</td></tr>
+          <tr><td><b>Danone</b></td><td class="mute">Parets 2024 + hubs 100 M€</td><td class="num text-right">3 cierres</td></tr>
+          <tr><td><b>Leche Pascual</b></td><td class="mute">Venta Gurb + UHT</td><td class="num text-right">80 trab.</td></tr>
+          <tr><td><b>Mahou San Miguel</b></td><td class="mute">Hub Alovera simultáneo</td><td class="num text-right">107 M€</td></tr>
+          <tr><td><b>AGAMA / Damm</b></td><td class="mute">Cierre Palma</td><td class="num text-right">14 trab.</td></tr>
+          <tr><td><b>Nestlé España</b></td><td class="mute">ERE 12 centros</td><td class="num text-right">267 trab.</td></tr>
+          <tr><td><b>Azucarera · ABF</b></td><td class="mute">Cierre La Bañeza 94 años</td><td class="num text-right">119 M£</td></tr>
+        </tbody>
+      </table>
+      <div class="gap-2"></div>
+      <p class="text-mute" style="font-size: 7.5pt;">Fuentes: El País, 20minutos, El Periódico, El Ideal Gallego, Retail Actual, Ultima Hora, Mahou San Miguel, Registro Mercantil. Período: jul 2024 – may 2026.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">02 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 3 — DOLORES CRÍTICOS DEL SECTOR
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANYAAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec891TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>02 · Código de dolor</b><br>Cinco puntos de fuga de capital</div>
+  </div>
+
+  <div class="kicker">El coste oculto de no actuar</div>
+  <h1 style="font-size: 20pt;">Cinco dolores que drenan el EBITDA<br>antes de que la planta cierre.</h1>
+  <div class="gap-3"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col">
+      <div class="panel accent" style="height: 100%;">
+        <h4 style="color: var(--accent);">01 · Obsolescencia</h4>
+        <h3 class="mt-2" style="font-size: 13pt;">Plantas maduras sin vida útil contable</h3>
+        <p class="mt-2">Líneas UHT GEA con 25 años, homogeneizadores sin repuesto, llenadoras asépticas fuera de soporte. Caso real: 119 M£ de deterioro contable en Azucarera con equipos valorados a <b>cero</b>.</p>
+        <div class="mt-3"><span class="badge red">Impacto EBITDA</span> <span class="text-mute">Pérdida de valor sin recuperación</span></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel accent" style="height: 100%;">
+        <h4 style="color: var(--accent);">02 · Coste normativo</h4>
+        <h3 class="mt-2" style="font-size: 13pt;">Sanitario + ESG duplicado</h3>
+        <p class="mt-2">Cumplir Reglamento 1169/2011, APPCC y a la vez reportar CSRD sobre activos que se desimplantan. Coste doble sin retorno. La regulación CSRD penaliza el pasivo oculto de suelo y equipos no valorados.</p>
+        <div class="mt-3"><span class="badge red">Doble reporting</span> <span class="text-mute">Sanitario + sostenibilidad</span></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel accent" style="height: 100%;">
+        <h4 style="color: var(--accent);">03 · Mermas y energía</h4>
+        <h3 class="mt-2" style="font-size: 13pt;">Equipos ineficientes</h3>
+        <p class="mt-2">Líneas con 3-5% de merma técnica que el mercado secundario absorbería a descuento. Mahou invierte 16 M€ en biomasa Alovera para evitar comprar gas; ese CAPEX se pudo internalizar vía reempleo.</p>
+        <div class="mt-3"><span class="badge red">3-5% merma</span> <span class="text-mute">Coste energético duplicado</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gap-3"></div>
+
+  <div class="row">
+    <div class="col">
+      <div class="panel good" style="height: 100%;">
+        <h4 style="color: var(--good);">04 · Capital detenido</h4>
+        <h3 class="mt-2" style="font-size: 12pt;">Activos sin uso = pasivo silencioso</h3>
+        <p class="mt-2">Suelo industrial sin tasar, líneas paradas, repuestos obsoletos. Sin desimplantación circular, el activo se deprecia hasta liquidación concursal —el peor escenario financiero.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel good" style="height: 100%;">
+        <h4 style="color: var(--good);">05 · Conflicto laboral</h4>
+        <h3 class="mt-2" style="font-size: 12pt;">Cronograma incierto = coste visible</h3>
+        <p class="mt-2">Pascual: cortes de la C-17. Nestlé: huelgas activas. Azucarera: ERE 194 afectados. Cada mes de retraso en el cierre = coste de personal, seguridad y reputación. Surus acorta cronogramas un 40% de media.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">03 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 4 — SOLUCIÓN SURUS: 3 SERVICIOS
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANYAAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec891TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>03 · La solución</b><br>Tres servicios, un único resultado: capital liberado</div>
+  </div>
+
+  <div class="kicker">Desimplantación circular · marca registrada UE</div>
+  <h1 style="font-size: 22pt;">Surus compra el problema, devuelve capital.</h1>
+  <p class="lede mt-2" style="font-size: 12pt;">Un único interlocutor transforma el cierre de planta en un movimiento financiero, fiscal y de sostenibilidad. Sin CAPEX, sin riesgos laborales, sin destruir valor.</p>
+
+  <div class="gap-4"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col">
+      <div class="panel" style="height: 100%; border-top: 2mm solid var(--accent); padding-top: 8mm;">
+        <span class="badge gold">Servicio 01</span>
+        <h2 class="mt-2" style="font-size: 16pt;">Asesoramiento</h2>
+        <p class="mt-2">Valoración independiente de activos, due diligence técnica, modelado financiero del reempleo. <b>Lo que pagarías a un Big Four, con la diferencia de que el asesor también ejecuta.</b></p>
+        <hr class="mt-3 mb-3">
+        <ul class="tight">
+          <li>Tasación de suelo industrial y logístico</li>
+          <li>Inventario técnico con brand + modelo + specs</li>
+          <li>Modelado fiscal del impacto en plusvalías</li>
+          <li>Reporte CSRD auditable de impacto</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel" style="height: 100%; border-top: 2mm solid var(--accent); padding-top: 8mm;">
+        <span class="badge gold">Servicio 02</span>
+        <h2 class="mt-2" style="font-size: 16pt;">Desimplantaciones</h2>
+        <p class="mt-2">Desmantelamiento llave en mano, gestión de residuos con trazabilidad legal, descontaminación de suelo y cumplimiento normativo integral. <b>El cliente firma; nosotros ejecutamos.</b></p>
+        <hr class="mt-3 mb-3">
+        <ul class="tight">
+          <li>Desmantelamiento mecánico y eléctrico</li>
+          <li>Gestión de residuos LER con trazabilidad</li>
+          <li>Coordinación de seguridad y ERE</li>
+          <li>Plazos cerrados: 40% más rápido que mercado</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel" style="height: 100%; border-top: 2mm solid var(--accent); padding-top: 8mm;">
+        <span class="badge gold">Servicio 03</span>
+        <h2 class="mt-2" style="font-size: 16pt;">Reempleo</h2>
+        <p class="mt-2">110.000 subastas ejecutadas a través de Escrapalia, +27 países compradores, 98% de reempleo sobre lo desmontado. <b>El activo deja de ser pasivo y vuelve al mercado.</b></p>
+        <hr class="mt-3 mb-3">
+        <ul class="tight">
+          <li>Red de +1.000 clientes compradores B2B</li>
+          <li>Subastas Escrapalia opacas y trazables</li>
+          <li>Logística inversa europea integrada</li>
+          <li>Pago al cliente en &lt; 30 días post-adjudicación</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">04 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 5 — METODOLOGÍA 6+4
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec891TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>04 · Metodología</b><br>Ciclo de vida circular 6+4</div>
+  </div>
+
+  <div class="kicker">Metodología propia</div>
+  <h1 style="font-size: 22pt;">Diez pasos frente a los seis del<br>ciclo lineal tradicional.</h1>
+  <p class="lede mt-2" style="font-size: 11pt;">Surus añade cuatro eslabones al ciclo de vida clásico. Es la diferencia entre tirar y reemplear.</p>
+
+  <div class="gap-3"></div>
+
+  <h4 class="mb-2">Ciclo tradicional (6 pasos)</h4>
+  <div class="flow">
+    <div class="step"><b>01</b><span>Diseño</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>02</b><span>Fabricación</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>03</b><span>Distribución</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>04</b><span>Uso</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>05</b><span>Reciclaje</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>06</b><span>Vertedero</span></div>
+  </div>
+
+  <div class="gap-3"></div>
+
+  <h4 class="mb-2" style="color: var(--accent-2);">Ciclo Surus · Reemployment Effect (4 pasos adicionales)</h4>
+  <div class="flow">
+    <div class="step re"><b>07</b><span>Reempleo directo</span></div>
+    <div class="arrow" style="color: var(--accent-2);">→</div>
+    <div class="step re"><b>08</b><span>Reutilización por piezas</span></div>
+    <div class="arrow" style="color: var(--accent-2);">→</div>
+    <div class="step re"><b>09</b><span>Reciclaje completo / parcial</span></div>
+    <div class="arrow" style="color: var(--accent-2);">→</div>
+    <div class="step re"><b>10</b><span>Valorización energética</span></div>
+  </div>
+
+  <div class="gap-4"></div>
+
+  <div class="row">
+    <div class="col">
+      <div class="panel alt">
+        <h4 class="mb-1" style="color: var(--accent);">Resultado financiero</h4>
+        <p class="text-white mono" style="font-size: 13pt; font-weight: 600;">+€400M generados vía reempleo</p>
+        <p class="text-mute mt-1">Solo el 2% del valor rescatado termina en vertedero.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel alt">
+        <h4 class="mb-1" style="color: var(--accent);">Resultado en circularidad</h4>
+        <p class="text-white mono" style="font-size: 13pt; font-weight: 600;">98% de activos reempleados</p>
+        <p class="text-mute mt-1">+110.000 subastas en Escrapalia, +27 países compradores.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel alt">
+        <h4 class="mb-1" style="color: var(--accent);">Resultado en ESG</h4>
+        <p class="text-white mono" style="font-size: 13pt; font-weight: 600;">EcoVadis Silver 78/100 · Top 15%</p>
+        <p class="text-mute mt-1">Pilar Environment 83/100 (Top 4% industrial).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">05 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 6 — MÉTRICAS GLOBALES
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec891TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>05 · Track record</b><br>Mediciones auditadas desde 2021</div>
+  </div>
+
+  <div class="kicker">Métricas acumuladas Surus 2021 – 2026</div>
+  <h1 style="font-size: 22pt;">Cuatrocientos millones de euros,<br>treinta millones de kilos de CO₂ evitados.</h1>
+
+  <div class="gap-3"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col">
+      <div class="panel" style="height: 100%;">
+        <h4 class="mb-2" style="color: var(--accent);">Capital generado</h4>
+        <div class="big-number white">+400<span style="font-size: 28pt; color: var(--accent);">M€</span></div>
+        <p class="mt-1">vía reempleo de activos industriales en 5 años</p>
+        <hr class="mt-2 mb-2">
+        <div class="hbar"><span class="lbl">Reempleo directo</span><div class="track"><div class="fill" style="width: 60%;"></div></div><span class="pct">60%</span></div>
+        <div class="hbar"><span class="lbl">Reutilización piezas</span><div class="track"><div class="fill olive" style="width: 24%;"></div></div><span class="pct">24%</span></div>
+        <div class="hbar"><span class="lbl">Reciclaje</span><div class="track"><div class="fill gray" style="width: 14%;"></div></div><span class="pct">14%</span></div>
+        <div class="hbar"><span class="lbl">Vertedero</span><div class="track"><div class="fill gray" style="width: 2%;"></div></div><span class="pct">2%</span></div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="panel" style="height: 100%;">
+        <h4 class="mb-2" style="color: var(--accent);">Huella ambiental evitada</h4>
+
+        <div style="display: flex; gap: 4mm; margin-top: 3mm;">
+          <div style="flex: 1; text-align: center; padding: 4mm 2mm; background: var(--bg-3); border-radius: 1.5mm;">
+            <div class="big-number" style="font-size: 30pt;">30,7M</div>
+            <div class="metric-label">kg CO₂ evitados</div>
+            <div class="text-mute mt-1" style="font-size: 7.5pt;">= 1.024.332 árboles/año</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 4mm 2mm; background: var(--bg-3); border-radius: 1.5mm;">
+            <div class="big-number" style="font-size: 30pt;">9,9M</div>
+            <div class="metric-label">m³ agua ahorrada</div>
+            <div class="text-mute mt-1" style="font-size: 7.5pt;">= 209.031 habitantes/año</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 4mm 2mm; background: var(--bg-3); border-radius: 1.5mm;">
+            <div class="big-number" style="font-size: 30pt;">405M</div>
+            <div class="metric-label">MJ energía evitada</div>
+            <div class="text-mute mt-1" style="font-size: 7.5pt;">= 11.334 hogares/año</div>
+          </div>
+        </div>
+
+        <hr class="mt-3 mb-2">
+        <div class="hbar"><span class="lbl">+15 IBEX 35</span><div class="track"><div class="fill" style="width: 100%;"></div></div><span class="pct">Top</span></div>
+        <div class="hbar"><span class="lbl">+1.000 clientes</span><div class="track"><div class="fill" style="width: 92%;"></div></div><span class="pct">92%</span></div>
+        <div class="hbar"><span class="lbl">+27 países compradores</span><div class="track"><div class="fill olive" style="width: 80%;"></div></div><span class="pct">80%</span></div>
+        <div class="hbar"><span class="lbl">+110.000 subastas Escrapalia</span><div class="track"><div class="fill" style="width: 96%;"></div></div><span class="pct">96%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">06 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 7 — RESUMEN DE LOS 7 CASOS A&B
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0ciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec891TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>06 · Casos A&amp;B</b><br>Siete grupos, siete operaciones distintas</div>
+  </div>
+
+  <div class="kicker">Casos de éxito alimentación y bebidas</div>
+  <h1 style="font-size: 22pt;">Una misma metodología,<br>siete aplicaciones sectoriales distintas.</h1>
+  <p class="lede mt-2" style="font-size: 11pt;">Las cinco fichas en color oro son los casos detallados. Las dos en gris son menciones de contexto sectorial.</p>
+
+  <div class="gap-2"></div>
+
+  <table style="font-size: 8.5pt;">
+    <thead>
+      <tr>
+        <th style="width: 16%;">Grupo</th>
+        <th style="width: 22%;">Operación detectada</th>
+        <th style="width: 14%;">Subsector</th>
+        <th style="width: 12%;" class="text-right">Magnitud</th>
+        <th style="width: 12%;" class="text-right">Empleados</th>
+        <th style="width: 24%;">Aplicación Surus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Nueva Pescanova</b> <span class="badge gold">caso A</span></td>
+        <td class="mute">Traslado Sabón → Morás + desinversión Pescamar (MZ)</td>
+        <td>Pescado congelado</td>
+        <td class="num text-right">16 M€</td>
+        <td class="num text-right">—</td>
+        <td class="mute">Desimplantación Sabón + venta Pescamar</td>
+      </tr>
+      <tr>
+        <td><b>Danone</b> <span class="badge gold">caso B</span></td>
+        <td class="mute">Cierre Parets 2024 + hubs Aldaia/Tres Cantos</td>
+        <td>Lácteos</td>
+        <td class="num text-right">100 M€</td>
+        <td class="num text-right">—</td>
+        <td class="mute">Desimplantación Parets + Sevilla + Salas</td>
+      </tr>
+      <tr>
+        <td><b>Leche Pascual</b> <span class="badge gray">mención</span></td>
+        <td class="mute">Venta Gurb a Casa Tarradellas + UHT</td>
+        <td>Lácteos</td>
+        <td class="num text-right">80 trab.</td>
+        <td class="num text-right">80</td>
+        <td class="mute">Reempleo líneas GEA vía GUTINVEST</td>
+      </tr>
+      <tr>
+        <td><b>Mahou San Miguel</b> <span class="badge gold">caso C</span></td>
+        <td class="mute">Hub Alovera: almacén + biomasa + modernización</td>
+        <td>Cerveza</td>
+        <td class="num text-right">107 M€</td>
+        <td class="num text-right">4.419</td>
+        <td class="mute">Desimplantación líneas + biomasa (Plan Vamos 2030)</td>
+      </tr>
+      <tr>
+        <td><b>AGAMA / Damm</b> <span class="badge gray">mención</span></td>
+        <td class="mute">Cierre Palma de Mallorca post-reforma 2023</td>
+        <td>Lácteos / cerveza</td>
+        <td class="num text-right">14 trab.</td>
+        <td class="num text-right">14</td>
+        <td class="mute">Suelo Palma + reempleo equipos reformados</td>
+      </tr>
+      <tr>
+        <td><b>Nestlé España</b> <span class="badge gold">caso D</span></td>
+        <td class="mute">ERE 12 centros + creación hubs Girona / Sebares</td>
+        <td>Alimentación múltiple</td>
+        <td class="num text-right">267 trab.</td>
+        <td class="num text-right">267</td>
+        <td class="mute">Desimplantación multi-planta + suelo Esplugues</td>
+      </tr>
+      <tr>
+        <td><b>Azucarera · ABF</b> <span class="badge gold">caso E</span></td>
+        <td class="mute">Cierre La Bañeza 94 años + refinería Miranda 27 M€</td>
+        <td>Azúcar</td>
+        <td class="num text-right">119 M£</td>
+        <td class="num text-right">194</td>
+        <td class="mute">Reempleo suelo La Bañeza + valor residual</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="gap-3"></div>
+
+  <div class="row">
+    <div class="col">
+      <div class="panel" style="padding: 4mm 5mm;">
+        <h4 class="mb-1">Magnitud agregada detectada</h4>
+        <p class="text-white mono" style="font-size: 11pt; font-weight: 600;">+2.000 M€ en activos susceptibles de desimplantación circular</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel" style="padding: 4mm 5mm;">
+        <h4 class="mb-1">Casos detallados en próximas páginas</h4>
+        <p class="text-white mono" style="font-size: 11pt; font-weight: 600;">Pescanova · Danone · Mahou · Nestlé · Azucarera</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">07 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 8 — CASO A: NUEVA PESCANOVA
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0ciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec911TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>07 · Caso A · Pescanova</b><br>Traslado industrial + desinversión + recapitalización</div>
+  </div>
+
+  <div class="case-head">
+    <div class="who">
+      <div class="kicker">Caso A · Pesca congelada · A Coruña</div>
+      <h2>Nueva Pescanova</h2>
+      <p class="text-mute mt-1">Traslado Sabón → Morás (16 M€) · desinversión Pescamar Mozambique · recapitalización 283 M€ ABANCA · vuelta a beneficios 2025 · facturación 1.053,6 M€.</p>
+    </div>
+    <div class="pill">
+      <span class="badge gold">+1.053 M€</span>
+      <span class="badge olive">16.841 m²</span>
+    </div>
+  </div>
+
+  <div class="case-kpis">
+    <div class="case-kpi"><div class="num">283<span style="font-size: 13pt;">M€</span></div><div class="lbl">Ampliación de capital ABANCA</div></div>
+    <div class="case-kpi olive"><div class="num">16,8K</div><div class="lbl">m² Morás (lindante Inditex)</div></div>
+    <div class="case-kpi"><div class="num">16<span style="font-size: 13pt;">M€</span></div><div class="lbl">Inversión traslado Sabón</div></div>
+    <div class="case-kpi olive"><div class="num">+8%</div><div class="lbl">Revalorización suelo liberado</div></div>
+  </div>
+
+  <div class="gap-3"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col-3">
+      <h4 class="mb-2">Operación simultánea (3 vectores)</h4>
+      <ul class="tight">
+        <li><b>Traslado Sabón → Morás:</b> 16 M€ en nueva planta, parcela 16.841 m² lindante con Inditex. Activa corredor industrial Arteixo-Morás.</li>
+        <li><b>Desinversión Pescamar (MZ):</b> salida de Mozambique por costes operativos y riesgo regulatorio. Activo periférico liquidable.</li>
+        <li><b>Recapitalización 283 M€ ABANCA:</b> señal de confianza institucional tras años de pérdidas. Vuelta a beneficios 2025.</li>
+        <li><b>PIE declarado:</b> Prevención de Incidencia Preventiva Extracontractual = gestión preventiva de riesgos laborales del traslado.</li>
+      </ul>
+    </div>
+    <div class="col-2">
+      <div class="panel accent" style="height: 100%;">
+        <h4 class="mb-2" style="color: var(--accent);">Aplicación Surus</h4>
+        <p style="color: #fff; font-size: 9.5pt; line-height: 1.5;">Sabón es un suelo industrial liberado en zona de alta presión inmobiliaria (proximidad sede Inditex). La operación Surus:</p>
+        <ul class="tight mt-2">
+          <li>Tasación independiente del suelo Sabón</li>
+          <li>Desmantelamiento ordenado de la planta saliente</li>
+          <li>Reempleo de líneas de procesado vía Escrapalia</li>
+          <li>Estructuración fiscal de la plusvalía</li>
+          <li>Venta de Pescamar con due diligence técnica</li>
+        </ul>
+        <hr class="mt-2 mb-2">
+        <p class="text-mute" style="font-size: 8pt;">CEO: Jorge Escudero · Directora Industria: Marta Otero · Financiador: ABANCA</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">08 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 9 — CASO B: DANONE
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0ciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec911TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>08 · Caso B · Danone</b><br>3 cierres en 11 años, 100 M€ en hubs</div>
+  </div>
+
+  <div class="case-head">
+    <div class="who">
+      <div class="kicker">Caso B · Lácteos · Multilocalización</div>
+      <h2>Danone España</h2>
+      <p class="text-mute mt-1">Parets 2024 + Sevilla 2013 + Salas 2022 = tres cierres. Inversión simultánea 100 M€ en Aldaia (60 M€) y Tres Cantos (40 M€). Racionalización continental: +Ochsenfurt 2026 + Villefranche 2027.</p>
+    </div>
+    <div class="pill">
+      <span class="badge gold">5 plantas activas</span>
+      <span class="badge red">3 cerradas</span>
+    </div>
+  </div>
+
+  <div class="case-kpis">
+    <div class="case-kpi"><div class="num">100<span style="font-size: 13pt;">M€</span></div><div class="lbl">Inversión hubs Aldaia + Tres Cantos</div></div>
+    <div class="case-kpi olive"><div class="num">3</div><div class="lbl">Cierres en 11 años (Sevilla, Salas, Parets)</div></div>
+    <div class="case-kpi"><div class="num">+15%</div><div class="lbl">Revalorización suelo Parets (metro BCN)</div></div>
+    <div class="case-kpi olive"><div class="num">+2</div><div class="lbl">Cierres europeos previstos (DE, FR)</div></div>
+  </div>
+
+  <div class="gap-3"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col-3">
+      <h4 class="mb-2">Cronología de la racionalización</h4>
+      <table>
+        <thead><tr><th>Año</th><th>Planta</th><th>Tipo</th><th>Valor liberado</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">2013</td><td>Sevilla</td><td class="mute">Cierre</td><td class="num">Medio-Alto</td></tr>
+          <tr><td class="mono">2022</td><td>Salas (Asturias)</td><td class="mute">Cierre</td><td class="num">Medio</td></tr>
+          <tr><td class="mono">2024</td><td><b>Parets del Vallès</b></td><td class="mute">Cierre emblemático</td><td class="num text-accent"><b>Alto</b></td></tr>
+          <tr><td class="mono">Q4 2026</td><td>Ochsenfurt (DE)</td><td class="mute">Cierre previsto</td><td class="num text-mute">Por confirmar</td></tr>
+          <tr><td class="mono">~2027</td><td>Villefranche (FR)</td><td class="mute">Cierre previsto</td><td class="num text-mute">Por confirmar</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-2">
+      <div class="panel accent" style="height: 100%;">
+        <h4 class="mb-2" style="color: var(--accent);">Aplicación Surus</h4>
+        <p style="color: #fff; font-size: 9.5pt; line-height: 1.5;">La red Danone se especializa por categoría sobre proximidad al mercado. Los suelos liberados tienen valor logístico creciente:</p>
+        <ul class="tight mt-2">
+          <li><b>Parets del Vallès:</b> zona metropolitana BCN, alta presión inmobiliaria</li>
+          <li><b>Salas (Asturias):</b> suelo industrial con potencial de reconversión</li>
+          <li><b>Sevilla:</b> revalorización acumulada desde 2013</li>
+          <li>Coordinación europea para los cierres DE y FR</li>
+        </ul>
+        <hr class="mt-2 mb-2">
+        <p class="text-mute" style="font-size: 8pt;">DG España: François Lacombe · Dir. Operaciones: Jaime Avila · Plant Mgr Tres Cantos: David Ramos</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">09 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 10 — CASO C: MAHOU SAN MIGUEL
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAyNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0ciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec911TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>09 · Caso C · Mahou</b><br>Mayor inversión simultánea del sector cervecero</div>
+  </div>
+
+  <div class="case-head">
+    <div class="who">
+      <div class="kicker">Caso C · Cerveza y bebidas · Guadalajara</div>
+      <h2>Mahou San Miguel</h2>
+      <p class="text-mute mt-1">Plan Vamos 2030 (220 M€). Alovera concentra 107 M€ en tres proyectos simultáneos: almacén automatizado 80 M€ + biomasa 16 M€ + modernización 11 M€. 8 fábricas cerveza + 4 manantiales · 1.933,5 M€ facturación · 4.419 empleados.</p>
+    </div>
+    <div class="pill">
+      <span class="badge gold">Vamos 2030</span>
+      <span class="badge olive">Descarbonización</span>
+    </div>
+  </div>
+
+  <div class="case-kpis">
+    <div class="case-kpi"><div class="num">220<span style="font-size: 13pt;">M€</span></div><div class="lbl">Plan Vamos 2030 (inversión total)</div></div>
+    <div class="case-kpi olive"><div class="num">107<span style="font-size: 13pt;">M€</span></div><div class="lbl">Alovera simultáneo (3 proyectos)</div></div>
+    <div class="case-kpi"><div class="num">80<span style="font-size: 13pt;">M€</span></div><div class="lbl">Almacén automatizado (mayor CAPEX)</div></div>
+    <div class="case-kpi olive"><div class="num">16<span style="font-size: 13pt;">M€</span></div><div class="lbl">Planta biomasa (descarbonización)</div></div>
+  </div>
+
+  <div class="gap-3"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col-3">
+      <h4 class="mb-2">Estrategia Alovera: concentración sobre dispersión</h4>
+      <table>
+        <thead><tr><th>Proyecto</th><th>Inversión</th><th>Estado</th><th>Impacto Surus</th></tr></thead>
+        <tbody>
+          <tr><td>Almacén automatizado</td><td class="num">80 M€</td><td><span class="badge green">En ejecución</span></td><td class="mute">Libera 4 almacenes históricos</td></tr>
+          <tr><td>Planta biomasa</td><td class="num">16 M€</td><td><span class="badge green">En ejecución</span></td><td class="mute">Sustituye gas natural, CO₂ ↓</td></tr>
+          <tr><td>Modernización líneas</td><td class="num">11 M€</td><td><span class="badge green">En ejecución</span></td><td class="mute">Desimplantación líneas antiguas</td></tr>
+        </tbody>
+      </table>
+      <p class="text-mute mt-2" style="font-size: 7.5pt;">El almacén de 80 M€ es una de las mayores inversiones logísticas del sector alimentario español.</p>
+    </div>
+    <div class="col-2">
+      <div class="panel accent" style="height: 100%;">
+        <h4 class="mb-2" style="color: var(--accent);">Aplicación Surus</h4>
+        <p style="color: #fff; font-size: 9.5pt; line-height: 1.5;">La concentración en Alovera libera activos en plantas Mahou históricas (Madrid capital, Legazpi, San Sebastián de los Reyes):</p>
+        <ul class="tight mt-2">
+          <li><b>Desimplantación líneas antiguas</b> de Madrid, Alovera previo y regional</li>
+          <li><b>Reempleo calderas y filtros</b> en mercado secundario</li>
+          <li><b>Modelado fiscal</b> del ahorro por biomasa (vs. gas)</li>
+          <li><b>Reporte CSRD</b> de la descarbonización</li>
+        </ul>
+        <hr class="mt-2 mb-2">
+        <p class="text-mute" style="font-size: 8pt;">DG Operaciones: Nicolás Castrejón · Dir. Fabrica Alovera: César Rodríguez</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">10 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 11 — CASOS D + E: NESTLÉ + AZUCARERA (comprimido)
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0ciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec911TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>10 · Casos D &amp; E</b><br>ERE Nestlé + cierre centenario Azucarera</div>
+  </div>
+
+  <div class="kicker">Casos D &amp; E · Multilocalización y sector azucarero</div>
+  <h1 style="font-size: 20pt;">Nestlé ejecuta el mayor ERE del A&amp;B español.<br>Azucarera cierra 94 años de historia.</h1>
+
+  <div class="gap-3"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col">
+      <div class="panel accent" style="height: 100%;">
+        <div class="kicker">Caso D · Nestlé España</div>
+        <h2 class="mt-1" style="font-size: 18pt;">Plan "Fuel for Growth"</h2>
+        <p class="text-mute mt-1">Plan global: 16.000 despidos. España: 267 afectados en 12 centros. Esplugues (BCN) = 158 despidos (59% del total). Plan paralelo de creación: +25 puestos Girona, +10 Sebares = reconfiguración, no solo recorte.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin-top: 4mm;">
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">267</div><div class="lbl">Trabajadores ERE</div></div>
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">158</div><div class="lbl">Esplugues (59%)</div></div>
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">12</div><div class="lbl">Centros afectados</div></div>
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">2.894</div><div class="lbl">M€ facturación</div></div>
+        </div>
+
+        <div class="quote mt-3">
+          <p>"Suelo Esplugues con valor inmobiliario muy alto en zona metropolitana BCN. La reconfiguración puede liberar activos en múltiples localizaciones."</p>
+          <div class="attr"><b>Surus · Aplicación directa</b> · Desimplantación multi-planta + reempleo suelo Esplugues</div>
+        </div>
+
+        <table class="mt-2" style="font-size: 7.5pt;">
+          <thead><tr><th>Centro</th><th>Localización</th><th>Impacto</th><th class="text-right">Valor suelo</th></tr></thead>
+          <tbody>
+            <tr><td>Esplugues</td><td>Barcelona</td><td>-158 despidos</td><td class="num text-right">Muy alto</td></tr>
+            <tr><td>La Penilla</td><td>Cantabria</td><td>-43 despidos</td><td class="num text-right">Medio</td></tr>
+            <tr><td>Pontecesures</td><td>Pontevedra</td><td>-27 despidos (14%)</td><td class="num text-right">Medio</td></tr>
+            <tr><td>Girona</td><td>Girona</td><td class="text-good">+25 nuevos</td><td class="num text-right text-good">Inversión</td></tr>
+            <tr><td>Sebares</td><td>Asturias</td><td class="text-good">+10 nuevos</td><td class="num text-right text-good">Inversión</td></tr>
+          </tbody>
+        </table>
+        <p class="text-mute mt-2" style="font-size: 7.5pt;">Presidente Nestlé España: Olivier Helfer · CEO global: Philipp Navratil · Presidente global: Pablo Isla</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="panel accent" style="height: 100%;">
+        <div class="kicker">Caso E · Azucarera (AB Foods)</div>
+        <h2 class="mt-1" style="font-size: 18pt;">La Bañeza · 94 años</h2>
+        <p class="text-mute mt-1">Cierre planta centenaria + cese molturación Jerez/Miranda + conversión Miranda a refinería (27 M€). ERE 194 ratificado jul 2025. Deterioro contable 119 M£ con equipos a cero y suelo en 21 M£. ABF planea separación Primark/FoodCo antes 2027.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin-top: 4mm;">
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">94</div><div class="lbl">Años La Bañeza</div></div>
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">194</div><div class="lbl">Trabajadores ERE</div></div>
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">119</div><div class="lbl">M£ deterioro</div></div>
+          <div class="case-kpi" style="padding: 3mm;"><div class="num">21</div><div class="lbl">M£ suelo conservado</div></div>
+        </div>
+
+        <div class="quote mt-3">
+          <p>"Equipos a cero contable + suelo a 21 M£ = ventana única para venta limpia sin cargas. La separación ABF añade opcionalidad de M&amp;A sobre FoodCo."</p>
+          <div class="attr"><b>Surus · Aplicación directa</b> · Reempleo suelo La Bañeza + valor residual cero = desinversión limpia</div>
+        </div>
+
+        <table class="mt-2" style="font-size: 7.5pt;">
+          <thead><tr><th>Planta</th><th>Localización</th><th>Cambio</th><th class="text-right">Inversión / Valor</th></tr></thead>
+          <tbody>
+            <tr><td>La Bañeza</td><td>León</td><td class="mute">Cierre</td><td class="num text-right">21 M£ suelo</td></tr>
+            <tr><td>Miranda de Ebro</td><td>Burgos</td><td class="text-good">Conversión refinería</td><td class="num text-right">27 M€</td></tr>
+            <tr><td>Jerez/Guadalete</td><td>Cádiz</td><td class="mute">Cese molturación 2026</td><td class="num text-right">—</td></tr>
+            <tr><td>ACOR (competidor)</td><td>Valladolid</td><td class="mute">Pérdidas</td><td class="num text-right">Oportunidad M&amp;A</td></tr>
+          </tbody>
+        </table>
+        <p class="text-mute mt-2" style="font-size: 7.5pt;">CEO Azucarera: Juan Luis Rivero · ABF matriz: pendiente separación Primark/FoodCo &lt; 2027</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">11 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 12 — PRUEBA SOCIAL: 7 CLIENTES IBEX 35
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgCAYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0ciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec911TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>11 · Prueba social</b><br>Siete testimonios de C-Level</div>
+  </div>
+
+  <div class="kicker">Casos icónicos Surus · clientes multinacionales y sector público</div>
+  <h1 style="font-size: 22pt;">Quince empresas del IBEX 35,<br>más de mil clientes, veintisiete países.</h1>
+  <p class="lede mt-2" style="font-size: 11pt;">Lo que dicen los directores que ya trabajan con Surus.</p>
+
+  <div class="gap-3"></div>
+
+  <div class="row" style="flex: 1;">
+    <div class="col-2">
+      <div class="stack">
+        <div class="quote">
+          <p>"La colaboración con Surus ha permitido iniciar un camino de éxito en la enajenación de equipos y materiales obsoletos de REE."</p>
+          <div class="attr"><b>Ana Villuendas Adé</b> · Procurement Director · Red Eléctrica de España</div>
+        </div>
+        <div class="quote">
+          <p>"Trabajar con Surus ha supuesto un gran cambio de mentalidad en la visión del material descartado para nuestras operaciones."</p>
+          <div class="attr"><b>Lorenzo López Sánchez</b> · Global Manager Drilling &amp; Completions · Repsol</div>
+        </div>
+        <div class="quote">
+          <p>"Gracias a Surus y a su web Escrapalia hemos podido hacer las adjudicaciones a través de subastas totalmente transparentes."</p>
+          <div class="attr"><b>Juan Martino</b> · Operations &amp; Logistics Director · SIGNUS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="stack">
+        <div class="quote">
+          <p>"La colaboración entre los expertos de AECOM y Surus aporta herramientas y soluciones que permiten abordar los proyectos de desimplantación."</p>
+          <div class="attr"><b>César Asensio</b> · Sustainability &amp; Environment Director · AECOM</div>
+        </div>
+        <div class="quote">
+          <p>"SURUS apoya a SENASA en la comercialización de aeronaves y la transferencia de propiedad de las mismas."</p>
+          <div class="attr"><b>Belén Muñoz Guerrero</b> · Subdirectora · SENASA (Grupo Fomento)</div>
+        </div>
+        <div class="quote">
+          <p>"La FNMT-RCM ha trabajado con Surus en la valorización de sus activos públicos obsoletos a través de subastas digitales."</p>
+          <div class="attr"><b>FNMT-RCM</b> · Fábrica Nacional de Moneda y Timbre · Real Casa de la Moneda</div>
+        </div>
+        <div class="quote">
+          <p>"Confiamos en Surus para dar a los activos de laboratorio una segunda vida útil."</p>
+          <div class="attr"><b>Iván José Galindo Cardiel</b> · CEO · WorldPathol</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">12 / 13</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 13 — CTA / CONTACTO
+     ============================================================ -->
+<section class="slide">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA纽约AAACgYAAABwmJLyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjVDQUNFN0RCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjVDQUNFN0VCNjExMTFFOUE2QkVEMzcwODlCNzQ2MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NUNBQ0U3QkI2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NUNBQ0U3Q0I2MTExMUU5QTZCRUQzNzA4OUI3NDYyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0ciI/PpCiysEAAEYpSURBVHja7H0HYB3Vlfa883pR75YlW65yB2NawGCqqSHBCaSHTS9LspvNbjYtw5+ezZJls9mEJGQhhIVQAoRQA5hiYxtj3LtlSVbvfen1uf89d+bO3Jn3nmxDbAtrLowlvTL1fPec911TCGUUnOEMZ/xth+LcAmc4wwGWM5whgMsZzjDAZYznOEAyxnOcIDlDGc4wHLGFBn/P4ABAMr5hEXwO+gMAAAAAElFTkSuQmCC" alt="Surus">
+      <span class="brand">Surus · A&amp;B Intelligence 2026</span>
+    </div>
+    <div class="right"><b>12 · Próximos pasos</b><br>Conversación técnica de 45 minutos</div>
+  </div>
+
+  <div class="cta-grid" style="flex: 1;">
+    <div class="cta-left">
+      <div class="kicker">Decisión</div>
+      <h1>Una reunión de<br>45 minutos basta<br>para tasar su suelo.</h1>
+      <p class="lede mt-3">De los siete casos analizados, cuatro están en fase de cierre operativo durante 2026. La ventana de interlocución con los CDO y CFO de cada grupo es ahora.</p>
+
+      <div class="gap-3"></div>
+
+      <h4 class="mb-2">Qué obtendrá en la primera sesión</h4>
+      <ul class="tight">
+        <li><b>Tasación independiente</b> de suelo industrial liberado o a liberar</li>
+        <li><b>Inventario técnico</b> con brand + modelo + specs de los activos a desmontar</li>
+        <li><b>Modelado fiscal</b> del impacto en plusvalías y CSRD</li>
+        <li><b>Cronograma</b> de desimplantación cerrado a 12-18 meses</li>
+        <li><b>Hoja de términos</b> con compromiso de compra sobre activo identificado</li>
+      </ul>
+    </div>
+
+    <div class="cta-right">
+      <div class="panel" style="height: 100%;">
+        <h3 style="color: var(--accent); font-size: 11pt; letter-spacing: 0.08em; text-transform: uppercase;">Contacto</h3>
+        <div class="gap-3"></div>
+        <div class="signature">
+          <div class="name">Juan Carlos Alvarado</div>
+          <div class="role">Director · Grupo Surus</div>
+          <div class="contact">
+            <b>Web</b> · www.surusin.com<br>
+            <b>Email</b> · jalvarado@surusin.com<br>
+            <b>Madrid</b> · Sede central<br>
+            <b>Operativa</b> · España + 27 países
+          </div>
+        </div>
+        <div class="gap-3"></div>
+        <div style="padding: 4mm; background: var(--bg-3); border-radius: 1.5mm; border: 1px solid var(--accent);">
+          <p class="text-white" style="font-size: 10pt; font-weight: 600; line-height: 1.4;">Surus compra el problema,<br>le devuelve capital.</p>
+          <p class="text-mute mt-1" style="font-size: 8pt;">Sin CAPEX · sin riesgos laborales · sin destruir valor.</p>
+        </div>
+        <div class="gap-3"></div>
+        <table style="font-size: 7.5pt;">
+          <tbody>
+            <tr><td class="mute" style="border: none; padding: 1mm 0;">Track record</td><td class="num text-right" style="border: none; padding: 1mm 0;">+400 M€ generados</td></tr>
+            <tr><td class="mute" style="border: none; padding: 1mm 0;">Activos reempleados</td><td class="num text-right" style="border: none; padding: 1mm 0;">98%</td></tr>
+            <tr><td class="mute" style="border: none; padding: 1mm 0;">Clientes IBEX 35</td><td class="num text-right" style="border: none; padding: 1mm 0;">+15</td></tr>
+            <tr><td class="mute" style="border: none; padding: 1mm 0;">Sostenibilidad</td><td class="num text-right" style="border: none; padding: 1mm 0;">EcoVadis Silver 78/100</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SURUS · Dossier Alimentación y Bebidas · Confidencial</span>
+    <span class="pageno">13 / 13</span>
+  </div>
+</section>
+
+</body>
+</html>

@@ -2,9 +2,9 @@
 // Filtra concursos explícitamente (BORME) y detecta EREs y cierres de planta.
 import { PrismaClient } from '@prisma/client';
 import boeBopList from '@/lib/data/boe-bop-list.json' with { type: 'json' };
-import { scrapeBoeBop, type BoeBopEntry } from '@/lib/scrapers/boe-bop.js';
-import { isDeimplantation } from '@/lib/filters/deimplantation.js';
-import type { ScrapedArticle } from '@/lib/scrapers/types.js';
+import { scrapeBoeBop, type BoeBopEntry } from '@/lib/scrapers/boe-bop';
+import { isDeimplantation } from '@/lib/filters/deimplantation';
+import type { ScrapedArticle } from '@/lib/scrapers/types';
 
 const prisma = new PrismaClient();
 
@@ -36,8 +36,7 @@ async function persistArticle(article: ScrapedArticle) {
       outletType: 'bofficial',
       publishedAt: article.publishedAt,
       language: 'es',
-      country: 'ES',
-      content: article.content.slice(0, 50000),
+      contentText: article.content.slice(0, 50000),
       contentHash: article.contentHash,
       deimplantationSignal: inScope,
       outOfScopeReason: outReason,
@@ -45,7 +44,7 @@ async function persistArticle(article: ScrapedArticle) {
     },
     update: {
       title: article.title.slice(0, 500),
-      content: article.content.slice(0, 50000),
+      contentText: article.content.slice(0, 50000),
       contentHash: article.contentHash,
       deimplantationSignal: inScope,
       outOfScopeReason: outReason,
@@ -117,8 +116,8 @@ export async function runBoeBopAgent(opts: {
   });
   await prisma.scanConfig.upsert({
     where: { agentName: 'boe-bop-sindicatos' },
-    create: { agentName: 'boe-bop-sindicatos', keywords: [], sources: entries.map((e) => e.slug), cadenceDays: 2, isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
-    update: { isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
+    create: { agentName: 'boe-bop-sindicatos', queryConfig: { keywords: [], sources: entries.map((e) => e.slug) } as object, cadenceDays: 2, isActive: true, lastRunAt: finishedAt },
+    update: { isActive: true, lastRunAt: finishedAt },
   });
 
   return {

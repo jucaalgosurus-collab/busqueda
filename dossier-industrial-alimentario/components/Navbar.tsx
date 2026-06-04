@@ -1,6 +1,8 @@
 // components/Navbar.tsx — Top navigation for HERMES Dossier
+// Next.js Link auto-prepends basePath from next.config.ts (set to /dossier).
+// Do NOT prepend basePath manually here — that produces /dossier/dossier/...
 import Link from 'next/link';
-import { basePath } from '@/lib/utils/base-path';
+import { ThemeToggle } from './ThemeToggle';
 
 const NAV_LINKS = [
   { href: '/', label: 'Dashboard' },
@@ -8,13 +10,13 @@ const NAV_LINKS = [
   { href: '/empresas', label: 'Empresas' },
   { href: '/eventos', label: 'Eventos' },
   { href: '/contactos', label: 'Contactos' },
+  { href: '/buscar-responsables', label: 'Buscar responsables' },
   { href: '/mocr', label: 'MOCR' },
   { href: '/agentes', label: 'Agentes' },
   { href: '/legacy', label: 'Legacy' },
 ];
 
 export function Navbar() {
-  const base = basePath();
   return (
     <nav
       style={{
@@ -32,7 +34,7 @@ export function Navbar() {
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-5)' }}
       >
         <Link
-          href={`${base}/`}
+          href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -56,23 +58,39 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
-          {NAV_LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={`${base}${l.href}`}
-              style={{
-                color: 'rgba(255,255,255,0.85)',
-                padding: 'var(--space-2) var(--space-3)',
-                borderRadius: 'var(--radius-md)',
-                fontSize: 'var(--text-sm)',
-                fontWeight: 500,
-                transition: 'all 0.15s ease',
-              }}
-            >
-              {l.label}
-            </Link>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+          <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                style={{
+                  color: 'rgba(255,255,255,0.85)',
+                  padding: 'var(--space-2) var(--space-3)',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 500,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+          <ThemeToggle />
+          <span
+            title="HERMES Dossier — creado por Juan Carlos Alvarado para Surus Inversa"
+            style={{
+              fontSize: 'var(--text-xs)',
+              color: 'rgba(255,255,255,0.55)',
+              padding: 'var(--space-1) var(--space-2)',
+              borderLeft: '1px solid rgba(255,255,255,0.2)',
+              lineHeight: 1.2,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Creado por <strong style={{ color: 'rgba(255,255,255,0.9)' }}>Juan Carlos Alvarado</strong> para <strong style={{ color: 'var(--surus-accent)' }}>Surus</strong>
+          </span>
         </div>
       </div>
     </nav>

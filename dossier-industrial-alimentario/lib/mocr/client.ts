@@ -110,9 +110,9 @@ export async function classifyDocument(opts: {
   if (!GEMINI_KEY) throw new Error('GEMINI_API_KEY not configured');
 
   const fileBytes = await readFile(opts.filePath);
-  const sha256 = createHash('sha256').update(fileBytes).digest('hex');
   const base64 = fileBytes.toString('base64');
   const mime = opts.filePath.toLowerCase().endsWith('.pdf') ? 'application/pdf' : 'image/jpeg';
+  const fileName = opts.filePath.split(/[/\\]/).pop() ?? 'document';
 
   // Persist Document record
   const doc = await prisma.document.create({
@@ -120,7 +120,9 @@ export async function classifyDocument(opts: {
       companyId: opts.companyId ?? null,
       kind: opts.kind,
       fileUrl: `file://${opts.filePath}`,
-      sha256,
+      fileName,
+      fileSize: fileBytes.length,
+      mimeType: mime,
       ocrProvider: 'gemini-2.5-flash',
     },
   });

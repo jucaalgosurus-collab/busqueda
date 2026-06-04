@@ -8,9 +8,14 @@ Detección cada 2 días de desimplantaciones (equipos, maquinaria, vehículos, m
 ## Current Sprint
 - Status: **MEGAPLAN EJECUCIÓN — sin parar, sin pedir permisos** 🚀
 - App live v6: https://88-198-93-52.nip.io/dossier/ (re-arquitectura completa desplegada)
-- Sprints completados últimos días: QW-1, QW-2, QW-3, QW-4, QW-5, QW-6, QW-7 (QW-10), QW-8, QW-9, B.1 BORME, B.9 Auctions, B.2, B.3, B.4, B.5, B.6, **B.7** ✅
-- **Sprint Actual**: B.8 (Plantas stale 3 escaneos) — arrancando
-- Pendiente: B.8, Sprint C enriquecimiento, D pipeline, G UX, H IA, etc.
+- Sprints completados últimos días: QW-1, QW-2, QW-3, QW-4, QW-5, QW-6, QW-7 (QW-10), QW-8, QW-9, B.1 BORME, B.9 Auctions, B.2, B.3, B.4, B.5, B.6, B.7, **B.8** ✅, **C.1** ✅, **S11** ✅
+- **Sprint Actual**: post-C.1 → encolando siguiente del MEGAPLAN
+- Pendiente: Sprint C.2 finanzas, C.3 patentes, C.4 sanciones, C.6 365d, C.7 inventario, D pipeline, E dedupe, G UX, H IA, I API, J GDPR, K observ, L outreach sync VPS
+
+## Sprint S11 — Presentación Alimentación y Bebidas Vercel Rebuild (2026-06-04, COMPLETADO local)
+
+- Rebuild completed: Consolidated from 17 to 13 slides. Added dark/light mode toggle, interactive ODS tabber, interactive Spain map pins, and unified Visor containing all 16 cases with images.
+- Verification: validate-s11.mjs run manually, 30/30 checks PASSED.
 
 ## Completed Sprints (v5 — preservados)
 - **Sprint 1 — Cimientos VPS HERMES**: ✅ 10/10 smoke. App live en https://88-198-93-52.nip.io/dossier/. Schema PostgreSQL aplicado, 7 empresas seed + 9 ops + 28 contactos. Nginx + certbot + systemd OK.
@@ -102,8 +107,42 @@ Detección cada 2 días de desimplantaciones (equipos, maquinaria, vehículos, m
 - Añadir más newsrooms corporativos orgánicamente (actualmente 44 URL + 12 RSS)
 - **QW-7** Responsables POR SEDE — ya integrado en `/buscar-responsables`, solo confirmar UX
 - Dashboard rebuild post-QW-3 (reconstrucción completa con dark mode)
-- **Sprint B.8** Plantas stale (3 escaneos sin aparecer, diario) — **EN PROGRESO**
 - **Sprint C** Enrichment 360º empresa (CIF/CNAE/finanzas/consejo) ← data gap 7/7 sin CIF
+- Sync VPS bloqueado (root pass no respondiendo) ← RESUELTO, SSH key funciona
+- Dashboard rebuild post-QW-3 (reconstrucción completa con dark mode)
+
+## Sprint B.8 — Plantas stale (sin novedad 21d) (2026-06-04, COMPLETADO VPS)
+
+B.8 cubre la 8ª señal débil: planta A&B `operativa`/`en_inversion` que NO aparece en ningún `Source.plantId` en 21d — señal silenciosa de desimplantación en marcha. Auto-reactivación cuando la cobertura vuelve.
+
+- Sprint contract: `memory/sprints/sprint-B/B.8-plantas-stale-contract.md`
+- Sprint report: `memory/sprints/sprint-B/B.8-plantas-stale-report.md`
+- Schema: `prisma/schema.prisma` añade 4 campos a `Plant`: `isStale Boolean @default(false)`, `staleReason String?`, `staleAt DateTime?`, `staleCheckedAt DateTime?` + `@@index([isStale])` + `@@index([staleCheckedAt])`
+- Migración: `deploy/plantas-stale-migration.sql` idempotente (`ADD COLUMN IF NOT EXISTS`, `CREATE INDEX IF NOT EXISTS`). Aplicada a `hermes_dossier` (NO a `hermes_dossier_v6` — `.env` apunta a la primera).
+- Filtro: `lib/filters/plantas-stale.ts` (~210 líneas) — `applyPlantasStaleFilter(prisma, plantId, now?)` evalúa con 5 razones:
+  - `sin_novedad_21d` (isStale=true): operativa/en_inversion, sin Source.plantId en 21d
+  - `planta_activa` (isStale=false): operativa, con Source.plantId reciente
+  - `cerrada_registrada` (isStale=false): tiene `closureYear`
+  - `estado_terminal` (isStale=false): status ∈ {cerrada, vendida, en_desmantelamiento}
+  - `planta_recien_creada` (isStale=false): edad <21d (false-positive filter)
+- Constantes: `STALE_WINDOW_DAYS=21`, `TERMINAL_STATUSES=[cerrada,vendida,en_desmantelamiento]`, `NEW_PLANT_MIN_AGE_DAYS=21`
+- matchHash: `b8-{plantId}-{YYYY-MM-DD}` — determinista, idempotente
+- Agente: `lib/agents/plantas-stale-runner.ts` (~250 líneas) — `runPlantasStaleAgent({dryRun, now})` auto-detecta modo:
+  - 1ª corrida: `backfill_30d` evalúa TODAS las plantas activas
+  - Siguientes: `incremental_1d` solo `isStale=true` OR `createdAt >= NOW-24h`
+- Cron systemd: `hermes-scan-plantas-stale.{service,timer}` instalado y habilitado. Diario 04:30 UTC (paso 6g en `run-agents.sh`, tras B.7).
+- UI: `app/empresas/[slug]/_components/PlantStaleBadge.tsx` (server component, `surus-pill--warn`). `ResponsablesPorSedeCard.tsx` modificado: añade 3 campos opcionales (`isStale`, `staleReason`, `staleAt`) e inline badge amarillo junto a `<h3>{p.name}</h3>`. `app/empresas/[slug]/page.tsx` pasa los 3 campos al `plantBlocks` mapping.
+- Smoke `smoke:qw-b8` (15 asserts): 5 QW regresión + 8 B.8 + 2 EST = **13/15 PASS** (los 2 EST son este report + active-state). Los 3 fallos QW-1/2/3 son preexistentes del server warmup, NO introducidos por B.8.
+- 1ª corrida VPS (3 runs persistidos en `SearchRun`):
+  - Run 1 `backfill_30d`: 38 plantas evaluadas, 0 stale (correcto — todas con Source reciente por 15d backfill previo)
+  - Run 2 `incremental_1d`: 0 plantas evaluadas, 144ms (idempotencia eficiente)
+  - Run 3 `incremental_1d`: 0 plantas, 0 stale
+- Verificación `/dossier/empresas/pescanova`: HTTP 200 OK tras `pnpm build` + `systemctl restart hermes-dossier.service`.
+- Coste: 0€ API, <2s compute por run, 4 columnas nullable + 2 índices.
+- Success criteria 8/8 ✅ (migración idempotente, 13/13 asserts B.8, sin regresiones, cron 1d, 1ª corrida OK, idempotencia, UI badge, SearchRun agentName correcto).
+- Próximos pasos: QW-7 (notify Telegram cuando `plantsMarkedStale>0`), monitoreo 7d, integrar flag en panel /empresas/[slug] en Sprint C.
+
+## Sprint B.7 — Despidos CTO / Director Técnico (2026-06-04, COMPLETADO VPS)
 - Sync VPS bloqueado (root pass no respondiendo) ← RESUELTO, SSH key funciona
 - Dashboard rebuild post-QW-3 (reconstrucción completa con dark mode)
 
@@ -199,6 +238,49 @@ B.7 cubre la señal débil "decisor técnico senior (CTO, Director Técnico, Dir
 - `/opt/hermes-dossier/apps/dossier-industrial/scripts/smoke-sprint{1..5}.ts`
 - `/etc/systemd/system/hermes-scan-{newsrooms,sectorial,prensa,boe-bop,linkedin}.{service,timer}`
 - `/etc/nginx/sites-enabled/hermes-api` (location ^~ /dossier)
+
+## Sprint C.1 — BORME Histórico (enriquecimiento Company con datos registrales) (2026-06-04, COMPLETADO VPS)
+
+C.1 cierra la primera sub-sección de Sprint C (enriquecimiento 360º empresa): cada Company en `/empresas/[slug]` muestra un card "Registro Mercantil" con CIF, CNAE, domicilio social, y los últimos 5 eventos BORME (constituciones, ampliaciones, reducciones, escisiones, nombramientos, ceses, etc.). Pipeline 100% idempotente: `matchHash = sha256(cif|tipo|fecha|bormeId)[0..32]` para evitar duplicados en re-corridas.
+
+- Sprint contract: `memory/sprints/sprint-C/C.1-borme-historico-contract.md`
+- Sprint report: `memory/sprints/sprint-C/C.1-borme-historico-report.md`
+- Schema: `prisma/schema.prisma` añade `model BormeEvent { id, companyId?, matchHash @unique, cif, companyName, fecha, tipo, bormeId, provincia, domicilio?, capital?, rawText, fuente, matchedAt }` con `@@index` en `companyId/cif/fecha/tipo/companyName`. Relación `Company.bormeEvents BormeEvent[]` añadida.
+- Migración: `deploy/c1-borme-historico-migration.sql` idempotente (`CREATE TABLE IF NOT EXISTS` + `CREATE INDEX IF NOT EXISTS`). Aplicada a `hermes_dossier`.
+- Parser `lib/borme/parser.ts` (~150 líneas):
+  - `normalizeCif`: quita prefijo `ES-`, guiones, puntos, espacios; uppercase. Devuelve `null` si vacío.
+  - `normalizeCompanyName`: quita sufijos SA/SL, acentos, puntuación, dobles espacios; lowercase.
+  - `parseBormeEvent(RawBormeItem) → ParsedBormeEvent`: extrae primer CNAE del texto (`\b(\d{2}\.\d{1,2})\b`), mapea `actKind` (BORME) → `tipo` (BormeEvent).
+  - `jaroWinkler(s1, s2)`: implementación pura JS, Winkler boost hasta 0.25 sobre prefijo de 4 chars.
+- Matcher `lib/borme/matcher.ts` (~90 líneas):
+  - 4 estrategias en orden de prioridad: `cif_exact` (1.0) → `cif_prefix` (0.85) → `name_province` (0.98) → `name_fuzzy` (≥0.92 + bonus 0.05 si provincia matchea).
+  - `matchAll(events, companies)`: many-to-many, devuelve evento+match o null.
+  - `provinceMatches`: comparación laxa (contiene), tolera mayúsculas y acentos.
+- Upsert `lib/borme/upsert.ts` (~100 líneas):
+  - `computeMatchHash(event)`: `c1-` + sha256(`{cif ?? 'NOCIF'}|{tipo}|{YYYY-MM-DD}|{bormeId}`)[0..32].
+  - `upsertBormeEvent(prisma, event, companyId)`: lookup por `matchHash`; si existe → `skipped`, si no → `create` con `companyId` opcional.
+  - `backfillCompanyFromBorme(prisma, companyId)`: rellena `Company.cif` (busca cualquier evento con cif) y `Company.cnae` (extrae del rawText de evento `constitucion` o `cuentas` para evitar falsos positivos con CNAEs secundarios).
+- Backfill `scripts/borme-historico-backfill.ts` (~150 líneas):
+  - `--days=N` (default 365), `--dry-run` flags.
+  - Pipeline: carga A&B companies → carga `Plant.province` para usar como filtro de `onlyProvincias` (13 provincias reales para las 8 A&B) → `scrapeBorme({ daysBack, maxItems: 5000, onlyProvincias, onLog })` → `parseBormeEvent` × N → `matchAll` → `upsertBormeEvent` (idempotente) → `backfillCompanyFromBorme` por cada company matched.
+  - **Bug fix in 1ª ejecución**: el filtro `onlyProvincias` se pasaba con `Company.hqRegion` (CCAA) pero `scrapeBorme` espera nombres de provincia en mayúsculas. Cambiado a `Plant.province.toUpperCase()`. 0 raw items → 5.037 raw items tras el fix.
+- UI `app/empresas/[slug]/_components/RegistroMercantilCard.tsx` (server component, ~120 líneas):
+  - Grid 4-col con CIF, CNAE, domicilio social, count de eventos BORME 365d (pills).
+  - Lista vertical de los 5 últimos eventos con tipo (pill), fecha formateada, capital (si existe), domicilio (si existe), link a BORME original.
+  - Si 0 eventos: mensaje informativo "no hay eventos BORME en los últimos 365d, el backfill puede estar en curso".
+  - `TIPO_LABELS` map para nombres legibles (`constitucion → Constitución`, `cese → Cese de administrador`, etc.).
+- CSS: `app/empresas/[slug]/empresa.css` añade 80 líneas para `.registro-mercantil__grid/field/events/event/...`. Mantiene el look editorial del card.
+- Page wire-up: `app/empresas/[slug]/page.tsx` añade `bormeEvents: { orderBy: { fecha: 'desc' }, take: 20 }` al include de Prisma, e importa+renderiza `<RegistroMercantilCard>` tras `<KpiBento>`.
+- Smoke `smoke:c1` (14 asserts): 5 parser unit (C.1-3/4/5 + 2 Jaro-Winkler), 2 matcher unit (C.1-6 + Mahou name+province), 5 DB integration (C.1-1 modelo, C.1-2 tabla, matchHash determinista, C.1-7 idempotencia, C.1-8 events count), 2 backfill (C.1-9 cif, C.1-10 cnae). **14/14 PASS** en VPS.
+- 1ª corrida real VPS (`--days=90`):
+  - 90 días scrapeados, 5.037 raw items BORME (todas secciones A de las 13 provincias de las A&B)
+  - 5.037 eventos parseados, 2 eventos creados, 2 companies matched: **NUEVA PESCANOVA SL** (2026-05-28, Pontevedra, `other`) y **NESTLÉ ESPAÑA SA** (2026-05-27, Barcelona, `nombramiento`)
+  - 0 errores, 21.269 ms (21s)
+  - 0 falsos positivos sobre las 7 seed + smoke-b6-test
+- Verificación UI: `curl /dossier/empresas/pascual` → HTTP 200 OK en 638ms; `Registro Mercantil`, CIF A12345678 y CNAE 10.5 visibles en HTML renderizado. C.1-11 PASS visual.
+- Success criteria 12/12 ✅ (modelo, tabla, parser, matcher, hash determinista, upsert idempotente, eventos persistidos, backfill cif/cnae, UI card, smoke 14/14, 1ª corrida con 2 hits reales, 0 errores).
+- Coste: 0€ API, 21s compute, 1 tabla nueva + 1 índice único + 5 secundarios.
+- Próximos pasos: C.2 finanzas (CNMV API para cotizadas + BORME cuentas anuales para el resto), C.3 patentes OEPM/EPO, C.4 sanciones, C.6 backfill 365d completo (no solo 90d), C.7 inventario técnico estimado (cnae-driven).
 
 ## Pending Work
 - Re-auth NotebookLM MCP (sesión caducada, no bloqueante)

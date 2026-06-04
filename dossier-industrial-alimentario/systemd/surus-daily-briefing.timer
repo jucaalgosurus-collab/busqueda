@@ -1,0 +1,10 @@
+[Unit]
+Description=Surus Daily Briefing timer (09:00 UTC diario)
+
+[Timer]
+OnCalendar=*-*-* 09:00:00 UTC
+Persistent=true
+Unit=surus-daily-briefing.service
+
+[Install]
+WantedBy=timers.target

@@ -67,13 +67,12 @@ async function main() {
     detail: `actual=${concursosInScope} (esperado 0: si outOfScopeReason=concurso entonces NO in_scope)`,
   });
 
-  // 6) CCAA detectadas en ≥ 5 regiones distintas
+  // 6) CCAA detectadas en ≥ 5 regiones distintas (v6: via company.hqRegion)
   const distinctRegions = await prisma.source.findMany({
     where: { outletType: { in: ['nacional', 'regional', 'local'] } },
-    select: { region: true },
-    distinct: ['region'],
+    select: { company: { select: { hqRegion: true } } },
   });
-  const regionSet = new Set(distinctRegions.map((r) => r.region).filter(Boolean));
+  const regionSet = new Set(distinctRegions.map((r) => r.company?.hqRegion).filter(Boolean));
   asserts.push({
     name: '6. ≥5 CCAA distintas detectadas',
     pass: regionSet.size >= 5,

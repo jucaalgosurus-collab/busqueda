@@ -5,10 +5,10 @@ import { PrismaClient } from '@prisma/client';
 import { createHash } from 'node:crypto';
 import newsroomList from '@/lib/data/newsroom-list.json' with { type: 'json' };
 import sectorialList from '@/lib/data/sectorial-list.json' with { type: 'json' };
-import { scrapeNewsroom } from '@/lib/scrapers/newsroom.js';
-import { scrapeSectorial as _scrapeSectorial } from '@/lib/scrapers/sectorial.js';
-import { isDeimplantation } from '@/lib/filters/deimplantation.js';
-import type { NewsroomListEntry, SectorialListEntry, ScrapedArticle } from '@/lib/scrapers/types.js';
+import { scrapeNewsroom } from '@/lib/scrapers/newsroom';
+import { scrapeSectorial as _scrapeSectorial } from '@/lib/scrapers/sectorial';
+import { isDeimplantation } from '@/lib/filters/deimplantation';
+import type { NewsroomListEntry, SectorialListEntry, ScrapedArticle } from '@/lib/scrapers/types';
 
 const prisma = new PrismaClient();
 
@@ -39,8 +39,7 @@ async function persistArticle(article: ScrapedArticle, defaultCompanySlug?: stri
       outletType: article.outletType,
       publishedAt: article.publishedAt,
       language: 'es',
-      country: 'ES',
-      content: article.content.slice(0, 50000),
+      contentText: article.content.slice(0, 50000),
       contentHash: article.contentHash,
       deimplantationSignal: inScope,
       outOfScopeReason: outReason,
@@ -48,7 +47,7 @@ async function persistArticle(article: ScrapedArticle, defaultCompanySlug?: stri
     },
     update: {
       title: article.title.slice(0, 500),
-      content: article.content.slice(0, 50000),
+      contentText: article.content.slice(0, 50000),
       contentHash: article.contentHash,
       deimplantationSignal: inScope,
       outOfScopeReason: outReason,
@@ -96,13 +95,12 @@ export async function runNewsroomsAgent(opts: { maxPerSource?: number; onlySlugs
       try {
         const { source, inScope: ok, outReason } = await persistArticle(art, entry.slug);
         if (ok) inScope++; else outOfScope++;
-        // ArticleCompany link si tenemos company
+        // v6: Source tiene companyId directo (FK), sin tabla ArticleCompany
         const companyId = companyCache.get(entry.slug);
         if (companyId) {
-          await prisma.articleCompany.upsert({
-            where: { articleId_companyId: { articleId: source.id, companyId } },
-            create: { articleId: source.id, companyId, sentiment: 0, relevance: 0.5 },
-            update: {},
+          await prisma.source.update({
+            where: { id: source.id },
+            data: { companyId },
           });
         }
         upserted++;
@@ -122,8 +120,8 @@ export async function runNewsroomsAgent(opts: { maxPerSource?: number; onlySlugs
   // Activar el ScanConfig de este agente
   await prisma.scanConfig.upsert({
     where: { agentName: 'newsrooms-corporativas' },
-    create: { agentName: 'newsrooms-corporativas', keywords: [], sources: [], cadenceDays: 2, isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
-    update: { isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
+    create: { agentName: 'newsrooms-corporativas', queryConfig: { keywords: [], sources: [] } as object, cadenceDays: 2, isActive: true, lastRunAt: finishedAt },
+    update: { isActive: true, lastRunAt: finishedAt },
   });
 
   return { agentName: 'newsrooms-corporativas', scanned: entries.length, found, inScope, outOfScope, new: upserted, updated: 0, errors, durationMs: finishedAt.getTime() - startedAt.getTime() };
@@ -175,8 +173,8 @@ export async function runSectorialAgent(opts: { maxPerSource?: number; onlySlugs
   });
   await prisma.scanConfig.upsert({
     where: { agentName: 'prensa-sectorial' },
-    create: { agentName: 'prensa-sectorial', keywords: [], sources: [], cadenceDays: 2, isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
-    update: { isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
+    create: { agentName: 'prensa-sectorial', queryConfig: { keywords: [], sources: [] } as object, cadenceDays: 2, isActive: true, lastRunAt: finishedAt },
+    update: { isActive: true, lastRunAt: finishedAt },
   });
 
   return { agentName: 'prensa-sectorial', scanned: entries.length, found, inScope, outOfScope, new: upserted, updated: 0, errors, durationMs: finishedAt.getTime() - startedAt.getTime() };

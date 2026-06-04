@@ -20,7 +20,7 @@ function toNewsroomEntry(entry: PrensaListEntry) {
 /** Scrapea un medio de prensa con detección de CCAA aplicada a cada artículo */
 export async function scrapePrensa(
   entry: PrensaListEntry,
-  opts: { maxArticles?: number; usePlaywright?: boolean } = {},
+  opts: { maxArticles?: number; usePlaywright?: boolean; stealth?: boolean; rate?: number; limiterKey?: string; userAgent?: string; proxy?: string | null; daysBack?: number } = {},
 ): Promise<ScrapedArticle[]> {
   const articles = await scrapeNewsroom(toNewsroomEntry(entry), opts);
   return articles.map((a) => {

@@ -17,6 +17,7 @@ import { DocumentsGrid } from './_components/DocumentsGrid';
 import { NotesEditor } from './_components/NotesEditor';
 import { ActionBar } from './_components/ActionBar';
 import { RegistroMercantilCard } from './_components/RegistroMercantilCard';
+import { FinancialsCard } from './_components/FinancialsCard';
 import './empresa.css';
 
 export const dynamic = 'force-dynamic';
@@ -74,6 +75,13 @@ export default async function EmpresaPage({ params }: PageProps) {
   });
 
   if (!company) notFound();
+
+  // C.2: source con outletType='financial' (URL Wikipedia) — para FinancialsCard
+  const wikiSource = await prisma.source.findFirst({
+    where: { companyId: company.id, outletType: 'financial' },
+    orderBy: { scrapedAt: 'desc' },
+    select: { url: true },
+  });
 
   // Vecinos para navegación prev/next (alfabético, solo activas)
   const neighbors = await prisma.company.findMany({
@@ -166,6 +174,14 @@ export default async function EmpresaPage({ params }: PageProps) {
           hqCity={company.hqCity}
           hqRegion={company.hqRegion}
           events={company.bormeEvents}
+        />
+        <FinancialsCard
+          facturacionM={company.facturacionM}
+          facturacionYear={company.facturacionYear}
+          ebitdaM={company.ebitdaM}
+          beneficioNetoM={company.beneficioNetoM}
+          empleadosTotal={company.empleadosTotal}
+          fuente={wikiSource?.url ?? null}
         />
         <PlantMap plants={company.plants} slug={company.slug} />
         <InventoryTable plants={company.plants} />

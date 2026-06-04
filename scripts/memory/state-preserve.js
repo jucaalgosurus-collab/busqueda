@@ -52,7 +52,7 @@ function loadActiveState() {
 }
 
 function extractSection(content, sectionName) {
-  const regex = new RegExp(`## ${sectionName}\\n([\\s\\S]*?)(?=\\n## |$)`, 'm');
+  const regex = new RegExp(`## ${sectionName}\\r?\\n([\\s\\S]*?)(?=\\r?\\n## |$)`, 'm');
   const match = content.match(regex);
   return match ? match[1].trim() : null;
 }
@@ -80,7 +80,7 @@ function loadInstincts() {
           scope: frontmatter.scope || 'global',
           trigger: frontmatter.trigger || '',
           file,
-          summary: content.split('---')[2]?.trim().split('\n')[0] || ''
+          summary: content.split('---')[2]?.trim().split(/\r?\n/)[0] || ''
         });
       } catch (e) {
         // Skip malformed instinct files
@@ -96,11 +96,11 @@ function loadInstincts() {
 }
 
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return null;
 
   const frontmatter = {};
-  for (const line of match[1].split('\n')) {
+  for (const line of match[1].split(/\r?\n/)) {
     const [key, ...valueParts] = line.split(':');
     if (key && valueParts.length > 0) {
       frontmatter[key.trim()] = valueParts.join(':').trim();

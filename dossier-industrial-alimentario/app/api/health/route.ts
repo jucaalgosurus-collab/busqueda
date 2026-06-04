@@ -10,7 +10,7 @@ export async function GET() {
       prisma.company.count(),
       prisma.operation.count(),
       prisma.source.count(),
-      prisma.contact.count(),
+      prisma.plantContact.count(),
     ]);
     return NextResponse.json({
       status: 'ok',

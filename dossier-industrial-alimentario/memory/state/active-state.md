@@ -1,12 +1,42 @@
 # Active State — HERMES Dossier Industrial v6
 **Fecha:** 2026-06-04
-**Sprint:** Sprint B.5 Seguros crédito: completed (VPS)
+**Sprints activos:**
+- HERMES: Sprint B.5 Seguros crédito (CESCE/CyC/Coface/Allianz Trade) — completado VPS 8/8 B.5 PASS funcionales
+- SURUS deck: Sprint 11 — COMPLETADO 30/30 PASS + build-fixer (2 defectos cazados)
 
 ## Objetivo
 
 Re-arquitectura v6 del dossier industrial alimentario. Réplica legacy 1:1 con 14 modelos Prisma en DB `hermes_dossier_v6`. Detector de desimplantaciones de grandes A&B en España.
 
-## Sprint Actual: Sprint B.5 Seguros de crédito (CESCE/CyC/Coface/Allianz Trade) — completado (VPS, 13/13 B.5)
+## Sprint Actual: Sprint C.2 Datos financieros (Wikipedia) — completado (VPS, 14/14 PASS)
+
+- **Status:** COMPLETADO VPS — smoke 14/14 PASS + 1ª corrida real con 2/6 hits Wikipedia + corrección de seed v6 (Damm 2025→2061M€)
+- **Verificación end-to-end (2026-06-04T09:30Z, VPS):**
+  - Type-check: 0 errores (`./node_modules/.bin/tsc --noEmit`)
+  - Build: ✓ Compiled successfully in 6.8s
+  - Service: hermes-dossier.service active (port 3002)
+  - Smoke: `pnpm smoke:c2` → **14/14 PASS** (3 candidateSlugs + 5 parseNumber + 3 adjustToMillions + 3 DB integration)
+  - 1ª corrida: `pnpm financials:backfill` → companiesEvaluated=6 wikipediaFound=2 fieldsUpdated=1 (Damm sanity) sourcesUpdated=2 errors=0 durationMs=3139
+  - Datos reales: Pascual 980M€ ; Damm 2061M€ (corregido) / 5765 emp / 130M€ beneficio
+  - UI verificada vía curl `127.0.0.1:3002/dossier/empresas/damm` → "Facturación: 2061M € · Empleados: 5765 · Beneficio neto: 130M €"
+  - Cron `surus-agente-financieros.timer` instalado, OnCalendar=weekly (lunes 00:00 UTC)
+- **Agente:** Generator (Sonnet 4.6)
+- **Schema v6:** `Source.outletType` añade `'financial'` (union type, no migration)
+- **Sanity guard:** detecta facturacionM en [2010-2030] y lo corrige con valor Wikipedia plausible (>100M€)
+- **Próximo sprint:** C.3 — Patentes OEPM/EPO
+
+## S11 SURUS A&B Dossier — Sprint cerrado 2026-06-04
+
+- **Sprint deck comercial Surus A&B**: https://alimentos-ten.vercel.app/SURUS-Alimentacion-Bebidas-2026
+- **Status:** GO — 30/30 criterios PASS + build-fixer adversarial (2 defectos cazados: <text>NOT</text> en icono +2 + alt text "Casalobos Abencys")
+- **F1 Iconos duotono sólidos:** 10 SVG metodología con linearGradient teal→bronze, fill dominante, filter shadow, viewBox 64x64, render 38x38, IDs únicos s11-grad-ico-01 a s11-grad-ico-10
+- **F2 Datos verificados:** 200.000+ → 415.000+ usuarios / +240.000 subastas / 1.550 m² → 1,55 M€ Domingo del Palacio / "Casalobos Abencys" → "Bodega Casalobos"
+- **F3 Cifras casos:** Fricarne +150.000€ / Cuniporc +62.500€ / PepsiCo 3.600€ Garvens XS40
+- **F4 Banda macro 8 cifras:** +400M€ / 30,7M kg CO₂ / 98% reempleo / +27 países / +15 IBEX 35 / +1.000 clientes / 18.000T / EcoVadis 78/100
+- **F5 Slide 15 certificaciones 4x2:** ISO 14001, 9001, 27001, 19601, 37001, 45001, ENS Media, EcoVadis Silver
+- **F6 Slide 16 testimonios 10 citas literales:** Ana Villuendas Adé/Red Eléctrica, Lorenzo López/Repsol, César Asensio/AECOM, Luis Sanz/EnergyLoop, Belén Muñoz/SENASA, Juan Martino/SIGNUS, Enric Porta/Deloitte, José Antonio Cadahia/Roca Junyent, Paula Pérez/Abencys, Ivan José Galindo/WorldPathol
+- **Memoria:** `memory/sprints/sprint-11/S11-contract.md`
+- **Despliegue:** dpl_26VvvHtyGskmpQaNd1fzhLRMtng6
 
 - **Status:** COMPLETADO VPS — smoke 8/8 B.5 PASS funcionales + 5 fails preexistentes (3 QW regresión sin servidor /empresas, 2 EST que se cierran con este report + active-state)
 - **Verificación end-to-end (2026-06-04T05:50Z, VPS):**

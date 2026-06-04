@@ -398,5 +398,85 @@
     "region": "Cantabria",
     "ccaa": "Cantabria",
     "kind": "regional"
+  },
+  {
+    "slug": "el-diario-montanes",
+    "name": "El Diario Montañés — Economía",
+    "outlet": "El Diario Montañés",
+    "url": "https://www.eldiariomontanes.es/economia/",
+    "rss": "https://www.eldiariomontanes.es/rss/economia.xml",
+    "region": "Cantabria",
+    "ccaa": "Cantabria",
+    "kind": "regional"
+  },
+  {
+    "slug": "hoy-extremadura",
+    "name": "Hoy — Economía (Extremadura)",
+    "outlet": "Hoy",
+    "url": "https://www.hoy.es/economia/",
+    "rss": "https://www.hoy.es/rss/economia.xml",
+    "region": "Extremadura",
+    "ccaa": "Extremadura",
+    "kind": "regional"
+  },
+  {
+    "slug": "la-tribuna-clm",
+    "name": "La Tribuna de Castilla-La Mancha",
+    "outlet": "La Tribuna CLM",
+    "url": "https://www.latribunadeclm.es/",
+    "rss": "https://www.latribunadeclm.es/rss/economia.xml",
+    "region": "Castilla-La Mancha",
+    "ccaa": "Castilla-La Mancha",
+    "kind": "regional"
+  },
+  {
+    "slug": "diario-de-teruel",
+    "name": "Diario de Teruel — Economía",
+    "outlet": "Diario de Teruel",
+    "url": "https://www.diariodeteruel.es/economia/",
+    "rss": "https://www.diariodeteruel.es/rss/economia.xml",
+    "region": "Aragón",
+    "ccaa": "Aragón",
+    "kind": "regional"
+  },
+  {
+    "slug": "la-opinion-murcia",
+    "name": "La Opinión de Murcia — Economía",
+    "outlet": "La Opinión de Murcia",
+    "url": "https://www.laopiniondemurcia.es/economia/",
+    "rss": "https://www.laopiniondemurcia.es/rss/economia.xml",
+    "region": "Murcia",
+    "ccaa": "Región de Murcia",
+    "kind": "regional"
+  },
+  {
+    "slug": "el-faro-ceuta-melilla",
+    "name": "El Faro de Ceuta y Melilla",
+    "outlet": "El Faro",
+    "url": "https://elfaroceutamelilla.es/",
+    "rss": "https://elfaroceutamelilla.es/feed",
+    "region": "Ceuta y Melilla",
+    "ccaa": "Ceuta y Melilla",
+    "kind": "local"
+  },
+  {
+    "slug": "efe-empresas",
+    "name": "EFE Empresas / Agencia EFE",
+    "outlet": "EFE Empresas",
+    "url": "https://www.efeempresas.com/",
+    "rss": "https://www.efeempresas.com/feed/",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "agencia"
+  },
+  {
+    "slug": "europa-press-rss",
+    "name": "Europa Press RSS — Empresas",
+    "outlet": "Europa Press",
+    "url": "https://www.europapress.es/economia/",
+    "rss": "https://www.europapress.es/rss/rss.aspx?ch=0060",
+    "region": "Madrid",
+    "ccaa": "Comunidad de Madrid",
+    "kind": "agencia"
   }
 ]

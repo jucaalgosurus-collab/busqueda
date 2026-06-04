@@ -3,9 +3,9 @@
 // persiste Source con region/province detectados, crea SearchRun, actualiza ScanConfig.
 import { PrismaClient } from '@prisma/client';
 import prensaList from '@/lib/data/prensa-list.json' with { type: 'json' };
-import { scrapePrensa } from '@/lib/scrapers/prensa.js';
-import { isDeimplantation } from '@/lib/filters/deimplantation.js';
-import type { PrensaListEntry, ScrapedArticle } from '@/lib/scrapers/types.js';
+import { scrapePrensa } from '@/lib/scrapers/prensa';
+import { isDeimplantation } from '@/lib/filters/deimplantation';
+import type { PrensaListEntry, ScrapedArticle } from '@/lib/scrapers/types';
 
 const prisma = new PrismaClient();
 
@@ -34,12 +34,9 @@ async function persistArticle(article: ScrapedArticle) {
       title: article.title.slice(0, 500),
       outlet: article.outlet,
       outletType: article.outletType,
-      region: article.region,
-      province: article.province ?? null,
       publishedAt: article.publishedAt,
       language: 'es',
-      country: 'ES',
-      content: article.content.slice(0, 50000),
+      contentText: article.content.slice(0, 50000),
       contentHash: article.contentHash,
       deimplantationSignal: inScope,
       outOfScopeReason: outReason,
@@ -47,9 +44,7 @@ async function persistArticle(article: ScrapedArticle) {
     },
     update: {
       title: article.title.slice(0, 500),
-      content: article.content.slice(0, 50000),
-      region: article.region,
-      province: article.province ?? null,
+      contentText: article.content.slice(0, 50000),
       contentHash: article.contentHash,
       deimplantationSignal: inScope,
       outOfScopeReason: outReason,
@@ -64,9 +59,16 @@ async function persistArticle(article: ScrapedArticle) {
 export async function runPrensaAgent(opts: {
   maxPerSource?: number;
   onlySlugs?: string[];
+  /**
+   * QW-8: filtro de fecha incremental. Default 2 (últimos 2 días, alineado con
+   * cadenceDays=2 del ScanConfig). Pasar 15 explícitamente para backfill inicial.
+   * Items sin publishedAt se incluyen siempre.
+   */
+  daysBack?: number;
 } = {}): Promise<PrensaAgentResult> {
   const startedAt = new Date();
   const maxPer = opts.maxPerSource ?? 12;
+  const daysBack = opts.daysBack ?? 2;
   const onlySlugs = new Set(opts.onlySlugs ?? []);
 
   const entries = (prensaList as PrensaListEntry[]).filter(
@@ -77,7 +79,8 @@ export async function runPrensaAgent(opts: {
     data: {
       agentName: 'prensa-general-regional',
       startedAt,
-      query: { maxPer, onlySlugs: [...onlySlugs], total: entries.length },
+      mode: daysBack > 2 ? 'backfill_15d' : 'incremental_2d',
+      query: { maxPer, daysBack, onlySlugs: [...onlySlugs], total: entries.length },
     },
   });
 
@@ -88,7 +91,7 @@ export async function runPrensaAgent(opts: {
     const entry = entries[i];
     let articles: ScrapedArticle[] = [];
     try {
-      articles = await scrapePrensa(entry, { maxArticles: maxPer, usePlaywright: true });
+      articles = await scrapePrensa(entry, { maxArticles: maxPer, usePlaywright: true, daysBack });
     } catch (e) {
       errors++;
       console.warn(`[prensa] ${entry.slug} scraper threw: ${(e as Error).message}`);
@@ -129,18 +132,15 @@ export async function runPrensaAgent(opts: {
     where: { agentName: 'prensa-general-regional' },
     create: {
       agentName: 'prensa-general-regional',
-      keywords: [],
-      sources: entries.map((e) => e.slug),
+      queryConfig: { keywords: [], sources: entries.map((e) => e.slug) } as object,
       cadenceDays: 2,
       isActive: true,
       lastRunAt: finishedAt,
-      nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000),
     },
     update: {
       isActive: true,
       lastRunAt: finishedAt,
-      nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000),
-      sources: entries.map((e) => e.slug),
+      queryConfig: { keywords: [], sources: entries.map((e) => e.slug) } as object,
     },
   });
 

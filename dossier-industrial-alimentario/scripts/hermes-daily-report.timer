@@ -1,0 +1,13 @@
+# /etc/systemd/system/hermes-daily-report.timer
+# Reporte diario a las 08:00 hora local Madrid (06:00 UTC)
+[Unit]
+Description=HERMES Dossier - timer reporte diario 06:00 UTC (08:00 Madrid)
+Requires=hermes-daily-report.service
+
+[Timer]
+OnCalendar=*-*-* 06:00:00
+Persistent=true
+Unit=hermes-daily-report.service
+
+[Install]
+WantedBy=timers.target

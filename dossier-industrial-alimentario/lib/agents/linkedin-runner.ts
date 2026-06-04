@@ -8,7 +8,7 @@ import * as cheerio from 'cheerio';
 import { createHash } from 'node:crypto';
 import linkedinQueries from '@/lib/data/linkedin-queries.json' with { type: 'json' };
 import newsroomList from '@/lib/data/newsroom-list.json' with { type: 'json' };
-import { USER_AGENT } from '@/lib/scrapers/types.js';
+import { USER_AGENT } from '@/lib/scrapers/types';
 
 const prisma = new PrismaClient();
 
@@ -55,14 +55,16 @@ function extractLinkedInProfiles(html: string): Array<{ url: string; title: stri
 
 function inferRoleRelevance(role: string): 'plant_manager' | 'coo' | 'sustainability' | 'maintenance' | 'procurement' | 'cfo' | 'ceo' | 'ere_responsible' | 'other' {
   const r = role.toLowerCase();
-  if (/planta|plant manager|f[aá]brica/.test(r)) return 'plant_manager';
-  if (/coo|director de operaciones|chief operating/.test(r)) return 'coo';
-  if (/sostenibilidad|sustainability|rsc|responsabilidad social/.test(r)) return 'sustainability';
-  if (/mantenimiento|maintenance/.test(r)) return 'maintenance';
+  if (/planta|plant manager|f[aá]brica|director industrial|director f[aá]brica/.test(r)) return 'plant_manager';
+  if (/coo|director de operaciones|jefe de operaciones|operaciones|chief operating|direcci[oó]n operaciones/.test(r)) return 'coo';
+  if (/sostenibilidad|sustainability|rsc|responsabilidad social|jefe de sostenibilidad|direcci[oó]n sostenibilidad/.test(r)) return 'sustainability';
+  if (/mantenimiento|maintenance|jefe de mantenimiento|direcci[oó]n mantenimiento/.test(r)) return 'maintenance';
   if (/compras|procurement|compras/.test(r)) return 'procurement';
-  if (/cfo|chief financial|director financiero/.test(r)) return 'cfo';
+  if (/cfo|chief financial|director financiero|jefe de finanzas|direcci[oó]n financiera|jefe de contabilidad/.test(r)) return 'cfo';
   if (/ceo|director general|consejero delegado/.test(r)) return 'ceo';
   if (/ere|regulaci[oó]n de empleo|relaciones laborales/.test(r)) return 'ere_responsible';
+  if (/ingenier[ií]a|jefe de ingenier[ií]a|direcci[oó]n ingenier[ií]a/.test(r)) return 'other';
+  if (/medio ambiente|jefe de medio ambiente|direcci[oó]n medio ambiente/.test(r)) return 'sustainability';
   return 'other';
 }
 
@@ -76,7 +78,7 @@ export interface LinkedInAgentResult {
   durationMs: number;
 }
 
-export async function runLinkedInAgent(opts: { maxQueries?: number; onlyRoles?: string[] } = {}): Promise<LinkedInAgentResult> {
+export async function runGoogleCSEAgent(opts: { maxQueries?: number; onlyRoles?: string[] } = {}): Promise<LinkedInAgentResult> {
   const startedAt = new Date();
   const maxQ = opts.maxQueries ?? 20;
   const onlyRoles = new Set((opts.onlyRoles ?? []).map((r) => r.toLowerCase()));
@@ -107,6 +109,19 @@ export async function runLinkedInAgent(opts: { maxQueries?: number; onlyRoles?: 
   const companiesByName = new Map<string, string>();
   const comps = await prisma.company.findMany({ select: { id: true, name: true } });
   for (const c of comps) companiesByName.set(c.name.toLowerCase(), c.id);
+  // Cache de plantId "placeholder" por company (PlantContact requiere plantId no-null)
+  // Estrategia: si la company no tiene plants, creamos una "plant sede" mínima para anclar el contacto.
+  const plantByCompany = new Map<string, string>();
+  for (const c of comps) {
+    const plant = await prisma.plant.findFirst({
+      where: { companyId: c.id },
+      select: { id: true },
+      orderBy: { name: 'asc' },
+    });
+    if (plant) {
+      plantByCompany.set(c.id, plant.id);
+    }
+  }
 
   for (let i = 0; i < queries.length; i++) {
     const query = queries[i];
@@ -137,23 +152,41 @@ export async function runLinkedInAgent(opts: { maxQueries?: number; onlyRoles?: 
       }
 
       try {
+        // v6: PlantContact requiere plantId + companyId no-null. Si la company no tiene
+        // plant conocido, saltamos el contacto (no inventamos un plantId).
+        if (!companyId) {
+          duplicates++; // contamos como duplicado lógico (perfil sin empresa matcheable)
+          continue;
+        }
+        const plantId = plantByCompany.get(companyId);
+        if (!plantId) {
+          duplicates++;
+          continue;
+        }
         const hash = createHash('sha256').update(p.url).digest('hex').slice(0, 16);
-        await prisma.contact.upsert({
+        const inferredRole = inferRoleRelevance(query.role);
+        await prisma.plantContact.upsert({
           where: { id: `li-${hash}` },
           create: {
             id: `li-${hash}`,
             fullName: name.slice(0, 200),
-            currentRole: query.role.slice(0, 200),
-            currentCompanyId: companyId,
+            role: query.role.slice(0, 200),
+            roleCategory: inferredRole,
             linkedinUrl: p.url,
             emailVerified: false,
-            roleRelevance: inferRoleRelevance(query.role),
+            companyId,
+            plantId,
+            sourceUrl: p.url,
+            sourceOutlet: 'LinkedIn',
+            via: 'google_cse',
+            confidence: 0.5,
             lastEnrichedAt: new Date(),
           },
           update: {
-            currentRole: query.role.slice(0, 200),
-            currentCompanyId: companyId,
-            roleRelevance: inferRoleRelevance(query.role),
+            role: query.role.slice(0, 200),
+            roleCategory: inferredRole,
+            companyId,
+            plantId,
             lastEnrichedAt: new Date(),
           },
         });
@@ -185,8 +218,8 @@ export async function runLinkedInAgent(opts: { maxQueries?: number; onlyRoles?: 
   });
   await prisma.scanConfig.upsert({
     where: { agentName: 'linkedin-osint' },
-    create: { agentName: 'linkedin-osint', keywords: [], sources: [], cadenceDays: 2, isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
-    update: { isActive: true, lastRunAt: finishedAt, nextRunAt: new Date(Date.now() + 2 * 24 * 3600 * 1000) },
+    create: { agentName: 'linkedin-osint', queryConfig: { keywords: [], sources: [] } as object, cadenceDays: 2, isActive: true, lastRunAt: finishedAt },
+    update: { isActive: true, lastRunAt: finishedAt },
   });
 
   return {
@@ -198,6 +231,16 @@ export async function runLinkedInAgent(opts: { maxQueries?: number; onlyRoles?: 
     errors,
     durationMs: finishedAt.getTime() - startedAt.getTime(),
   };
+}
+
+/**
+ * Wrapper público: delega al dispatcher (Plan B Playwright si está habilitado,
+ * si no al runner Google CSE clásico). Mantiene compatibilidad con todos los
+ * callers existentes (orquestador, panel /agentes, scripts).
+ */
+export async function runLinkedInAgent(opts: { maxQueries?: number; onlyRoles?: string[] } = {}): Promise<LinkedInAgentResult> {
+  const { runLinkedInDispatcher } = await import('./linkedin-dispatcher.js');
+  return runLinkedInDispatcher(opts);
 }
 
 // CLI entry

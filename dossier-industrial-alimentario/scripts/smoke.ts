@@ -39,7 +39,7 @@ async function main() {
   });
 
   // 4) Contacts count ≥ 28
-  const contactCount = await prisma.contact.count();
+  const contactCount = await prisma.plantContact.count();
   asserts.push({
     name: '4. ≥28 contacts',
     pass: contactCount >= 28,
@@ -70,7 +70,7 @@ async function main() {
       outlet: 'Smoke Test',
       outletType: 'corporate_newsroom',
       publishedAt: new Date('2026-06-01'),
-      content: 'Nueva Pescanova anuncia el cierre de su planta de procesado de pescado en Vigo',
+      contentText: 'Nueva Pescanova anuncia el cierre de su planta de procesado de pescado en Vigo',
       deimplantationSignal: true,
     },
   });

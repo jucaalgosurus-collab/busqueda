@@ -1,0 +1,10 @@
+[Unit]
+Description=HERMES Agente Financieros (C.2) — Timer semanal
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+Unit=surus-agente-financieros.service
+
+[Install]
+WantedBy=timers.target

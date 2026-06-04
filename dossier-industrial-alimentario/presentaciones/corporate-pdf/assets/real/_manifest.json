@@ -1,0 +1,236 @@
+[
+  {
+    "page": 1,
+    "idx": 1,
+    "width": 572,
+    "height": 991,
+    "ext": "png",
+    "bytes": 1157723,
+    "file": "pdf_p01_i01_572x991.png"
+  },
+  {
+    "page": 1,
+    "idx": 2,
+    "width": 259,
+    "height": 215,
+    "ext": "png",
+    "bytes": 8380,
+    "file": "pdf_p01_i02_259x215.png"
+  },
+  {
+    "page": 2,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p02_i01_173x143.png"
+  },
+  {
+    "page": 2,
+    "idx": 2,
+    "width": 660,
+    "height": 400,
+    "ext": "jpeg",
+    "bytes": 63838,
+    "file": "pdf_p02_i02_660x400.jpeg"
+  },
+  {
+    "page": 2,
+    "idx": 3,
+    "width": 366,
+    "height": 723,
+    "ext": "png",
+    "bytes": 641952,
+    "file": "pdf_p02_i03_366x723.png"
+  },
+  {
+    "page": 3,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p03_i01_173x143.png"
+  },
+  {
+    "page": 3,
+    "idx": 2,
+    "width": 392,
+    "height": 479,
+    "ext": "png",
+    "bytes": 408124,
+    "file": "pdf_p03_i02_392x479.png"
+  },
+  {
+    "page": 3,
+    "idx": 3,
+    "width": 443,
+    "height": 626,
+    "ext": "png",
+    "bytes": 600087,
+    "file": "pdf_p03_i03_443x626.png"
+  },
+  {
+    "page": 4,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p04_i01_173x143.png"
+  },
+  {
+    "page": 4,
+    "idx": 2,
+    "width": 429,
+    "height": 617,
+    "ext": "png",
+    "bytes": 560401,
+    "file": "pdf_p04_i02_429x617.png"
+  },
+  {
+    "page": 4,
+    "idx": 3,
+    "width": 407,
+    "height": 612,
+    "ext": "png",
+    "bytes": 575844,
+    "file": "pdf_p04_i03_407x612.png"
+  },
+  {
+    "page": 5,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p05_i01_173x143.png"
+  },
+  {
+    "page": 5,
+    "idx": 2,
+    "width": 413,
+    "height": 682,
+    "ext": "png",
+    "bytes": 474787,
+    "file": "pdf_p05_i02_413x682.png"
+  },
+  {
+    "page": 5,
+    "idx": 3,
+    "width": 492,
+    "height": 509,
+    "ext": "png",
+    "bytes": 583969,
+    "file": "pdf_p05_i03_492x509.png"
+  },
+  {
+    "page": 6,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p06_i01_173x143.png"
+  },
+  {
+    "page": 6,
+    "idx": 2,
+    "width": 572,
+    "height": 700,
+    "ext": "png",
+    "bytes": 662100,
+    "file": "pdf_p06_i02_572x700.png"
+  },
+  {
+    "page": 6,
+    "idx": 3,
+    "width": 477,
+    "height": 642,
+    "ext": "png",
+    "bytes": 732316,
+    "file": "pdf_p06_i03_477x642.png"
+  },
+  {
+    "page": 7,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p07_i01_173x143.png"
+  },
+  {
+    "page": 7,
+    "idx": 2,
+    "width": 507,
+    "height": 652,
+    "ext": "png",
+    "bytes": 743366,
+    "file": "pdf_p07_i02_507x652.png"
+  },
+  {
+    "page": 7,
+    "idx": 3,
+    "width": 476,
+    "height": 675,
+    "ext": "png",
+    "bytes": 565178,
+    "file": "pdf_p07_i03_476x675.png"
+  },
+  {
+    "page": 8,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p08_i01_173x143.png"
+  },
+  {
+    "page": 8,
+    "idx": 2,
+    "width": 416,
+    "height": 819,
+    "ext": "png",
+    "bytes": 625816,
+    "file": "pdf_p08_i02_416x819.png"
+  },
+  {
+    "page": 8,
+    "idx": 3,
+    "width": 478,
+    "height": 603,
+    "ext": "png",
+    "bytes": 648478,
+    "file": "pdf_p08_i03_478x603.png"
+  },
+  {
+    "page": 9,
+    "idx": 1,
+    "width": 173,
+    "height": 143,
+    "ext": "png",
+    "bytes": 6020,
+    "file": "pdf_p09_i01_173x143.png"
+  },
+  {
+    "page": 9,
+    "idx": 2,
+    "width": 438,
+    "height": 640,
+    "ext": "png",
+    "bytes": 734517,
+    "file": "pdf_p09_i02_438x640.png"
+  },
+  {
+    "page": 9,
+    "idx": 3,
+    "width": 450,
+    "height": 632,
+    "ext": "png",
+    "bytes": 697138,
+    "file": "pdf_p09_i03_450x632.png"
+  }
+]

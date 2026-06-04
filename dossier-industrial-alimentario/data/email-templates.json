@@ -1,0 +1,110 @@
+[
+  {
+    "id": "QW-5-AB-CFO-01",
+    "sector": "alimentos_bebidas",
+    "cargo": "CFO",
+    "subject": "Cierre 2025 y lo que detectamos en {{empresa}}",
+    "body": "Hola {{nombre}},\n\nDetectamos un movimiento de activos en {{empresa}} durante {{trimestre}} que encaja con el patrón de empresas de tu tamaño en el sector alimentación y bebidas. Concretamente: {{hallazgo_breve}}.\n\nEl caso que mejor ilustra el modelo es una planta similar en {{pais_referencia}} donde ayudamos a cerrar un proceso de desimplantación en {{meses_ejecucion}} meses y recuperar {{valor_recuperado}} de los activos.\n\n¿Te parece útil que te envíe el dossier completo con el resto de señales que tenemos? Sin compromiso.\n\nUn saludo,\n{{firma}}",
+    "maxLength": 600,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente", "le saluda cordialmente"]
+  },
+  {
+    "id": "QW-5-AB-PLANT-01",
+    "sector": "alimentos_bebidas",
+    "cargo": "Director de Planta",
+    "subject": "Lo que vimos en la línea de {{linea}} de {{empresa}}",
+    "body": "Hola {{nombre}},\n\nDurante el último trimestre detectamos señales técnicas en la operación de {{empresa}} que indican capacidad ociosa en {{linea}}. En plantas de alimentación con perfiles similares hemos visto que el coste mensual de mantener esa capacidad parada es de {{coste_estimado}}.\n\nTengo un dossier con tres casos reales donde la línea se redirigió a un comprador industrial en menos de {{meses_ejecucion}} meses. ¿Te lo envío?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 600,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-IND-CFO-01",
+    "sector": "industrial",
+    "cargo": "CFO",
+    "subject": "Activo industrial en {{ciudad}} con señales de salida",
+    "body": "Hola {{nombre}},\n\nNuestras fuentes detectaron que {{empresa}} está moviendo {{tipo_activo}} en {{ciudad}}. En operaciones similares del sector industrial hemos cerrado desimplantaciones en {{meses_ejecucion}} meses, recuperando {{porcentaje_valor}}% del valor contable.\n\nEl caso que más se parece al tuyo es el de {{empresa_referencia}} ({{pais_referencia}}, {{año}}). ¿Quieres que te pase el informe técnico?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 600,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-IND-PLANT-01",
+    "sector": "industrial",
+    "cargo": "Director de Planta",
+    "subject": "Capacidad parada en {{linea}} — caso real",
+    "body": "Hola {{nombre}},\n\nLa planta de {{empresa}} en {{ciudad}} muestra indicadores consistentes con parada o ralentización de {{linea}} (consumo eléctrico, turnos, suministros). En plantas industriales de este tamaño hemos ayudado a redirigir el activo en {{meses_ejecucion}} meses.\n\nTengo el dossier técnico con tres ejemplos comparables. ¿Te lo envío esta semana?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 600,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-PHARM-CFO-01",
+    "sector": "farmaceutico",
+    "cargo": "CFO",
+    "subject": "Reorganización en {{empresa}} y lo que hicimos en {{empresa_referencia}}",
+    "body": "Hola {{nombre}},\n\nNuestras fuentes confirman movimientos de activos regulados en {{empresa}}. En el sector farmacéutico español, las desimplantaciones tienen particularidades GMP y de trazabilidad que ya hemos resuelto en {{empresa_referencia}} ({{año}}).\n\nEl proceso típico dura {{meses_ejecucion}} meses y recupera {{porcentaje_valor}}% del valor contable cumpliendo normativa. ¿Hablamos 15 minutos?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 650,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-PHARM-PLANT-01",
+    "sector": "farmaceutico",
+    "cargo": "Director de Planta",
+    "subject": "Activo GMP parado en {{ciudad}}",
+    "body": "Hola {{nombre}},\n\nDetectamos señales de parada o subutilización en la planta de {{empresa}} en {{ciudad}}, con implicaciones de cumplimiento GMP. En plantas similares hemos ejecutado desimplantaciones regulatoriamente limpias en {{meses_ejecucion}} meses.\n\nTengo documentación técnica con tres casos comparables. ¿Te interesa que te la envíe?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 650,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-CONST-CFO-01",
+    "sector": "construccion",
+    "cargo": "CFO",
+    "subject": "Maquinaria parada en {{empresa}} — caso real de recuperación",
+    "body": "Hola {{nombre}},\n\nDetectamos movimiento de maquinaria pesada en {{empresa}} durante {{trimestre}}. En el sector construcción hemos ayudado a liquidar parques de maquinaria parada recuperando {{porcentaje_valor}}% del valor en {{meses_ejecucion}} meses.\n\nEl caso que más se parece es el de {{empresa_referencia}} en {{pais_referencia}}. ¿Quieres que te envíe el informe?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 600,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-CONST-PLANT-01",
+    "sector": "construccion",
+    "cargo": "Jefe de Obra",
+    "subject": "Maquinaria ociosa en {{empresa}}",
+    "body": "Hola {{nombre}},\n\nVimos en nuestras fuentes que {{empresa}} tiene maquinaria ociosa en {{ubicacion}}. En constructoras con parque similar hemos ejecutado liquidaciones en {{meses_ejecucion}} meses redirigiendo equipos a compradores industriales.\n\nTengo tres casos comparables con cifras. ¿Te los envío?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 600,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-ENERG-CFO-01",
+    "sector": "energetico",
+    "cargo": "CFO",
+    "subject": "Activo energético en {{ciudad}} con señales de salida",
+    "body": "Hola {{nombre}},\n\nDetectamos señales de reorganización en activos energéticos de {{empresa}} en {{ciudad}}. En el sector energético español las desimplantaciones requieren gestión regulatoria específica que ya hemos resuelto en {{empresa_referencia}} ({{año}}).\n\nEl proceso típico cierra en {{meses_ejecucion}} meses. ¿Te paso el dossier técnico?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 650,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-OTRO-CFO-01",
+    "sector": "otro_industrial",
+    "cargo": "CFO",
+    "subject": "Activo industrial de {{empresa}} — caso de referencia",
+    "body": "Hola {{nombre}},\n\nNuestras fuentes indican que {{empresa}} está reorganizando activos en {{ciudad}}. En operaciones industriales de este tipo hemos recuperado {{porcentaje_valor}}% del valor contable en {{meses_ejecucion}} meses.\n\nEl caso comparable más reciente es el de {{empresa_referencia}}. ¿Quieres que te envíe el informe?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 600,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-AB-FALLBACK-01",
+    "sector": "alimentos_bebidas",
+    "cargo": "OTRO",
+    "subject": "Detectamos movimiento de activos en {{empresa}}",
+    "body": "Hola {{nombre}},\n\nDurante el último trimestre detectamos señales en {{empresa}} que encajan con procesos de desimplantación o reorganización. En el sector alimentación y bebidas hemos ayudado a cerrar procesos similares en {{meses_ejecucion}} meses.\n\n¿Tienes 15 minutos esta semana para ver si encaja con tu situación?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 500,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  },
+  {
+    "id": "QW-5-GEN-FALLBACK-01",
+    "sector": "general",
+    "cargo": "OTRO",
+    "subject": "Señales detectadas en {{empresa}}",
+    "body": "Hola {{nombre}},\n\nNuestras fuentes detectaron movimiento de activos en {{empresa}} durante {{trimestre}}. Hemos ayudado a empresas similares a ejecutar desimplantaciones industriales en {{meses_ejecucion}} meses recuperando {{porcentaje_valor}}% del valor contable.\n\n¿Tienes 15 minutos para que te cuente cómo funcionó en el caso más parecido al tuyo?\n\nUn saludo,\n{{firma}}",
+    "maxLength": 500,
+    "forbiddenPhrases": ["estimado/a", "no dude en", "quedo a su disposición", "atentamente"]
+  }
+]

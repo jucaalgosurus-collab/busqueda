@@ -1,0 +1,21 @@
+{
+  "/api/mocr/route": "/api/mocr",
+  "/_not-found/page": "/_not-found",
+  "/api/companies/route": "/api/companies",
+  "/api/contactos/export.csv/route": "/api/contactos/export.csv",
+  "/api/empresas/[slug]/notes/route": "/api/empresas/[slug]/notes",
+  "/api/empresas/[slug]/upload/route": "/api/empresas/[slug]/upload",
+  "/api/contactos/search/route": "/api/contactos/search",
+  "/api/empresas/[slug]/route": "/api/empresas/[slug]",
+  "/api/health/route": "/api/health",
+  "/api/hallazgos/export/route": "/api/hallazgos/export",
+  "/legacy/page": "/legacy",
+  "/empresas/page": "/empresas",
+  "/agentes/page": "/agentes",
+  "/eventos/page": "/eventos",
+  "/empresas/[slug]/page": "/empresas/[slug]",
+  "/hallazgos/page": "/hallazgos",
+  "/contactos/page": "/contactos",
+  "/mocr/page": "/mocr",
+  "/page": "/"
+}

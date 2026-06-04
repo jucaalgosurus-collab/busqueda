@@ -13,7 +13,21 @@
     { "role": "CFO", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
     { "role": "Responsable ERE", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
     { "role": "Director Industrial", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
-    { "role": "Director Fábrica", "subsector": "A&B", "company_hint": "todas top 60 A&B" }
+    { "role": "Director Fábrica", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Jefe de Mantenimiento", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Jefe de Operaciones", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Jefe de Ingeniería", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Jefe de Contabilidad", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Jefe de Finanzas", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Jefe de Sostenibilidad", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Jefe de Medio Ambiente", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Dirección Mantenimiento", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Dirección Operaciones", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Dirección Ingeniería", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Dirección Financiera", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Dirección Sostenibilidad", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Dirección Medio Ambiente", "subsector": "A&B", "company_hint": "todas top 60 A&B" },
+    { "role": "Director General", "subsector": "A&B", "company_hint": "todas top 60 A&B" }
   ],
   "google_templates": [
     "site:linkedin.com/in \"{role}\" \"{company_hint}\" \"{subsector}\"",

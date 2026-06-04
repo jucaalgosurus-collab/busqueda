@@ -1,5 +1,5 @@
 // scripts/scan-sectorial.ts — Entry CLI para prensa-sectorial agent
-import { runSectorialAgent } from '../lib/agents/runner.js';
+import { runSectorialAgent } from '../lib/agents/runner';
 
 runSectorialAgent({
   maxPerSource: Number(process.env.MAX_PER_SOURCE ?? 15),

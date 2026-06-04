@@ -2,6 +2,7 @@
 import { prisma } from '@/lib/db/prisma';
 import { Navbar } from '@/components/Navbar';
 import { basePath } from '@/lib/utils/base-path';
+import { labelDeIndustria } from '@/lib/industria';
 import { HallazgosFilters } from './HallazgosFilters';
 
 export const dynamic = 'force-dynamic';
@@ -11,6 +12,7 @@ interface SearchParams {
   ccaa?: string;
   signal?: string;
   stale?: string;
+  industria?: string;
 }
 
 async function getHallazgos(params: SearchParams) {
@@ -19,11 +21,13 @@ async function getHallazgos(params: SearchParams) {
   if (params.signal === 'out') where.deimplantationSignal = false;
   if (params.stale === '1') where.isStale = true;
   if (params.stale === '0') where.isStale = false;
-  if (params.ccaa) where.region = params.ccaa;
+  const companyFilter: Record<string, unknown> = {};
+  if (params.ccaa) companyFilter.hqRegion = params.ccaa;
+  if (params.industria) companyFilter.sector = params.industria;
+  if (Object.keys(companyFilter).length > 0) where.company = companyFilter;
   if (params.q && params.q.trim().length > 0) {
     where.OR = [
       { title: { contains: params.q, mode: 'insensitive' } },
-      { content: { contains: params.q, mode: 'insensitive' } },
       { outlet: { contains: params.q, mode: 'insensitive' } },
     ];
   }
@@ -31,9 +35,7 @@ async function getHallazgos(params: SearchParams) {
   return prisma.source.findMany({
     where,
     include: {
-      companies: {
-        include: { company: true },
-      },
+      company: { select: { id: true, slug: true, name: true, hqRegion: true, sector: true } },
     },
     orderBy: { publishedAt: 'desc' },
     take: 200,
@@ -41,13 +43,13 @@ async function getHallazgos(params: SearchParams) {
 }
 
 async function getCcaaList() {
-  const rows = await prisma.source.findMany({
-    where: { region: { not: null } },
-    select: { region: true },
-    distinct: ['region'],
+  const rows = await prisma.company.findMany({
+    where: { hqRegion: { not: null } },
+    select: { hqRegion: true },
+    distinct: ['hqRegion'],
   });
   return rows
-    .map((r) => r.region)
+    .map((r) => r.hqRegion)
     .filter((r): r is string => Boolean(r))
     .sort();
 }
@@ -67,6 +69,7 @@ export default async function HallazgosPage({
     if (sp.ccaa) qs.set('ccaa', sp.ccaa);
     if (sp.signal) qs.set('signal', sp.signal);
     if (sp.stale) qs.set('stale', sp.stale);
+    if (sp.industria) qs.set('industria', sp.industria);
     qs.set('format', 'csv');
     return `${base}/api/hallazgos/export?${qs.toString()}`;
   })();
@@ -110,6 +113,7 @@ export default async function HallazgosPage({
                 <th style={th}>Título</th>
                 <th style={th}>Outlet</th>
                 <th style={th}>Tipo</th>
+                <th style={th}>Industria</th>
                 <th style={th}>Empresas</th>
                 <th style={th}>CCAA</th>
                 <th style={th}>Estado</th>
@@ -142,17 +146,25 @@ export default async function HallazgosPage({
                     </span>
                   </td>
                   <td style={td}>
-                    {h.companies.map((ac) => (
+                    {h.company?.sector ? (
+                      <span className="surus-pill surus-pill-accent">
+                        {labelDeIndustria(h.company.sector)}
+                      </span>
+                    ) : (
+                      '—'
+                    )}
+                  </td>
+                  <td style={td}>
+                    {h.company ? (
                       <a
-                        key={ac.companyId}
-                        href={`${base}/empresas/${ac.company.slug}`}
+                        href={`${base}/empresas/${h.company.slug}`}
                         style={{ marginRight: 6 }}
                       >
-                        {ac.company.name}
+                        {h.company.name}
                       </a>
-                    ))}
+                    ) : '—'}
                   </td>
-                  <td style={td}>{h.region || '—'}</td>
+                  <td style={td}>{h.company?.hqRegion || '—'}</td>
                   <td style={td}>
                     {h.isStale ? (
                       <span className="surus-pill surus-pill-warning">stale</span>
@@ -164,7 +176,7 @@ export default async function HallazgosPage({
               ))}
               {hallazgos.length === 0 && (
                 <tr>
-                  <td colSpan={7} style={{ ...td, textAlign: 'center', padding: 'var(--space-6)' }}>
+                  <td colSpan={8} style={{ ...td, textAlign: 'center', padding: 'var(--space-6)' }}>
                     No hay hallazgos con esos filtros.
                   </td>
                 </tr>

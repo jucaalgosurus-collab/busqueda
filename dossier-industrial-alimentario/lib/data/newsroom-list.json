@@ -2,7 +2,7 @@
   {
     "name": "ElPozo Alimentación",
     "slug": "elpozo-alimentacion",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Murcia",
@@ -12,7 +12,7 @@
   {
     "name": "Foodiverse (antigua Campofrío Food Group)",
     "slug": "foodiverse",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Castilla y León",
@@ -22,7 +22,7 @@
   {
     "name": "Grupo Jorge",
     "slug": "grupo-jorge",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Aragón",
@@ -32,7 +32,7 @@
   {
     "name": "Incarlopsa",
     "slug": "incarlopsa",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Castilla-La Mancha",
@@ -42,7 +42,7 @@
   {
     "name": "Grupo Tello",
     "slug": "grupo-tello",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Castilla-La Mancha",
@@ -52,7 +52,7 @@
   {
     "name": "Coren",
     "slug": "coren",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Galicia",
@@ -62,7 +62,7 @@
   {
     "name": "Argal",
     "slug": "argal",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Cataluña",
@@ -72,7 +72,7 @@
   {
     "name": "Grupo Noel",
     "slug": "grupo-noel",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cárnicas",
     "cnae": "10.1",
     "region": "Andalucía",
@@ -82,7 +82,7 @@
   {
     "name": "Leche Pascual (Calidad Pascual)",
     "slug": "calidad-pascual",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Lácteos",
     "cnae": "10.5",
     "region": "Castilla y León",
@@ -92,7 +92,7 @@
   {
     "name": "Lactalis Iberia",
     "slug": "lactalis-iberia",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Lácteos",
     "cnae": "10.5",
     "region": "Madrid",
@@ -102,7 +102,7 @@
   {
     "name": "Danone Iberia",
     "slug": "danone-iberia",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Lácteos",
     "cnae": "10.5",
     "region": "Cataluña",
@@ -112,7 +112,7 @@
   {
     "name": "Kaiku Corporación",
     "slug": "kaiku",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Lácteos",
     "cnae": "10.5",
     "region": "País Vasco",
@@ -122,7 +122,7 @@
   {
     "name": "Covap (Cooperativa Andaluza)",
     "slug": "covap",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Lácteos",
     "cnae": "10.5",
     "region": "Andalucía",
@@ -132,7 +132,7 @@
   {
     "name": "Capsa Food",
     "slug": "capsa-food",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Lácteos",
     "cnae": "10.5",
     "region": "Asturias",
@@ -142,7 +142,7 @@
   {
     "name": "Central Lechera Asturiana",
     "slug": "central-lechera-asturiana",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Lácteos",
     "cnae": "10.5",
     "region": "Asturias",
@@ -152,7 +152,7 @@
   {
     "name": "Nueva Pescanova",
     "slug": "nueva-pescanova",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pescado",
     "cnae": "10.2",
     "region": "Galicia",
@@ -162,7 +162,7 @@
   {
     "name": "Grupo Iberconsa",
     "slug": "grupo-iberconsa",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pescado",
     "cnae": "10.2",
     "region": "Galicia",
@@ -172,7 +172,7 @@
   {
     "name": "Frinsa",
     "slug": "frinsa",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pescado",
     "cnae": "10.2",
     "region": "Galicia",
@@ -182,7 +182,7 @@
   {
     "name": "Jealsa",
     "slug": "jealsa",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pescado",
     "cnae": "10.2",
     "region": "Galicia",
@@ -192,7 +192,7 @@
   {
     "name": "Pescapuerta",
     "slug": "pescapuerta",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pescado",
     "cnae": "10.2",
     "region": "Galicia",
@@ -202,7 +202,7 @@
   {
     "name": "Congalsa",
     "slug": "congalsa",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pescado",
     "cnae": "10.2",
     "region": "Galicia",
@@ -212,7 +212,7 @@
   {
     "name": "Deoleo",
     "slug": "deoleo",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Aceite",
     "cnae": "10.4",
     "region": "Andalucía",
@@ -222,7 +222,7 @@
   {
     "name": "Borges",
     "slug": "borges",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Aceite",
     "cnae": "10.4",
     "region": "Cataluña",
@@ -232,7 +232,7 @@
   {
     "name": "Acesur",
     "slug": "acesur",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Aceite",
     "cnae": "10.4",
     "region": "Andalucía",
@@ -242,7 +242,7 @@
   {
     "name": "Migasa",
     "slug": "migasa",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Aceite",
     "cnae": "10.4",
     "region": "Andalucía",
@@ -252,7 +252,7 @@
   {
     "name": "Ybarra",
     "slug": "ybarra",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Aceite",
     "cnae": "10.4",
     "region": "Andalucía",
@@ -262,7 +262,7 @@
   {
     "name": "Grupo IAN",
     "slug": "grupo-ian",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Conservas",
     "cnae": "10.3",
     "region": "Murcia",
@@ -272,7 +272,7 @@
   {
     "name": "Hero España",
     "slug": "hero-espana",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Conservas",
     "cnae": "10.3",
     "region": "Murcia",
@@ -282,7 +282,7 @@
   {
     "name": "Juver Alimentación",
     "slug": "juver-alimentacion",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Conservas",
     "cnae": "10.3",
     "region": "Murcia",
@@ -292,7 +292,7 @@
   {
     "name": "Panrico",
     "slug": "panrico",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pan/Pastas",
     "cnae": "10.7",
     "region": "Cataluña",
@@ -302,7 +302,7 @@
   {
     "name": "Grupo Bimbo Iberia",
     "slug": "grupo-bimbo-iberia",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Pan/Pastas",
     "cnae": "10.7",
     "region": "Madrid",
@@ -312,7 +312,7 @@
   {
     "name": "Adam Foods",
     "slug": "adam-foods",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Galletas/Bollería",
     "cnae": "10.7",
     "region": "País Vasco",
@@ -322,7 +322,7 @@
   {
     "name": "Cerealto Siro",
     "slug": "cerealto-siro",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Galletas/Bollería",
     "cnae": "10.7",
     "region": "Castilla y León",
@@ -332,7 +332,7 @@
   {
     "name": "Siro",
     "slug": "siro",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Galletas/Bollería",
     "cnae": "10.7",
     "region": "Castilla y León",
@@ -342,7 +342,7 @@
   {
     "name": "Azucarera",
     "slug": "azucarera",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Azúcar/Cacao/Café",
     "cnae": "10.8",
     "region": "Madrid",
@@ -352,7 +352,7 @@
   {
     "name": "AB Sugar Iberia",
     "slug": "ab-sugar-iberia",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Azúcar/Cacao/Café",
     "cnae": "10.8",
     "region": "Madrid",
@@ -362,7 +362,7 @@
   {
     "name": "Idilia Foods (ColaCao, Nocilla)",
     "slug": "idilia-foods",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Azúcar/Cacao/Café",
     "cnae": "10.8",
     "region": "Cataluña",
@@ -372,7 +372,7 @@
   {
     "name": "Casa Santiveri",
     "slug": "casa-santiveri",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Azúcar/Cacao/Café",
     "cnae": "10.8",
     "region": "Cataluña",
@@ -382,7 +382,7 @@
   {
     "name": "Nanta (Nutreco)",
     "slug": "nanta",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Piensos",
     "cnae": "10.9",
     "region": "Madrid",
@@ -392,7 +392,7 @@
   {
     "name": "Nutreco",
     "slug": "nutreco",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Piensos",
     "cnae": "10.9",
     "region": "Madrid",
@@ -402,7 +402,7 @@
   {
     "name": "Piensos del Sur",
     "slug": "piensos-del-sur",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Piensos",
     "cnae": "10.9",
     "region": "Andalucía",
@@ -412,7 +412,7 @@
   {
     "name": "Vall Companys",
     "slug": "vall-companys",
-    "sector": "Alimentacion",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Piensos",
     "cnae": "10.9",
     "region": "Cataluña",
@@ -422,7 +422,7 @@
   {
     "name": "Mahou-San Miguel",
     "slug": "mahou-san-miguel",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cerveza",
     "cnae": "11.05",
     "region": "Madrid",
@@ -432,7 +432,7 @@
   {
     "name": "Damm",
     "slug": "damm",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cerveza",
     "cnae": "11.05",
     "region": "Cataluña",
@@ -442,7 +442,7 @@
   {
     "name": "Hijos de Rivera (Estrella Galicia)",
     "slug": "hijos-de-rivera",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cerveza",
     "cnae": "11.05",
     "region": "Galicia",
@@ -452,7 +452,7 @@
   {
     "name": "Cervezas Alhambra (Grupo Mahou)",
     "slug": "cervezas-alhambra",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cerveza",
     "cnae": "11.05",
     "region": "Andalucía",
@@ -462,7 +462,7 @@
   {
     "name": "La Zaragozana (Ambar)",
     "slug": "la-zaragozana",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Cerveza",
     "cnae": "11.05",
     "region": "Aragón",
@@ -472,7 +472,7 @@
   {
     "name": "Grupo Freixenet",
     "slug": "grupo-freixenet",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Vinos",
     "cnae": "11.02",
     "region": "Cataluña",
@@ -482,7 +482,7 @@
   {
     "name": "Codorníu",
     "slug": "codorniu",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Vinos",
     "cnae": "11.02",
     "region": "Cataluña",
@@ -492,7 +492,7 @@
   {
     "name": "J. García Carrión",
     "slug": "j-garcia-carrion",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Vinos",
     "cnae": "11.02",
     "region": "Murcia",
@@ -502,7 +502,7 @@
   {
     "name": "Félix Solís Avantis",
     "slug": "felix-solis-avantis",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Vinos",
     "cnae": "11.02",
     "region": "Castilla-La Mancha",
@@ -512,7 +512,7 @@
   {
     "name": "Bodegas Riojanas",
     "slug": "bodegas-riojanas",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Vinos",
     "cnae": "11.02",
     "region": "La Rioja",
@@ -522,7 +522,7 @@
   {
     "name": "Marqués de Cáceres",
     "slug": "marques-de-caceres",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Vinos",
     "cnae": "11.02",
     "region": "La Rioja",
@@ -532,7 +532,7 @@
   {
     "name": "Coca-Cola Europacific Partners Iberia",
     "slug": "coca-cola-europacific-iberia",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Refrescos",
     "cnae": "11.07",
     "region": "Madrid",
@@ -542,7 +542,7 @@
   {
     "name": "PepsiCo Iberia",
     "slug": "pepsico-iberia",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Refrescos",
     "cnae": "11.07",
     "region": "Barcelona",
@@ -552,7 +552,7 @@
   {
     "name": "Corporación Vichy Catalán",
     "slug": "corporacion-vichy-catalan",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Aguas",
     "cnae": "11.07",
     "region": "Cataluña",
@@ -562,7 +562,7 @@
   {
     "name": "Solán de Cabras (Grupo Mahou-San Miguel)",
     "slug": "solan-de-cabras",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Aguas",
     "cnae": "11.07",
     "region": "Castilla-La Mancha",
@@ -572,7 +572,7 @@
   {
     "name": "Beam Suntory España",
     "slug": "beam-suntory-espana",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Licores",
     "cnae": "11.01",
     "region": "Madrid",
@@ -582,7 +582,7 @@
   {
     "name": "Destilerías Domecq",
     "slug": "destilerias-domecq",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Licores",
     "cnae": "11.01",
     "region": "Andalucía",
@@ -592,11 +592,1081 @@
   {
     "name": "Zamora Company (Licor 43)",
     "slug": "zamora-company",
-    "sector": "Bebidas",
+    "sector": "Alimentos y Bebidas",
     "subsector": "Licores",
     "cnae": "11.01",
     "region": "Murcia",
     "newsroomUrl": "https://www.zamoracompany.com",
+    "rssUrl": null
+  },
+  {
+    "name": "Vall Companys",
+    "slug": "vall-companys",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.vallcompanys.es/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Fuertes (El Pozo)",
+    "slug": "grupo-fuertes",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Murcia",
+    "newsroomUrl": "https://www.grupofuertes.com/noticias/",
+    "rssUrl": null
+  },
+  {
+    "name": "Coren (Cooperativa Ourensana)",
+    "slug": "coren",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.coren.es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Faccsa-Prolongo",
+    "slug": "faccsa-prolongo",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Batallé",
+    "slug": "grupo-batallé",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Frinsa (Grupo Jealsa-Rianxeira)",
+    "slug": "frinsa",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Jealsa-Rianxeira",
+    "slug": "jealsa-rianxeira",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.jealsa.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Conservas Garavilla (Orbe)",
+    "slug": "conservas-garavilla",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Conservas",
+    "cnae": "10.2",
+    "region": "País Vasco",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Conservas Isabel",
+    "slug": "conservas-isabel",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Conservas",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Iberconsa (Iberica de Conservas)",
+    "slug": "iberconsa",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Lactalis Iberia",
+    "slug": "lactalis-iberia",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.lactalis.es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Leche Pascual (Quality Food Group)",
+    "slug": "leche-pascual",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Castilla y León",
+    "newsroomUrl": "https://www.calidadpascual.com/sala-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Danone Iberia",
+    "slug": "danone-iberia",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.danone.es/sala-de-prensa",
+    "rssUrl": "https://www.danone.es/feed"
+  },
+  {
+    "name": "Grupo TGT (Lacteos y Derivados)",
+    "slug": "grupo-tgt",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Galicia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Clesa (Grupo Fuertes)",
+    "slug": "clesa",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Kaiku (Grupo EROSKI)",
+    "slug": "kaiku",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "País Vasco",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "CAPSA FOOD (Central Lechera Asturiana)",
+    "slug": "capsa-food",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Asturias",
+    "newsroomUrl": "https://www.capsafood.com/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo IAN (Iberica de Alimentación y Nutrición)",
+    "slug": "grupo-ian",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Galicia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Nanta (Grupo Nutreco)",
+    "slug": "nanta",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Piensos del Segre",
+    "slug": "piensos-del-segre",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Cofco International Iberia",
+    "slug": "cofco-iberia",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo AN (Cooperativa Agroalimentaria)",
+    "slug": "grupo-an",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Piensos",
+    "cnae": "10.9",
+    "region": "Navarra",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "AB Azucarera Iberia",
+    "slug": "ab-azucarera-iberia",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Andalucía",
+    "newsroomUrl": "https://www.ab-azucarera.es/sala-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "British Sugar (ABF)",
+    "slug": "british-sugar",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Ebro Foods",
+    "slug": "ebro-foods",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Arroz/Pasta",
+    "cnae": "10.6",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.ebrofoods.es/sala-de-prensa",
+    "rssUrl": "https://www.ebrofoods.es/feed"
+  },
+  {
+    "name": "Grupo DACSA (Molinos del Cierzo)",
+    "slug": "grupo-dacsa",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Arroz/Pasta",
+    "cnae": "10.6",
+    "region": "C. Valenciana",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Arento (Harinera de Tardienta)",
+    "slug": "grupo-arento",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Arroz/Pasta",
+    "cnae": "10.6",
+    "region": "Aragón",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Bimbo Iberia",
+    "slug": "bimbo-iberia",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pan/Pastas",
+    "cnae": "10.7",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.grupobimbo.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Vicky Foods (Dolce)",
+    "slug": "vicky-foods",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pan/Pastas",
+    "cnae": "10.7",
+    "region": "C. Valenciana",
+    "newsroomUrl": "https://www.vickyfoods.com/sala-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Panstar (Panificadora de Aralar)",
+    "slug": "grupo-panstar",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pan/Pastas",
+    "cnae": "10.7",
+    "region": "País Vasco",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Lacasa (Chocolates Lacasa)",
+    "slug": "lacasa",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Aragón",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Natra (Chocolate y derivados)",
+    "slug": "natra",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "C. Valenciana",
+    "newsroomUrl": "https://www.natra.com/sala-de-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Valor (Chocolates Valor)",
+    "slug": "valor-chocolates",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "C. Valenciana",
+    "newsroomUrl": "https://www.valor.es/noticias",
+    "rssUrl": null
+  },
+  {
+    "name": "Idilia Foods (ColaCao, Nocilla)",
+    "slug": "idilia-foods",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Azúcar/Cacao/Café",
+    "cnae": "10.8",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.idiliafoods.com/sala-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Deoleo (Aceite de oliva)",
+    "slug": "deoleo",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": "https://www.deoleo.com/sala-de-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Acesur (Grupo Acesur)",
+    "slug": "acesur",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Migasa (Grupo Migasa)",
+    "slug": "migasa",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Ybarra (Aceites Ybarra)",
+    "slug": "grupo-ybarra",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Aceite",
+    "cnae": "10.4",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Fritz Haber (Helados)",
+    "slug": "fritz-haber",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Helados Nestlé España",
+    "slug": "nestle-helados",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Farggi (Helados)",
+    "slug": "farggi",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Lácteos",
+    "cnae": "10.5",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Palacios (Embutidos)",
+    "slug": "grupo-palacios",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "La Rioja",
+    "newsroomUrl": "https://www.grupopalacios.es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Embutidos Goikoa",
+    "slug": "embutidos-goikoa",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Navarra",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Argal (Embutidos Argal)",
+    "slug": "argal",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Casa Tarradellas",
+    "slug": "casa-tarradellas",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Cárnicas",
+    "cnae": "10.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.casatarradellas.es/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Martiko (Productos del mar)",
+    "slug": "martiko",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Navarra",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Ubago (Conservas)",
+    "slug": "grupo-ubago",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Conservas",
+    "cnae": "10.2",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Conservas Albo",
+    "slug": "conservas-albo",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Conservas",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Angulas Aguinaga",
+    "slug": "angulas-aguinaga",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "País Vasco",
+    "newsroomUrl": "https://www.angulasaguinaga.es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Pescanova (Nueva Pescanova)",
+    "slug": "nueva-pescanova",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.nueva-pescanova.com/sala-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Aperitivos y Frutos Secos Abreu",
+    "slug": "aperitivos-abreu",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Castilla y León",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Pantoja (Frutos secos)",
+    "slug": "grupo-pantoja",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Andalucía",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Grupo Ibersnack (Bocaditos y snacks)",
+    "slug": "ibersnack",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Frit Ravich (Snacks)",
+    "slug": "frit-ravich",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.fritravich.com/sala-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Cuétara (Galletas)",
+    "slug": "cuetara",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Adam Foods (Grupo Europastry)",
+    "slug": "adam-foods",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Galletas/Bollería",
+    "cnae": "10.7",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Europastry (Congelados panadería)",
+    "slug": "europastry",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pan/Pastas",
+    "cnae": "10.7",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.europastry.com/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "TGT Foods Iberia (Congelados)",
+    "slug": "tgt-foods-iberia",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pan/Pastas",
+    "cnae": "10.7",
+    "region": "Cataluña",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Pesquisa y Congelados (Findus)",
+    "slug": "findus-iberia",
+    "sector": "Alimentos y Bebidas",
+    "subsector": "Pescado",
+    "cnae": "10.2",
+    "region": "Madrid",
+    "newsroomUrl": null,
+    "rssUrl": null
+  },
+  {
+    "name": "Seat (Volkswagen Group España)",
+    "slug": "seat",
+    "sector": "Industrial",
+    "subsector": "Vehículos de motor",
+    "cnae": "29.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.seat.es/sala-de-prensa.html",
+    "rssUrl": "https://www.seat.es/rss/sala-prensa.xml"
+  },
+  {
+    "name": "Renault España",
+    "slug": "renault-espana",
+    "sector": "Industrial",
+    "subsector": "Vehículos de motor",
+    "cnae": "29.1",
+    "region": "Castilla y León",
+    "newsroomUrl": "https://www.renault.es/actualidad/sala-de-prensa",
+    "rssUrl": "https://www.renault.es/rss/prensa.xml"
+  },
+  {
+    "name": "Stellantis Vigo (PSA)",
+    "slug": "stellantis-vigo",
+    "sector": "Industrial",
+    "subsector": "Vehículos de motor",
+    "cnae": "29.1",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.stellantis.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Iberia (airline)",
+    "slug": "iberia-airline",
+    "sector": "Industrial",
+    "subsector": "Otro material de transporte",
+    "cnae": "30.3",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.iberia.com/es/sala-comunicacion/",
+    "rssUrl": null
+  },
+  {
+    "name": "Navantia",
+    "slug": "navantia",
+    "sector": "Industrial",
+    "subsector": "Otro material de transporte",
+    "cnae": "30.1",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.navantia.es/es/comunicacion/sala-prensa",
+    "rssUrl": "https://www.navantia.es/feed"
+  },
+  {
+    "name": "Talgo",
+    "slug": "talgo",
+    "sector": "Industrial",
+    "subsector": "Otro material de transporte",
+    "cnae": "30.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.talgo.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "CAF (Construcciones y Auxiliar de Ferrocarriles)",
+    "slug": "caf",
+    "sector": "Industrial",
+    "subsector": "Otro material de transporte",
+    "cnae": "30.2",
+    "region": "País Vasco",
+    "newsroomUrl": "https://www.caf.net/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Gestamp",
+    "slug": "gestamp",
+    "sector": "Industrial",
+    "subsector": "Productos metálicos",
+    "cnae": "25.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.gestamp.com/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "CIE Automotive",
+    "slug": "cie-automotive",
+    "sector": "Industrial",
+    "subsector": "Productos metálicos",
+    "cnae": "29.3",
+    "region": "País Vasco",
+    "newsroomUrl": "https://www.cieautomotive.com/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Tubacex",
+    "slug": "tubacex",
+    "sector": "Industrial",
+    "subsector": "Metalurgia",
+    "cnae": "24.2",
+    "region": "País Vasco",
+    "newsroomUrl": "https://www.tubacex.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Acerinox",
+    "slug": "acerinox",
+    "sector": "Industrial",
+    "subsector": "Metalurgia",
+    "cnae": "24.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.acerinox.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "ArcelorMittal España",
+    "slug": "arcelormittal-espana",
+    "sector": "Industrial",
+    "subsector": "Metalurgia",
+    "cnae": "24.1",
+    "region": "Asturias",
+    "newsroomUrl": "https://spain.arcelormittal.com/sala-de-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "Ferroglobe (Grupo FerroAtlántica)",
+    "slug": "ferroglobe",
+    "sector": "Industrial",
+    "subsector": "Metalurgia",
+    "cnae": "24.4",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.ferroglobe.com/news/",
+    "rssUrl": null
+  },
+  {
+    "name": "Bayer Hispania (Crop Science)",
+    "slug": "bayer-hispania",
+    "sector": "Industrial",
+    "subsector": "Química",
+    "cnae": "20.2",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.bayer.com/es/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "BASF Española",
+    "slug": "basf-espanola",
+    "sector": "Industrial",
+    "subsector": "Química",
+    "cnae": "20.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.basf.com/es/es/media",
+    "rssUrl": null
+  },
+  {
+    "name": "Repsol Química",
+    "slug": "repsol-quimica",
+    "sector": "Industrial",
+    "subsector": "Química",
+    "cnae": "20.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.repsol.com/es/sala-prensa/",
+    "rssUrl": "https://www.repsol.com/rss/sala-prensa.xml"
+  },
+  {
+    "name": "CEPSA Química",
+    "slug": "cepsa-quimica",
+    "sector": "Industrial",
+    "subsector": "Química",
+    "cnae": "20.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.cepsa.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Solvay Iberia",
+    "slug": "solvay-iberia",
+    "sector": "Industrial",
+    "subsector": "Química",
+    "cnae": "20.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.solvay.com/en/media",
+    "rssUrl": null
+  },
+  {
+    "name": "Inditex (manufactura)",
+    "slug": "inditex",
+    "sector": "Industrial",
+    "subsector": "Textil",
+    "cnae": "14.1",
+    "region": "Galicia",
+    "newsroomUrl": "https://www.inditex.com/es/sala-prensa",
+    "rssUrl": "https://www.inditex.com/rss/sala-prensa.xml"
+  },
+  {
+    "name": "Mango (textil)",
+    "slug": "mango",
+    "sector": "Industrial",
+    "subsector": "Textil",
+    "cnae": "14.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.mango.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "ENCE — Energía y Celulosa",
+    "slug": "ence",
+    "sector": "Industrial",
+    "subsector": "Papel",
+    "cnae": "17.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.ence.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "SAICA (papel y cartón)",
+    "slug": "saica",
+    "sector": "Industrial",
+    "subsector": "Papel",
+    "cnae": "17.1",
+    "region": "Aragón",
+    "newsroomUrl": "https://www.saica.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Smurfit Kappa España",
+    "slug": "smurfit-kappa-espana",
+    "sector": "Industrial",
+    "subsector": "Papel",
+    "cnae": "17.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.smurfitkappa.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Grifols",
+    "slug": "grifols",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.grifols.com/es/sala-prensa",
+    "rssUrl": "https://www.grifols.com/rss/sala-prensa.xml"
+  },
+  {
+    "name": "Almirall",
+    "slug": "almirall",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.almirall.com/es/sala-de-prensa",
+    "rssUrl": "https://www.almirall.com/rss"
+  },
+  {
+    "name": "Faes Farma",
+    "slug": "faes-farma",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "País Vasco",
+    "newsroomUrl": "https://www.faesfarma.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Laboratorios Rovi",
+    "slug": "rovi",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.rovi.es/es/sala-prensa",
+    "rssUrl": "https://www.rovi.es/rss/sala-prensa.xml"
+  },
+  {
+    "name": "Esteve (Grupo)",
+    "slug": "esteve",
+    "sector": "Farmaceutico",
+    "subsector": "Principios activos",
+    "cnae": "21.1",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.esteve.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Insud Pharma (Chemo Group)",
+    "slug": "insud-pharma",
+    "sector": "Farmaceutico",
+    "subsector": "Principios activos",
+    "cnae": "21.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.insudpharma.com/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Reig Jofre",
+    "slug": "reig-jofre",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "Cataluña",
+    "newsroomUrl": "https://www.reigjofre.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Normon (Laboratorios Normon)",
+    "slug": "normon",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.normon.es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Cinfa (Laboratorios Cinfa)",
+    "slug": "cinfa",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "Navarra",
+    "newsroomUrl": "https://www.cinfa.com/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Viatris España",
+    "slug": "viatris-espana",
+    "sector": "Farmaceutico",
+    "subsector": "Preparados farmacéuticos",
+    "cnae": "21.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.viatris.com/es-es/news",
+    "rssUrl": null
+  },
+  {
+    "name": "ACS (Actividades de Construcción y Servicios)",
+    "slug": "acs",
+    "sector": "Construccion",
+    "subsector": "Construcción de edificios",
+    "cnae": "41.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.grupoacs.com/sala-prensa/",
+    "rssUrl": "https://www.grupoacs.com/rss/sala-prensa.xml"
+  },
+  {
+    "name": "Ferrovial",
+    "slug": "ferrovial",
+    "sector": "Construccion",
+    "subsector": "Ingeniería civil",
+    "cnae": "42.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.ferrovial.com/es/sala-prensa/",
+    "rssUrl": "https://www.ferrovial.com/rss/"
+  },
+  {
+    "name": "Acciona (construcción)",
+    "slug": "acciona",
+    "sector": "Construccion",
+    "subsector": "Ingeniería civil",
+    "cnae": "42.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.acciona.com/es/sala-prensa/",
+    "rssUrl": "https://www.acciona.com/rss/"
+  },
+  {
+    "name": "OHLA (Obrascón Huarte Lain)",
+    "slug": "ohla",
+    "sector": "Construccion",
+    "subsector": "Construcción de edificios",
+    "cnae": "41.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.ohla-group.com/sala-prensa/",
+    "rssUrl": null
+  },
+  {
+    "name": "FCC (Fomento de Construcciones y Contratas)",
+    "slug": "fcc",
+    "sector": "Construccion",
+    "subsector": "Actividades de construcción especializadas",
+    "cnae": "43.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.fcc.es/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Sacyr",
+    "slug": "sacyr",
+    "sector": "Construccion",
+    "subsector": "Ingeniería civil",
+    "cnae": "42.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.sacyr.com/es/sala-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Iberdrola",
+    "slug": "iberdrola",
+    "sector": "Energetico",
+    "subsector": "Energía eléctrica",
+    "cnae": "35.1",
+    "region": "País Vasco",
+    "newsroomUrl": "https://www.iberdrola.com/sala-comunicacion",
+    "rssUrl": "https://www.iberdrola.com/rss/noticias.xml"
+  },
+  {
+    "name": "Endesa",
+    "slug": "endesa",
+    "sector": "Energetico",
+    "subsector": "Energía eléctrica",
+    "cnae": "35.1",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.endesa.com/es/sala-de-prensa",
+    "rssUrl": "https://www.endesa.com/rss/sala-prensa.xml"
+  },
+  {
+    "name": "Naturgy (Gas Natural Fenosa)",
+    "slug": "naturgy",
+    "sector": "Energetico",
+    "subsector": "Gas y vapor",
+    "cnae": "35.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.naturgy.com/es/sala-prensa",
+    "rssUrl": "https://www.naturgy.com/rss/"
+  },
+  {
+    "name": "Repsol (energía)",
+    "slug": "repsol-energia",
+    "sector": "Energetico",
+    "subsector": "Refino de petróleo",
+    "cnae": "19.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.repsol.com/es/sala-prensa/",
+    "rssUrl": "https://www.repsol.com/rss/sala-prensa.xml"
+  },
+  {
+    "name": "Cepsa (energía)",
+    "slug": "cepsa-energia",
+    "sector": "Energetico",
+    "subsector": "Refino de petróleo",
+    "cnae": "19.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.cepsa.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "BP Energía España",
+    "slug": "bp-energia-espana",
+    "sector": "Energetico",
+    "subsector": "Refino de petróleo",
+    "cnae": "19.2",
+    "region": "Madrid",
+    "newsroomUrl": "https://www.bp.com/es_es/spain/sala-de-prensa.html",
+    "rssUrl": null
+  },
+  {
+    "name": "EDP España (HC Energía)",
+    "slug": "edp-espana",
+    "sector": "Energetico",
+    "subsector": "Energía eléctrica",
+    "cnae": "35.1",
+    "region": "Asturias",
+    "newsroomUrl": "https://www.edp.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Viesgo (Repsol Renovables)",
+    "slug": "viesgo",
+    "sector": "Energetico",
+    "subsector": "Renovables",
+    "cnae": "35.1",
+    "region": "Cantabria",
+    "newsroomUrl": "https://www.viesgo.com/es/sala-de-prensa",
+    "rssUrl": null
+  },
+  {
+    "name": "Acciona Energía",
+    "slug": "acciona-energia",
+    "sector": "Energetico",
+    "subsector": "Renovables",
+    "cnae": "35.1",
+    "region": "Navarra",
+    "newsroomUrl": "https://www.acciona-energia.com/es/sala-prensa/",
     "rssUrl": null
   }
 ]

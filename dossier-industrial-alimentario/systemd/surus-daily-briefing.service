@@ -1,0 +1,16 @@
+[Unit]
+Description=Surus Daily Briefing — HERMES Dossier Industrial
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+ExecStart=/usr/bin/pnpm tsx lib/agents/daily-briefing-runner.ts
+EnvironmentFile=/opt/hermes-dossier/.env
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=60s
+
+[Install]
+WantedBy=multi-user.target

@@ -83,12 +83,12 @@ async function main() {
     detail: runSec ? `id=${runSec.id} found=${runSec.itemsFound}` : 'no run',
   });
 
-  // 9) ArticleCompany links para al menos 3 newsrooms con in_scope
-  const linkedArticles = await prisma.articleCompany.count({
-    where: { article: { outletType: 'corporate_newsroom', deimplantationSignal: true } },
+  // 9) Source con companyId (FK directa en v6) para al menos 3 newsrooms con in_scope
+  const linkedArticles = await prisma.source.count({
+    where: { outletType: 'corporate_newsroom', deimplantationSignal: true, companyId: { not: null } },
   });
   asserts.push({
-    name: '9. ArticleCompany links ≥ 3 (newsroom in_scope ↔ Company)',
+    name: '9. Sources vinculadas a Company ≥ 3 (newsroom in_scope)',
     pass: linkedArticles >= 3,
     detail: `actual=${linkedArticles}`,
   });

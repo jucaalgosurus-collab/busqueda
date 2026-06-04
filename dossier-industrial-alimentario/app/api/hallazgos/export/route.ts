@@ -20,12 +20,14 @@ export async function GET(req: NextRequest) {
   if (sp.get('signal') === 'out') where.deimplantationSignal = false;
   if (sp.get('stale') === '1') where.isStale = true;
   if (sp.get('stale') === '0') where.isStale = false;
-  if (sp.get('ccaa')) where.region = sp.get('ccaa');
+  const companyFilter: Record<string, unknown> = {};
+  if (sp.get('ccaa')) companyFilter.hqRegion = sp.get('ccaa');
+  if (sp.get('industria')) companyFilter.sector = sp.get('industria');
+  if (Object.keys(companyFilter).length > 0) where.company = companyFilter;
   const q = sp.get('q');
   if (q && q.trim().length > 0) {
     where.OR = [
       { title: { contains: q, mode: 'insensitive' } },
-      { content: { contains: q, mode: 'insensitive' } },
       { outlet: { contains: q, mode: 'insensitive' } },
     ];
   }
@@ -33,7 +35,7 @@ export async function GET(req: NextRequest) {
   const sources = await prisma.source.findMany({
     where,
     include: {
-      companies: { include: { company: true } },
+      company: { select: { name: true, hqRegion: true, hqCity: true, sector: true } },
     },
     orderBy: { publishedAt: 'desc' },
     take: 1000,
@@ -47,9 +49,10 @@ export async function GET(req: NextRequest) {
     'url',
     'deimplantation_signal',
     'out_of_scope_reason',
-    'region',
-    'province',
-    'companies',
+    'sector',
+    'hq_region',
+    'hq_city',
+    'company',
     'is_stale',
   ];
 
@@ -61,9 +64,10 @@ export async function GET(req: NextRequest) {
     s.url,
     s.deimplantationSignal ? '1' : '0',
     s.outOfScopeReason || '',
-    s.region || '',
-    s.province || '',
-    s.companies.map((ac) => ac.company.name).join('; '),
+    s.company?.sector || '',
+    s.company?.hqRegion || '',
+    s.company?.hqCity || '',
+    s.company?.name || '',
     s.isStale ? '1' : '0',
   ]);
 

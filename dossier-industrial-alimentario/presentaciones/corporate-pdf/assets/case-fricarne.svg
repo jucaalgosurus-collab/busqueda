@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky-fr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3030"/>
+      <stop offset="60%" stop-color="#4a4a48"/>
+      <stop offset="100%" stop-color="#6a6a68"/>
+    </linearGradient>
+    <linearGradient id="ground-fr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3530"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="tile-fr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d0d0c8"/>
+      <stop offset="100%" stop-color="#7a7a72"/>
+    </linearGradient>
+    <linearGradient id="sign-fr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9302c"/>
+      <stop offset="100%" stop-color="#7a1818"/>
+    </linearGradient>
+    <radialGradient id="glow-fr" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#c9a961" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#c9a961" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="noise-fr">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="5"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#sky-fr)"/>
+  <rect y="280" width="600" height="120" fill="url(#ground-fr)"/>
+  <circle cx="300" cy="200" r="200" fill="url(#glow-fr)"/>
+
+  <!-- Distant buildings -->
+  <g fill="#2a2a2a" opacity="0.7">
+    <rect x="0" y="220" width="50" height="60"/>
+    <rect x="60" y="200" width="40" height="80"/>
+    <rect x="500" y="210" width="40" height="70"/>
+    <rect x="550" y="225" width="50" height="55"/>
+  </g>
+
+  <!-- Main supermarket building -->
+  <g>
+    <!-- Building shell -->
+    <path d="M120 280 L120 150 L380 150 L380 280 Z" fill="url(#tile-fr)"/>
+    <!-- Roof -->
+    <path d="M120 150 L250 110 L380 150 Z" fill="#2a2a28"/>
+    <path d="M120 150 L250 110 L380 150 L380 158 L250 118 L120 158 Z" fill="#0a0a0a" opacity="0.4"/>
+    <!-- Big sign FRICARNE -->
+    <rect x="135" y="155" width="230" height="35" fill="url(#sign-fr)"/>
+    <rect x="135" y="155" width="230" height="35" fill="none" stroke="#3a0808" stroke-width="1"/>
+    <text x="250" y="180" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="#fff" letter-spacing="3">FRICARNE</text>
+    <!-- Yellow accent under sign -->
+    <rect x="135" y="190" width="230" height="3" fill="#fbbf24"/>
+    <!-- Big windows (escaparate) -->
+    <g fill="#1a1f1a" opacity="0.9">
+      <rect x="140" y="200" width="100" height="60"/>
+      <rect x="260" y="200" width="100" height="60"/>
+    </g>
+    <!-- Products shelves (visible through glass) -->
+    <g stroke="#c9a961" stroke-width="0.5" opacity="0.7">
+      <line x1="145" y1="220" x2="235" y2="220"/>
+      <line x1="145" y1="235" x2="235" y2="235"/>
+      <line x1="145" y1="250" x2="235" y2="250"/>
+      <line x1="265" y1="220" x2="355" y2="220"/>
+      <line x1="265" y1="235" x2="355" y2="235"/>
+      <line x1="265" y1="250" x2="355" y2="250"/>
+    </g>
+    <!-- Door (entrance) -->
+    <rect x="220" y="200" width="60" height="80" fill="#0a0a0a"/>
+    <line x1="250" y1="200" x2="250" y2="280" stroke="#3a3a3a" stroke-width="1"/>
+    <line x1="225" y1="220" x2="275" y2="220" stroke="#3a3a3a" stroke-width="0.5" opacity="0.5"/>
+    <line x1="225" y1="240" x2="275" y2="240" stroke="#3a3a3a" stroke-width="0.5" opacity="0.5"/>
+    <line x1="225" y1="260" x2="275" y2="260" stroke="#3a3a3a" stroke-width="0.5" opacity="0.5"/>
+  </g>
+
+  <!-- Awning lights -->
+  <g fill="#fbbf24">
+    <circle cx="130" cy="155" r="2"/>
+    <circle cx="160" cy="148" r="2"/>
+    <circle cx="200" cy="138" r="2"/>
+    <circle cx="250" cy="132" r="2"/>
+    <circle cx="300" cy="138" r="2"/>
+    <circle cx="340" cy="148" r="2"/>
+    <circle cx="370" cy="155" r="2"/>
+  </g>
+  <!-- Light glow -->
+  <g fill="#fbbf24" opacity="0.3">
+    <ellipse cx="250" cy="135" rx="40" ry="6"/>
+  </g>
+
+  <!-- Cold trucks (3 vehicles) -->
+  <g transform="translate(40,250)">
+    <rect x="0" y="0" width="60" height="25" fill="#1a1a1a"/>
+    <rect x="0" y="0" width="60" height="3" fill="#4a4a4a"/>
+    <rect x="50" y="-8" width="14" height="12" fill="#2a2a2a"/>
+    <rect x="52" y="-6" width="10" height="8" fill="#0a0a0a"/>
+    <circle cx="14" cy="25" r="5" fill="#1a1a1a"/>
+    <circle cx="44" cy="25" r="5" fill="#1a1a1a"/>
+    <circle cx="58" cy="25" r="5" fill="#1a1a1a"/>
+    <!-- Snowflake -->
+    <g transform="translate(30,12)">
+      <line x1="-4" y1="0" x2="4" y2="0" stroke="#4ade80" stroke-width="0.8"/>
+      <line x1="0" y1="-4" x2="0" y2="4" stroke="#4ade80" stroke-width="0.8"/>
+      <line x1="-3" y1="-3" x2="3" y2="3" stroke="#4ade80" stroke-width="0.8"/>
+      <line x1="-3" y1="3" x2="3" y2="-3" stroke="#4ade80" stroke-width="0.8"/>
+    </g>
+  </g>
+
+  <g transform="translate(420,255)">
+    <rect x="0" y="0" width="60" height="22" fill="#1a1a1a"/>
+    <rect x="0" y="0" width="60" height="3" fill="#4a4a4a"/>
+    <rect x="50" y="-8" width="14" height="12" fill="#2a2a2a"/>
+    <rect x="52" y="-6" width="10" height="8" fill="#0a0a0a"/>
+    <circle cx="14" cy="22" r="5" fill="#1a1a1a"/>
+    <circle cx="44" cy="22" r="5" fill="#1a1a1a"/>
+    <circle cx="58" cy="22" r="5" fill="#1a1a1a"/>
+  </g>
+
+  <g transform="translate(500,260)">
+    <rect x="0" y="0" width="50" height="18" fill="#1a1a1a"/>
+    <rect x="0" y="0" width="50" height="2" fill="#4a4a4a"/>
+    <rect x="42" y="-7" width="12" height="10" fill="#2a2a2a"/>
+    <rect x="44" y="-5" width="8" height="6" fill="#0a0a0a"/>
+    <circle cx="12" cy="18" r="4" fill="#1a1a1a"/>
+    <circle cx="38" cy="18" r="4" fill="#1a1a1a"/>
+  </g>
+
+  <!-- Cart / foreground element -->
+  <g transform="translate(195,290)">
+    <path d="M0 0 L20 0 L25 -15 L-5 -15" fill="none" stroke="#5a5a5a" stroke-width="1"/>
+    <rect x="0" y="0" width="20" height="10" fill="none" stroke="#5a5a5a" stroke-width="0.8"/>
+    <circle cx="3" cy="12" r="1.5" fill="#3a3a3a"/>
+    <circle cx="17" cy="12" r="1.5" fill="#3a3a3a"/>
+  </g>
+
+  <!-- Ground texture -->
+  <line x1="0" y1="285" x2="600" y2="285" stroke="#0a0a0a" stroke-width="0.5" opacity="0.5"/>
+  <line x1="0" y1="310" x2="600" y2="310" stroke="#1a1a1a" stroke-width="0.3" opacity="0.3"/>
+
+  <rect width="600" height="400" filter="url(#noise-fr)" opacity="0.4"/>
+
+  <radialGradient id="vig-fr" cx="0.5" cy="0.5" r="0.7">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.7"/>
+  </radialGradient>
+  <rect width="600" height="400" fill="url(#vig-fr)"/>
+
+  <rect x="20" y="340" width="450" height="50" fill="#0d0e12" opacity="0.9"/>
+  <rect x="20" y="340" width="3" height="50" fill="#c9a961"/>
+  <text x="38" y="362" font-family="Georgia, serif" font-size="20" font-weight="700" fill="#c9a961" letter-spacing="2">FRICARNE</text>
+  <text x="38" y="380" font-family="Arial, sans-serif" font-size="9" fill="#a0aec0" letter-spacing="3">10 SUPERMERCADOS + 4 VEHÍCULOS FRIGORÍFICOS · VALENCIA</text>
+</svg>

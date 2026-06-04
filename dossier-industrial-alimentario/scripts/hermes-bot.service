@@ -1,0 +1,19 @@
+# /etc/systemd/system/hermes-bot.service
+# Bot de Telegram interactivo — polling long-running
+[Unit]
+Description=HERMES Dossier - bot de Telegram (responde texto y notas de voz)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/hermes-dossier/bot
+ExecStart=/usr/bin/python3 /opt/hermes-dossier/bot/bot.py
+Restart=always
+RestartSec=5
+User=root
+Group=root
+StandardOutput=append:/var/log/hermes-scan/bot.log
+StandardError=append:/var/log/hermes-scan/bot.log
+
+[Install]
+WantedBy=multi-user.target

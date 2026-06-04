@@ -1,5 +1,5 @@
 // scripts/scan-newsrooms.ts — Entry CLI para newsrooms-corporativas agent
-import { runNewsroomsAgent } from '../lib/agents/runner.js';
+import { runNewsroomsAgent } from '../lib/agents/runner';
 
 runNewsroomsAgent({
   maxPerSource: Number(process.env.MAX_PER_SOURCE ?? 8),

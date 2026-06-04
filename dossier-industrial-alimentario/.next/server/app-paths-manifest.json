@@ -1,0 +1,21 @@
+{
+  "/api/mocr/route": "app/api/mocr/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/companies/route": "app/api/companies/route.js",
+  "/api/contactos/export.csv/route": "app/api/contactos/export.csv/route.js",
+  "/api/empresas/[slug]/notes/route": "app/api/empresas/[slug]/notes/route.js",
+  "/api/empresas/[slug]/upload/route": "app/api/empresas/[slug]/upload/route.js",
+  "/api/contactos/search/route": "app/api/contactos/search/route.js",
+  "/api/empresas/[slug]/route": "app/api/empresas/[slug]/route.js",
+  "/api/health/route": "app/api/health/route.js",
+  "/api/hallazgos/export/route": "app/api/hallazgos/export/route.js",
+  "/legacy/page": "app/legacy/page.js",
+  "/empresas/page": "app/empresas/page.js",
+  "/agentes/page": "app/agentes/page.js",
+  "/eventos/page": "app/eventos/page.js",
+  "/empresas/[slug]/page": "app/empresas/[slug]/page.js",
+  "/hallazgos/page": "app/hallazgos/page.js",
+  "/contactos/page": "app/contactos/page.js",
+  "/mocr/page": "app/mocr/page.js",
+  "/page": "app/page.js"
+}

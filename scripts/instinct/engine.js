@@ -17,10 +17,10 @@ function ensureDir(dir) {
 }
 
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return null;
   const frontmatter = {};
-  for (const line of match[1].split('\n')) {
+  for (const line of match[1].split(/\r?\n/)) {
     const [key, ...valueParts] = line.split(':');
     if (key && valueParts.length > 0) {
       frontmatter[key.trim()] = valueParts.join(':').trim();

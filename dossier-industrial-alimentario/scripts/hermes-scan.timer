@@ -1,0 +1,14 @@
+# /etc/systemd/system/hermes-scan.timer
+# Ejecuta el scan de HERMES Dossier CADA 2 DÍAS
+# (lunes, miércoles, viernes, domingo a las 04:00 UTC = 06:00 hora local Madrid)
+[Unit]
+Description=HERMES Dossier - timer cada 2 días (04:00 UTC)
+Requires=hermes-scan.service
+
+[Timer]
+OnCalendar=Mon,Thu,Sun *-*-* 04:00:00
+Persistent=true
+Unit=hermes-scan.service
+
+[Install]
+WantedBy=timers.target

@@ -43,7 +43,7 @@ export default async function AgentesPage() {
                   <td style={td}>
                     <code style={{ fontSize: 'var(--text-xs)' }}>{c.agentName}</code>
                   </td>
-                  <td style={td}>{c.region || '—'}</td>
+                  <td style={td}>{'—'}</td>
                   <td style={td}>cada {c.cadenceDays} días</td>
                   <td style={td}>
                     {c.isActive ? (
@@ -53,7 +53,7 @@ export default async function AgentesPage() {
                     )}
                   </td>
                   <td style={td}>{c.lastRunAt ? new Date(c.lastRunAt).toLocaleString('es-ES') : '—'}</td>
-                  <td style={td}>{c.nextRunAt ? new Date(c.nextRunAt).toLocaleString('es-ES') : '—'}</td>
+                  <td style={td}>{'—'}</td>
                 </tr>
               ))}
             </tbody>

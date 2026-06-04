@@ -1,0 +1,147 @@
+[
+  {
+    "platform": "Escrapalia",
+    "country": "ES",
+    "baseUrl": "https://www.escrapalia.com",
+    "searchUrlTemplate": "https://www.escrapalia.com/es/buscar?q={query}",
+    "type": "html",
+    "rateLimitMs": 8000,
+    "requiresStealth": "flaresolverr",
+    "notes": "Cloudflare protection, requires Flaresolverr. Search by company name.",
+    "active": true
+  },
+  {
+    "platform": "Surplex",
+    "country": "ES/INTL",
+    "baseUrl": "https://www.surplex.com",
+    "searchUrlTemplate": "https://www.surplex.com/es/buscar?q={query}",
+    "sitemapUrl": "https://www.surplex.com/sitemap.xml",
+    "type": "html+xml",
+    "rateLimitMs": 8000,
+    "requiresStealth": "playwright",
+    "notes": "Cloudflare+Akamai. Sitemap XML available for lot discovery.",
+    "active": true
+  },
+  {
+    "platform": "Troostwijk",
+    "country": "NL/INTL",
+    "baseUrl": "https://www.troostwijkauctions.com",
+    "searchUrlTemplate": "https://www.troostwijkauctions.com/es/search?q={query}",
+    "sitemapUrl": "https://www.troostwijkauctions.com/sitemap.xml",
+    "type": "html+xml",
+    "rateLimitMs": 8000,
+    "requiresStealth": "playwright",
+    "notes": "Sitemap XML available. Heavy Cloudflare.",
+    "active": true
+  },
+  {
+    "platform": "HGP Auctions",
+    "country": "UK",
+    "baseUrl": "https://hgpauction.com",
+    "searchUrlTemplate": "https://hgpauction.com/?s={query}",
+    "type": "html",
+    "rateLimitMs": 6000,
+    "requiresStealth": "basic",
+    "notes": "WordPress site. No Cloudflare. Confirmed Danone-Ochsenfurt in seed.",
+    "active": true
+  },
+  {
+    "platform": "Apex Auctions",
+    "country": "UK",
+    "baseUrl": "https://www.apexauctions.co.uk",
+    "searchUrlTemplate": "https://www.apexauctions.co.uk/?s={query}",
+    "type": "html",
+    "rateLimitMs": 6000,
+    "requiresStealth": "basic",
+    "notes": "Confimed Danone-Apex in seed (historial).",
+    "active": true
+  },
+  {
+    "platform": "GUTINVEST",
+    "country": "ES",
+    "baseUrl": "https://www.gutinvest.com",
+    "searchUrlTemplate": "https://www.gutinvest.com/buscar?q={query}",
+    "type": "html",
+    "rateLimitMs": 6000,
+    "requiresStealth": "basic",
+    "notes": "Caso confirmado Pascual-GEA-Barcelona (activos_detectados) en seed.",
+    "active": true
+  },
+  {
+    "platform": "CFT",
+    "country": "ES",
+    "baseUrl": "https://www.cftsubastas.es",
+    "searchUrlTemplate": "https://www.cftsubastas.es/buscar?q={query}",
+    "type": "html",
+    "rateLimitMs": 6000,
+    "requiresStealth": "basic",
+    "notes": "Subastas Concursales (filtradas por B.9-D).",
+    "active": true
+  },
+  {
+    "platform": "Industrial Auctions",
+    "country": "EU",
+    "baseUrl": "https://www.industrialauctions.com",
+    "searchUrlTemplate": "https://www.industrialauctions.com/es/buscar?q={query}",
+    "type": "html",
+    "rateLimitMs": 8000,
+    "requiresStealth": "flaresolverr",
+    "notes": "Cloudflare.",
+    "active": true
+  },
+  {
+    "platform": "Machineryline",
+    "country": "INTL",
+    "baseUrl": "https://www.machineryline.es",
+    "searchUrlTemplate": "https://www.machineryline.es/buscar?q={query}",
+    "type": "json+html",
+    "rateLimitMs": 6000,
+    "requiresStealth": "basic",
+    "notes": "JSON API for listings. Public.",
+    "active": true
+  },
+  {
+    "platform": "Machinerypark",
+    "country": "DE",
+    "baseUrl": "https://www.machinerypark.es",
+    "searchUrlTemplate": "https://www.machinerypark.es/buscar?q={query}",
+    "type": "html",
+    "rateLimitMs": 6000,
+    "requiresStealth": "basic",
+    "notes": "DE-based, ES mirror.",
+    "active": true
+  },
+  {
+    "platform": "BPI Auctions",
+    "country": "ES",
+    "baseUrl": "https://www.bpiauctions.com",
+    "searchUrlTemplate": "https://www.bpiauctions.com/es/buscar?q={query}",
+    "type": "html",
+    "rateLimitMs": 6000,
+    "requiresStealth": "basic",
+    "notes": "BPI especializadas en activos industriales.",
+    "active": true
+  },
+  {
+    "platform": "EquipNet",
+    "country": "US/INTL",
+    "baseUrl": "https://www.equipnet.com",
+    "searchUrlTemplate": "https://www.equipnet.com/es/search?q={query}",
+    "type": "html",
+    "rateLimitMs": 8000,
+    "requiresStealth": "flaresolverr",
+    "notes": "Cloudflare. Used by multinational A&B for asset disposal.",
+    "active": true
+  },
+  {
+    "platform": "RB Global",
+    "country": "US/INTL",
+    "baseUrl": "https://www.rbauction.com",
+    "searchUrlTemplate": "https://www.rbauction.com/es/search?q={query}",
+    "type": "html",
+    "rateLimitMs": 10000,
+    "requiresStealth": "flaresolverr",
+    "notes": "Ritchie Bros. Cloudflare estricto, throttling agresivo. Solo si otros no devuelven hits.",
+    "active": true
+  }
+]

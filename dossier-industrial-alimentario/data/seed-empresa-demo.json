@@ -1,0 +1,155 @@
+{
+  "company": {
+    "slug": "nueva-pescanova",
+    "name": "Nueva Pescanova",
+    "cif": "A36005221",
+    "sector": "Alimentacion",
+    "subsector": "Pescado, marisco y derivados",
+    "cnae": "10.2",
+    "parentGroup": "Nueva Pescanova S.A.",
+    "hqCity": "Vigo",
+    "hqRegion": "Galicia",
+    "website": "https://pescanova.com",
+    "facturacionM": 1100.0,
+    "facturacionYear": 2024,
+    "ebitdaM": 95.0,
+    "beneficioNetoM": 12.0,
+    "deudaNetaM": 280.0,
+    "empleadosTotal": 3200,
+    "tier": "A",
+    "status": "active",
+    "priority": 1
+  },
+  "plants": [
+    {
+      "name": "Chapela",
+      "ccaa": "Galicia",
+      "province": "Pontevedra",
+      "city": "Redondela",
+      "address": "Av. Beiramar, 155, Chapela",
+      "lat": 42.245,
+      "lng": -8.667,
+      "status": "operativa",
+      "specialty": "Procesado de pescado congelado",
+      "employees": 850,
+      "parcelaM2": 35000.0,
+      "naveM2": 18000.0
+    },
+    {
+      "name": "Vigo",
+      "ccaa": "Galicia",
+      "province": "Pontevedra",
+      "city": "Vigo",
+      "address": "Av. Beiramar, 75, Vigo",
+      "lat": 42.237,
+      "lng": -8.722,
+      "status": "en_desmantelamiento",
+      "specialty": "Planta histórica (cierre programado)",
+      "employees": 0,
+      "parcelaM2": 22000.0,
+      "naveM2": 12000.0,
+      "closureYear": 2026
+    },
+    {
+      "name": "Porriño",
+      "ccaa": "Galicia",
+      "province": "Pontevedra",
+      "city": "Porriño",
+      "address": "Polígono A Granxa, Porriño",
+      "lat": 42.108,
+      "lng": -8.629,
+      "status": "en_inversion",
+      "specialty": "Logística y distribución",
+      "employees": 220,
+      "investmentMEur": 28.0
+    },
+    {
+      "name": "Celeiro",
+      "ccaa": "Galicia",
+      "province": "Lugo",
+      "city": "Cervo",
+      "address": "Muelle s/n, Celeiro",
+      "lat": 43.683,
+      "lng": -7.452,
+      "status": "operativa",
+      "specialty": "Procesado de merluza y rodaballo",
+      "employees": 410
+    },
+    {
+      "name": "Salamanca",
+      "ccaa": "Castilla y León",
+      "province": "Salamanca",
+      "city": "Salamanca",
+      "address": "Polígono El Montalvo, Salamanca",
+      "lat": 40.962,
+      "lng": -5.661,
+      "status": "cerrada",
+      "specialty": "Antena logística",
+      "employees": 0,
+      "closureYear": 2023
+    }
+  ],
+  "inventory": [
+    { "plantName": "Chapela", "category": "linea_produccion", "brand": "Marel", "model": "SensorX", "specs": "Línea fileteado 8 t/h", "quantity": 2, "status": "operativo", "estimatedValueEur": 1800000 },
+    { "plantName": "Chapela", "category": "refrigeracion", "brand": "Linde", "model": "CRYO 900", "specs": "Túnel congelación -35°C, 2 unidades", "quantity": 2, "status": "operativo", "estimatedValueEur": 950000 },
+    { "plantName": "Vigo", "category": "linea_produccion", "brand": "Baader", "model": "188", "specs": "Línea fileteado bacalao", "quantity": 1, "status": "desmantelado", "releaseWindow": "Q2 2026", "estimatedValueEur": 350000 },
+    { "plantName": "Vigo", "category": "caldera", "brand": "Saacke", "model": "UNIMAT", "specs": "2 calderas 6 MWt", "quantity": 2, "status": "liberado", "releaseWindow": "Q3 2026", "estimatedValueEur": 480000 },
+    { "plantName": "Vigo", "category": "edificio", "brand": null, "model": null, "specs": "Nave industrial 12.000 m² + parcela 22.000 m²", "quantity": 1, "status": "en_venta", "releaseWindow": "2027", "estimatedValueEur": 8500000 },
+    { "plantName": "Porriño", "category": "sistema_almacenaje", "brand": "Dematic", "model": "Multishuttle", "specs": "Almacén automatizado 12.000 palets", "quantity": 1, "status": "en_obra", "estimatedValueEur": 4200000 },
+    { "plantName": "Celeiro", "category": "envasado", "brand": "Krones", "model": "VarioClean", "specs": "Envasadora aséptica 18.000 b/h", "quantity": 1, "status": "operativo", "estimatedValueEur": 1200000 },
+    { "plantName": "Salamanca", "category": "edificio", "brand": null, "model": null, "specs": "Nave logística 4.500 m²", "quantity": 1, "status": "vendido", "releaseWindow": "Q4 2023", "estimatedValueEur": 1900000 }
+  ],
+  "contacts": [
+    { "plantName": "Chapela", "fullName": "Manuel Pérez Hermida", "role": "Director de Planta", "roleCategory": "plant_manager", "linkedinUrl": "https://www.linkedin.com/in/pescanova-ejemplo", "email": "manuel.perez@pescanova.com", "emailVerified": true, "sourceOutlet": "LinkedIn", "confidence": 0.9 },
+    { "plantName": "Chapela", "fullName": "Ana Rodríguez Vázquez", "role": "Directora de Sostenibilidad", "roleCategory": "sustainability", "linkedinUrl": "https://www.linkedin.com/in/pescanova-ejemplo2", "email": "ana.rodriguez@pescanova.com", "emailVerified": true, "sourceOutlet": "LinkedIn", "confidence": 0.85 },
+    { "plantName": "Vigo", "fullName": "Luis Balsa Comesaña", "role": "Director Operaciones Grupo", "roleCategory": "coo", "linkedinUrl": "https://www.linkedin.com/in/pescanova-coo", "email": "luis.balsa@pescanova.com", "emailVerified": true, "sourceOutlet": "El País", "confidence": 0.9 },
+    { "plantName": "Porriño", "fullName": "Roberto Comesaña Pereira", "role": "Director de Logística", "roleCategory": "other", "linkedinUrl": "https://www.linkedin.com/in/pescanova-logistica", "email": "r.comesana@pescanova.com", "emailVerified": false, "sourceOutlet": "Hunter.io", "confidence": 0.7 },
+    { "plantName": "Porriño", "fullName": "Eva González", "role": "Responsable ERE", "roleCategory": "ere_responsible", "linkedinUrl": "https://www.linkedin.com/in/pescanova-ere", "email": "e.gonzalez@pescanova.com", "emailVerified": true, "sourceOutlet": "El Periódico", "confidence": 0.8 },
+    { "plantName": "Celeiro", "fullName": "Jorge Castiñeira", "role": "Plant Manager Celeiro", "roleCategory": "plant_manager", "linkedinUrl": "https://www.linkedin.com/in/pescanova-celeiro", "email": "j.castineira@pescanova.com", "emailVerified": true, "sourceOutlet": "LinkedIn", "confidence": 0.9 },
+    { "plantName": "Celeiro", "fullName": "María Loureiro", "role": "Directora de Mantenimiento", "roleCategory": "maintenance", "linkedinUrl": "https://www.linkedin.com/in/pescanova-mto", "email": "m.loureiro@pescanova.com", "emailVerified": true, "sourceOutlet": "LinkedIn", "confidence": 0.8 },
+    { "plantName": "Salamanca", "fullName": "Pedro Holguera", "role": "CFO Nueva Pescanova", "roleCategory": "cfo", "linkedinUrl": "https://www.linkedin.com/in/pescanova-cfo", "email": "cfo@pescanova.com", "emailVerified": true, "sourceOutlet": "LinkedIn", "confidence": 0.95 },
+    { "plantName": "Salamanca", "fullName": "Santiago Pérez", "role": "Director de Procurement", "roleCategory": "procurement", "linkedinUrl": "https://www.linkedin.com/in/pescanova-procurement", "email": "s.perez@pescanova.com", "emailVerified": false, "sourceOutlet": "El País", "confidence": 0.7 },
+    { "plantName": "Vigo", "fullName": "Elena Vilar", "role": "CEO Grupo Nueva Pescanova", "roleCategory": "ceo", "linkedinUrl": "https://www.linkedin.com/in/pescanova-ceo", "email": "ceo@pescanova.com", "emailVerified": true, "sourceOutlet": "LinkedIn", "confidence": 0.95 }
+  ],
+  "operations": [
+    { "type": "plant_closure", "title": "Cierre progresivo planta Vigo", "description": "Cierre de la planta histórica de Vigo en dos fases: parada de líneas Q2 2026, desmantelamiento Q3-Q4 2026. 220 empleos afectados con ERE acordado.", "amountMeur": 45.0, "jobsAffected": 220, "announcedAt": "2025-11-12", "status": "in_execution", "sourceUrl": "https://elpais.es/economia/pescanova-vigo-cierre", "sourceOutlet": "El País" },
+    { "type": "investment", "title": "Inversión 28M€ almacén Porriño", "description": "Nuevo centro logístico automatizado con tecnología Dematic Multishuttle, 12.000 palets. 80 nuevos puestos.", "amountMeur": 28.0, "jobsAffected": 80, "announcedAt": "2026-01-15", "status": "in_execution", "sourceUrl": "https://lavozdegalicia.es/pescanova-porrino", "sourceOutlet": "La Voz de Galicia" },
+    { "type": "ERE", "title": "ERE 220 trabajadores Vigo", "description": "Expediente de regulación de empleo acordado con sindicatos para la planta de Vigo, indemnización 35 días por año.", "jobsAffected": 220, "announcedAt": "2025-10-22", "status": "executed", "sourceUrl": "https://cig.gal/pescanova-ere", "sourceOutlet": "CIG" },
+    { "type": "biomass_plant", "title": "Planta biomasa Marín", "description": "Proyecto de planta de biomasa para autoconsumo en factoría de Marín, inversión 18M€, 50 empleos directos.", "amountMeur": 18.0, "jobsAffected": 50, "announcedAt": "2025-09-08", "status": "announced", "sourceUrl": "https://xunta.gal/biomasa-marin", "sourceOutlet": "Xunta de Galicia" },
+    { "type": "subasta", "title": "Subasta activos Vigo", "description": "Subasta de los activos de la planta de Vigo (líneas Baader, calderas Saacke) a través de Surplex.", "amountMeur": 1.2, "announcedAt": "2026-02-10", "status": "in_negotiation", "sourceUrl": "https://surplex.com/pescanova-vigo", "sourceOutlet": "Surplex" }
+  ],
+  "events": [
+    { "plantName": "Vigo", "date": "2025-10-22", "title": "Comunicado ERE a plantilla", "description": "La dirección comunica formalmente el ERE que afecta a 220 trabajadores." },
+    { "plantName": "Vigo", "date": "2025-11-12", "title": "Anuncio público cierre planta", "description": "Pescanova anuncia en rueda de prensa el cierre progresivo de la planta de Vigo.", "sourceUrl": "https://elpais.es/pescanova-vigo-anuncio", "sourceOutlet": "El País" },
+    { "plantName": "Vigo", "date": "2026-02-10", "title": "Inicio subasta activos con Surplex", "description": "Surplex confirma el inicio del proceso de subasta de los activos de Vigo." },
+    { "plantName": "Porriño", "date": "2026-01-15", "title": "Inauguración obras almacén automatizado", "description": "Comienzan las obras del nuevo centro logístico de Porriño." },
+    { "plantName": "Marín", "date": "2025-09-08", "title": "Aprobación proyecto biomasa", "description": "La Xunta aprueba el proyecto de biomasa en la factoría de Marín." },
+    { "plantName": "Celeiro", "date": "2025-12-01", "title": "Inversión en línea Krones", "description": "Nueva línea de envasado aséptico Krones VarioClean operativa." },
+    { "plantName": "Salamanca", "date": "2023-11-30", "title": "Cierre definitivo antena Salamanca", "description": "Cierre de la antena logística de Salamanca y venta del inmueble." },
+    { "plantName": "Chapela", "date": "2026-03-15", "title": "Auditoría MOCR EINF 2024", "description": "Auditoría del EINF 2024 con grado B de MOCR." }
+  ],
+  "financials": [
+    { "year": 2020, "concept": "ERTE COVID-19 plantilla", "amountMeur": -8.0, "category": "divestment" },
+    { "year": 2021, "concept": "Ampliación de capital", "amountMeur": 65.0, "category": "capital_increase" },
+    { "year": 2021, "concept": "Modernización Chapela", "amountMeur": 12.0, "category": "investment" },
+    { "year": 2022, "concept": "Planta biomasa Marín (fase 1)", "amountMeur": 18.0, "category": "investment" },
+    { "year": 2022, "concept": "Reestructuración deuda", "amountMeur": -22.0, "category": "debt_restructuring" },
+    { "year": 2023, "concept": "Venta antena Salamanca", "amountMeur": 1.9, "category": "divestment" },
+    { "year": 2023, "concept": "Modernización Celeiro", "amountMeur": 8.5, "category": "investment" },
+    { "year": 2024, "concept": "Ingresos ejercicio", "amountMeur": 1100.0, "category": "revenue" },
+    { "year": 2024, "concept": "EBITDA ejercicio", "amountMeur": 95.0, "category": "ebitda" },
+    { "year": 2025, "concept": "Almacén automatizado Porriño", "amountMeur": 28.0, "category": "investment" }
+  ],
+  "auctionChecks": [
+    { "platform": "Surplex", "result": "activos_detectados", "details": "Subasta activa: líneas Baader, calderas Saacke, túnel congelación.", "checkedAt": "2026-03-15" },
+    { "platform": "Escrapalia", "result": "sin_activos", "details": "Sin activos actuales de Pescanova. Historial 2018: venta 2 calderas.", "checkedAt": "2026-03-12" },
+    { "platform": "Troostwijk", "result": "activos_detectados", "details": "Lote programado Q3 2026: equipos auxiliares planta Vigo.", "checkedAt": "2026-03-10" },
+    { "platform": "GUTINVEST", "result": "sin_activos", "details": "Sin activos.", "checkedAt": "2026-03-08" },
+    { "platform": "HGP", "result": "historial", "details": "Histórico: Pescanova Chapela lote 2019.", "checkedAt": "2026-03-05" }
+  ],
+  "documents": [
+    { "kind": "balance_sheet", "fileName": "EINF-NuevaPescanova-2024.pdf", "fileSize": 1840500, "externalUrl": "https://pescanova.com/sites/default/files/einf-2024.pdf", "ocrProvider": "docling", "ocrConfidence": 0.92, "grade": "B" },
+    { "kind": "press_release", "fileName": "NP-Cierre-Vigo-2025-11-12.pdf", "fileSize": 240800, "externalUrl": "https://pescanova.com/sala-prensa/comunicado-cierre-vigo.pdf", "ocrProvider": "gemini", "ocrConfidence": 0.96, "grade": "A" },
+    { "kind": "pdf", "fileName": "ERE-Vigo-2025-10-22.pdf", "fileSize": 580300, "externalUrl": "https://cig.gal/sites/default/files/ere-pescanova-vigo.pdf", "ocrProvider": "docling", "ocrConfidence": 0.88, "grade": "B" }
+  ]
+}

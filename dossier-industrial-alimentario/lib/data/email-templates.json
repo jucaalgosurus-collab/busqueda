@@ -1,0 +1,58 @@
+[
+  {
+    "id": "QW-5-AB-CFO-01",
+    "sector": "Alimentos y Bebidas",
+    "cargo": "CFO / Director Financiero",
+    "subject": "{{empresa}} — optimización de activos en {{ciudad}}",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Trabajamos con empresas de alimentación y bebidas en España ayudándolas a gestionar el ciclo de vida de sus activos industriales: desde la valoración técnica in situ y el reacondicionamiento hasta la venta especializada y el reciclaje responsable, pasando por la desimplantación completa de plantas cuando se cierra o se reubica una línea de producción.\n\nVi que en {{empresa}} están reorganizando operaciones en {{ciudad}}. Si esto incluye movimientos de maquinaria, líneas completas o plantas, suele haber un problema de balance: activos que ya no se amortizan pero siguen ocupando espacio y capital.\n\n¿Tiene sentido que hablemos 15 minutos esta semana? Sin compromiso.\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  },
+  {
+    "id": "QW-5-AB-PLANT-01",
+    "sector": "Alimentos y Bebidas",
+    "cargo": "Director de Planta",
+    "subject": "Planta de {{ciudad}} — apoyo en desimplantación",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Ayudamos a empresas de alimentación y bebidas en España con la desimplantación técnica de líneas y plantas: clasificación de equipos con valor residual, retirada EHS-compliant, transporte especializado y destino final con trazabilidad.\n\nSi en la planta de {{ciudad}} hay equipos que se van a retirar o reubicar, me imagino que la prioridad es hacerlo sin afectar al resto de la producción y con un reporte claro de qué se ha movido, a dónde, y con qué valor.\n\n¿Le encaja una llamada de 15 minutos para ver si podemos echar una mano?\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  },
+  {
+    "id": "QW-5-IND-CFO-01",
+    "sector": "Industrial",
+    "cargo": "CFO / Director Financiero",
+    "subject": "{{empresa}} — activos industriales en {{ciudad}}",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Trabajamos con empresas industriales en España en la gestión del ciclo de vida de sus activos: valoración técnica, reacondicionamiento, venta especializada y reciclaje responsable, incluyendo la desimplantación completa de plantas.\n\nCuando una planta como la de {{ciudad}} reduce capacidad o se reorganiza, los activos que quedan suelen tener tres destinos: reúso interno, venta a terceros o reciclaje. Cada uno con su impacto en balance y enESG.\n\n¿Le parece bien una llamada breve esta semana para revisar el caso de {{empresa}}?\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  },
+  {
+    "id": "QW-5-IND-PLANT-01",
+    "sector": "Industrial",
+    "cargo": "Director de Planta",
+    "subject": "Apoyo técnico en {{ciudad}}",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Damos soporte técnico a plantas industriales en España para desimplantaciones y reubicaciones: inventariado in situ, clasificación A/B/C/D, desmontaje EHS-compliant y trazabilidad de materiales hasta destino final.\n\nSi en la planta de {{ciudad}} tienen previsto retirar equipos o líneas en las próximas semanas, solemos poder empezar con una visita técnica de 2-3 horas y un informe valorativo sin coste.\n\n¿Hablamos 15 minutos para cuadrar?\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  },
+  {
+    "id": "QW-5-PHARM-CFO-01",
+    "sector": "Farmacéutico",
+    "cargo": "CFO / Director Financiero",
+    "subject": "Cierre ordenado de la planta de {{ciudad}}",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Trabajamos con empresas farmacéuticas en España ayudándolas a cerrar plantas de forma ordenada: inventariado, valoración, desinstalación GMP-aware y trazabilidad de materiales hasta destino regulado.\n\nEn plantas como la de {{ciudad}}, cuando llega el momento del cierre o reubicación, el reto suele ser triple: regulatorio (GMP, validaciones, residuos), balance (activos dados de baja) y ESG (huella evitada, materiales recuperados).\n\n¿Le parece útil una llamada de 15 minutos para revisar el caso?\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  },
+  {
+    "id": "QW-5-PHARM-PLANT-01",
+    "sector": "Farmacéutico",
+    "cargo": "Director de Planta",
+    "subject": "Desinstalación GMP-aware en {{ciudad}}",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Damos soporte a plantas farmacéuticas en España para desinstalaciones de líneas y equipos: documentación GMP, descontaminación cuando aplica, retirada con cadena de custodia y destino regulado para materiales clasificados.\n\nSi en la planta de {{ciudad}} hay líneas o equipos a retirar en los próximos meses, solemos poder empezar con un inventario técnico en sitio y un plan de retirada compatible con su calendario regulatorio.\n\n¿Le encaja una llamada breve esta semana?\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  },
+  {
+    "id": "QW-5-CONST-CFO-01",
+    "sector": "Construcción",
+    "cargo": "CFO / Director Financiero",
+    "subject": "{{empresa}} — activos de obra en {{ciudad}}",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Trabajamos con empresas constructoras en España en la gestión del ciclo de vida de sus activos: maquinaria de obra, plantas de hormigón, asfaltadoras, grúas. Valoración, venta especializada y desimplantación cuando se cierra o reubica un parque.\n\nEn el caso de {{empresa}} en {{ciudad}}, si están reorganizando el parque de maquinaria, solemos poder recuperar valor residual significativo y reducir coste de retirada.\n\n¿Le parece bien una llamada de 15 minutos esta semana?\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  },
+  {
+    "id": "QW-5-CONST-PLANT-01",
+    "sector": "Construcción",
+    "cargo": "Director de Planta",
+    "subject": "Parque de maquinaria en {{ciudad}}",
+    "body": "Soy Juan Carlos Alvarado, de Surus Inversa. Ayudamos a empresas de construcción en España con la desimplantación y venta de maquinaria de obra: inventariado, valoración técnica in situ, desmontaje y destino final con trazabilidad.\n\nSi en {{ciudad}} hay maquinaria que se va a retirar, vender o reubicar, solemos poder empezar con una visita técnica de 2-3 horas y un informe valorativo sin coste.\n\n¿Hablamos 15 minutos para cuadrar?\n\nUn saludo,\nJuan Carlos Alvarado\nSurus Inversa"
+  }
+]

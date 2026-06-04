@@ -16,7 +16,7 @@ export interface BoeBopEntry {
 /** Scrapea un BOE/BOP/sindicato. Devuelve artículos sin tocar el filtro deimplantation. */
 export async function scrapeBoeBop(
   entry: BoeBopEntry,
-  opts: { maxArticles?: number; usePlaywright?: boolean } = {},
+  opts: { maxArticles?: number; usePlaywright?: boolean; stealth?: boolean; rate?: number; userAgent?: string; proxy?: string | null; limiterKey?: string } = {},
 ): Promise<ScrapedArticle[]> {
   const articles = await scrapeNewsroom(
     { slug: entry.slug, name: entry.name, newsroomUrl: entry.url, rssUrl: entry.rss },

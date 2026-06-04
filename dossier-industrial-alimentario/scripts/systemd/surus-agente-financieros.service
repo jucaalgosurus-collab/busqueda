@@ -1,0 +1,13 @@
+[Unit]
+Description=HERMES Agente Financieros (C.2) — Scrape Wikipedia para KPIs A&B
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/hermes-dossier/apps/dossier-industrial
+EnvironmentFile=/opt/hermes-dossier/.env
+ExecStart=/usr/bin/pnpm scan:financials
+StandardOutput=append:/opt/hermes-dossier/logs/financials.log
+StandardError=append:/opt/hermes-dossier/logs/financials.err

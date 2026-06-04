@@ -164,5 +164,5 @@ export function detectCcaa(input: {
 
 /** Formato para Prisma (snippet útil en runner) */
 export const ccaaFilterWhere = (ccaa: string): Prisma.SourceWhereInput => ({
-  region: { equals: ccaa, mode: 'insensitive' as Prisma.QueryMode },
+  company: { hqRegion: { equals: ccaa, mode: 'insensitive' as Prisma.QueryMode } },
 });

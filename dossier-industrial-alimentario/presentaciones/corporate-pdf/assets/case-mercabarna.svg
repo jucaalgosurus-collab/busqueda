@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky-me" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1820"/>
+      <stop offset="50%" stop-color="#2a2830"/>
+      <stop offset="100%" stop-color="#5a5050"/>
+    </linearGradient>
+    <linearGradient id="ground-me" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a30"/>
+      <stop offset="100%" stop-color="#0a0a10"/>
+    </linearGradient>
+    <linearGradient id="concrete-me" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a6a60"/>
+      <stop offset="50%" stop-color="#4a3a30"/>
+      <stop offset="100%" stop-color="#2a1a10"/>
+    </linearGradient>
+    <linearGradient id="metal-me" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="40%" stop-color="#8a8a8a"/>
+      <stop offset="60%" stop-color="#5a5a5a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow-me" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#c9a961" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#c9a961" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="noise-me">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="9"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#sky-me)"/>
+  <rect y="280" width="600" height="120" fill="url(#ground-me)"/>
+  <circle cx="300" cy="200" r="200" fill="url(#glow-me)"/>
+
+  <!-- Distant industrial silhouette -->
+  <g fill="#1a1a20" opacity="0.7">
+    <rect x="0" y="220" width="40" height="60"/>
+    <rect x="50" y="200" width="30" height="80"/>
+    <rect x="90" y="210" width="20" height="70"/>
+    <rect x="450" y="205" width="35" height="75"/>
+    <rect x="495" y="220" width="30" height="60"/>
+    <rect x="535" y="195" width="20" height="85"/>
+    <rect x="565" y="215" width="35" height="65"/>
+  </g>
+  <!-- Distant chimneys -->
+  <rect x="25" y="180" width="6" height="40" fill="#1a1a20" opacity="0.7"/>
+  <rect x="478" y="170" width="6" height="35" fill="#1a1a20" opacity="0.7"/>
+
+  <!-- Main matadero building (Mercabarna) -->
+  <g>
+    <!-- Front face -->
+    <path d="M60 280 L60 130 L260 130 L260 280 Z" fill="url(#concrete-me)"/>
+    <!-- Roof -->
+    <path d="M60 130 L160 80 L260 130 Z" fill="#2a2a30"/>
+    <path d="M60 130 L160 80 L260 130 L260 138 L160 88 L60 138 Z" fill="#0a0a0a" opacity="0.4"/>
+    <!-- Roof corrugation -->
+    <g stroke="#0a0a0a" stroke-width="0.5" opacity="0.6">
+      <line x1="80" y1="125" x2="100" y2="108"/>
+      <line x1="120" y1="115" x2="140" y2="98"/>
+      <line x1="160" y1="105" x2="180" y2="88"/>
+      <line x1="200" y1="115" x2="220" y2="98"/>
+      <line x1="240" y1="125" x2="260" y2="108"/>
+    </g>
+    <!-- Windows -->
+    <g fill="#0a0a0f" opacity="0.85">
+      <rect x="80" y="155" width="30" height="35"/>
+      <rect x="120" y="155" width="30" height="35"/>
+      <rect x="170" y="155" width="30" height="35"/>
+      <rect x="210" y="155" width="30" height="35"/>
+    </g>
+    <g fill="none" stroke="#3a3a3a" stroke-width="1.2">
+      <rect x="80" y="155" width="30" height="35"/>
+      <rect x="120" y="155" width="30" height="35"/>
+      <rect x="170" y="155" width="30" height="35"/>
+      <rect x="210" y="155" width="30" height="35"/>
+      <line x1="95" y1="155" x2="95" y2="190"/>
+      <line x1="135" y1="155" x2="135" y2="190"/>
+      <line x1="185" y1="155" x2="185" y2="190"/>
+      <line x1="225" y1="155" x2="225" y2="190"/>
+    </g>
+    <!-- Door / loading bay -->
+    <rect x="100" y="210" width="120" height="70" fill="#0a0808"/>
+    <line x1="115" y1="210" x2="115" y2="280" stroke="#3a3a3a" stroke-width="0.8"/>
+    <line x1="135" y1="210" x2="135" y2="280" stroke="#3a3a3a" stroke-width="0.8"/>
+    <line x1="155" y1="210" x2="155" y2="280" stroke="#3a3a3a" stroke-width="0.8"/>
+    <line x1="175" y1="210" x2="175" y2="280" stroke="#3a3a3a" stroke-width="0.8"/>
+    <line x1="195" y1="210" x2="195" y2="280" stroke="#3a3a3a" stroke-width="0.8"/>
+    <line x1="215" y1="210" x2="215" y2="280" stroke="#3a3a3a" stroke-width="0.8"/>
+  </g>
+
+  <!-- Silos (storage) -->
+  <g>
+    <ellipse cx="290" cy="160" rx="14" ry="4" fill="url(#metal-me)"/>
+    <path d="M276 160 L276 280 Q276 290 290 290 Q304 290 304 280 L304 160" fill="url(#metal-me)"/>
+    <ellipse cx="290" cy="160" rx="14" ry="4" fill="#5a5a5a"/>
+    <ellipse cx="290" cy="280" rx="14" ry="4" fill="#1a1a1a"/>
+    <line x1="290" y1="150" x2="290" y2="130" stroke="#3a3a3a" stroke-width="1"/>
+  </g>
+
+  <!-- Second silo -->
+  <g>
+    <ellipse cx="315" cy="170" rx="12" ry="3.5" fill="url(#metal-me)"/>
+    <path d="M303 170 L303 280 Q303 288 315 288 Q327 288 327 280 L327 170" fill="url(#metal-me)"/>
+    <ellipse cx="315" cy="170" rx="12" ry="3.5" fill="#5a5a5a"/>
+    <ellipse cx="315" cy="280" rx="12" ry="3.5" fill="#1a1a1a"/>
+  </g>
+
+  <!-- Loading dock + cold truck -->
+  <g transform="translate(330,250)">
+    <!-- Dock -->
+    <rect x="0" y="0" width="80" height="30" fill="#2a2a30"/>
+    <rect x="0" y="0" width="80" height="4" fill="#5a5a5a"/>
+    <!-- Truck -->
+    <rect x="40" y="-30" width="100" height="40" fill="#1a1a1a"/>
+    <rect x="40" y="-30" width="100" height="5" fill="#3a3a3a"/>
+    <rect x="125" y="-25" width="20" height="20" fill="#2a2a2a"/>
+    <rect x="128" y="-22" width="14" height="14" fill="#0a0a0a"/>
+    <!-- Cab window -->
+    <rect x="50" y="-25" width="20" height="20" fill="#1a3050" opacity="0.6"/>
+    <!-- Wheels -->
+    <circle cx="55" cy="10" r="5" fill="#1a1a1a"/>
+    <circle cx="55" cy="10" r="2" fill="#5a5a5a"/>
+    <circle cx="80" cy="10" r="5" fill="#1a1a1a"/>
+    <circle cx="80" cy="10" r="2" fill="#5a5a5a"/>
+    <circle cx="115" cy="10" r="5" fill="#1a1a1a"/>
+    <circle cx="115" cy="10" r="2" fill="#5a5a5a"/>
+    <circle cx="135" cy="10" r="5" fill="#1a1a1a"/>
+    <circle cx="135" cy="10" r="2" fill="#5a5a5a"/>
+    <!-- Snowflake on truck -->
+    <g transform="translate(95,-12)">
+      <line x1="-4" y1="0" x2="4" y2="0" stroke="#4ade80" stroke-width="0.8"/>
+      <line x1="0" y1="-4" x2="0" y2="4" stroke="#4ade80" stroke-width="0.8"/>
+      <line x1="-3" y1="-3" x2="3" y2="3" stroke="#4ade80" stroke-width="0.8"/>
+      <line x1="-3" y1="3" x2="3" y2="-3" stroke="#4ade80" stroke-width="0.8"/>
+    </g>
+  </g>
+
+  <!-- Foreground processing equipment (raíles) -->
+  <g transform="translate(80,260)">
+    <line x1="0" y1="10" x2="180" y2="10" stroke="#1a1a1a" stroke-width="3"/>
+    <line x1="0" y1="10" x2="180" y2="10" stroke="#5a5a5a" stroke-width="0.5"/>
+    <g fill="#3a3a3a">
+      <circle cx="20" cy="10" r="3"/>
+      <circle cx="50" cy="10" r="3"/>
+      <circle cx="80" cy="10" r="3"/>
+      <circle cx="110" cy="10" r="3"/>
+      <circle cx="140" cy="10" r="3"/>
+      <circle cx="170" cy="10" r="3"/>
+    </g>
+  </g>
+
+  <!-- Street lights -->
+  <g transform="translate(490,200)">
+    <line x1="0" y1="80" x2="0" y2="20" stroke="#3a3a3a" stroke-width="1.5"/>
+    <ellipse cx="0" cy="15" rx="8" ry="3" fill="#c9a961" opacity="0.6"/>
+    <ellipse cx="0" cy="15" rx="6" ry="2" fill="#f4e4b8"/>
+  </g>
+
+  <!-- Subtle dust/atmosphere -->
+  <ellipse cx="100" cy="290" rx="60" ry="3" fill="#fff" opacity="0.1"/>
+  <ellipse cx="450" cy="295" rx="80" ry="3" fill="#fff" opacity="0.08"/>
+
+  <rect width="600" height="400" filter="url(#noise-me)" opacity="0.45"/>
+
+  <radialGradient id="vig-me" cx="0.5" cy="0.5" r="0.7">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.7"/>
+  </radialGradient>
+  <rect width="600" height="400" fill="url(#vig-me)"/>
+
+  <rect x="20" y="340" width="380" height="50" fill="#0d0e12" opacity="0.9"/>
+  <rect x="20" y="340" width="3" height="50" fill="#c9a961"/>
+  <text x="38" y="362" font-family="Georgia, serif" font-size="20" font-weight="700" fill="#c9a961" letter-spacing="2">MERCABARNA</text>
+  <text x="38" y="380" font-family="Arial, sans-serif" font-size="9" fill="#a0aec0" letter-spacing="3">DESIMPLANTACIÓN MATADERO · CIUDAD ALIMENTARIA · BARCELONA</text>
+</svg>

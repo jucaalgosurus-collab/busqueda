@@ -5,9 +5,8 @@ import { Navbar } from '@/components/Navbar';
 export const dynamic = 'force-dynamic';
 
 export default async function EventosPage() {
-  const events = await prisma.event.findMany({
-    include: { company: true },
-    orderBy: { startsAt: 'asc' },
+  const events = await prisma.timelineEvent.findMany({
+    orderBy: { date: 'asc' },
   });
 
   return (
@@ -38,10 +37,10 @@ export default async function EventosPage() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <strong>{e.title}</strong>
-                    <span className="surus-pill surus-pill-info">{e.type}</span>
+                    <span className="surus-pill surus-pill-info">{e.operationId ? 'operación' : 'evento'}</span>
                   </div>
                   <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surus-text-soft)', marginTop: 'var(--space-1)' }}>
-                    {new Date(e.startsAt).toLocaleString('es-ES')} · {e.company?.name || '—'}
+                    {new Date(e.date).toLocaleString('es-ES')}
                   </div>
                 </li>
               ))}

@@ -3,6 +3,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import { INDUSTRIAS, labelDeIndustria } from '@/lib/industria';
 
 export function HallazgosFilters({
   ccaas,
@@ -10,7 +11,7 @@ export function HallazgosFilters({
   base,
 }: {
   ccaas: string[];
-  initial: { q?: string; ccaa?: string; signal?: string; stale?: string };
+  initial: { q?: string; ccaa?: string; signal?: string; stale?: string; industria?: string };
   base: string;
 }) {
   const router = useRouter();
@@ -34,7 +35,7 @@ export function HallazgosFilters({
       }}
       style={{
         display: 'grid',
-        gridTemplateColumns: '2fr 1fr 1fr 1fr auto',
+        gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr auto',
         gap: 'var(--space-2)',
         marginBottom: 'var(--space-4)',
         alignItems: 'end',
@@ -150,6 +151,37 @@ export function HallazgosFilters({
           <option value="">— Todos —</option>
           <option value="0">Fresh</option>
           <option value="1">Stale</option>
+        </select>
+      </div>
+
+      <div>
+        <label
+          style={{
+            display: 'block',
+            fontSize: 'var(--text-xs)',
+            color: 'var(--surus-text-soft)',
+            marginBottom: 4,
+          }}
+        >
+          Industria
+        </label>
+        <select
+          value={initial.industria ?? ''}
+          onChange={(e) => apply({ industria: e.target.value })}
+          style={{
+            width: '100%',
+            padding: 'var(--space-2)',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--surus-border)',
+            fontSize: 'var(--text-sm)',
+          }}
+        >
+          <option value="">— Todas —</option>
+          {INDUSTRIAS.map((i) => (
+            <option key={i.sector} value={i.sector}>
+              {i.label}
+            </option>
+          ))}
         </select>
       </div>
 

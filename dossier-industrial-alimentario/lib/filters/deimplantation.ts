@@ -29,7 +29,7 @@ export interface DeimplantationResult {
   /** keywords (normalizadas) que dispararon el positive filter, sin duplicados */
   signals: string[];
   /** motivo de rechazo si aplica */
-  outOfScopeReason: 'not_deimplantation' | 'subasta' | 'concurso' | null;
+  outOfScopeReason: 'not_deimplantation' | 'subasta' | 'concurso' | 'm_and_a' | 'auction_or_ettbewerb' | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -320,6 +320,99 @@ export function isDeimplantation(text: string): DeimplantationResult {
     score,
     signals: positiveHits.map((h) => h.label),
     outOfScopeReason: score >= IN_SCOPE_THRESHOLD ? null : 'not_deimplantation',
+  };
+}
+
+// ===========================================================================
+// B.1 BORME — Filtro específico para actos societarios del BORME
+// ===========================================================================
+
+/** Resultado del filtro BORME: extiende el deimplantation base con outOfScopeReason
+ *  extendido y signalStrength (weak/medium/strong) para el dashboard. */
+export interface BormeFilterResult extends DeimplantationResult {
+  signalStrength: 'weak' | 'medium' | 'strong';
+}
+
+const BORME_MA_PATTERNS: ReadonlyArray<{ pattern: RegExp; label: string }> = [
+  { pattern: /\bfusi[oó]n\b/, label: 'fusion' },
+  { pattern: /\badquisici[oó]n\b/, label: 'adquisicion' },
+  { pattern: /\babsorci[oó]n\b/, label: 'absorcion' },
+  { pattern: /escisi[oó]n total/i, label: 'escision_total' },
+];
+
+const BORME_AUCTION_PATTERNS: ReadonlyArray<{ pattern: RegExp; label: string }> = [
+  { pattern: /subasta/i, label: 'subasta' },
+  { pattern: /liquidaci[oó]n concursal/i, label: 'liquidacion_concursal' },
+  { pattern: /concurso de acreedores/i, label: 'concurso' },
+];
+
+/**
+ * Filtro BORME — corre sobre el `text` de un RawBormeItem y devuelve:
+ *  - inScope: true solo si es señal amarilla de desimplantación (≥1 keyword match
+ *    O score>0.5 vía isDeimplantation) Y NO es M&A puro Y NO es subasta/concurso.
+ *  - signalStrength: weak/medium/strong para colorear el badge en /hallazgos.
+ *
+ * Reglas (verbatim B.1 contract):
+ *  - B.1-C: ≥1 keyword match OR score > 0.5
+ *  - B.1-D: anti-M&A: keywords "fusion|adquisicion|absorcion" → signal=false,
+ *           outOfScopeReason='m_and_a'
+ *  - B.1-E: anti-subasta/concurso: keywords "subasta|concurso|liquidacion concursal"
+ *           → signal=false, outOfScopeReason='auction_or_ettbewerb'
+ *  - B.1-H: 0 falsos positivos M&A/subasta marcados como signal=true
+ */
+export function applyBormeFilter(text: string): BormeFilterResult {
+  // Edge case: texto vacío / corto.
+  if (typeof text !== 'string' || text.length < MIN_TEXT_LENGTH) {
+    return {
+      inScope: false,
+      score: 0,
+      signals: [],
+      outOfScopeReason: 'not_deimplantation',
+      signalStrength: 'weak',
+    };
+  }
+
+  const normalized = normalize(text);
+
+  // 1) Anti-M&A primero (más fuerte que el anti-M&A del filtro genérico porque en
+  //    BORME un acto de fusión/adquisición raramente va combinado con desimplantación).
+  const maHit = firstMatch(BORME_MA_PATTERNS, normalized);
+  if (maHit) {
+    return {
+      inScope: false,
+      score: 0,
+      signals: [maHit],
+      outOfScopeReason: 'm_and_a',
+      signalStrength: 'weak',
+    };
+  }
+
+  // 2) Anti-subasta/concurso (BORME a veces publica "salida a subasta" de activos).
+  const auctionHit = firstMatch(BORME_AUCTION_PATTERNS, normalized);
+  if (auctionHit) {
+    return {
+      inScope: false,
+      score: 0,
+      signals: [auctionHit],
+      outOfScopeReason: 'auction_or_ettbewerb',
+      signalStrength: 'weak',
+    };
+  }
+
+  // 3) Reutiliza el filtro genérico (que ya tiene concurso/subasta, lo dejamos
+  //    como segunda línea de defensa).
+  const base = isDeimplantation(text);
+  if (!base.inScope) {
+    return { ...base, signalStrength: 'weak' };
+  }
+
+  // 4) Mapea strength según el score: ≥0.85 strong, ≥0.5 medium, resto weak.
+  const signalStrength: 'weak' | 'medium' | 'strong' =
+    base.score >= 0.85 ? 'strong' : base.score >= 0.5 ? 'medium' : 'weak';
+
+  return {
+    ...base,
+    signalStrength,
   };
 }
 

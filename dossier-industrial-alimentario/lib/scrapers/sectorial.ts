@@ -10,13 +10,13 @@
 // orchestrator that maps a `SectorialListEntry` to the shared `SharedEntry`
 // shape and picks the right outlet type.
 
-import { __internal } from './newsroom.js';
+import { __internal } from './newsroom';
 import {
   DEFAULT_MAX_ARTICLES,
   type ScrapedArticle,
   type ScrapeOptions,
   type SectorialListEntry,
-} from './types.js';
+} from './types';
 
 /**
  * Scrape a sector press outlet (Alimarket, Aral, etc.).
@@ -33,7 +33,7 @@ export async function scrapeSectorial(
   const maxArticles = opts?.maxArticles ?? DEFAULT_MAX_ARTICLES;
   const usePlaywright = opts?.usePlaywright ?? true;
   const fetchMsStart = Date.now();
-  const http = __internal.makeHttp();
+  const http = __internal.makeHttp({ stealth: opts?.stealth, userAgent: opts?.userAgent, proxy: opts?.proxy });
   const shared = __internal.toSharedEntry({
     slug: entry.slug,
     name: entry.name,
@@ -47,6 +47,7 @@ export async function scrapeSectorial(
       maxArticles,
       fetchMsStart,
       'sector',
+      opts,
     );
     if (rssArticles.length > 0) return rssArticles;
   }
@@ -58,6 +59,7 @@ export async function scrapeSectorial(
     fetchMsStart,
     usePlaywright,
     'sector',
+    opts,
   );
 }
 
