@@ -8,6 +8,7 @@ import sectorialList from '@/lib/data/sectorial-list.json' with { type: 'json' }
 import { scrapeNewsroom } from '@/lib/scrapers/newsroom';
 import { scrapeSectorial as _scrapeSectorial } from '@/lib/scrapers/sectorial';
 import { isDeimplantation } from '@/lib/filters/deimplantation';
+import { extractNameCandidates, processAgentMention } from '@/lib/scrapers/company-matcher';
 import type { NewsroomListEntry, SectorialListEntry, ScrapedArticle } from '@/lib/scrapers/types';
 
 const prisma = new PrismaClient();
@@ -59,6 +60,46 @@ async function persistArticle(article: ScrapedArticle, defaultCompanySlug?: stri
   return { source, inScope, outReason, signals: filter.signals };
 }
 
+/**
+ * E.14.1 — Auto-amplía la lista de Company desde el contenido del artículo.
+ * Si el `defaultCompanySlug` ya cubre la noticia, el matcher se salta (no
+ * duplica). Si NO, intenta matchear candidatos extraídos contra Company
+ * existente (link) o crea uno nuevo como tier='B' (auto-amplify).
+ */
+async function amplifyCompaniesFromArticle(
+  article: ScrapedArticle,
+  defaultCompanySlug: string | undefined,
+  agentName: string,
+): Promise<{ newCompanyId: string | null; amplified: boolean }> {
+  try {
+    const text = `${article.title}\n${article.content}`;
+    const candidates = extractNameCandidates(text);
+    if (candidates.length === 0) return { newCompanyId: null, amplified: false };
+
+    let firstNew: string | null = null;
+    let amplified = false;
+    // Cap por artículo para evitar storms (regex puede dar muchos falsos positivos)
+    for (const cand of candidates.slice(0, 3)) {
+      const norm = cand.toLowerCase().trim();
+      // Si el candidato ES el defaultCompanySlug, saltar
+      if (defaultCompanySlug && norm === defaultCompanySlug.toLowerCase()) continue;
+      const r = await processAgentMention(prisma, cand, agentName);
+      if (r.action === 'created') {
+        amplified = true;
+        if (!firstNew) firstNew = r.companyId;
+        console.log(`[${agentName}] auto-amplify: "${cand}" → ${r.suggestedSlug}`);
+      } else if (r.action === 'linked') {
+        // Si el Source no tiene companyId, vincular al primer match
+        if (!firstNew) firstNew = r.companyId;
+      }
+    }
+    return { newCompanyId: firstNew, amplified };
+  } catch (e) {
+    console.warn(`[${agentName}] amplify failed: ${(e as Error).message}`);
+    return { newCompanyId: null, amplified: false };
+  }
+}
+
 export async function runNewsroomsAgent(opts: { maxPerSource?: number; onlySlugs?: string[] } = {}): Promise<AgentResult> {
   const startedAt = new Date();
   const maxPer = opts.maxPerSource ?? 12;
@@ -103,6 +144,9 @@ export async function runNewsroomsAgent(opts: { maxPerSource?: number; onlySlugs
             data: { companyId },
           });
         }
+        // E.14.1 — auto-amplify desde el contenido (en newsrooms es no-op porque
+        // la empresa ya está en cache, pero dejamos la llamada por uniformidad)
+        await amplifyCompaniesFromArticle(art, entry.slug, 'newsrooms-corporativas');
         upserted++;
       } catch (e) {
         errors++;
@@ -155,8 +199,18 @@ export async function runSectorialAgent(opts: { maxPerSource?: number; onlySlugs
 
     for (const art of articles) {
       try {
-        const { inScope: ok } = await persistArticle(art);
+        const { source, inScope: ok } = await persistArticle(art);
         if (ok) inScope++; else outOfScope++;
+        // E.14.1 — sectorial: este es el caso real de auto-amplify.
+        // Si la noticia menciona una empresa no conocida, la creamos como tier='B'.
+        const { newCompanyId } = await amplifyCompaniesFromArticle(art, undefined, 'prensa-sectorial');
+        if (newCompanyId) {
+          // Si el Source no tiene companyId, vincular al primer match/create
+          const cur = await prisma.source.findUnique({ where: { id: source.id }, select: { companyId: true } });
+          if (!cur?.companyId) {
+            await prisma.source.update({ where: { id: source.id }, data: { companyId: newCompanyId } });
+          }
+        }
         upserted++;
       } catch (e) {
         errors++;

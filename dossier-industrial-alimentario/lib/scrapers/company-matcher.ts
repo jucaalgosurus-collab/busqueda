@@ -302,3 +302,75 @@ export async function persistMention(
       return { action: 'pending', companyId: null, suggestedSlug: decision.suggestedSlug };
   }
 }
+
+// ---------------------------------------------------------------------------
+// Auto-ampliación desde agentes (Sprint E.14.1)
+// ---------------------------------------------------------------------------
+
+export interface AmplifyResult {
+  action: 'linked' | 'created' | 'skipped_pyme' | 'already_known' | 'invalid_name';
+  companyId: string | null;
+  suggestedSlug: string | null;
+}
+
+/**
+ * Procesa una mención detectada por un agente en un artículo scrapeado.
+ * Reglas (mandato 2026-06-04):
+ *   - Si la Company existe (match normalizado): la enlaza.
+ *   - Si NO existe: la crea como tier='B', sector=defaultSector, status='active',
+ *     subsector='Por clasificar'. La nueva empresa NO entra al pipeline de
+ *     contactos hasta que el usuario pulse "Buscar responsables" (Regla 1).
+ *
+ * NO clasifica por tamaño: el mandato dice "tier='B'" directo, sin gate
+ * de facturación/empleados. El gate de tamaño es para auto-ampliación desde
+ * contactos, no desde señal.
+ */
+export async function processAgentMention(
+  prisma: PrismaClient,
+  rawName: string,
+  agentName: string,
+  defaultSector = 'Alimentos y Bebidas',
+): Promise<AmplifyResult> {
+  const cleaned = rawName.replace(/\s+/g, ' ').trim();
+  if (cleaned.length < 3) {
+    return { action: 'invalid_name', companyId: null, suggestedSlug: null };
+  }
+
+  // 1) Match exacto normalizado con Company existente
+  const all = await prisma.company.findMany({
+    where: { status: 'active' },
+    select: { id: true, slug: true, name: true },
+    take: 5000,
+  });
+  const existing = matchExistingCompany(cleaned, all);
+  if (existing) {
+    return { action: 'linked', companyId: existing.id, suggestedSlug: existing.slug };
+  }
+
+  // 2) Auto-crear como tier='B'
+  const slug = slugify(cleaned);
+  if (!slug) {
+    return { action: 'invalid_name', companyId: null, suggestedSlug: null };
+  }
+  const existingBySlug = await prisma.company.findUnique({
+    where: { slug },
+    select: { id: true, slug: true },
+  });
+  if (existingBySlug) {
+    return { action: 'already_known', companyId: existingBySlug.id, suggestedSlug: existingBySlug.slug };
+  }
+  const created = await prisma.company.create({
+    data: {
+      slug,
+      name: cleaned,
+      sector: defaultSector,
+      subsector: 'Por clasificar',
+      tier: 'B',
+      priority: 0,
+      status: 'active',
+    },
+    select: { id: true, slug: true },
+  });
+  console.log(`[company-matcher:auto-amplify] nuevo Company por ${agentName}: ${created.slug} (${created.id})`);
+  return { action: 'created', companyId: created.id, suggestedSlug: created.slug };
+}

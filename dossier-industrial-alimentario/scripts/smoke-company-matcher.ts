@@ -8,6 +8,7 @@
 //   5. matchExistingCompany: match exacto normalizado
 //   6. classifyMention: link_existing / create_new / skip_pyme / pending_review
 //   7. Constants: LARGE_MIN_FACTURACION_M=50, LARGE_MIN_EMPLEADOS=250, LARGE_TIERS=['A','B']
+//   8. processAgentMention: con mock Prisma (sin tocar DB real)
 //
 // Uso: npx tsx scripts/smoke-company-matcher.ts
 
@@ -18,6 +19,7 @@ import {
   extractNameCandidates,
   matchExistingCompany,
   classifyMention,
+  processAgentMention,
   LARGE_MIN_FACTURACION_M,
   LARGE_MIN_EMPLEADOS,
   LARGE_TIERS,
@@ -167,6 +169,92 @@ eq(slugify('Mahou-San Miguel, S.A.'), 'mahou-san-miguel', 'slugify: Mahou-San Mi
   });
   eq(a5.kind, 'skip_pyme', 'classify: 2M€+20empl sin match → skip_pyme');
   if (a5.kind === 'skip_pyme') eq(a5.reason, 'facturacion_lt_50M', 'classify: → facturacion_lt_50M');
+}
+
+// 8. processAgentMention — auto-amplify (con PrismaClient mockeado)
+{
+  // Mock Prisma: solo necesita findMany, findUnique, create
+  const makeMock = (companies: { id: string; slug: string; name: string }[]) => {
+    const bySlug = new Map(companies.map((c) => [c.slug, c]));
+    return {
+      company: {
+        findMany: async () => companies,
+        findUnique: async ({ where }: { where: { slug: string } }) => bySlug.get(where.slug) ?? null,
+        create: async ({ data }: { data: { slug: string; name: string; sector: string } }) => {
+          const id = `new-${data.slug}`;
+          const c = { id, slug: data.slug, name: data.name };
+          bySlug.set(data.slug, c);
+          return c;
+        },
+      },
+    } as never;
+  };
+
+  // 8a) match con existente → linked
+  {
+    const mock = makeMock([{ id: 'c1', slug: 'pascual', name: 'PASCUAL' }]);
+    const r = await processAgentMention(mock, 'PASCUAL', 'prensa-sectorial');
+    eq(r.action, 'linked', 'amplify: PASCUAL matchea existente → linked');
+    eq(r.companyId, 'c1', 'amplify: → c1');
+  }
+
+  // 8b) match con existente en forma normalizada (sufijo legal)
+  {
+    const mock = makeMock([{ id: 'c1', slug: 'pascual', name: 'Pascual, S.A.U.' }]);
+    const r = await processAgentMention(mock, 'PASCUAL, S.A.U.', 'prensa-sectorial');
+    eq(r.action, 'linked', 'amplify: PASCUAL, S.A.U. matchea Pascual, S.A.U. → linked');
+  }
+
+  // 8c) NO existe → crea como tier='B'
+  // slugify('Nueva Compañía Grande S.A.') = 'nueva-grande' porque el
+  // LEGAL_SUFFIXES_RE incluye "compañia" y se elimina.
+  {
+    const mock = makeMock([]);
+    const r = await processAgentMention(mock, 'Nueva Compañía Grande S.A.', 'prensa-sectorial');
+    eq(r.action, 'created', 'amplify: nombre nuevo → created');
+    eq(r.suggestedSlug, 'nueva-grande', 'amplify: slug sugerido (sufijo "compañía" eliminado)');
+  }
+
+  // 8d) slug ya existe (otra Company, name distinto) → already_known (no
+  // match normalizado, pero slug colisiona). NO crea duplicado.
+  {
+    const mock = makeMock([{ id: 'c1', slug: 'foo', name: 'Otro Nombre' }]);
+    const r = await processAgentMention(mock, 'Foo', 'prensa-sectorial');
+    eq(r.action, 'already_known', 'amplify: match por slug → already_known (no duplicate)');
+    eq(r.companyId, 'c1', 'amplify: → c1 (por slug)');
+  }
+
+  // 8e) nombre vacío → invalid_name
+  {
+    const mock = makeMock([]);
+    const r = await processAgentMention(mock, '  ', 'prensa-sectorial');
+    eq(r.action, 'invalid_name', 'amplify: nombre vacío → invalid_name');
+  }
+
+  // 8f) caracteres que no producen slug → invalid_name
+  {
+    const mock = makeMock([]);
+    const r = await processAgentMention(mock, '###', 'prensa-sectorial');
+    eq(r.action, 'invalid_name', 'amplify: solo símbolos → invalid_name');
+  }
+
+  // 8g) defaultSector custom
+  {
+    let captured = '';
+    const mock = {
+      company: {
+        findMany: async () => [],
+        findUnique: async () => null,
+        create: async ({ data }: { data: { sector: string } }) => {
+          captured = data.sector;
+          return { id: 'x', slug: 'y', name: 'Y' };
+        },
+      },
+    } as never;
+    const r = await processAgentMention(mock, 'Industrial XYZ', 'prensa-sectorial', 'Industria Auxiliar');
+    eq(r.action, 'created', 'amplify: defaultSector custom → created');
+    eq(captured, 'Industria Auxiliar', 'amplify: sector custom se aplica');
+  }
 }
 
 console.log(`\n=== ${passed} PASS, ${failed} FAIL ===`);
