@@ -85,6 +85,12 @@ model Plant {
   parcelaM2     Float?
   naveM2        Float?
 
+  // E.10 — Lifecycle explícito de la sede. openedAt se rellena al crear
+  // manualmente o al confirmar detección; closedAt se rellena al cerrar
+  // o vender. Permiten queries tipo "sedes abiertas en 2024".
+  openedAt      DateTime?
+  closedAt      DateTime?
+
   closureYear   Int?
   investmentMEur Float?
   notes         String?
@@ -536,4 +542,56 @@ model EmailVerification {
 
   @@index([email])
   @@index([expiresAt])
+}
+
+// ============================================================================
+// 19. USER — Usuarios del panel admin (E.10)
+// jucaalgo es el admin por defecto. Los usuarios 'user' solo pueden cambiar
+// su contraseña; los 'admin' pueden CRUD usuarios + CRUD empresas + CRUD
+// sedes. Hash de password con scrypt (Node built-in, sin dependencias).
+// ============================================================================
+model User {
+  id            String   @id @default(cuid())
+  username      String   @unique
+  passwordHash  String
+  role          String   @default("user") // 'admin' | 'user'
+  displayName   String?
+  isActive      Boolean  @default(true)
+  mustChangePassword Boolean @default(false)
+
+  lastLoginAt   DateTime?
+  lastLoginIp   String?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  createdBy     String?  // username del admin que lo creó
+
+  sessions      SessionLog[]
+
+  @@index([role, isActive])
+}
+
+// ============================================================================
+// 20. SESSION_LOG — Audit de conexiones (E.10 dashboard "quién se conecta")
+// Cada login (vía /api/auth/login) registra un row con IP, UA, loginAt.
+// El logout (vía /api/auth/logout) actualiza logoutAt y durationSec.
+// Track de "tiempo conectado" + "desde qué IP" para el panel admin.
+// ============================================================================
+model SessionLog {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  username    String   // snapshot por si el user se borra después
+  loginAt     DateTime @default(now())
+  logoutAt    DateTime?
+  durationSec Int?
+
+  ip          String?  // X-Forwarded-For o remote_addr
+  userAgent   String?  // User-Agent
+  country     String?  // futuro: GeoIP
+
+  @@index([userId, loginAt])
+  @@index([username, loginAt])
+  @@index([ip])
 }

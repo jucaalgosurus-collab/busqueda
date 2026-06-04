@@ -64,7 +64,10 @@
     "notify:strong": "tsx lib/telegram/notify.ts",
     "test": "node --import tsx --test __tests__/**/*.test.ts",
     "test:hunter": "node --import tsx --test __tests__/hunter-runner.test.ts",
-    "backfill:email-verification": "tsx scripts/backfill-email-verification.ts"
+    "backfill:email-verification": "tsx scripts/backfill-email-verification.ts",
+    "smoke:e10": "tsx scripts/smoke-e10-admin.ts",
+    "smoke:e10:auth": "tsx scripts/smoke-e10-auth.ts",
+    "seed:admin": "tsx scripts/seed-admin.ts"
   },
   "dependencies": {
     "next": "15.5.7",
