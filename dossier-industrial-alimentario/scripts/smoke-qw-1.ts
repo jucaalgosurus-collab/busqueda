@@ -1,8 +1,8 @@
 // scripts/smoke-qw-1.ts — Sprint QW-1: Smoke del módulo Telegram alerts.
 //
-// 7 asserts:
+// 6 asserts (E.2 — quitamos borme-runner deprecado):
 //   QW-1-A  lib/telegram/notify.ts existe y exporta notifyStrong + buildStrongAlert
-//   QW-1-B  borme-runner.ts y auctions-runner.ts llaman a notifyStrong
+//   QW-1-B  auctions-runner.ts llama a notifyStrong  (borme-runner DEPRECATED E.2)
 //   QW-1-C  notify.ts respeta TELEGRAM_ALERTS_ENABLED=false (no spawnea)
 //   QW-1-D  Anti-spam por source+day: 5 llamadas mismo sourceId → solo 1 sent
 //   QW-1-E  Anti-spam global: 21 alertas distintas → solo 20 sent
@@ -47,13 +47,10 @@ async function main() {
   }
   assert('QW-1-A2 [bot_send.py existe]', existsSync(botSendPath), existsSync(botSendPath) ? 'ok' : 'falta');
 
-  // QW-1-B: runners llaman a notifyStrong.
-  const bormeRunner = readFileSync(join(process.cwd(), 'lib', 'agents', 'borme-runner.ts'), 'utf-8');
+  // QW-1-B: auctions-runner llama a notifyStrong. borme-runner DEPRECATED en E.2.
   const auctionsRunner = readFileSync(join(process.cwd(), 'lib', 'agents', 'auctions-runner.ts'), 'utf-8');
-  const bormeCalls = /notifyStrong\s*\(/.test(bormeRunner);
   const auctionsCalls = /notifyStrong\s*\(/.test(auctionsRunner);
-  assert('QW-1-B [borme-runner.ts llama a notifyStrong]', bormeCalls, bormeCalls ? 'import + call' : 'no call');
-  assert('QW-1-B2 [auctions-runner.ts llama a notifyStrong]', auctionsCalls, auctionsCalls ? 'import + call' : 'no call');
+  assert('QW-1-B [auctions-runner.ts llama a notifyStrong]', auctionsCalls, auctionsCalls ? 'import + call' : 'no call');
 
   // QW-1-C: notify.ts respeta TELEGRAM_ALERTS_ENABLED=false.
   if (existsSync(notifyPath)) {
