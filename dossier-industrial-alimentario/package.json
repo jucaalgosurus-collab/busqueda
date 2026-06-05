@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev -p 3002",
     "build": "prisma generate && next build",
-    "vercel-build": "mkdir -p public && cp PRESENTACION-INTERACTIVA.html public/index.html && cp PRESENTACION-INTERACTIVA.html public/PRESENTACION-INTERACTIVA.html && cp -r presentaciones/corporate-pdf/* public/",
+    "vercel-build": "mkdir -p public && cp -r presentaciones/corporate-pdf/* public/ && cp PRESENTACION-INTERACTIVA.html public/index.html && cp PRESENTACION-INTERACTIVA.html public/PRESENTACION-INTERACTIVA.html",
     "start": "next start -p 3002 -H 127.0.0.1",
     "lint": "next lint",
     "prisma:generate": "prisma generate",

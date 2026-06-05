@@ -1,0 +1,2 @@
+# Exclude middleware from Vercel deployment since Vercel is used purely for static presentation hosting
+middleware.ts
