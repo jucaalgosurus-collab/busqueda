@@ -15,7 +15,6 @@ const NAV_LINKS = [
   { href: '/buscar-responsables', label: 'Buscar responsables' },
   { href: '/mocr', label: 'MOCR' },
   { href: '/agentes', label: 'Agentes' },
-  { href: '/legacy', label: 'Legacy' },
 ];
 
 export function Navbar() {
