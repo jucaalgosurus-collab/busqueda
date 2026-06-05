@@ -179,6 +179,14 @@ export async function runPatentesAgent(opts: { dryRun?: boolean; maxCompanies?: 
       continue;
     }
 
+    // 2026-06-05: si OEPM no está disponible (DNS NXDOMAIN), abortar todo el
+    // batch — seguir iterando solo acumula errores y ruido en logs.
+    if (scrape.error === 'oepm_unavailable') {
+      console.error(`[patentes-runner] OEPM no disponible, abortando batch: ${scrape.triedUrls[0]}`);
+      result.errors++;
+      break;
+    }
+
     if (!scrape.found || scrape.hits.length === 0) {
       continue;
     }

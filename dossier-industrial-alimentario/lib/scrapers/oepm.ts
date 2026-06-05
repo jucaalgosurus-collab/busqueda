@@ -241,7 +241,18 @@ export async function scrapeOepmPatents(
     };
   } catch (e) {
     const fetchMs = Date.now() - start;
-    const error = e instanceof Error ? e.message : String(e).slice(0, 200);
-    return { found: false, hits: [], triedUrls, fetchMs, error };
+    const msg = e instanceof Error ? e.message : String(e);
+    // 2026-06-05: OEPM migró invenes.oepm.es a consultas2.oepm.es/InvenesWeb.
+    // DNS NXDOMAIN del subdominio viejo → no tiene sentido reintentar por cada
+    // company. Marcamos el resultado con un sentinel `oepm_unavailable` para
+    // que el runner aborte el batch completo.
+    const isDnsFail = /ENOTFOUND|getaddrinfo/i.test(msg);
+    return {
+      found: false,
+      hits: [],
+      triedUrls,
+      fetchMs,
+      error: isDnsFail ? 'oepm_unavailable' : msg.slice(0, 200),
+    };
   }
 }
