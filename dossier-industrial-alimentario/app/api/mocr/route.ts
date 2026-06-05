@@ -5,11 +5,19 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { randomBytes } from 'node:crypto';
 import { classifyDocument } from '@/lib/mocr/client';
+import { requireUser } from '@/lib/auth/session';
 
 const ALLOWED_KINDS = ['nameplate', 'certificate', 'balance_sheet', 'photo'] as const;
 type Kind = typeof ALLOWED_KINDS[number];
 
 export async function POST(req: NextRequest) {
+  // A.11: defensa en profundidad — middleware ya gate, pero MOCR consume
+  // Gemini ($$) y escribe a /tmp, gate redundante.
+  try {
+    await requireUser();
+  } catch {
+    return NextResponse.json({ success: false, error: 'unauthorized' }, { status: 401 });
+  }
   try {
     const contentType = req.headers.get('content-type') ?? '';
     if (!contentType.includes('multipart/form-data') && !contentType.includes('application/x-www-form-urlencoded')) {

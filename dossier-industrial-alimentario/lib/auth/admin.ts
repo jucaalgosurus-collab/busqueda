@@ -21,7 +21,9 @@ export function isAdminConfigured(): boolean {
 
 export function isAdminAuthorized(req: NextRequest): boolean {
   const expected = getSecret();
-  if (!expected) return true; // dev mode: no env, todo pasa
+  // FAIL-CLOSED (A.11): si no hay secret configurado, NO se permite nada.
+  // Antes: dev mode abierto. JC reportó que las APIs estaban expuestas.
+  if (!expected) return false;
   const provided = req.headers.get(HEADER) ?? req.nextUrl.searchParams.get('secret');
   if (!provided) return false;
   // comparación constant-time

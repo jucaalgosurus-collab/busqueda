@@ -13,6 +13,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import { prisma } from '@/lib/db/prisma';
+import { isGrande, REJECT_PYME_MESSAGE } from '@/lib/filters/grande';
+import { requireUser } from '@/lib/auth/session';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,6 +59,12 @@ function domainFromWebsite(website: string | null | undefined): string | null {
 }
 
 export async function POST(req: NextRequest) {
+  // A.11: defensa en profundidad — Hunter cuesta $, gate redundante.
+  try {
+    await requireUser();
+  } catch {
+    return NextResponse.json({ success: false, error: 'unauthorized' }, { status: 401 });
+  }
   let body: { company?: string; sede?: string; roles?: string[] } = {};
   try { body = await req.json(); } catch { /* empty body is OK, default below */ }
 
@@ -80,10 +88,18 @@ export async function POST(req: NextRequest) {
         { cif: companyQ },
       ],
     },
-    select: { id: true, slug: true, name: true, website: true, subsector: true },
+    select: { id: true, slug: true, name: true, website: true, subsector: true, facturacionM: true, empleadosTotal: true, tier: true },
   });
   if (!company) {
     return NextResponse.json({ success: false, error: `company not found: ${companyQ}` }, { status: 404 });
+  }
+
+  // E.15 — gate "Solo grandes" (Regla 3, 2026-06-04). PYMES fuera de cobertura.
+  if (!isGrande(company)) {
+    return NextResponse.json(
+      { success: false, error: REJECT_PYME_MESSAGE, code: 'pyme_not_in_scope' },
+      { status: 403 },
+    );
   }
 
   // 2. Resolver plant (sede)
