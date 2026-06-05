@@ -17,7 +17,24 @@ if [ -z "${TELEGRAM_BOT_TOKEN:-}" ] || [ -z "${TELEGRAM_CHAT_ID:-}" ]; then
   exit 0
 fi
 
-export PGPASSWORD='Surus2024!'
+# PGPASSWORD se carga de /opt/hermes-dossier/.env (mode 600, gitignored).
+# Mantenemos retro-compat: si la var está en .env, se respeta; si no, fallback a la URL parseada.
+if [ -f /opt/hermes-dossier/.env ]; then
+  set +u
+  PGPASSWORD=$(grep -E '^PGPASSWORD=' /opt/hermes-dossier/.env | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'")
+  if [ -z "$PGPASSWORD" ]; then
+    DB_URL=$(grep -E '^DATABASE_URL=' /opt/hermes-dossier/.env | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'")
+    if [ -n "$DB_URL" ]; then
+      PGPASSWORD=$(printf '%s' "$DB_URL" | sed -E 's#^postgresql://[^:]+:([^@]+)@.*#\1#')
+    fi
+  fi
+  export PGPASSWORD
+  set -u
+fi
+if [ -z "${PGPASSWORD:-}" ]; then
+  echo "[daily-report] PGPASSWORD no disponible en .env, skip"
+  exit 0
+fi
 
 # === STATS 24h ===
 NEW_SOURCES=$(psql -h 127.0.0.1 -U surus -d hermes_dossier -t -A -c "SELECT COUNT(*) FROM \"Source\" WHERE \"scrapedAt\" > NOW() - INTERVAL '24 hours';")

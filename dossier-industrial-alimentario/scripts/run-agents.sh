@@ -7,9 +7,24 @@
 set -euo pipefail
 
 cd /opt/hermes-dossier/apps/dossier-industrial
-export DATABASE_URL='postgresql://surus:Surus2024!@127.0.0.1:5432/hermes_dossier?schema=public'
-export HUNTER_API_KEY='ce0edc32d98cd7d9e02a5e64ac67ff8f69c66f6e'
-export GEMINI_API_KEY='AQ.Ab8RN6Jfno8IljblLQgO-UKoyO9OfDcQy7a2Y0-QvR1T4K2wRg'
+
+# Todas las credenciales se cargan de /opt/hermes-dossier/.env (mode 600, gitignored).
+# Retro-compatibilidad: si el fichero .env existe, sus variables tienen precedencia
+# sobre cualquier export residual de este script. El script nunca debe hardcodear
+# credenciales en código committed.
+if [ -f /opt/hermes-dossier/.env ]; then
+  set +u
+  # shellcheck disable=SC1091
+  source /opt/hermes-dossier/.env
+  set -u
+fi
+
+# Defaults: si faltan las API keys (entorno nuevo), exportar string vacío para
+# que los agentes fallen en seco con un error claro en lugar de hacer requests
+# anonimas.
+export DATABASE_URL="${DATABASE_URL:-}"
+export HUNTER_API_KEY="${HUNTER_API_KEY:-}"
+export GEMINI_API_KEY="${GEMINI_API_KEY:-}"
 
 LOG_DIR=/var/log/hermes-scan
 mkdir -p "$LOG_DIR"

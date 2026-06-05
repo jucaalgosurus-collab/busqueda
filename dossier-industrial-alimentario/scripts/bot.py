@@ -23,7 +23,18 @@ def _get_key(path, var):
     return ""
 DS_KEY = _get_key("/opt/hermes-v2/.env", "DEEPSEEK_API_KEY")
 GEM_KEY = _get_key("/opt/hermes-dossier/.env", "GEMINI_API_KEY")
-DB_PW = "Surus2024!"
+DB_PW = _get_key("/opt/hermes-dossier/.env", "PGPASSWORD")
+if not DB_PW:
+    DB_PW = _get_key("/opt/hermes-dossier/.env", "DATABASE_URL")
+    if DB_PW and "://" in DB_PW and "@" in DB_PW:
+        # Parsear la URL para extraer la password: postgresql://user:PW@host:port/db
+        try:
+            after_scheme = DB_PW.split("://", 1)[1]
+            userinfo, _ = after_scheme.split("@", 1)
+            if ":" in userinfo:
+                DB_PW = userinfo.split(":", 1)[1]
+        except Exception:
+            DB_PW = ""
 
 if not TOKEN or not CHAT:
     print("FATAL: TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID missing", file=sys.stderr); sys.exit(1)
