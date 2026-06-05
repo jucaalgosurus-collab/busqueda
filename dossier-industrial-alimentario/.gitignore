@@ -15,3 +15,9 @@ logs/
 *.tsbuildinfo
 .DS_Store
 Thumbs.db
+
+# A.12: Master key del cifrado AES-256 del .env (scripts/crypto-env.sh).
+# NUNCA commitear: la passphrase vive SOLO en el VPS, en /root/.env.master.key
+# con permisos 600. Si la pierdes, el .env.enc es ruido irrecuperable.
+.env.master.key
+*.master.key
