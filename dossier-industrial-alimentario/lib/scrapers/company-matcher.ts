@@ -339,7 +339,15 @@ export async function processAgentMention(
   // 1) Match exacto normalizado con Company existente
   const all = await prisma.company.findMany({
     where: { status: 'active' },
-    select: { id: true, slug: true, name: true },
+    select: {
+      id: true,
+      slug: true,
+      name: true,
+      facturacionM: true,
+      empleadosTotal: true,
+      tier: true,
+      sector: true,
+    },
     take: 5000,
   });
   const existing = matchExistingCompany(cleaned, all);
