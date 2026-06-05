@@ -160,37 +160,25 @@ TLS:           HSTS 2 años, CSP estricto, cookies Secure
 
 ---
 
-## ⚠️ PUSH BLOQUEADO — acción manual JC requerida
+## ✅ PUSH DESBLOQUEADO — sincronizado con origin/main
 
-**2026-06-05**
+**2026-06-05 09:10**
 
-GitHub push protection detectó un GitHub PAT (`ghp_[REDACTED-77Qv...Bc9D]`) en
-el commit `fcb7f44` (active-state.md, línea 59) y rechaza el push entero.
+Commit `dbff1d2` pusheado a `origin/main` (aab3989 → dbff1d2).
 
-Commits pendientes en local sin pushear:
-- `86c2072` — docs(memory): redact GitHub PAT from R4 list
-- `fcb7f44` — docs(memory): cierre A.13+A.14+A.15+A.16 hardening completo
-- `aab3989` — feat(prisma): pg_trgm migration
+Los 3 commits bloqueados (fcb7f44 + 86c2072 + d07dcc5) se consolidaron en un
+solo commit limpio con el PAT ya redactado. La reescritura solo afectó los
+commits locales no pusheados; el historial de `main` remoto no se tocó.
 
-Opciones para JC (cualquiera desbloquea el push):
+**Acción JC recomendada** (todavía pendiente, no bloqueante):
+1. **Regenerar el PAT en GitHub** (sigue en historial antiguo, no compromete
+   el código actual pero el token puede haberse filtrado):
+   https://github.com/settings/tokens → Delete `ghp_[REDACTED-77Qv...Bc9D]`
+2. Crear PAT nuevo y actualizar credenciales de push.
 
-1. **Permitir la URL del secreto** (1 minuto):
-   https://github.com/jucaalgosurus-collab/busqueda/security/secret-scanning/unblock-secret/3EhnLjvKjANDKsDjxifKF5ou3Pw
-   - Click "Allow" → push se desbloquea automáticamente
-
-2. **Borrar del historial** (5 minutos, requiere `git filter-repo` o BFG):
-   ```bash
-   cd dossier-industrial-alimentario
-   pip install git-filter-repo
-   git filter-repo --invert-paths --path memory/state/active-state.md
-   git push origin main --force
-   ```
-
-3. **Regenerar el PAT en GitHub** (recomendable — el PAT está en historial):
-   - https://github.com/settings/tokens → Delete `ghp_[REDACTED-77Qv...Bc9D]`
-   - Crear PAT nuevo
-   - Actualizar credenciales de push (`git credential-store`)
-
-**El código deployado en el VPS funciona perfectamente** (verificado con
-51/51 smoke tests). El push pendiente es solo docs/memoria, no afecta runtime.
+**Smoke VPS 2026-06-05 09:10**:
+- 8/8 endpoints públicos 200 OK
+- 5/5 APIs protegidas 401 sin auth (gate A.11 operativo)
+- 0 errores en journalctl últimas 2 min
+- App operativa en `https://hermes.surus.es/dossier/`
 
