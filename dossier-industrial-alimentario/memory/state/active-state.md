@@ -182,3 +182,65 @@ commits locales no pusheados; el historial de `main` remoto no se tocó.
 - 0 errores en journalctl últimas 2 min
 - App operativa en `https://hermes.surus.es/dossier/`
 
+---
+
+## ✅ Sprint E.9 — 413 empresas con CNAE-INEs real — CERRADO
+
+**Fecha cierre**: 2026-06-05 (commit `f13e1b4` pusheado)
+
+### Contexto pivote
+- JC exige ≥ 400 empresas con CNAE-INEs (CNAE 10.x o 11.x)
+- DB real PRE: 760 totales, **64 con CNAE-INEs**, 718 tier-B sin CNAE
+- Auditoría reveló: **691/718 son RUIDO** de scraping (slugs basura tipo
+  `about-ferroglobe`, `acuerdo-joint-venture`, `aecoc-shopperview`)
+
+### Plan ejecutado (VPS)
+1. **Limpieza**: DELETE 661 Company WHERE cnae IS NULL AND sin web AND
+   sin parentGroup AND sin forma legal. Preserva 5 con web + 33 con
+   nombre legal.
+2. **Seed 3 bloques** (270 CNAE-INEs reales): seed-cnae (62) +
+   seed-expansion (126) + seed-expansion-2 (82).
+3. **Seed Bloque 3** (144 nuevas): cubre 10.3 Frutas/hortalizas, 10.5
+   Helados, 10.6 Molinería, 10.7 Pan/pastas/galletas, 10.8 Platos
+   preparados.
+4. **Verificación end-to-end** en VPS: /empresas?cnae=10 → 322 CNAE 10.x;
+   /empresas?cnae=11 → 91 CNAE 11.x; total con CNAE = 413.
+
+### Resultado final DB
+- 448 empresas totales
+- **413 con CNAE-INEs** (CNAE 10: 322, CNAE 11: 91)
+- 35 legítimas sin CNAE pendientes
+- Tier A: 181, B: 202, C: 65
+- 417 con website
+
+### Distribución subsectores
+| CNAE | Subsector | Count |
+|------|-----------|-------|
+| 10.1 | Cárnicas procesadas | 24 |
+| 10.2 | Pescado y marisco | 11 |
+| 10.3 | Frutas y hortalizas procesadas | 32 |
+| 10.4 | Aceites y grasas | 25 |
+| 10.5 | Helados | 20 |
+| 10.6 | Molinería y almidones | 2 |
+| 10.7 | Pan, pastas, galletas | 58 |
+| 10.8 | Otros (café, salsas, snacks, platos) | 96 |
+| 10.9 | Piensos | 11 |
+| 11.0 | Bebidas | 91 |
+| Otros | (sin subsector formal) | 43 |
+
+### Archivos
+- `data/seed-expansion.json` (126)
+- `data/seed-expansion-2.json` (82)
+- `data/seed-expansion-3.json` (144)
+- `scripts/seed-expansion-2026-06-05.ts` (idempotente, 3-input)
+- `memory/sprints/sprint-E.9b-expansion-400.md` (contrato)
+
+### Riesgos restantes
+- 35 empresas legítimas sin CNAE (no entran en filtro cnae=10/11)
+- Pendiente backfill heurístico para las 35 (no bloqueante para JC)
+- Las 43 sin subsector-formal probablemente del seed-cnae inicial; revisar
+  en próxima iteración
+
+### Pendientes E.0 serie
+- D.1.6, D.1.8, D.1.10 — siguen abiertas (D.1.10 bloqueado por acción manual JC)
+
