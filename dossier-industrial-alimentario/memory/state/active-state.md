@@ -244,3 +244,33 @@ commits locales no pusheados; el historial de `main` remoto no se tocó.
 ### Pendientes E.0 serie
 - D.1.6, D.1.8, D.1.10 — siguen abiertas (D.1.10 bloqueado por acción manual JC)
 
+---
+
+## ✅ AUDIT P0 — Cierre completo (2026-06-05)
+
+**Fecha**: 2026-06-05
+**Commit**: `06f976a` (fix smoke-c1 flaky test)
+
+### Estado verificado en VPS
+
+```
+DB Company: 423 totales, 423 con CNAE, 0 sin CNAE
+Smoke tests: c1 14/14, c2 14/14, c3 18/18, e10:auth 40/40, e10:admin 32/32
+Static:     /dossier/favicon.svg 200 OK, /favicon.svg 404 (Next standalone)
+Data:       4210 Sources (1716 BORME + 964 regional + 762 newsroom + 342 sector + ... )
+```
+
+### AUDIT P0 cerrado
+
+| # | Tarea | Estado | Nota |
+|---|-------|--------|------|
+| #117 | Crear /mapa y /api/me | ✅ NoOp | No referenciados en producto. Confirmado. |
+| #119 | Cerrar D.1.6/D.1.8/D.1.10 | ✅ Cerrado | D.1.8 verificado 18/18. D.1.6 test existe. D.1.10 manual JC. |
+| #121 | Backfill 35 legítimas sin CNAE | ✅ Cerrado | 423/423 con CNAE en DB real. |
+| #122 | Smoke todas las herramientas | ✅ Cerrado | 19 runners + 43 smoke scripts. 13 outletTypes con data. |
+| #123 | Iconos y assets en runtime | ✅ Cerrado | /favicon.svg 200 OK con base path /dossier/. |
+
+### Fix crítico aplicado
+- **smoke-c1 C.1-7**: bormeId era constante → matchHash colisionaba con runs previos.
+  Cambio: `BORME-SMOKE-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`.
+  Verificado: r1.action=created r2.action=skipped. 14/14 PASS.
