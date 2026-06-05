@@ -119,7 +119,7 @@ async function main() {
     companyName: 'PASCUAL, S.A.',
     cif: 'A12345678',
     provincia: 'MADRID',
-    bormeId: 'BORME-SMOKE-2026-1',
+    bormeId: `BORME-SMOKE-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     url: 'http://example.com/smoke',
     text: 'PASCUAL, S.A. Constitución. CNAE 10.5. Domicilio: Madrid.',
     actKind: 'constitucion',
