@@ -10,6 +10,8 @@
 // la empresa/cliente no va a ver estos Notes — son internos.
 import { prisma } from '@/lib/db/prisma';
 
+const NIL_UUID = '00000000-0000-0000-0000-000000000000';
+
 export type AdminAction =
   | 'company.create'
   | 'company.update'
@@ -18,11 +20,18 @@ export type AdminAction =
   | 'plant.create'
   | 'plant.update'
   | 'plant.soft_delete'
-  | 'plant.reactivate';
+  | 'plant.reactivate'
+  | 'user.create'
+  | 'user.update'
+  | 'user.deactivate'
+  | 'user.reactivate'
+  | 'auth.login'
+  | 'auth.logout'
+  | 'auth.change_password';
 
 export interface AdminLogInput {
   action: AdminAction;
-  companyId: string;
+  companyId?: string | null;
   plantId?: string | null;
   actor?: string; // 'admin' por defecto
   changes?: Record<string, { from: unknown; to: unknown }>;
@@ -37,10 +46,15 @@ export async function logAdminAction(input: AdminLogInput): Promise<void> {
     changes: input.changes ?? null,
     meta: input.meta ?? null,
   });
+  // Si nos pasan un UUID nil como placeholder, tratar como null para no
+  // violar la FK de Company. Acciones que no aplican a una company concreta
+  // (user.*, auth.*) deben pasar companyId=undefined o null.
+  const companyId =
+    input.companyId && input.companyId !== NIL_UUID ? input.companyId : null;
   try {
     await prisma.note.create({
       data: {
-        companyId: input.companyId,
+        companyId,
         plantId: input.plantId ?? null,
         author: actor,
         body: `[admin.${input.action}] ${body}`,
@@ -52,7 +66,7 @@ export async function logAdminAction(input: AdminLogInput): Promise<void> {
     // eslint-disable-next-line no-console
     console.warn('[admin-log] failed to persist audit entry', {
       action: input.action,
-      companyId: input.companyId,
+      companyId,
       err: e instanceof Error ? e.message : String(e),
     });
   }
