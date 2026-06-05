@@ -13,7 +13,6 @@ const NAV_LINKS = [
   { href: '/eventos', label: 'Eventos' },
   { href: '/contactos', label: 'Contactos' },
   { href: '/buscar-responsables', label: 'Buscar responsables' },
-  { href: '/mocr', label: 'MOCR' },
   { href: '/agentes', label: 'Agentes' },
 ];
 
