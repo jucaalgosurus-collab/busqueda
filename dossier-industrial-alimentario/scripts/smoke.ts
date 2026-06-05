@@ -80,7 +80,7 @@ async function main() {
   const tsResults = await prisma.$queryRaw<{ count: bigint }[]>`
     SELECT count(*)::bigint as count
     FROM "Source"
-    WHERE content_tsvector @@ plainto_tsquery('spanish', 'pescanova vigo cierre')
+    WHERE "contentTsv" @@ plainto_tsquery('spanish', 'pescanova vigo cierre')
   `;
   const tsCount = Number(tsResults[0]?.count ?? 0);
   asserts.push({

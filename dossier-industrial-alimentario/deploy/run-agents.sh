@@ -23,7 +23,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 # 1. Newsrooms corporativas
 echo "" | tee -a "$LOG"
 echo "▶ AGENT 1: newsrooms-corporativas" | tee -a "$LOG"
-timeout 480 ./node_modules/.bin/tsx lib/agents/runner.ts 2>&1 | grep -E '(inScope|new|errors|progress|✓)' | tail -10 | tee -a "$LOG" || echo "  ✗ newsrooms falló" | tee -a "$LOG"
+timeout 1500 ./node_modules/.bin/tsx lib/agents/runner.ts 2>&1 | grep -E '(inScope|new|errors|progress|✓)' | tail -10 | tee -a "$LOG" || echo "  ✗ newsrooms falló" | tee -a "$LOG"
 
 # 2. Prensa nacional+regional
 echo "" | tee -a "$LOG"
