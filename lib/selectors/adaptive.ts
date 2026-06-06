@@ -54,13 +54,22 @@ export async function updateProfile(
   const passed = results.filter((r) => r.passed);
   const successRate = results.length > 0 ? passed.length / results.length : 0;
 
+  const deduped = new Map<string, SelectorTestResult>();
+  for (const r of passed) {
+    const prev = deduped.get(r.selector);
+    if (prev) {
+      deduped.set(r.selector, { ...r, matches: prev.matches + r.matches });
+    } else {
+      deduped.set(r.selector, r);
+    }
+  }
   const profile: SelectorProfile = {
     portalSlug,
     version: (existing?.version ?? 0) + 1,
     selectors: Object.fromEntries(
-      passed.map((r) => [
+      Array.from(deduped.values()).map((r) => [
         r.selector,
-        { selector: r.selector, type: 'css' as const, weight: r.matches, attribute: undefined },
+        { selector: r.selector, type: 'css' as const, weight: r.matches },
       ])
     ),
     lastUpdated: new Date(),

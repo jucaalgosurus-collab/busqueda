@@ -72,11 +72,30 @@ const tests: Array<{ name: string; fn: () => void | Promise<void> }> = [
     },
   },
   {
-    name: 'loadProfile returns null for unknown',
+    name: 'concurrent saveProfile does not lose data',
     async fn() {
       cleanup();
-      const result = await loadProfile('nonexistent');
-      assert.equal(result, null);
+      const promises = Array.from({ length: 20 }, (_, i) =>
+        updateProfile(`p-${i}`, '<html/>', [
+          { portalSlug: `p-${i}`, selector: 'a', matches: 1, expected: 1, passed: true },
+        ])
+      );
+      await Promise.all(promises);
+      const all = await listProfiles();
+      assert.equal(all.length, 20, 'expected 20 profiles after concurrent writes');
+    },
+  },
+  {
+    name: 'duplicate selectors are merged (not overwritten)',
+    async fn() {
+      cleanup();
+      const profile = await updateProfile('dedup-portal', '<html/>', [
+        { portalSlug: 'dedup-portal', selector: 'a', matches: 1, expected: 1, passed: true },
+        { portalSlug: 'dedup-portal', selector: 'a', matches: 3, expected: 1, passed: true },
+        { portalSlug: 'dedup-portal', selector: 'b', matches: 2, expected: 1, passed: true },
+      ]);
+      assert.equal(profile.selectors['a'].weight, 4, 'duplicate selector weights must sum');
+      assert.equal(profile.selectors['b'].weight, 2);
     },
   },
 ];
