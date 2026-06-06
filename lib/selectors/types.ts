@@ -11,8 +11,9 @@ export interface SelectorCandidate {
 export interface SelectorProfile {
   portalSlug: string;
   version: number;
+  htmlHash: string;
   selectors: Record<string, SelectorCandidate>;
-  lastUpdated: Date;
+  lastUpdated: string;
   sampleCount: number;
   successRate: number;
 }

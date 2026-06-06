@@ -98,6 +98,42 @@ const tests: Array<{ name: string; fn: () => void | Promise<void> }> = [
       assert.equal(profile.selectors['b'].weight, 2);
     },
   },
+  {
+    name: 'probePortal returns drift=false when html matches profile.htmlHash',
+    async fn() {
+      cleanup();
+      const html = '<div class="article">unchanged</div>';
+      await updateProfile('stable-portal', html, [
+        { portalSlug: 'stable-portal', selector: '.article', matches: 5, expected: 1, passed: true },
+      ]);
+      const result = await probePortal('stable-portal', html, 5);
+      assert.equal(result.driftDetected, false, 'same HTML should not be drift');
+      assert.equal(result.extractedCount, 5);
+    },
+  },
+  {
+    name: 'probePortal returns drift=true when html changes',
+    async fn() {
+      cleanup();
+      await updateProfile('changed-portal', '<div class="article">v1</div>', [
+        { portalSlug: 'changed-portal', selector: '.article', matches: 1, expected: 1, passed: true },
+      ]);
+      const result = await probePortal('changed-portal', '<div class="article">v2-totally-different</div>', 1);
+      assert.equal(result.driftDetected, true);
+      assert.equal(result.extractedCount, 0);
+    },
+  },
+  {
+    name: 'lastUpdated is ISO string roundtrip',
+    async fn() {
+      cleanup();
+      const profile = await updateProfile('iso-portal', '<html/>', [
+        { portalSlug: 'iso-portal', selector: 'a', matches: 1, expected: 1, passed: true },
+      ]);
+      assert.equal(typeof profile.lastUpdated, 'string');
+      assert.ok(!isNaN(Date.parse(profile.lastUpdated)), 'must be parseable date');
+    },
+  },
 ];
 
 async function main() {

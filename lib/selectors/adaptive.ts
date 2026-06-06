@@ -30,12 +30,7 @@ export async function probePortal(
     };
   }
 
-  const profileHash = createHash('sha256')
-    .update(JSON.stringify(profile.selectors))
-    .digest('hex')
-    .slice(0, 16);
-
-  const driftDetected = profileHash !== htmlHash;
+  const driftDetected = profile.htmlHash !== htmlHash;
   return {
     portalSlug,
     htmlHash,
@@ -63,16 +58,18 @@ export async function updateProfile(
       deduped.set(r.selector, r);
     }
   }
+  const htmlHash = createHash('sha256').update(html).digest('hex').slice(0, 16);
   const profile: SelectorProfile = {
     portalSlug,
     version: (existing?.version ?? 0) + 1,
+    htmlHash,
     selectors: Object.fromEntries(
       Array.from(deduped.values()).map((r) => [
         r.selector,
         { selector: r.selector, type: 'css' as const, weight: r.matches },
       ])
     ),
-    lastUpdated: new Date(),
+    lastUpdated: new Date().toISOString(),
     sampleCount: (existing?.sampleCount ?? 0) + 1,
     successRate,
   };
