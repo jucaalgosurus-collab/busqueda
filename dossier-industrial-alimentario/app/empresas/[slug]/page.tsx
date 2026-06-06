@@ -15,6 +15,7 @@ import { ResponsablesPorSedeCard } from './_components/ResponsablesPorSedeCard';
 import { SourcesList } from './_components/SourcesList';
 import { DocumentsGrid } from './_components/DocumentsGrid';
 import { NotesEditor } from './_components/NotesEditor';
+import { DeepDiveCard } from './_components/DeepDiveCard';
 import { ActionBar } from './_components/ActionBar';
 import { RegistroMercantilCard } from './_components/RegistroMercantilCard';
 import { FinancialsCard } from './_components/FinancialsCard';
@@ -176,6 +177,7 @@ export default async function EmpresaPage({ params }: PageProps) {
       />
       <ActionBar
         slug={company.slug}
+        companyId={company.id}
         companyName={company.name}
         prevSlug={prevSlug}
         nextSlug={nextSlug}
@@ -210,6 +212,7 @@ export default async function EmpresaPage({ params }: PageProps) {
         <ContactsByPlant plants={company.plants} />
         <SourcesList sources={company.sources} />
         <DocumentsGrid documents={company.documents} />
+        <DeepDiveCard slug={company.slug} />
         <NotesEditor slug={company.slug} notes={company.notes} />
       </main>
     </div>
