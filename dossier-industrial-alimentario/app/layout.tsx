@@ -2,6 +2,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { basePath } from '@/lib/utils/base-path';
+import { SectorProvider } from './_components/SectorContext';
+import { GlobalHeader } from './_components/GlobalHeader';
 
 export const metadata: Metadata = {
   title: 'HERMES Dossier — A&B OSINT',
@@ -20,7 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        {children}
+        <SectorProvider>
+          <GlobalHeader />
+          {children}
+        </SectorProvider>
         <footer
           style={{
             borderTop: '1px solid var(--surus-border, #e2e8f0)',
