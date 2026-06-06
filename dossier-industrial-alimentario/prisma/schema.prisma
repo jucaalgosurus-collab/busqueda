@@ -42,6 +42,8 @@ model Company {
   tier          String   @default("A") // 'A' | 'B'
   status        String   @default("active") // 'active' | 'inactive'
   priority      Int      @default(0)
+  // Sprint CRM.1 — Pipeline comercial Surus (5 etapas). Null = sin clasificar.
+  pipelineStage String?  // 'nuevo' | 'cualificado' | 'propuesta' | 'negociacion' | 'cerrado'
 
   plants        Plant[]
   sources       Source[]
@@ -304,6 +306,24 @@ model Source {
   @@index([isStale])
   @@index([publishedAt])
   @@index([sector])
+}
+
+// ============================================================================
+// 8b. MATCH_REVIEW — Cola de revisión de match heurístico Source → Company
+//     Sprint 1 (2026-06-05): cuando matchFuzzy devuelve score 0.70-0.85,
+//     se inserta aquí para que un humano decida linkear/dismissal/crear.
+// ============================================================================
+model MatchReview {
+  id             String   @id @default(cuid())
+  sourceId       String   @unique
+  title          String
+  topCandidates  Json     // [{companyId, name, score, method}, ...] top 5
+  createdAt      DateTime @default(now())
+  resolvedAt     DateTime?
+  resolvedBy     String?
+  decision       String?  // 'linked' | 'dismissed' | 'new_company'
+
+  @@index([resolvedAt])
 }
 
 // ============================================================================

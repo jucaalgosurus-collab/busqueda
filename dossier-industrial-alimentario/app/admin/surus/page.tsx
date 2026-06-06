@@ -96,24 +96,21 @@ export default async function SurusAdminPage() {
             </p>
           </Card>
 
-          <Card title="Pipeline comercial" subtitle="CRM.1 — vista previa">
+          <Card title="Pipeline comercial" subtitle="CRM.1 — Kanban con drag&drop">
             <p style={{ margin: 0, color: 'var(--surus-text-soft, #64748b)' }}>
-              Vista Kanban de leads por estado (nuevo → cualificado → propuesta → cerrado).
-              Se activa en sprint CRM.1.
+              Vista Kanban de leads por estado (nuevo → cualificado → propuesta → negociación → cerrado).
+              Arrastra tarjetas entre columnas.
             </p>
-            <div style={{ marginTop: 'var(--space-3)' }}>
-              <span
-                style={{
-                  fontSize: 'var(--text-xs)',
-                  padding: '2px 8px',
-                  borderRadius: 12,
-                  background: 'var(--surus-surface, #f8fafc)',
-                  border: '1px solid var(--surus-border, #e2e8f0)',
-                }}
-              >
-                Pendiente sprint CRM.1
-              </span>
-            </div>
+            <a
+              href="/admin/surus/pipeline"
+              style={{
+                display: 'inline-block',
+                marginTop: 'var(--space-3)',
+                color: 'var(--surus-accent, #0ea5e9)',
+              }}
+            >
+              Ir al pipeline →
+            </a>
           </Card>
 
           <Card title="Listado de empresas" subtitle="Acceso directo">
