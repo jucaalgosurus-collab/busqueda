@@ -2,6 +2,7 @@
 // app/_components/GlobalHeader.tsx — Header con selector de sector y navegación
 import Link from 'next/link';
 import { SectorSelector } from './SectorSelector';
+import { SecretMenuTrigger } from './SecretMenuTrigger';
 import { basePath } from '@/lib/utils/base-path';
 
 const NAV = [
@@ -58,6 +59,7 @@ export function GlobalHeader() {
         ))}
       </nav>
       <SectorSelector />
+      <SecretMenuTrigger />
     </header>
   );
 }
